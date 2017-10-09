@@ -4,7 +4,7 @@ from common.currency import Currency
 
 
 class CurrencyTest(unittest.TestCase):
-    currency = Currency(extended=True, currency="ethereum")
+    currency = Currency("ethereum")
 
     def reset_currency_to_specific(self):
         self.currency.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"

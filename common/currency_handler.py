@@ -1,5 +1,7 @@
 import os
 
+import math
+
 from common.currency import Currency
 from globals import GlobalData
 

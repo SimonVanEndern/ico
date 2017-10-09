@@ -132,56 +132,17 @@ class Currency:
 
             return list(zip(timestamp, volume))
 
-    def get_market_cap_financial_data(self, currency):
-        with open(os.path.join(self.data_path, currency + ".csv"), "r") as file:
-            reader = csv.reader(file)
-            data = list(file)
-            data.pop(0)
-            timestamp, usd, btc, volume = zip(*data)
-            timestamp = map(int, timestamp)
-            volume = map(int, volume)
-
-            return list(zip(timestamp, ))
-
-    def get_currencies_from_file_names(self, size_limit=math.inf):
-        output = []
-        for index, filename in enumerate(os.listdir(self.data_path)):
-            if index == size_limit:
-                return output
-
-            output.append(filename.split(".")[0])
-
-        return output
-
-    def get_return_data(self):
-        input = self.get_financial_data()
-
-        output = []
-        for index, element in enumerate(input):
-            if index == 0:
-                continue
-            output.append((element[0], (element[1] / input[index - 1][1]) - 1))
-
-        return output
-
-    @staticmethod
-    def return_data_to_dict(data):
-        output = {}
-        for timestamp, datapoint in data:
-            output[timestamp] = datapoint
-
-        return output
-
-    def calculate_daily_return(self):
+    def calculate_daily_return(self, with_timestamp=False):
         last = self.usd[0]
         output = []
-        for course in self.usd:
-            output.append(course / last - 1)
-            last = course
+        for index, price in enumerate(self.usd):
+            relative_change = price / last - 1
+            if with_timestamp:
+                output.append((self.timestamp[index], relative_change))
+            else:
+                output.append(relative_change)
 
-        # No removing, because we need same number of datapoints
-        # Remove first element which is 0.0
-        # output.pop(0)
+            last = price
         return output
 
     def calculate_rolling_volatility(self, window1=30, window2=90, window3=180):

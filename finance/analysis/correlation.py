@@ -15,8 +15,10 @@ class Correlation:
         return
 
     def get_return_correlation_data(self, currency0, currency1):
-        return_data_currency0 = self.currency_handler.get_currency(currency0).get_return_data()
-        return_data_currency1 = self.currency_handler.get_currency(currency1).get_return_data()
+        return_data_currency0 = self.currency_handler.get_currency(currency0).calculate_daily_return(
+            with_timestamp=True)
+        return_data_currency1 = self.currency_handler.get_currency(currency1).calculate_daily_return(
+            with_timestamp=True)
 
         diff = len(return_data_currency1) - len(return_data_currency0)
         for i in range(int(math.fabs(diff))):
@@ -100,4 +102,4 @@ class Correlation:
 
 run_script = Correlation()
 # run_script.export_correlation_matrix()
-run_script.get_all_correlations("xxx")
+run_script.get_all_correlations("bitcoin")
