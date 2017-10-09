@@ -38,30 +38,29 @@ def calculate_correlation(data1, data2):
 class Currency:
     data_path = GlobalData.financial_data
 
-    def __init__(self, extended=False, currency="", data_path=""):
-        if extended:
-            if data_path != "":
-                self.data_path = data_path
+    def __init__(self, currency, data_path=None):
+        if data_path is not None:
+            self.data_path = data_path
 
-            self.name = currency
+        self.name = currency
 
-            # Inputs
-            self.data = None
-            self.timestamp = None
-            self.usd = None
-            self.btc = None
-            self.market_cap = None
-            self.volume = None
+        # Inputs
+        self.data = None
+        self.timestamp = None
+        self.usd = None
+        self.btc = None
+        self.market_cap = None
+        self.volume = None
 
-            # Calculations
-            self.daily_return = None
-            self.volatility = None
-            self.price_linear_regression = None
-            self.volume_linear_regression = None
-            self.return_volume_correlation = None
-            self.volume_relative_change = None
+        # Calculations
+        self.daily_return = None
+        self.volatility = None
+        self.price_linear_regression = None
+        self.volume_linear_regression = None
+        self.return_volume_correlation = None
+        self.volume_relative_change = None
 
-            self.instantiate()
+        self.instantiate()
 
     def instantiate(self):
         self.data = self.load_data()
@@ -131,7 +130,7 @@ class Currency:
             reader = csv.reader(file)
             data = list(reader)
             data.pop(0)
-            timestamp, usd, btc, volume = zip(*data)
+            timestamp, usd, btc, volume, market_cap = zip(*data)
             timestamp = map(int, timestamp)
             volume = map(int, volume)
 
@@ -224,7 +223,7 @@ class Currency:
         return result
 
 
-run_script = Currency(extended=True, currency="bitcoin")
+run_script = Currency("bitcoin")
 run_script.print_course()
 run_script.print_volume()
 # run_script.print_daily_return()

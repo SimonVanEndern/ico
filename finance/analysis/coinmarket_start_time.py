@@ -10,7 +10,9 @@ class AggregateCoinmarketStartTime:
     example_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-09-28"
     start_time_data = []
     coinmarketcap = common.coinmarketCapApi.CoinmarketCapApi()
-    currency_provider = common.currency.Currency()
+
+    # Change away from static
+    currency_provider = common.currency.Currency("bitcoin")
     highest_market_cap_data = {}
 
     now = datetime.now()

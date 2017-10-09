@@ -9,7 +9,8 @@ from common.currency import Currency
 
 
 class Correlation:
-    currency = Currency()
+    # Change away from static bitcoin
+    currency = Currency("bitcoin")
 
     def __init__(self):
         return

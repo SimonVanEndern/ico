@@ -7,6 +7,7 @@ import pandas
 
 import common.coinmarketCapApi
 import common.currency
+from finance.analysis.coinmarket_start_time import AggregateCoinmarketStartTime
 
 
 def contains_keyword_coin(currencies):
@@ -25,13 +26,16 @@ def contains_keyword_coin(currencies):
 class DescriptiveStatistics:
     example_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-09-28"
     coinmarketcap = common.coinmarketCapApi.CoinmarketCapApi()
-    currency_provider = common.currency.Currency()
+
+    # Change away from static bitcoin
+    currency_provider = common.currency.Currency("bitcoin")
 
     now = datetime.now()
     path = os.path.join(os.path.dirname(__file__) + "\\aggregated",
                         "start_date" + str(now.year) + str(now.month) + str(now.day) + ".csv")
 
     def __init__(self):
+        AggregateCoinmarketStartTime()
         return
 
     # Printing a histogram of the number of currencies started to be listed at coinmarketcap by month

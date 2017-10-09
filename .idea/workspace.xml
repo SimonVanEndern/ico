@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7f706f99-14d9-4e62-8eec-2dff7ea6a8b0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency.py" afterPath="$PROJECT_DIR$/common/currency.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/test_currency.py" afterPath="$PROJECT_DIR$/common/test_currency.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance/analysis/coinmarket_start_time.py" afterPath="$PROJECT_DIR$/finance/analysis/coinmarket_start_time.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance/analysis/correlation.py" afterPath="$PROJECT_DIR$/finance/analysis/correlation.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance/analysis/descriptive_statistics.py" afterPath="$PROJECT_DIR$/finance/analysis/descriptive_statistics.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,7 +21,7 @@
     <SUITE FILE_PATH="coverage/bachelor_thesis$bitfinex.coverage" NAME="bitfinex Coverage Results" MODIFIED="1507450418901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exchanges/sources" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$cyberfund.coverage" NAME="cyberfund Coverage Results" MODIFIED="1506933261987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/sources" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$coinmarketcap_token_parser.coverage" NAME="coinmarketcap_token_parser Coverage Results" MODIFIED="1507458400166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
-    <SUITE FILE_PATH="coverage/bachelor_thesis$main.coverage" NAME="main Coverage Results" MODIFIED="1507471464122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$main.coverage" NAME="main Coverage Results" MODIFIED="1507547127581" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bachelor-thesis$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1506681231147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_test_coinmarketcap_coin_parser_py.coverage" NAME="Unittests in test_coinmarketcap_coin_parser.py Coverage Results" MODIFIED="1507533519559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor-thesis$smithandcrown.coverage" NAME="smithandcrown Coverage Results" MODIFIED="1506678304734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/sources" />
@@ -56,8 +58,8 @@
       <file leaf-file-name="currency.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/common/currency.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="144">
+              <caret line="133" column="43" lean-forward="true" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -68,8 +70,8 @@
       <file leaf-file-name="coinmarket_start_time.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finance/analysis/coinmarket_start_time.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="12" column="12" lean-forward="true" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+            <state relative-caret-position="77">
+              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -78,8 +80,8 @@
       <file leaf-file-name="descriptive_statistics.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finance/analysis/descriptive_statistics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+            <state relative-caret-position="17">
+              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -88,8 +90,20 @@
       <file leaf-file-name="correlation.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finance/analysis/correlation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="17" column="72" lean-forward="true" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
+            <state relative-caret-position="187">
+              <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -141,18 +155,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/parser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="globals.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/globals.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -174,7 +176,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fuck</find>
       <find>humani</find>
       <find>district</find>
       <find>card</find>
@@ -204,6 +205,7 @@
       <find>daily</find>
       <find>get_volume_fina</find>
       <find>currency()</find>
+      <find>start_date</find>
     </findStrings>
     <dirStrings>
       <dir>Z:\Google Drive\05 - Projekte\bachelor-thesis\ico</dir>
@@ -246,7 +248,6 @@
         <option value="$PROJECT_DIR$/ico/main.py" />
         <option value="$PROJECT_DIR$/finance/analysis/correlations.py" />
         <option value="$PROJECT_DIR$/common/currencies.py" />
-        <option value="$PROJECT_DIR$/finance/analysis/correlation.py" />
         <option value="$PROJECT_DIR$/finance/data/exporter.py" />
         <option value="$PROJECT_DIR$/ico/initial_coin_offering.py" />
         <option value="$PROJECT_DIR$/exchanges/sources/bitfinex.py" />
@@ -262,14 +263,15 @@
         <option value="$PROJECT_DIR$/common/coinmarketcap_token_parser.py" />
         <option value="$PROJECT_DIR$/common/saved/coinmarketcap-tickers2017108.csv" />
         <option value="$PROJECT_DIR$/common/coinmarketCapApi.py" />
-        <option value="$PROJECT_DIR$/finance/analysis/coinmarket_start_time.py" />
-        <option value="$PROJECT_DIR$/finance/analysis/descriptive_statistics.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/common/test_coinmarketcap_coin_parser.py" />
         <option value="$PROJECT_DIR$/common/test_coinmarketcap_token_parser.py" />
         <option value="$PROJECT_DIR$/globals.py" />
         <option value="$PROJECT_DIR$/finance/analysis/volatility.py" />
         <option value="$PROJECT_DIR$/common/test_currency.py" />
+        <option value="$PROJECT_DIR$/finance/analysis/correlation.py" />
+        <option value="$PROJECT_DIR$/finance/analysis/descriptive_statistics.py" />
+        <option value="$PROJECT_DIR$/finance/analysis/coinmarket_start_time.py" />
         <option value="$PROJECT_DIR$/common/currency.py" />
       </list>
     </option>
@@ -325,6 +327,13 @@
               <item name="finance" type="462c0819:PsiDirectoryNode" />
               <item name="analysis" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bachelor-thesis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bachelor-thesis" type="462c0819:PsiDirectoryNode" />
+              <item name="finance" type="462c0819:PsiDirectoryNode" />
+              <item name="analysis" type="462c0819:PsiDirectoryNode" />
+              <item name="aggregated" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -370,7 +379,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.currency">
+  <component name="RunManager" selected="Python.main">
     <configuration name="Unittests for test_currency.CurrencyTest.test_calculate_rolling_volatility" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -414,21 +423,6 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/common&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-    </configuration>
-    <configuration name="Unittests in test_coinmarketcap_token_parser.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/common" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="bachelor-thesis" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/common/test_coinmarketcap_token_parser.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <configuration name="Unittests in test_currency.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -1068,21 +1062,39 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="bachelor-thesis" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in common" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test_coinmarketcap_token_parser.py" />
-      <item index="2" class="java.lang.String" itemvalue="Python.currency" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_currency.CurrencyTest.test_load_data" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for test_currency.CurrencyTest.test_calculate_rolling_volatility" />
-      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittests in test_currency.py" />
+      <item index="1" class="java.lang.String" itemvalue="Python.currency" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_currency.CurrencyTest.test_load_data" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_currency.CurrencyTest.test_calculate_rolling_volatility" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_currency.py" />
+      <item index="5" class="java.lang.String" itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.currency" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test_currency.py" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_currency.CurrencyTest.test_calculate_rolling_volatility" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_currency.CurrencyTest.test_load_data" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_coinmarketcap_token_parser.py" />
+        <item index="0" class="java.lang.String" itemvalue="Python.main" />
+        <item index="1" class="java.lang.String" itemvalue="Python.currency" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in test_currency.py" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_currency.CurrencyTest.test_calculate_rolling_volatility" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for test_currency.CurrencyTest.test_load_data" />
       </list>
     </recent_temporary>
   </component>
@@ -1100,7 +1112,7 @@
       <workItem from="1506444123636" duration="28138000" />
       <workItem from="1506602369307" duration="14248000" />
       <workItem from="1506693382575" duration="38854000" />
-      <workItem from="1507121588611" duration="35898000" />
+      <workItem from="1507121588611" duration="36443000" />
     </task>
     <servers />
   </component>
@@ -1137,7 +1149,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118434000" />
+    <option name="totallyTimeSpent" value="118979000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="780" extended-state="0" />
@@ -3768,22 +3780,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/parser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3852,34 +3854,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/finance/analysis/correlation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/finance/analysis/descriptive_statistics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+        <state relative-caret-position="17">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/finance/analysis/coinmarket_start_time.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="12" column="12" lean-forward="true" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finance/analysis/correlation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="17" column="72" lean-forward="true" selection-start-line="17" selection-start-column="72" selection-end-line="17" selection-end-column="72" />
+        <state relative-caret-position="77">
+          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/common/currency.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state relative-caret-position="144">
+          <caret line="133" column="43" lean-forward="true" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
