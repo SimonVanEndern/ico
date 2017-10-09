@@ -2,8 +2,10 @@ import csv
 import math
 import os.path
 from os import path
+from scipy import stats
 
 import matplotlib.pyplot as plt
+import numpy
 import pandas
 
 from globals import GlobalData
@@ -26,13 +28,9 @@ class Currency:
             self.market_cap = None
             self.volume = None
             self.daily_return = None
+            self.volatility = None
 
             self.instantiate()
-
-    def load_data(self):
-        with open(path.join(self.data_path, self.name + ".csv"), "r") as file:
-            reader = csv.reader(file)
-            return list(reader)
 
     def instantiate(self):
         self.data = self.load_data()
@@ -43,6 +41,12 @@ class Currency:
         self.usd = list(map(float, self.usd))
 
         self.daily_return = self.calculate_daily_return()
+        self.volatility = self.calculate_rolling_volatility()
+
+    def load_data(self):
+        with open(path.join(self.data_path, self.name + ".csv"), "r") as file:
+            reader = csv.reader(file)
+            return list(reader)
 
     def print_course(self):
         df = pandas.DataFrame(self.usd)
@@ -51,6 +55,11 @@ class Currency:
 
     def print_daily_return(self):
         df = pandas.DataFrame(self.daily_return)
+        df.plot()
+        plt.show()
+
+    def print_volatility(self):
+        df = pandas.DataFrame.from_dict(self.volatility)
         df.plot()
         plt.show()
 
@@ -130,10 +139,45 @@ class Currency:
         output.pop(0)
         return output
 
+    def calculate_rolling_volatility(self, window1=30, window2=90, window3=180):
+        rolling_1 = []
+        rolling_2 = []
+        rolling_3 = []
+        start = 0
+        end = len(self.daily_return)
+        while start + window1 < end:
+            if start + window3 < end:
+                rolling_3.append(numpy.std(self.daily_return[start: start + window3]))
+            else:
+                rolling_3.insert(0, 0)
+            if start + window2 < end:
+                rolling_2.append(numpy.std(self.daily_return[start: start + window2]))
+            else:
+                rolling_2.insert(0, 0)
+
+            rolling_1.append(numpy.std(self.daily_return[start:start + window1]))
+            start += 1
+
+        output = {"30": rolling_1, "90": rolling_2, "180": rolling_3}
+        return output
+
+    def calculate_linear_regression_on_volatility(self):
+        y_values = self.volatility["30"]
+        x_values = range(0, len(y_values))
+
+        # slope, intercept, r_value, p_value, std_err = stats.linregress(x_values, y_values)
+        result = stats.linregress(x_values, y_values)
+        # plt.plot(x_values, y_values, "--")
+        # line = [result.slope * i + result.intercept for i in x_values]
+        # plt.plot(x_values, line, "b")
+        # plt.show()
+        return result
+
 
 run_script = Currency(extended=True, currency="bitcoin")
-run_script.print_course()
-run_script.print_daily_return()
+# run_script.print_course()
+# run_script.print_daily_return()
+run_script.calculate_linear_regression_on_volatility()
 # run_script.get_return_correlation_data("bitcoin", "ethereum")
 # run_script.get_return_correlation_data("bitcoin", "litecoin")
 # run_script.get_return_correlation_data("ethereum", "litecoin")

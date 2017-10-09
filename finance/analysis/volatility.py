@@ -1,14 +1,11 @@
-import pandas
-import numpy
-import os.path
-import matplotlib.pyplot as plt
 import os
+import os.path
 
-from common.currency import Currency
+import matplotlib.pyplot as plt
+import pandas
 
 
 class Volatility:
-
     example_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-09-28"
     example_currency = "bitcoin"
 
