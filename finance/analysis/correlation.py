@@ -5,19 +5,18 @@ from datetime import datetime
 
 import numpy
 
-from common.currency import Currency
+from common.currency_handler import CurrencyHandler
 
 
 class Correlation:
-    # Change away from static bitcoin
-    currency = Currency("bitcoin")
+    currency_handler = CurrencyHandler()
 
     def __init__(self):
         return
 
     def get_return_correlation_data(self, currency0, currency1):
-        return_data_currency0 = self.currency.get_return_data(currency0)
-        return_data_currency1 = self.currency.get_return_data(currency1)
+        return_data_currency0 = self.currency_handler.get_currency(currency0).get_return_data()
+        return_data_currency1 = self.currency_handler.get_currency(currency1).get_return_data()
 
         diff = len(return_data_currency1) - len(return_data_currency0)
         for i in range(int(math.fabs(diff))):
@@ -40,7 +39,7 @@ class Correlation:
         return correlation[0][1]
 
     def get_all_correlations(self, currency, size_limit=100):
-        currencies = self.currency.get_currencies_from_file_names(size_limit=size_limit)
+        currencies = self.currency_handler.get_all_currency_names_where_data_is_available(size_limit=size_limit)
         output = []
 
         for other_currency in currencies:
@@ -49,11 +48,11 @@ class Correlation:
         # print(output)
         _, correlations = zip(*output)
         # correlations = map(math.fabs, correlations)
-        print(sorted(correlations, reverse=True))
+        # print(sorted(correlations, reverse=True))
         return correlations
 
     def export_correlation_matrix(self, size_limit=math.inf):
-        currencies = self.currency.get_currencies_from_file_names(size_limit=size_limit)
+        currencies = self.currency_handler.get_all_currency_names_where_data_is_available(size_limit=size_limit)
         output = [currencies]
 
         for currency in currencies:
@@ -75,8 +74,8 @@ class Correlation:
         currencies = []
         correlations = []
         with open(
-            "Z:/Google Drive/05 - Projekte/bachelor-thesis/finance/analysis/aggregated/correlation-matrix-1507119023.466763.csv",
-            "r") as file:
+                "Z:/Google Drive/05 - Projekte/bachelor-thesis/finance/analysis/aggregated/correlation-matrix-1507119023.466763.csv",
+                "r") as file:
             reader = csv.reader(file)
             for index, row in enumerate(reader):
                 if index == 0:
@@ -90,15 +89,15 @@ class Correlation:
                         continue
                     correlations.append((currencies[index], currencies[index2], float(element)))
 
-            print(correlations)
-            print(len(correlations))
+            # print(correlations)
+            # print(len(correlations))
             sorted_correlations = sorted(correlations, key=lambda x: x[2], reverse=True)
             while sorted_correlations[0][2] == 1.0:
                 sorted_correlations.pop(0)
 
-            print(sorted_correlations[:200])
+                # print(sorted_correlations[:200])
 
 
 run_script = Correlation()
 # run_script.export_correlation_matrix()
-run_script.find_highest_correlation()
+run_script.get_all_correlations("xxx")

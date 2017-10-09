@@ -74,6 +74,10 @@ class Currency:
         self.volume.pop(0)
         self.volume = list(map(float, self.volume))
 
+        self.timestamp = list(self.timestamp)
+        self.timestamp.pop(0)
+        self.timestamp = list(map(int, self.timestamp))
+
         self.daily_return = self.calculate_daily_return()
         self.volatility = self.calculate_rolling_volatility()
         self.price_linear_regression = calculate_linear_regression(self.usd)
@@ -114,16 +118,8 @@ class Currency:
     def print_volume(self):
         self.print_with_regression(self.volume, self.volume_linear_regression)
 
-    def get_financial_data(self, currency):
-        with open(os.path.join(self.data_path, currency + ".csv"), "r") as file:
-            reader = csv.reader(file)
-            data = list(reader)
-            data.pop(0)
-            timestamp, usd, btc, volume = zip(*data)
-            timestamp = map(int, timestamp)
-            usd = map(float, usd)
-
-            return list(zip(timestamp, usd))
+    def get_financial_data(self):
+            return list(zip(self.timestamp, self.usd))
 
     def get_volume_financial_data(self, currency):
         with open(os.path.join(self.data_path, currency + ".csv"), "r") as file:
@@ -157,8 +153,8 @@ class Currency:
 
         return output
 
-    def get_return_data(self, currency):
-        input = self.get_financial_data(currency)
+    def get_return_data(self):
+        input = self.get_financial_data()
 
         output = []
         for index, element in enumerate(input):
