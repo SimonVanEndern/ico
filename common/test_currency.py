@@ -26,19 +26,19 @@ class CurrencyTest(unittest.TestCase):
         self.reset_currency_to_specific()
         result = self.currency.calculate_daily_return()
         self.assertEqual(result[:10],
-                         [-0.5300393414370572, -0.46014427954161197, -0.10390123786735472, 0.16572870082281055,
+                         [0.0, -0.5300393414370572, -0.46014427954161197, -0.10390123786735472, 0.16572870082281055,
                           0.4578791674439675, 0.31256398069611, 0.5218620521569584, -0.2546957862610788,
-                          -0.13430416738292283, -0.09388119822988761])
+                          -0.13430416738292283])
 
     def test_calculate_rolling_volatility(self):
         self.reset_currency_to_specific()
         result = self.currency.calculate_rolling_volatility()
-        self.assertEqual(result["30"][:3], [0.20710665533971717, 0.18275999767266785, 0.16024334439989921])
+        self.assertEqual(result["30"][:3], [0.20709600699178304, 0.20710665533971717, 0.18275999767266785])
         self.assertEqual(result["90"][:3], [0, 0, 0])
-        self.assertEqual(result["180"][180:183], [0.10070672774496256, 0.10059590110171104, 0.10058950790887856])
+        self.assertEqual(result["180"][180:183], [0.09965761335607827, 0.10070672774496256, 0.10059590110171104])
 
     def test_calculate_linear_regression_on_volatility(self):
         self.reset_currency_to_specific()
         result = self.currency.calculate_linear_regression_on_volatility()
-        self.assertEqual(result.slope, -3.1528874556704874e-05)
-        self.assertEqual(result.intercept, 0.079761124383065027)
+        self.assertEqual(result.slope, -3.2842621099404758e-05)
+        self.assertEqual(result.intercept, 0.080459598585799041)
