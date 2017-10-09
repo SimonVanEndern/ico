@@ -1,0 +1,1 @@
+# Only very few currency pairs
