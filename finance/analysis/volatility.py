@@ -4,6 +4,8 @@ import os.path
 import matplotlib.pyplot as plt
 import os
 
+from common.currency import Currency
+
 
 class Volatility:
 

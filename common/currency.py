@@ -1,18 +1,58 @@
 import csv
-import os.path
-
 import math
+import os.path
+from os import path
 
-import common.coinmarketCapApi
+import matplotlib.pyplot as plt
+import pandas
+
+from globals import GlobalData
 
 
 class Currency:
-    data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-09-28"
-    example_currency = "bitcoin"
-    coinmarketcap = common.coinmarketCapApi.CoinmarketCapApi()
+    data_path = GlobalData.financial_data
 
-    def __init__(self):
-        return
+    def __init__(self, extended=False, currency="", data_path=""):
+        if extended:
+            if data_path != "":
+                self.data_path = data_path
+
+            self.name = currency
+
+            self.data = None
+            self.timestamp = None
+            self.usd = None
+            self.btc = None
+            self.market_cap = None
+            self.volume = None
+            self.daily_return = None
+
+            self.instantiate()
+
+    def load_data(self):
+        with open(path.join(self.data_path, self.name + ".csv"), "r") as file:
+            reader = csv.reader(file)
+            return list(reader)
+
+    def instantiate(self):
+        self.data = self.load_data()
+        self.timestamp, self.usd, self.btc, self.volume, self.market_cap = zip(*self.data)
+
+        self.usd = list(self.usd)
+        self.usd.pop(0)
+        self.usd = list(map(float, self.usd))
+
+        self.daily_return = self.calculate_daily_return()
+
+    def print_course(self):
+        df = pandas.DataFrame(self.usd)
+        df.plot()
+        plt.show()
+
+    def print_daily_return(self):
+        df = pandas.DataFrame(self.daily_return)
+        df.plot()
+        plt.show()
 
     def get_financial_data(self, currency):
         with open(os.path.join(self.data_path, currency + ".csv"), "r") as file:
@@ -79,8 +119,21 @@ class Currency:
 
         return output
 
+    def calculate_daily_return(self):
+        last = self.usd[0]
+        output = []
+        for course in self.usd:
+            output.append(course / last - 1)
+            last = course
 
-run_script = Currency()
+        # Remove first element which is 0.0
+        output.pop(0)
+        return output
+
+
+run_script = Currency(extended=True, currency="bitcoin")
+run_script.print_course()
+run_script.print_daily_return()
 # run_script.get_return_correlation_data("bitcoin", "ethereum")
 # run_script.get_return_correlation_data("bitcoin", "litecoin")
 # run_script.get_return_correlation_data("ethereum", "litecoin")
