@@ -1,6 +1,8 @@
+from common.aggregated import Aggregator
 from common.coinmarketCapApi import CoinmarketCapApi
 from common.coinmarketcap_coin_parser import CoinmarketCapCoinParser
 from common.coinmarketcap_token_parser import CoinmarketCapTokenParser
+from common.currency import Currency
 from finance.analysis.descriptive_statistics import DescriptiveStatistics
 import finance.analysis.descriptive_statistics as descriptives
 
@@ -11,7 +13,7 @@ class Main:
     coinmarketcap_tokens = CoinmarketCapTokenParser()
     descriptives = DescriptiveStatistics()
 
-    latest_only = False
+    latest_only = True
 
     def __init__(self):
         if not self.latest_only:
@@ -52,6 +54,18 @@ class Main:
             print("CCs without available market cap: " + str(stats["total"]))
             # Stat8
             print("Percentage containing 'coin' of ccs without market cap: " + str(stats["coin"] / stats["total"]))
+
+        # Table1: Showing the correlation of volume and usd with increasing correlation
+        bitcoin = Currency("ripple", date_limit="01.11.2016")
+        bitcoin.print_volume_return_correlations()
+
+        # Correlation volume and price
+        # Stat9
+        aggregator = Aggregator()
+        # print(aggregator.get_volume_price_correlation())
+        for key, value in (aggregator.get_volume_price_aggregation_2()).items():
+            print(key)
+            print(value)
 
 
 run_script = Main()

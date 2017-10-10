@@ -38,8 +38,10 @@ def calculate_relative_change_smoothed(data, smoothing=30):
             # if index > 0:
             #     output.append((course / last[0])/index)
             continue
-
-        output.append((course / last[len(last) - smoothing] - 1) / smoothing)
+        if (last[len(last) - smoothing]) == 0:
+            output.append(0)
+        else:
+            output.append((course / last[len(last) - smoothing] - 1) / smoothing)
 
         last.append(course)
 
@@ -78,10 +80,12 @@ class Currency:
         self.volatility = None
         self.price_linear_regression = None
         self.volume_linear_regression = None
-        self.return_volume_correlation = None
+        self.volume_return_correlations = None
         self.volume_relative_change = None
 
         self.instantiate()
+
+        self.validate_data()
 
     def limit_data(self):
         if self.date_limit is None:
@@ -92,7 +96,6 @@ class Currency:
             self.data.pop(0)
 
     def instantiate(self):
-
         self.data = self.load_data()
         self.limit_data()
         self.timestamp, self.usd, self.btc, self.volume, self.market_cap = zip(*self.data)
@@ -115,12 +118,25 @@ class Currency:
         self.volume_linear_regression = calculate_linear_regression(self.volume)
 
         self.volume_relative_change = calculate_relative_change(self.volume)
-        self.return_volume_correlation = calculate_correlation(self.volume_relative_change, self.daily_return)
+        self.volume_return_correlations = self.calculate_volume_return_correlations()
 
     def load_data(self):
         with open(path.join(self.data_path, self.name + ".csv"), "r") as file:
             reader = csv.reader(file)
             return list(reader)
+
+    def validate_data(self):
+        last = self.timestamp[0]
+        for date in self.timestamp:
+            if ((date - last) - 60 * 60 * 1000 * 24) > 24 * 60 * 60 * 1000:
+                print(self.name)
+                # print(date - last)
+                print(int((date - last) / 1000 / 60 / 60))
+                # print(date)
+                day = datetime.datetime.fromtimestamp(date / 1e3)
+                print(day)
+                # break
+            last = date
 
     @staticmethod
     def print_with_regression(data, regression):
@@ -211,11 +227,29 @@ class Currency:
         # plt.show()
         return result
 
+    def calculate_volume_return_correlation(self, smoothing=1):
+        val1 = calculate_relative_change_smoothed(self.volume, smoothing=smoothing)
+        val2 = calculate_relative_change_smoothed(self.usd, smoothing=smoothing)
 
-run_script = Currency("bitcoin", date_limit="01.11.2016")
-run_script.print_course()
-val1 = calculate_relative_change_smoothed(run_script.usd, smoothing=30)
-val2 = calculate_relative_change_smoothed(run_script.volume, smoothing=30)
-run_script.print_data([val1, val2])
+        return calculate_correlation(val1, val2)
 
-print(scipy.stats.pearsonr(val1, val2))
+    def calculate_volume_return_correlations(self):
+        output = []
+        for i in [1, 2, 3, 5, 7, 11, 17, 19, 23, 27, 29, 31, 37, 41, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 91]:
+            output.append(self.calculate_volume_return_correlation(smoothing=i))
+
+        return output
+
+    def print_volume_return_correlations(self):
+        for correlation in self.volume_return_correlations:
+            print(correlation)
+
+# run_script = Currency("zcash", date_limit="01.11.2016")
+# run_script.print_volume_return_correlations()
+# run_script.print_course()
+# run_script.print_volume()
+# val1 = calculate_relative_change_smoothed(run_script.usd, smoothing=15)
+# val2 = calculate_relative_change_smoothed(run_script.volume, smoothing=15)
+# run_script.print_data([val1, val2])
+#
+# print(scipy.stats.pearsonr(val1, val2))
