@@ -1,4 +1,5 @@
 import csv
+import datetime
 from os import path
 
 import matplotlib.pyplot as plt
@@ -36,7 +37,11 @@ def calculate_correlation(data1, data2):
 class Currency:
     data_path = GlobalData.financial_data
 
-    def __init__(self, currency, data_path=None):
+    def __init__(self, currency, data_path=None, date_limit=None):
+        self.date_limit = date_limit
+        if self.date_limit is not None:
+            self.date_limit = datetime.datetime.strptime(date_limit, "%d.%m.%Y")
+
         if data_path is not None:
             self.data_path = data_path
 
@@ -60,8 +65,18 @@ class Currency:
 
         self.instantiate()
 
+    def limit_data(self):
+        if self.date_limit is None:
+            return
+        self.data.pop(0)
+
+        while int(self.data[0][0]) < self.date_limit.timestamp() * 1000:
+            self.data.pop(0)
+
     def instantiate(self):
+
         self.data = self.load_data()
+        self.limit_data()
         self.timestamp, self.usd, self.btc, self.volume, self.market_cap = zip(*self.data)
 
         self.usd = list(self.usd)
@@ -170,6 +185,7 @@ class Currency:
         return result
 
 
-run_script = Currency("bitcoin")
+run_script = Currency("bitcoin", date_limit="01.11.2016")
 run_script.print_course()
 run_script.print_volume()
+print(run_script.return_volume_correlation)

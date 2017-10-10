@@ -5,6 +5,11 @@ from common.currency import Currency
 
 class CurrencyTest(unittest.TestCase):
     currency = Currency("ethereum")
+    date_limited_currency = Currency("ethereum", date_limit="01.01.2016")
+
+    def reset_limited_currency_to_specific(self):
+        self.date_limited_currency.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
+        self.date_limited_currency.instantiate()
 
     def reset_currency_to_specific(self):
         self.currency.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
@@ -42,3 +47,11 @@ class CurrencyTest(unittest.TestCase):
         result = self.currency.calculate_linear_regression_on_volatility()
         self.assertEqual(result.slope, -3.2842621099404758e-05)
         self.assertEqual(result.intercept, 0.080459598585799041)
+
+    def test_datapoints_currency(self):
+        result = self.currency.get_financial_data()
+        self.assertEqual(len(result), 792)
+
+    def test_date_limited_currency(self):
+        result = self.date_limited_currency.get_financial_data()
+        self.assertEqual(len(result), 645)
