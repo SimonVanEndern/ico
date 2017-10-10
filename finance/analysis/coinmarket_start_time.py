@@ -4,15 +4,15 @@ from datetime import datetime
 
 import common.coinmarketCapApi
 import common.currency
+from common.currency_handler import CurrencyHandler
 
 
 class AggregateCoinmarketStartTime:
     example_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-09-28"
     start_time_data = []
     coinmarketcap = common.coinmarketCapApi.CoinmarketCapApi()
+    currency_handler = CurrencyHandler()
 
-    # Change away from static
-    currency_provider = common.currency.Currency("bitcoin")
     highest_market_cap_data = {}
 
     now = datetime.now()
@@ -62,7 +62,7 @@ class AggregateCoinmarketStartTime:
         currencies = self.coinmarketcap.get_currencies()
         for index, currency in enumerate(currencies):
             try:
-                data = self.currency_provider.get_volume_financial_data(currency)
+                data = self.currency_handler.get_currency(currency).get_volume_financial_data()
                 sorted_data = sorted(data, key=lambda x: x[1], reverse=True)
                 highest = sorted_data[0]
                 json_output[currency] = highest[1]

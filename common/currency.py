@@ -1,6 +1,4 @@
 import csv
-import math
-import os.path
 from os import path
 
 import matplotlib.pyplot as plt
@@ -30,8 +28,8 @@ def calculate_relative_change(data):
     return output
 
 
+# Returns a named tuple with the correlation and p-value
 def calculate_correlation(data1, data2):
-    print(numpy.corrcoef(data1, data2)[0][1])
     return scipy.stats.pearsonr(data1, data2)
 
 
@@ -119,18 +117,10 @@ class Currency:
         self.print_with_regression(self.volume, self.volume_linear_regression)
 
     def get_financial_data(self):
-            return list(zip(self.timestamp, self.usd))
+        return list(zip(self.timestamp, self.usd))
 
-    def get_volume_financial_data(self, currency):
-        with open(os.path.join(self.data_path, currency + ".csv"), "r") as file:
-            reader = csv.reader(file)
-            data = list(reader)
-            data.pop(0)
-            timestamp, usd, btc, volume, market_cap = zip(*data)
-            timestamp = map(int, timestamp)
-            volume = map(int, volume)
-
-            return list(zip(timestamp, volume))
+    def get_volume_financial_data(self):
+        return list(zip(self.timestamp, self.volume))
 
     def calculate_daily_return(self, with_timestamp=False):
         last = self.usd[0]
@@ -183,12 +173,3 @@ class Currency:
 run_script = Currency("bitcoin")
 run_script.print_course()
 run_script.print_volume()
-# run_script.print_daily_return()
-# run_script.calculate_linear_regression_on_volatility()
-# run_script.get_return_correlation_data("bitcoin", "ethereum")
-# run_script.get_return_correlation_data("bitcoin", "litecoin")
-# run_script.get_return_correlation_data("ethereum", "litecoin")
-# run_script.get_return_correlation_data("ripple", "litecoin")
-# run_script.get_return_correlation_data("ripple", "bitcoin")
-# run_script.get_return_correlation_data("ripple", "ethereum")
-# run_script.get_all_correlations()
