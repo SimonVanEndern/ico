@@ -29,6 +29,24 @@ def calculate_relative_change(data):
     return output
 
 
+def calculate_relative_change_smoothed(data, smoothing=30):
+    last = [data[0]]
+    output = []
+    for index, course in enumerate(data):
+        if index < smoothing:
+            last.append(course)
+            # if index > 0:
+            #     output.append((course / last[0])/index)
+            continue
+
+        output.append((course / last[len(last) - smoothing] - 1) / smoothing)
+
+        last.append(course)
+
+    # output.pop(0)
+    return output
+
+
 # Returns a named tuple with the correlation and p-value
 def calculate_correlation(data1, data2):
     return scipy.stats.pearsonr(data1, data2)
@@ -113,13 +131,20 @@ class Currency:
         plt.plot(df)
         plt.show()
 
+    @staticmethod
+    def print_data(data):
+        for piece in data:
+            df = pandas.DataFrame(piece)
+            plt.plot(df)
+        plt.show()
+
     def print_course(self):
         self.print_with_regression(self.usd, self.price_linear_regression)
 
     def print_daily_return(self):
         df = pandas.DataFrame(self.daily_return)
-        df2 = pandas.DataFrame(self.volume_relative_change)
-        plt.plot(df2)
+        # df2 = pandas.DataFrame(self.volume_relative_change)
+        # plt.plot(df2)
         plt.plot(df)
         plt.show()
 
@@ -132,6 +157,8 @@ class Currency:
         self.print_with_regression(self.volume, self.volume_linear_regression)
 
     def get_financial_data(self):
+        print(self.date_limit)
+        print(len(self.timestamp))
         return list(zip(self.timestamp, self.usd))
 
     def get_volume_financial_data(self):
@@ -187,5 +214,8 @@ class Currency:
 
 run_script = Currency("bitcoin", date_limit="01.11.2016")
 run_script.print_course()
-run_script.print_volume()
-print(run_script.return_volume_correlation)
+val1 = calculate_relative_change_smoothed(run_script.usd, smoothing=30)
+val2 = calculate_relative_change_smoothed(run_script.volume, smoothing=30)
+run_script.print_data([val1, val2])
+
+print(scipy.stats.pearsonr(val1, val2))

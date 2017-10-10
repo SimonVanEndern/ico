@@ -1,7 +1,13 @@
 import csv
+import logging
 import math
 import os.path
 from datetime import datetime
+
+import matplotlib.pyplot as plt
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
 import numpy
 
@@ -14,10 +20,12 @@ class Correlation:
     def __init__(self):
         return
 
-    def get_return_correlation_data(self, currency0, currency1):
-        return_data_currency0 = self.currency_handler.get_currency(currency0).calculate_daily_return(
+    def get_return_correlation_data(self, currency0, currency1, date_limit=None):
+        return_data_currency0 = self.currency_handler.get_currency(currency0,
+                                                                   date_limit=date_limit).calculate_daily_return(
             with_timestamp=True)
-        return_data_currency1 = self.currency_handler.get_currency(currency1).calculate_daily_return(
+        return_data_currency1 = self.currency_handler.get_currency(currency1,
+                                                                   date_limit=date_limit).calculate_daily_return(
             with_timestamp=True)
 
         diff = len(return_data_currency1) - len(return_data_currency0)
@@ -30,27 +38,19 @@ class Correlation:
         _, currency0 = zip(*return_data_currency0)
         _, currency1 = zip(*return_data_currency1)
 
-        combined = list(zip(_, currency0, currency1))
-
-        # plt.plot(_, currency0)
-        # plt.plot(_, currency1)
-        # plt.show()
-
         correlation = numpy.corrcoef(currency0, currency1)
-        # print(correlation[0][1])
         return correlation[0][1]
 
-    def get_all_correlations(self, currency, size_limit=100):
+    def get_all_correlations(self, currency, size_limit=100, date_limit=None):
         currencies = self.currency_handler.get_all_currency_names_where_data_is_available(size_limit=size_limit)
         output = []
 
         for other_currency in currencies:
-            output.append((other_currency, self.get_return_correlation_data(currency, other_currency)))
+            logger.info("Calculating correlation with " + str(other_currency))
+            output.append(
+                (other_currency, self.get_return_correlation_data(currency, other_currency, date_limit=date_limit)))
 
-        # print(output)
         _, correlations = zip(*output)
-        # correlations = map(math.fabs, correlations)
-        # print(sorted(correlations, reverse=True))
         return correlations
 
     def export_correlation_matrix(self, size_limit=math.inf):
@@ -83,23 +83,31 @@ class Correlation:
                 if index == 0:
                     currencies = row
                     continue
-                # if index == 700:
-                #     break
 
                 for index2, element in enumerate(row):
                     if index2 == 0:
                         continue
                     correlations.append((currencies[index], currencies[index2], float(element)))
 
-            # print(correlations)
-            # print(len(correlations))
             sorted_correlations = sorted(correlations, key=lambda x: x[2], reverse=True)
             while sorted_correlations[0][2] == 1.0:
                 sorted_correlations.pop(0)
 
-                # print(sorted_correlations[:200])
-
 
 run_script = Correlation()
 # run_script.export_correlation_matrix()
-run_script.get_all_correlations("bitcoin")
+val1 = run_script.get_all_correlations("bitcoin", size_limit=100)
+val1 = list(map(math.fabs, val1))
+val2 = run_script.get_all_correlations("bitcoin", date_limit="01.01.2016", size_limit=100)
+val2 = list(map(math.fabs, val2))
+val3 = run_script.get_all_correlations("bitcoin", date_limit="01.01.2017", size_limit=100)
+val3 = list(map(math.fabs, val3))
+
+print(sum(val1))
+print(sum(val2))
+print(sum(val3))
+
+plt.plot(val1)
+plt.plot(val2)
+plt.plot(val3)
+plt.show()
