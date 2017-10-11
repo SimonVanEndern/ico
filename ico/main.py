@@ -1,5 +1,3 @@
-import operator
-
 from common.coinmarketCapApi import CoinmarketCapApi
 from ico.sources.blockstarter import BlockstarterSource
 from ico.sources.coindesk import CoindeskSource
@@ -99,12 +97,12 @@ class Main:
 
         for currency in sorted(listing):
             print(currency)
-        # for currency in self.data:
-        #     print(type(currency))
-        #     print(type(self.data[currency]))
+            # for currency in self.data:
+            #     print(type(currency))
+            #     print(type(self.data[currency]))
 
 
-run_script = Main()
+# run_script = Main()
 # run_script.log_data()
 # run_script.log_important_statistics()
-run_script.log_ordered_by_date()
+# run_script.log_ordered_by_date()

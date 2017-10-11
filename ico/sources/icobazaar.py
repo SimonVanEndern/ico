@@ -1,14 +1,13 @@
 import csv
-import urllib.request
 import datetime
-import os.path
 
-from ico.globaldata import GlobalData
+from global_data import GlobalData
 from ico.initial_coin_offering import ICO
 
 
 class IcobazaarSource:
-    baseAddress = GlobalData.baseAddress
+    baseAddress = GlobalData.ico_data_path
+
     filename = "\icobazaar-2017-09-26-11-16uhr.csv"
 
     def __init__(self):

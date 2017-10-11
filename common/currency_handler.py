@@ -3,14 +3,14 @@ import os
 import math
 
 from common.currency import Currency
-from globals import GlobalData
+from global_data import GlobalData
 
 
 class CurrencyHandler:
 
     all_currencies_with_data = None
     currencies = {}
-    data_path = GlobalData.financial_data
+    data_path = GlobalData.financial_data_path
 
     def __init__(self):
         pass

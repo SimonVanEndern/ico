@@ -3,7 +3,7 @@ from datetime import datetime
 
 import scipy
 
-from globals import GlobalData
+from global_data import GlobalData
 
 
 def calculate_average_volume(data):
@@ -15,7 +15,7 @@ def calculate_average_volume(data):
 
 
 class AggregateCoinmarketStartTimeAndAverageVolume:
-    data_path = GlobalData.financial_data
+    data_path = GlobalData.financial_data_path
     start_time_data = []
 
     highest_market_cap_data = {}

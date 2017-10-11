@@ -5,7 +5,7 @@ import os.path
 
 from bs4 import BeautifulSoup
 
-from ico.globaldata import GlobalData
+from global_data import GlobalData
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -16,7 +16,7 @@ from ico.initial_coin_offering import ICO
 
 class IcotrackerSource:
     filename = "Actual crowdsales - ICO Tracker-2017-09-28.html"
-    baseAddress = GlobalData.baseAddress
+    baseAddress = GlobalData.ico_data_path
     path = os.path.join(baseAddress, filename)
 
     def __init__(self):
@@ -66,11 +66,10 @@ class IcotrackerSource:
 
         return data
 
-    # def log_data(self):
-    #     data = self.getIcoData({})
-    #     for currency in data:
-    #         print(data[currency])
-
+        # def log_data(self):
+        #     data = self.getIcoData({})
+        #     for currency in data:
+        #         print(data[currency])
 
 # run_script = IcotrackerSource()
 # run_script.log_data()

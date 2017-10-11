@@ -8,7 +8,7 @@ import pandas
 import scipy
 from scipy import stats
 
-from globals import GlobalData
+from global_data import GlobalData
 
 
 def calculate_linear_regression(usd):
@@ -55,7 +55,7 @@ def calculate_correlation(data1, data2):
 
 
 class Currency:
-    data_path = GlobalData.financial_data
+    data_path = GlobalData.financial_data_path
 
     def __init__(self, currency, data_path=None, date_limit=None):
         self.date_limit = date_limit

@@ -1,6 +1,3 @@
-import types
-
-
 class ICO:
     def __init__(self, name, close_date, dataYesNo, raised_money):
         self.name = name
