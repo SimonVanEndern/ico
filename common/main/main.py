@@ -11,7 +11,5 @@ class Main:
 
     AggregateCoinmarketStartTimeAndAverageVolume(coinmarketcap, currency_handler)
 
-    # AggregateAverageMarketCapitalization(coinmarketcap)
-
 
 Main()
