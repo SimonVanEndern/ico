@@ -8,6 +8,7 @@ from datetime import timedelta
 import requests
 from bs4 import BeautifulSoup
 
+from ico.imports.importer import Importer
 from ico.initial_coin_offering import ICO
 
 logging.basicConfig(level=logging.DEBUG)
@@ -15,15 +16,14 @@ logging.basicConfig(level=logging.DEBUG)
 http.client.HTTPSConnection.debuglevel = 1
 
 
-class CyberfundSource:
+class CyberfundSource(Importer):
     html_import_address = "https://cyber.fund/radar"
     now = datetime.datetime.now()
-    # path = os.path.join(os.path.dirname(__file__) + "\saved",
-    #                     "cyberfund" + str(now.year) + str(now.month) + str(now.day) + ".html")
-    path = os.path.join(os.path.dirname(__file__) + "\saved",
-                         "cyberfund" + "2017102" + ".html")
 
     def __init__(self):
+        super().__init__()
+        self.path = os.path.join(os.path.dirname(__file__) + "\saved",
+                                 "cyberfund" + super().get_filename_date() + ".html")
         self.data = {}
         if os.path.isfile(self.path):
             return

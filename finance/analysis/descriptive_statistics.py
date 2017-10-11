@@ -6,6 +6,7 @@ import pandas
 
 import common.coinmarketCapApi
 import common.currency
+from common.currency_handler import CurrencyHandler
 from finance.analysis.coinmarket_start_time import AggregateCoinmarketStartTimeAndAverageVolume
 
 
@@ -26,15 +27,14 @@ class DescriptiveStatistics:
     example_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-09-28"
     coinmarketcap = common.coinmarketCapApi.CoinmarketCapApi()
 
-    # Change away from static bitcoin
-    currency_provider = common.currency.Currency("bitcoin")
+    currency_handler = CurrencyHandler()
 
     now = datetime.now()
     path = os.path.join(os.path.dirname(__file__) + "\\aggregated",
                         "start_date" + str(now.year) + str(now.month) + str(now.day) + ".csv")
 
     def __init__(self):
-        AggregateCoinmarketStartTimeAndAverageVolume(self.coinmarketcap)
+        AggregateCoinmarketStartTimeAndAverageVolume(self.coinmarketcap, self.currency_handler)
         return
 
     # Printing a histogram of the number of currencies started to be listed at coinmarketcap by month
@@ -83,7 +83,11 @@ class DescriptiveStatistics:
         for index, currency in enumerate(currencies):
             if index == 3:
                 break
-            data = self.currency_provider.get_volume_financial_data(currency)
+            result = self.currency_handler.get_currency(currency)
+            if result is not None:
+                data = result.get_volume_financial_data()
+            else:
+                data = None
             sorted_data = sorted(data, key=lambda x: x[1], reverse=True)
             highest = sorted_data[0]
             print(highest)

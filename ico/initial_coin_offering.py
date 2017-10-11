@@ -14,6 +14,9 @@ class ICO:
             else:
                 return self.close_date > other.close_date
 
+    def __repr__(self):
+        return str(self)
+
     def __str__(self):
         return str([self.name, self.close_date, self.funds, self.raised_money])
 

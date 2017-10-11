@@ -1,11 +1,12 @@
-import datetime
 import http.client
 import logging
 import os.path
+from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
 
+from ico.imports.importer import Importer
 from ico.initial_coin_offering import ICO
 
 logging.basicConfig(level=logging.DEBUG)
@@ -13,15 +14,13 @@ logging.basicConfig(level=logging.DEBUG)
 http.client.HTTPSConnection.debuglevel = 1
 
 
-class BlockstarterSource:
+class BlockstarterSource(Importer):
     html_import_address = "http://blockstarter.co/icodb/"
-    now = datetime.datetime.now()
-    # path = os.path.join(os.path.dirname(__file__) + "\saved",
-    #                     "blockstarter" + str(now.year) + str(now.month) + str(now.day) + ".html")
-    path = os.path.join(os.path.dirname(__file__) + "\saved",
-                        "blockstarter" + "2017102" + ".html")
 
     def __init__(self):
+        super().__init__()
+        self.path = os.path.join(os.path.dirname(__file__) + "\saved",
+                                 "blockstarter" + super().get_filename_date() + ".html")
         self.data = {}
         if os.path.isfile(self.path):
             return
@@ -49,7 +48,7 @@ class BlockstarterSource:
                 if date == "" or date == "n/a":
                     ico.close_date = None
                 else:
-                    ico.close_date = datetime.datetime.strptime(date, '%m.%d.%Y')
+                    ico.close_date = datetime.strptime(date, '%m.%d.%Y')
 
                 if name.lower() in currency_map:
                     data[currency_map[name.lower()]] = ico

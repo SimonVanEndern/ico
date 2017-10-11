@@ -48,8 +48,6 @@ class AggregateCoinmarketStartTimeAndAverageVolume:
             volume = currency.calculate_average_volume()
 
             beginning_date = datetime.fromtimestamp(currency.get_beginning_date() / 1e3)
-            start_time.append(beginning_date)
-            currencies.append(filename)
             json_currencies[filename] = beginning_date
             json_currencies_volume[filename] = volume
 

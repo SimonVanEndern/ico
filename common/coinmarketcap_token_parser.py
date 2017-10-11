@@ -1,13 +1,12 @@
+from collections import Counter
 from datetime import datetime
 from os import path
 
+import matplotlib.pyplot as plt
+import pandas
 from bs4 import BeautifulSoup
 
 from common.parser import Parser
-import numpy
-import matplotlib.pyplot as plt
-import pandas
-from collections import Counter
 
 
 class CoinmarketCapTokenParser(Parser):
@@ -48,7 +47,6 @@ class CoinmarketCapTokenParser(Parser):
         plt.show()
 
         return len(token_counts)
-
 
 # run_script = CoinmarketCapTokenParser()
 # run_script.get_platform_statistics()

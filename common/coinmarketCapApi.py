@@ -102,7 +102,7 @@ class CoinmarketCapApi:
 
     def save(self):
         if os.path.isfile(self.save_path):
-            os.remove(self.path)
+            os.remove(self.save_path)
 
         with open(self.save_path, "w") as file:
             json.dump(self.currencies, file)

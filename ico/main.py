@@ -1,17 +1,23 @@
+import logging
+
 from common.coinmarketCapApi import CoinmarketCapApi
-from ico.sources.blockstarter import BlockstarterSource
-from ico.sources.coindesk import CoindeskSource
-from ico.sources.coinschedule import CoinscheduleSource
-from ico.sources.cyberfund import CyberfundSource
-from ico.sources.icobazaar import IcobazaarSource
-from ico.sources.icotracker import IcotrackerSource
-from ico.sources.smithandcrown import SmithandcrownSource
+from ico.imports.blockstarter import BlockstarterSource
+from ico.imports.coindesk import CoindeskSource
+from ico.imports.coinschedule import CoinscheduleSource
+from ico.imports.cyberfund import CyberfundSource
+from ico.imports.icobazaar import IcobazaarSource
+from ico.imports.icotracker import IcotrackerSource
+from ico.imports.smithandcrown import SmithandcrownSource
+
+logging.basicConfig(level=logging.INFO)
 
 
 class Main:
     data = {}
 
     def __init__(self):
+        logging.info("Constructing ico:Main")
+
         self.coinmarketcap_source = CoinmarketCapApi()
         self.coindesk_source = CoindeskSource()
         self.icobazaar_source = IcobazaarSource()
@@ -23,7 +29,9 @@ class Main:
 
         self.currency_map = self.coinmarketcap_source.getShortnameMap()
 
-        self.getData()
+        self.collect_data()
+
+        logging.info("Finished constructing ico:Main")
 
     def add_data(self, newData):
         for key in newData:
@@ -34,8 +42,8 @@ class Main:
             else:
                 self.data[key] = newData[key]
 
-    def getData(self):
-        coindesk_data = self.coindesk_source.getIcoData(self.currency_map)
+    def collect_data(self):
+        coindesk_data = self.coindesk_source.get_ico_data(self.currency_map)
         icobazaar_data = self.icobazaar_source.getIcoData(self.currency_map)
         icotracker_data = self.icotracker_source.getIcoData(self.currency_map)
         coinschedule_data = self.coinschedule_source.getIcoData(self.currency_map)
@@ -52,6 +60,9 @@ class Main:
         self.add_data(smithandcrown_data)
         self.add_data(cyberfund_data)
         self.add_data(blockstarter_data)
+
+    def get_data(self):
+        return self.data
 
     def log_data(self):
         count_funding_data = 0

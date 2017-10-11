@@ -52,9 +52,8 @@ class CoinscheduleSource:
                 else:
                     data[name.lower()] = ico
 
-                # print(ico)
+                    # print(ico)
 
         return data
-
 
 # CoinscheduleSource().getIcoData({})
