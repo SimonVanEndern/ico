@@ -30,6 +30,7 @@ class BlockstarterSource(Importer):
                 file.write(request.text)
 
     def getIcoData(self, currency_map):
+        print(currency_map)
         data = {}
         with open(self.path, "r", encoding="utf8") as file:
             soup = BeautifulSoup(file, "html.parser")
@@ -58,4 +59,4 @@ class BlockstarterSource(Importer):
         return data
 
 
-BlockstarterSource().getIcoData({})
+# BlockstarterSource().getIcoData({})

@@ -1,6 +1,10 @@
+from json import JSONEncoder
+
+
 class ICO:
     def __init__(self, name, close_date, dataYesNo, raised_money):
-        self.name = name
+        # super().__init__()
+        self.name = name.lower()
         self.close_date = close_date
         self.funds = dataYesNo
         self.raised_money = raised_money

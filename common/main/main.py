@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 class Main:
-    print("Aggregation started")
+    logging.info("common:main:main - Aggregation started")
 
     coinmarketcap = CoinmarketCapApi()
     currency_handler = CurrencyHandler()
@@ -18,6 +18,9 @@ class Main:
     ico_handler = ico.main.Main()
     ico_data = ico_handler.get_data()
     print(ico_data)
+    coinmarketcap.add_ico_data(ico_data)
+    coinmarketcap.save()
+    print("Saved")
 
     AggregateCoinmarketStartTimeAndAverageVolume(coinmarketcap, currency_handler)
 

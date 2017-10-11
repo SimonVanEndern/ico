@@ -61,7 +61,7 @@ class IcotrackerSource:
                     # print(ico.name.lower() + " Found")
                     # print(currency_map[ico.name.lower()])
                 else:
-                    data[ico.name] = ico
+                    data[ico.name.lower()] = ico
                     # print(ico.name + " Not found in map")
 
         return data

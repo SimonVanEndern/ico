@@ -33,15 +33,6 @@ class Main:
 
         logging.info("Finished constructing ico:Main")
 
-    def add_data(self, newData):
-        for key in newData:
-            if key in self.data:
-                self.data[key].addData(newData[key].raised_money)
-                if newData[key].close_date is not None:
-                    self.data[key].close_date = newData[key].close_date
-            else:
-                self.data[key] = newData[key]
-
     def collect_data(self):
         coindesk_data = self.coindesk_source.get_ico_data(self.currency_map)
         icobazaar_data = self.icobazaar_source.getIcoData(self.currency_map)
@@ -61,7 +52,17 @@ class Main:
         self.add_data(cyberfund_data)
         self.add_data(blockstarter_data)
 
+    def add_data(self, newData):
+        for key in newData:
+            if key in self.data:
+                self.data[key].addData(newData[key].raised_money)
+                if newData[key].close_date is not None:
+                    self.data[key].close_date = newData[key].close_date
+            else:
+                self.data[key] = newData[key]
+
     def get_data(self):
+        print(self.data)
         return self.data
 
     def log_data(self):

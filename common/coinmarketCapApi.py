@@ -3,6 +3,7 @@ import http.client
 import json
 import os.path
 
+from common.main.json_converter import JsonConverter
 from ico.initial_coin_offering import ICO
 
 
@@ -13,8 +14,10 @@ class CoinmarketCapApi:
     api_section1 = "/v1/ticker/"
 
     now = datetime.datetime.now()
-    path = os.path.join(os.path.dirname(__file__) + "\saved", "coinmarketcap-tickers" + str(now.year) + str(now.month) + str(now.day) + ".json")
-    save_path = os.path.join(os.path.dirname(__file__) + "\saved", "coinmarketcap-data" + str(now.year) + str(now.month) + str(now.day) + ".json")
+    path = os.path.join(os.path.dirname(__file__) + "\saved",
+                        "coinmarketcap-tickers" + str(now.year) + str(now.month) + str(now.day) + ".json")
+    save_path = os.path.join(os.path.dirname(__file__) + "\saved",
+                             "coinmarketcap-data" + str(now.year) + str(now.month) + str(now.day) + ".json")
 
     def __init__(self):
 
@@ -105,4 +108,19 @@ class CoinmarketCapApi:
             os.remove(self.save_path)
 
         with open(self.save_path, "w") as file:
-            json.dump(self.currencies, file)
+            json.dump(self.currencies, file, cls=JsonConverter)
+
+    def add_ico_data(self, icos):
+        # print(icos)
+        # print(icos.keys())
+        # print(icos["ETH"])
+        for currency in self.currencies:
+            # if currency["symbol"] == "ETH":
+                # print("Here i am")
+            if currency["id"] in icos:
+                currency["ico"] = icos[currency["id"]]
+            # else:
+                # if currency["symbol"] in icos:
+                    # print(icos[currency["symbol"]])
+
+        print(self.currencies)

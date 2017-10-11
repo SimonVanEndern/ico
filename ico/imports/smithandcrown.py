@@ -69,4 +69,4 @@ class SmithandcrownSource:
         return data
 
 
-SmithandcrownSource().getIcoData({})
+# SmithandcrownSource().getIcoData({})

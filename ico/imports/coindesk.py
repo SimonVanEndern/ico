@@ -43,7 +43,7 @@ class CoindeskSource:
                     # print(ico.name.lower() + " Found")
                     # print(currency_map[ico.name.lower()])
                 else:
-                    data[ico.name] = ico
+                    data[ico.name.lower()] = ico
                     # print(ico.name + " Not found in map")
 
         return data
@@ -66,6 +66,6 @@ class CoindeskSource:
                 if ico.name.lower() in currency_map:
                     data[currency_map[ico.name.lower()]] = ico
                 else:
-                    data[ico.name] = ico
+                    data[ico.name.lower()] = ico
 
         return data
