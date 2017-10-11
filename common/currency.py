@@ -244,6 +244,12 @@ class Currency:
         for correlation in self.volume_return_correlations:
             print(correlation)
 
+    def get_beginning_date(self):
+        return self.timestamp[0]
+
+    def calculate_average_volume(self):
+        return scipy.mean(self.volume)
+
 # run_script = Currency("zcash", date_limit="01.11.2016")
 # run_script.print_volume_return_correlations()
 # run_script.print_course()

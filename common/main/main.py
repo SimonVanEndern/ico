@@ -1,13 +1,15 @@
 from common.coinmarketCapApi import CoinmarketCapApi
-from finance.analysis.coinmarket_start_time import AggregateCoinmarketStartTime
+from common.currency_handler import CurrencyHandler
+from finance.analysis.coinmarket_start_time import AggregateCoinmarketStartTimeAndAverageVolume
 
 
 class Main:
     print("Aggregation started")
 
     coinmarketcap = CoinmarketCapApi()
+    currency_handler = CurrencyHandler()
 
-    AggregateCoinmarketStartTime(coinmarketcap)
+    AggregateCoinmarketStartTimeAndAverageVolume(coinmarketcap, currency_handler)
 
     # AggregateAverageMarketCapitalization(coinmarketcap)
 
