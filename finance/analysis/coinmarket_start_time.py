@@ -2,15 +2,15 @@ import csv
 import os.path
 from datetime import datetime
 
-import common.coinmarketCapApi
-import common.currency
+import scipy
+
 from common.currency_handler import CurrencyHandler
+from globals import GlobalData
 
 
 class AggregateCoinmarketStartTime:
-    example_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-09-28"
+    data_path = GlobalData.financial_data
     start_time_data = []
-    coinmarketcap = common.coinmarketCapApi.CoinmarketCapApi()
     currency_handler = CurrencyHandler()
 
     highest_market_cap_data = {}
@@ -19,7 +19,8 @@ class AggregateCoinmarketStartTime:
     path = os.path.join(os.path.dirname(__file__) + "\\aggregated",
                         "start_date" + str(now.year) + str(now.month) + str(now.day) + ".csv")
 
-    def __init__(self):
+    def __init__(self, coinmarketcap):
+        self.coinmarketcap = coinmarketcap
         if os.path.isfile(self.path):
             with open(self.path, "r") as file:
                 reader = csv.reader(file)
@@ -33,20 +34,25 @@ class AggregateCoinmarketStartTime:
 
     def aggregate_start_time_data(self):
         json_currencies = {}
+        json_currencies_volume = {}
         currencies = []
         start_time = []
-        for filename in os.listdir(self.example_path):
-            with open(os.path.join(self.example_path, filename), "r") as file:
+        for filename in os.listdir(self.data_path):
+            with open(os.path.join(self.data_path, filename), "r") as file:
                 reader = csv.reader(file)
                 icos = list(reader)
+
+                volume = self.calculate_average_volume(icos)
 
                 beginning_date = datetime.fromtimestamp(int(icos[2][0]) / 1e3)
                 start_time.append(beginning_date)
                 currencies.append(filename.split(".")[0])
                 json_currencies[filename.split(".")[0]] = beginning_date
+                json_currencies_volume[filename.split(".")[0]] = volume
 
         self.start_time_data = zip(currencies, start_time)
         self.coinmarketcap.add_start_date(json_currencies)
+        self.coinmarketcap.add_volume_average(json_currencies_volume)
         self.coinmarketcap.save()
         with open(self.path, "w") as file:
             writer = csv.writer(file, delimiter=',', lineterminator='\n')
@@ -62,7 +68,12 @@ class AggregateCoinmarketStartTime:
         currencies = self.coinmarketcap.get_currencies()
         for index, currency in enumerate(currencies):
             try:
-                data = self.currency_handler.get_currency(currency).get_volume_financial_data()
+                result = self.currency_handler.get_currency(currency)
+                if result is not None:
+                    data = result.get_volume_financial_data()
+                else:
+                    json_output[currency] = None
+                    continue
                 sorted_data = sorted(data, key=lambda x: x[1], reverse=True)
                 highest = sorted_data[0]
                 json_output[currency] = highest[1]
@@ -71,6 +82,10 @@ class AggregateCoinmarketStartTime:
 
         return json_output
 
+    def calculate_average_volume(self, data):
+        timestamp, usd, btc, volume, market_cap = zip(*data)
+        volume = list(volume)
+        volume.pop(0)
+        volume = list(map(int, volume))
+        return scipy.mean(volume)
 
-run_script = AggregateCoinmarketStartTime()
-# run_script.get_highest_market_cap()

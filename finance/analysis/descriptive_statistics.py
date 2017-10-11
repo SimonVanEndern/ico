@@ -1,4 +1,3 @@
-import csv
 import os.path
 from datetime import datetime
 
@@ -35,7 +34,7 @@ class DescriptiveStatistics:
                         "start_date" + str(now.year) + str(now.month) + str(now.day) + ".csv")
 
     def __init__(self):
-        AggregateCoinmarketStartTime()
+        AggregateCoinmarketStartTime(self.coinmarketcap)
         return
 
     # Printing a histogram of the number of currencies started to be listed at coinmarketcap by month
@@ -103,7 +102,7 @@ class DescriptiveStatistics:
         keyword_count = 0
         for currency in currency_list:
             if count == bucket_size:
-                output.append((bucket, keyword_count / bucket_size, (bucket_size - keyword_count)/bucket_size))
+                output.append((bucket, keyword_count / bucket_size, (bucket_size - keyword_count) / bucket_size))
                 count = 0
                 bucket += 1
                 keyword_count = 0
@@ -112,7 +111,7 @@ class DescriptiveStatistics:
                 keyword_count += 1
 
             count += 1
-        output.append((bucket, keyword_count / count, (count - keyword_count)/count))
+        output.append((bucket, keyword_count / count, (count - keyword_count) / count))
 
         df = pandas.DataFrame(output)
         del df[0]
@@ -139,7 +138,7 @@ class DescriptiveStatistics:
 
             if index >= bucket_size:
                 keyword_counter.pop(0)
-                output.append(sum(keyword_counter)/bucket_size)
+                output.append(sum(keyword_counter) / bucket_size)
 
         df = pandas.DataFrame(output)
         chart = df.plot()

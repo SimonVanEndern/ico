@@ -95,6 +95,11 @@ class CoinmarketCapApi:
 
         return
 
+    def add_volume_average(self, average_volumes):
+        for currency in self.currencies:
+            if currency["id"] in average_volumes:
+                currency["average_volume"] = average_volumes[currency["id"]]
+
     def save(self):
         if os.path.isfile(self.save_path):
             os.remove(self.path)

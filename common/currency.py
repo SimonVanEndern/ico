@@ -85,7 +85,7 @@ class Currency:
 
         self.instantiate()
 
-        self.validate_data()
+        # self.validate_data()
 
     def limit_data(self):
         if self.date_limit is None:
@@ -125,18 +125,18 @@ class Currency:
             reader = csv.reader(file)
             return list(reader)
 
-    def validate_data(self):
-        last = self.timestamp[0]
-        for date in self.timestamp:
-            if ((date - last) - 60 * 60 * 1000 * 24) > 24 * 60 * 60 * 1000:
-                print(self.name)
-                # print(date - last)
-                print(int((date - last) / 1000 / 60 / 60))
-                # print(date)
-                day = datetime.datetime.fromtimestamp(date / 1e3)
-                print(day)
-                # break
-            last = date
+    # def validate_data(self):
+    #     last = self.timestamp[0]
+    #     for date in self.timestamp:
+    #         if ((date - last) - 60 * 60 * 1000 * 24) > 24 * 60 * 60 * 1000:
+    #             print(self.name)
+    #             # print(date - last)
+    #             print(int((date - last) / 1000 / 60 / 60))
+    #             # print(date)
+    #             day = datetime.datetime.fromtimestamp(date / 1e3)
+    #             print(day)
+    #             # break
+    #         last = date
 
     @staticmethod
     def print_with_regression(data, regression):
@@ -173,8 +173,8 @@ class Currency:
         self.print_with_regression(self.volume, self.volume_linear_regression)
 
     def get_financial_data(self):
-        print(self.date_limit)
-        print(len(self.timestamp))
+        # print(self.date_limit)
+        # print(len(self.timestamp))
         return list(zip(self.timestamp, self.usd))
 
     def get_volume_financial_data(self):

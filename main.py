@@ -13,7 +13,7 @@ class Main:
     coinmarketcap_tokens = CoinmarketCapTokenParser()
     descriptives = DescriptiveStatistics()
 
-    latest_only = True
+    latest_only = False
 
     def __init__(self):
         if not self.latest_only:

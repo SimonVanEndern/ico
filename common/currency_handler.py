@@ -28,7 +28,7 @@ class CurrencyHandler:
         try:
             self.currencies[currency] = {str(date_limit): Currency(currency, date_limit=date_limit)}
         except FileNotFoundError:
-            self.currencies[currency] = None
+            self.currencies[currency] = {str(date_limit): None}
 
     def get_all_currency_names_where_data_is_available(self, size_limit=math.inf):
         if self.all_currencies_with_data is not None:

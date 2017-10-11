@@ -73,5 +73,5 @@ class Aggregator:
         return summary
 
 
-run_script = Aggregator()
-run_script.check_all_currencies()
+# run_script = Aggregator()
+# run_script.check_all_currencies()
