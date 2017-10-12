@@ -6,3 +6,5 @@ class GlobalData:
 
     ico_static_date = "02.10.2017"
     ico_use_static_date = True
+
+    download_data_path_external = "X:\\bachelor-thesis\data"

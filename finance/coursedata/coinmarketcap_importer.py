@@ -6,6 +6,7 @@ import os.path
 import time
 
 from finance.coursedata import exporter
+from global_data import GlobalData
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -38,6 +39,7 @@ if tickerSymbols[0] != "bitcoin":
 
 exporter = exporter.Exporter()
 
+
 # GetData
 # for idx, symbol in enumerate(tickerSymbols):
 #     # if idx == 10:
@@ -69,6 +71,8 @@ class CoinmarketcapImportFinanceData:
     basicUrl = "graphs.coinmarketcap.com"
     price_usd_string = "price_usd"
 
+    save_path = GlobalData.download_data_path_external
+
     def request_currency(self, currency):
         conn = http.client.HTTPSConnection(basicUrl)
         path = "/currencies/{}/".format(currency)
@@ -80,24 +84,36 @@ class CoinmarketcapImportFinanceData:
         datapoints = data[self.price_usd_string]
 
         first_date = datapoints[0][0]
-        # print(first_date)
         last_date = datapoints[len(datapoints) - 1][0]
-        end_date = first_date + 365 * 24 * 60 * 60 * 1000
 
-        if not self.validate_data(data, path):
-            self.request_data_monthly(currency, first_date, last_date)
+        if not os.path.isdir(os.path.join(self.save_path, currency)):
+            os.mkdir(os.path.join(self.save_path, currency))
 
-        return data
+        self.request_data_monthly(currency, first_date, last_date)
+
+    def request_data_monthly(self, currency, first_date, last_date):
+        time_month = 29 * 24 * 60 * 60 * 1000
+
+        start = first_date
+        while start + time_month < last_date:
+            data = self.request_data(currency, start, start + time_month)
+            self.save_data(data, currency, start, start + time_month)
+
+            start += time_month
+
+        data = self.request_data(currency, start, last_date)
+        self.save_data(data, currency, start, last_date)
 
     def request_data(self, symbol, start, end):
-        print("Sleeping for 10 secs")
-        time.sleep(10)
+        print("Sleeping for 2 secs")
+        time.sleep(2)
         conn = http.client.HTTPSConnection(basicUrl)
         path = "/currencies/{}/{}/{}/".format(symbol, start, end)
         conn.request("GET", path)
 
         response = conn.getresponse()
         data = json.loads(response.read().decode("UTF-8"))
+        conn.close()
 
         return data
 
@@ -112,18 +128,13 @@ class CoinmarketcapImportFinanceData:
                 return False
             last = timestamp
 
-    def request_data_monthly(self, currency, first_date, last_date):
-        time_month = 30 * 24 * 60 * 60 * 1000
+    def save_data(self, data, currency, start, end):
+        logging.info("{} saved data from {} to {} --> {} entries".format(self.__class__.__name__, start, end,
+                                                                         len(data[self.price_usd_string])))
+        if len(data[self.price_usd_string]) < 800:
+            logging.warning(
+                "For {} to {} we only got {} entries".format(start, end, len(data[self.price_usd_string])))
 
-        start = first_date
-        while start + time_month < last_date:
-            data = self.request_data(currency, start, start + time_month)
-            self.validate_data(data, "quarterly/" + str(start) + "/" + str(start + time_month))
-            start += time_month
-
-        data = self.request_data(currency, start, last_date)
-        self.validate_data(data, "quarterly/" + str(start))
-
-
-run_script = CoinmarketcapImportFinanceData()
-run_script.request_currency("bitcoin")
+        filename = str(start) + "-" + str(end) + ".json"
+        with open(os.path.join(self.save_path, currency, filename), "w") as file:
+            json.dump(data, file)
