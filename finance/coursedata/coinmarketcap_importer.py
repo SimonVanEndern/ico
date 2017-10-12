@@ -20,9 +20,12 @@ class CoinmarketcapImportFinanceData:
     price_usd_string = "price_usd"
 
     save_path = GlobalData.download_data_path_external
+    last_timestamp = GlobalData.last_date_for_download
 
     def request_currency(self, currency):
-        conn = http.client.HTTPSConnection(basicUrl)
+        # ToDO: Replace this request with a request to the currency_handler module. Each currency should
+        # have an attribute for the start date
+        conn = http.client.HTTPSConnection(self.basicUrl)
         path = "/currencies/{}/".format(currency)
         conn.request("GET", path)
 
@@ -32,7 +35,8 @@ class CoinmarketcapImportFinanceData:
         datapoints = data[self.price_usd_string]
 
         first_date = datapoints[0][0]
-        last_date = datapoints[len(datapoints) - 1][0]
+        # last_date = datapoints[len(datapoints) - 1][0]
+        last_date = self.last_timestamp
 
         if not os.path.isdir(os.path.join(self.save_path, currency)):
             os.mkdir(os.path.join(self.save_path, currency))
@@ -52,15 +56,21 @@ class CoinmarketcapImportFinanceData:
         data = self.request_data(currency, start, last_date)
         self.save_data(data, currency, start, last_date)
 
-    def request_data(self, symbol, start, end):
+    def request_data(self, currency, start, end):
+        if self.check_data_already_downloaded(currency, start, end):
+            return None
         print("Sleeping for 2 secs")
         time.sleep(2)
         conn = http.client.HTTPSConnection(self.basicUrl)
-        path = "/currencies/{}/{}/{}/".format(symbol, start, end)
+        path = "/currencies/{}/{}/{}/".format(currency, start, end)
         conn.request("GET", path)
 
         response = conn.getresponse()
-        data = json.loads(response.read().decode("UTF-8"))
+        try:
+            data = json.loads(response.read().decode("UTF-8"))
+        except json.decoder.JSONDecodeError:
+            data = None
+            logging.warning("No results: {}".format(path))
         conn.close()
 
         return data
@@ -77,12 +87,22 @@ class CoinmarketcapImportFinanceData:
             last = timestamp
 
     def save_data(self, data, currency, start, end):
-        logging.info("{} saved data from {} to {} --> {} entries".format(self.__class__.__name__, start, end,
-                                                                         len(data[self.price_usd_string])))
-        if len(data[self.price_usd_string]) < 800:
-            logging.warning(
-                "For {} to {} we only got {} entries".format(start, end, len(data[self.price_usd_string])))
+        if data is None:
+            logging.info(
+                "{}: Currency {} from {} to {} already downloaded".format(self.__class__.__name__, currency, start,
+                                                                           end))
+            return
+        else:
+            logging.info("{} saved data from {} to {} --> {} entries".format(self.__class__.__name__, start, end,
+                                                                             len(data[self.price_usd_string])))
+            if len(data[self.price_usd_string]) < 800:
+                logging.warning(
+                    "For {} to {} we only got {} entries".format(start, end, len(data[self.price_usd_string])))
 
+            filename = str(start) + "-" + str(end) + ".json"
+            with open(os.path.join(self.save_path, currency, filename), "w") as file:
+                json.dump(data, file)
+
+    def check_data_already_downloaded(self, currency, start, end):
         filename = str(start) + "-" + str(end) + ".json"
-        with open(os.path.join(self.save_path, currency, filename), "w") as file:
-            json.dump(data, file)
+        return os.path.isfile(os.path.join(self.save_path, currency, filename))
