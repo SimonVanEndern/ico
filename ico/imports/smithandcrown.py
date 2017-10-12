@@ -61,12 +61,6 @@ class SmithandcrownSource:
                 ico = ICO(name, end_date, True, money)
             else:
                 ico = ICO(name, end_date, False, "")
-            if name.lower() in currency_map:
-                data[currency_map[name.lower()]] = ico
-            else:
-                data[name.lower()] = ico
+            data[name] = ico
 
         return data
-
-
-# SmithandcrownSource().getIcoData({})

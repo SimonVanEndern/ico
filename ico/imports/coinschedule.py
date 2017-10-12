@@ -47,13 +47,6 @@ class CoinscheduleSource:
                 money = infos[4].text
 
                 ico = ICO(name, end_date, True, money)
-                if name.lower() in currency_map:
-                    data[currency_map[name.lower()]] = ico
-                else:
-                    data[name.lower()] = ico
-
-                    # print(ico)
+                data[name] = ico
 
         return data
-
-# CoinscheduleSource().getIcoData({})

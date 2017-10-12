@@ -29,8 +29,7 @@ class BlockstarterSource(Importer):
             with open(self.path, "w") as file:
                 file.write(request.text)
 
-    def getIcoData(self, currency_map):
-        print(currency_map)
+    def getIcoData(self):
         data = {}
         with open(self.path, "r", encoding="utf8") as file:
             soup = BeautifulSoup(file, "html.parser")
@@ -51,12 +50,6 @@ class BlockstarterSource(Importer):
                 else:
                     ico.close_date = datetime.strptime(date, '%m.%d.%Y')
 
-                if name.lower() in currency_map:
-                    data[currency_map[name.lower()]] = ico
-                else:
-                    data[name.lower()] = ico
+                data[name] = ico
 
         return data
-
-
-# BlockstarterSource().getIcoData({})

@@ -61,13 +61,6 @@ class CyberfundSource(Importer):
                     ico = ICO(name, None, False, "")
 
                 ico.date = date
-
-                if name.lower() in currency_map:
-                    data[currency_map[name.lower()]] = ico
-                else:
-                    data[name.lower()] = ico
+                data[name] = ico
 
         return data
-
-
-CyberfundSource().getIcoData({})

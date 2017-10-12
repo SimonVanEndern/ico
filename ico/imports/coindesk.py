@@ -38,13 +38,7 @@ class CoindeskSource:
                 except ValueError:
                     date = None
                 ico = ICO(ico[0], date, True, ico[6])
-                if ico.name.lower() in currency_map:
-                    data[currency_map[ico.name.lower()]] = ico
-                    # print(ico.name.lower() + " Found")
-                    # print(currency_map[ico.name.lower()])
-                else:
-                    data[ico.name.lower()] = ico
-                    # print(ico.name + " Not found in map")
+                data[ico.name] = ico
 
         return data
 

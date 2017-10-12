@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f706f99-14d9-4e62-8eec-2dff7ea6a8b0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance/coursedata/coinmarketcap_importer.py" afterPath="$PROJECT_DIR$/finance/coursedata/coinmarketcap_importer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/global_data.py" afterPath="$PROJECT_DIR$/global_data.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ico/matcher.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ico/imports/test_records/test_get_ico_data_without_currency_map.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ico/imports/test_records/test_get_ico_data_without_currency_map_new_version.txt" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/coinmarketCapApi.py" afterPath="$PROJECT_DIR$/common/coinmarketCapApi.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico/imports/blockstarter.py" afterPath="$PROJECT_DIR$/ico/imports/blockstarter.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico/imports/coindesk.py" afterPath="$PROJECT_DIR$/ico/imports/coindesk.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico/imports/coinschedule.py" afterPath="$PROJECT_DIR$/ico/imports/coinschedule.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico/imports/cyberfund.py" afterPath="$PROJECT_DIR$/ico/imports/cyberfund.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico/imports/icobazaar.py" afterPath="$PROJECT_DIR$/ico/imports/icobazaar.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico/imports/icotracker.py" afterPath="$PROJECT_DIR$/ico/imports/icotracker.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico/imports/smithandcrown.py" afterPath="$PROJECT_DIR$/ico/imports/smithandcrown.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico/main.py" afterPath="$PROJECT_DIR$/ico/main.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,7 +33,7 @@
     <SUITE FILE_PATH="coverage/bachelor_thesis$coinmarketcap_importer.coverage" NAME="coinmarketcap_importer Coverage Results" MODIFIED="1507795549589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/coursedata" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1507723044917" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$testing.coverage" NAME="testing Coverage Results" MODIFIED="1507729193501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico" />
-    <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_imports.coverage" NAME="Unittests in imports Coverage Results" MODIFIED="1507729555598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/imports" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_imports.coverage" NAME="Unittests in imports Coverage Results" MODIFIED="1507800835427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/imports" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$financial_data_calculator.coverage" NAME="financial_data_calculator Coverage Results" MODIFIED="1507711911217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/coursedata" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$coinmarketcap_parser.coverage" NAME="coinmarketcap_parser Coverage Results" MODIFIED="1507455906155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_CurrencyTest_test_calculate_rolling_volatility.coverage" NAME="Unittests for test_currency.CurrencyTest.test_calculate_rolling_volatility Coverage Results" MODIFIED="1507539046658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
@@ -45,7 +56,7 @@
     <SUITE FILE_PATH="coverage/bachelor_thesis$bitfinex.coverage" NAME="bitfinex Coverage Results" MODIFIED="1507450418901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exchanges/sources" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_coinmarketcap_importer_CoinmarketcapImporterTest.coverage" NAME="Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest Coverage Results" MODIFIED="1507795430198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/coursedata" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$coinmarketcap_token_parser.coverage" NAME="coinmarketcap_token_parser Coverage Results" MODIFIED="1507458400166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
-    <SUITE FILE_PATH="coverage/bachelor_thesis$main.coverage" NAME="main Coverage Results" MODIFIED="1507733209250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common/main" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$main.coverage" NAME="main Coverage Results" MODIFIED="1507800688435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico" />
     <SUITE FILE_PATH="coverage/bachelor-thesis$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1506681231147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_test_coinmarketcap_coin_parser_py.coverage" NAME="Unittests in test_coinmarketcap_coin_parser.py Coverage Results" MODIFIED="1507533519559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor-thesis$smithandcrown.coverage" NAME="smithandcrown Coverage Results" MODIFIED="1506678304734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/sources" />
@@ -74,104 +85,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="coindesk.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ico/imports/coindesk.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-111">
-              <caret line="22" column="17" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="coinmarketcap_importer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finance/coursedata/coinmarketcap_importer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ico/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="52" column="40" lean-forward="true" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="exporter.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finance/coursedata/exporter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_coinmarketcap_importer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finance/coursedata/test_coinmarketcap_importer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="38" column="36" lean-forward="true" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="test_coindesk.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ico/imports/test_coindesk.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="37" column="34" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="37" selection-end-column="34" />
+            <state relative-caret-position="-19">
+              <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="total_data_importer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finance/coursedata/total_data_importer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="global_data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/global_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="34" lean-forward="true" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="coinschedule.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ico/imports/coinschedule.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-391">
-              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -180,8 +101,92 @@
         <entry file="file://$PROJECT_DIR$/ico/imports/blockstarter.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="281">
-              <caret line="44" column="54" lean-forward="true" selection-start-line="44" selection-start-column="54" selection-end-line="44" selection-end-column="54" />
+              <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="coindesk.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ico/imports/coindesk.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="267">
+              <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="coinschedule.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ico/imports/coinschedule.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cyberfund.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ico/imports/cyberfund.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="icobazaar.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ico/imports/icobazaar.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="icotracker.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ico/imports/icotracker.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="smithandcrown.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ico/imports/smithandcrown.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="matcher.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ico/matcher.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="62" lean-forward="true" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="coinmarketCapApi.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/coinmarketCapApi.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="51" column="43" lean-forward="false" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -221,12 +226,12 @@
       <find>ETH</find>
       <find>31</find>
       <find>lower</find>
-      <find>ethereum</find>
       <find>'ETH'</find>
       <find>ethereum'</find>
       <find>btc</find>
       <find>'ethereum'</find>
       <find>downlnoaded</find>
+      <find>ethereum</find>
     </findStrings>
     <dirStrings>
       <dir>Z:\Google Drive\05 - Projekte\bachelor-thesis\ico</dir>
@@ -245,7 +250,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/exchanges/sources/hitbtc.py" />
         <option value="$PROJECT_DIR$/exchanges/sources/bithumb.py" />
         <option value="$PROJECT_DIR$/finance/coursedata/exporter.py" />
         <option value="$PROJECT_DIR$/finance/coursedata/csvcreator.py" />
@@ -271,9 +275,7 @@
         <option value="$PROJECT_DIR$/common/test_currency.py" />
         <option value="$PROJECT_DIR$/ico/sources/icobazaar.py" />
         <option value="$PROJECT_DIR$/ico/sources/icotracker.py" />
-        <option value="$PROJECT_DIR$/ico/imports/coinschedule.py" />
         <option value="$PROJECT_DIR$/ico/imports/importer.py" />
-        <option value="$PROJECT_DIR$/ico/imports/cyberfund.py" />
         <option value="$PROJECT_DIR$/finance/analysis/coinmarket_start_time.py" />
         <option value="$PROJECT_DIR$/finance/analysis/descriptive_statistics.py" />
         <option value="$PROJECT_DIR$/common/coinmarketcap_token_parser.py" />
@@ -283,19 +285,22 @@
         <option value="$PROJECT_DIR$/ico/testing.py" />
         <option value="$PROJECT_DIR$/testing.py" />
         <option value="$PROJECT_DIR$/common/main/json_converter.py" />
-        <option value="$PROJECT_DIR$/ico/main.py" />
         <option value="$PROJECT_DIR$/common/main/main.py" />
-        <option value="$PROJECT_DIR$/common/coinmarketCapApi.py" />
         <option value="$PROJECT_DIR$/ico/initial_coin_offering.py" />
-        <option value="$PROJECT_DIR$/ico/imports/icobazaar.py" />
-        <option value="$PROJECT_DIR$/ico/imports/icotracker.py" />
-        <option value="$PROJECT_DIR$/ico/imports/smithandcrown.py" />
-        <option value="$PROJECT_DIR$/ico/imports/coindesk.py" />
-        <option value="$PROJECT_DIR$/ico/imports/blockstarter.py" />
         <option value="$PROJECT_DIR$/finance/coursedata/total_data_importer.py" />
         <option value="$PROJECT_DIR$/finance/coursedata/test_coinmarketcap_importer.py" />
         <option value="$PROJECT_DIR$/finance/coursedata/coinmarketcap_importer.py" />
         <option value="$PROJECT_DIR$/global_data.py" />
+        <option value="$PROJECT_DIR$/ico/main.py" />
+        <option value="$PROJECT_DIR$/common/coinmarketCapApi.py" />
+        <option value="$PROJECT_DIR$/ico/matcher.py" />
+        <option value="$PROJECT_DIR$/ico/imports/blockstarter.py" />
+        <option value="$PROJECT_DIR$/ico/imports/coindesk.py" />
+        <option value="$PROJECT_DIR$/ico/imports/coinschedule.py" />
+        <option value="$PROJECT_DIR$/ico/imports/cyberfund.py" />
+        <option value="$PROJECT_DIR$/ico/imports/icobazaar.py" />
+        <option value="$PROJECT_DIR$/ico/imports/icotracker.py" />
+        <option value="$PROJECT_DIR$/ico/imports/smithandcrown.py" />
       </list>
     </option>
   </component>
@@ -374,6 +379,19 @@
               <item name="bachelor-thesis" type="462c0819:PsiDirectoryNode" />
               <item name="ico" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="bachelor-thesis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bachelor-thesis" type="462c0819:PsiDirectoryNode" />
+              <item name="ico" type="462c0819:PsiDirectoryNode" />
+              <item name="imports" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bachelor-thesis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bachelor-thesis" type="462c0819:PsiDirectoryNode" />
+              <item name="ico" type="462c0819:PsiDirectoryNode" />
+              <item name="imports" type="462c0819:PsiDirectoryNode" />
+              <item name="test_records" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -417,22 +435,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.total_data_importer">
-    <configuration name="Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/finance/coursedata" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="bachelor-thesis" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-    </configuration>
+  <component name="RunManager" selected="Python tests.Unittests in imports">
     <configuration name="Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data_monthly" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -461,6 +464,21 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/common&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration name="Unittests in imports" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ico/imports" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="bachelor-thesis" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/ico/imports&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <configuration name="Unittests in test_coinmarketcap_importer.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -1082,20 +1100,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration name="coinmarketcap_importer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/finance/coursedata" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ico" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bachelor-thesis" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/finance/coursedata/coinmarketcap_importer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ico/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -1120,19 +1138,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in common" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data" />
-      <item index="2" class="java.lang.String" itemvalue="Python.coinmarketcap_importer" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data_monthly" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_coinmarketcap_importer.py" />
-      <item index="5" class="java.lang.String" itemvalue="Python.total_data_importer" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data_monthly" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in test_coinmarketcap_importer.py" />
+      <item index="3" class="java.lang.String" itemvalue="Python.total_data_importer" />
+      <item index="4" class="java.lang.String" itemvalue="Python.main" />
+      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittests in imports" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.total_data_importer" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test_coinmarketcap_importer.py" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data_monthly" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data" />
-        <item index="4" class="java.lang.String" itemvalue="Python.coinmarketcap_importer" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in imports" />
+        <item index="1" class="java.lang.String" itemvalue="Python.main" />
+        <item index="2" class="java.lang.String" itemvalue="Python.total_data_importer" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test_coinmarketcap_importer.py" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data_monthly" />
       </list>
     </recent_temporary>
   </component>
@@ -1151,20 +1169,11 @@
       <workItem from="1506602369307" duration="14248000" />
       <workItem from="1506693382575" duration="38854000" />
       <workItem from="1507121588611" duration="59145000" />
-      <workItem from="1507710572875" duration="25687000" />
+      <workItem from="1507710572875" duration="27270000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_coinmarketcap_importer_CoinmarketcapImporterTest_test_request_data - 2017.10.12 at 10h 05m 46s.xml">
-      <configuration name="Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_coinmarketcap_importer_CoinmarketcapImporterTest_test_request_data - 2017.10.12 at 10h 06m 03s.xml">
-      <configuration name="Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_coinmarketcap_importer_CoinmarketcapImporterTest_test_request_data - 2017.10.12 at 10h 06m 28s.xml">
-      <configuration name="Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_coinmarketcap_importer_CoinmarketcapImporterTest_test_request_data_monthly - 2017.10.12 at 10h 25m 18s.xml">
       <configuration name="Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data_monthly" configurationId="tests" />
     </history-entry>
@@ -1177,6 +1186,15 @@
     <history-entry file="Unittests_for_test_coinmarketcap_importer_CoinmarketcapImporterTest_test_request_data_monthly - 2017.10.12 at 10h 32m 39s.xml">
       <configuration name="Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest.test_request_data_monthly" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_imports - 2017.10.12 at 11h 32m 24s.xml">
+      <configuration name="Unittests in imports" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_imports - 2017.10.12 at 11h 33m 53s.xml">
+      <configuration name="Unittests in imports" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_imports - 2017.10.12 at 11h 33m 55s.xml">
+      <configuration name="Unittests in imports" configurationId="tests" />
+    </history-entry>
     <history-entry file="Unittests_in_test_coinmarketcap_importer_py - 2017.10.12 at 10h 38m 15s.xml">
       <configuration name="Unittests in test_coinmarketcap_importer.py" configurationId="tests" />
     </history-entry>
@@ -1188,7 +1206,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167368000" />
+    <option name="totallyTimeSpent" value="168951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="780" extended-state="0" />
@@ -1307,14 +1325,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/finance/coursedata/financial_data_calculator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/finance/analysis/volatility.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-221">
@@ -1465,14 +1475,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ico/imports/test_records/test_get_ico_data_without_currency_map.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="0" column="1009" lean-forward="true" selection-start-line="0" selection-start-column="1009" selection-end-line="0" selection-end-column="1009" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/parser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1554,7 +1556,7 @@
         <state relative-caret-position="85">
           <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="19" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1580,93 +1582,7 @@
         <state relative-caret-position="179">
           <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ico/imports/importer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="17" column="32" lean-forward="true" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/coinmarketCapApi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="51" column="8" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ico/imports/smithandcrown.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-187">
-          <caret line="37" column="13" lean-forward="true" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ico/imports/icotracker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="63" column="41" lean-forward="false" selection-start-line="63" selection-start-column="41" selection-end-line="63" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ico/imports/icobazaar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="30" column="37" lean-forward="false" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ico/imports/cyberfund.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-527">
-          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ico/imports/coinschedule.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-391">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ico/imports/coindesk.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-111">
-          <caret line="22" column="17" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ico/imports/blockstarter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="44" column="54" lean-forward="true" selection-start-line="44" selection-start-column="54" selection-end-line="44" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ico/imports/test_coindesk.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="37" column="34" lean-forward="true" selection-start-line="31" selection-start-column="8" selection-end-line="37" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1733,13 +1649,115 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ico/imports/importer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" column="62" lean-forward="true" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ico/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="52" column="40" lean-forward="true" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
+        <state relative-caret-position="230">
+          <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/coinmarketCapApi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="51" column="43" lean-forward="false" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ico/matcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="62" lean-forward="true" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ico/imports/test_records/test_get_ico_data_without_currency_map_old.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="0" column="1009" lean-forward="false" selection-start-line="0" selection-start-column="1009" selection-end-line="0" selection-end-column="1009" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ico/imports/test_coindesk.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19">
+          <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ico/imports/blockstarter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ico/imports/coindesk.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ico/imports/coinschedule.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ico/imports/cyberfund.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ico/imports/icobazaar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ico/imports/icotracker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ico/imports/smithandcrown.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

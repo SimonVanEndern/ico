@@ -49,14 +49,17 @@ class CoinmarketCapApi:
                 tickerSymbols.append(currency["id"])
         return tickerSymbols
 
-    def getShortnameMap(self):
+    def getShortnameMap(self, reverse=False):
         shortnames = []
         names = []
         for currency in self.currencies:
             shortnames.append(currency["symbol"])
             names.append(currency["id"])
 
-        return dict(zip(names, shortnames))
+        if reverse:
+            return dict(zip(shortnames, names))
+        else:
+            return dict(zip(names, shortnames))
 
     def getIcoData(self):
         data = {}

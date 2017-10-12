@@ -55,21 +55,6 @@ class IcotrackerSource:
                 if ico.raised_money == "Ƀ0":
                     ico.funds = False
                     # print("no funds")
-
-                if ico.name.lower() in currency_map:
-                    data[currency_map[ico.name.lower()]] = ico
-                    # print(ico.name.lower() + " Found")
-                    # print(currency_map[ico.name.lower()])
-                else:
-                    data[ico.name.lower()] = ico
-                    # print(ico.name + " Not found in map")
+                data[ico.name] = ico
 
         return data
-
-        # def log_data(self):
-        #     data = self.getIcoData({})
-        #     for currency in data:
-        #         print(data[currency])
-
-# run_script = IcotrackerSource()
-# run_script.log_data()
