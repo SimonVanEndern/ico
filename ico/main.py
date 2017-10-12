@@ -37,33 +37,21 @@ class Main:
         logging.info("Finished constructing ico:Main")
 
     def collect_data(self):
-        coindesk_data = self.coindesk_source.get_ico_data(self.currency_map)
-        icobazaar_data = self.icobazaar_source.getIcoData(self.currency_map)
-        icotracker_data = self.icotracker_source.getIcoData(self.currency_map)
-        coinschedule_data = self.coinschedule_source.getIcoData(self.currency_map)
+        coindesk_data = self.coindesk_source.get_ico_data()
+        icobazaar_data = self.icobazaar_source.getIcoData()
+        icotracker_data = self.icotracker_source.getIcoData()
+        coinschedule_data = self.coinschedule_source.getIcoData()
         coinmarketcap_data = self.coinmarketcap_source.getIcoData()
-        smithandcrown_data = self.smithandcrown_source.getIcoData(self.currency_map)
-        cyberfund_data = self.cyberfund_source.getIcoData(self.currency_map)
+        smithandcrown_data = self.smithandcrown_source.getIcoData()
+        cyberfund_data = self.cyberfund_source.getIcoData()
         blockstarter_data = self.blockstarter_source.getIcoData()
 
         sources = [coindesk_data, icobazaar_data, icotracker_data, coinschedule_data, coinmarketcap_data,
                    smithandcrown_data, cyberfund_data, blockstarter_data]
 
-        # print(blockstarter_data)
-        # print(self.currency_matcher.match(blockstarter_data))
-
         for source in sources:
             self.add_data(self.currency_matcher.match(source))
         print(self.data)
-
-        # self.add_data(coindesk_data)
-        # self.add_data(icobazaar_data)
-        # self.add_data(icotracker_data)
-        # self.add_data(coinschedule_data)
-        # self.add_data(coinmarketcap_data)
-        # self.add_data(smithandcrown_data)
-        # self.add_data(cyberfund_data)
-        # self.add_data(blockstarter_data)
 
     def add_data(self, newData):
         for key in newData:

@@ -23,16 +23,11 @@ class CoinscheduleSource:
         if os.path.isfile(self.path):
             return
         else:
-            # urllib.request.urlretrieve(self.html_import_address, self.path)
             request = requests.get(self.html_import_address)
             with open(self.path, "w") as file:
                 file.write(request.content.decode("UTF-8"))
-                # conn = http.client.HTTPSConnection("coinschedule.com")
-                # conn.request("GET", "/icos.php")
-                # response = conn.getresponse()
-                # print(response.read().decode("UTF-8"))
 
-    def getIcoData(self, currency_map):
+    def getIcoData(self):
         data = {}
         with open(self.path, "r", encoding='UTF-8') as file:
             soup = BeautifulSoup(file, "html.parser")

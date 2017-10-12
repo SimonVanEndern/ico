@@ -22,7 +22,7 @@ class IcotrackerSource:
     def __init__(self):
         return
 
-    def getIcoData(self, currency_map):
+    def getIcoData(self):
         data = {}
         with open(self.path, "r", encoding='UTF-8') as file:
             soup = BeautifulSoup(file, "html.parser")
@@ -54,7 +54,6 @@ class IcotrackerSource:
                 ico = ICO(name, date, True, money)
                 if ico.raised_money == "Ƀ0":
                     ico.funds = False
-                    # print("no funds")
                 data[ico.name] = ico
 
         return data

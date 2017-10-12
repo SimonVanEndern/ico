@@ -32,7 +32,7 @@ class CyberfundSource(Importer):
             with open(self.path, "w") as file:
                 file.write(request.text)
 
-    def getIcoData(self, currency_map):
+    def getIcoData(self):
         data = {}
         with open(self.path, "r", encoding="utf8") as file:
             soup = BeautifulSoup(file, "html.parser")

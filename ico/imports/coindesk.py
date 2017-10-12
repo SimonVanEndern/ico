@@ -20,9 +20,9 @@ class CoindeskSource:
         else:
             urllib.request.urlretrieve(self.csv_import_address, self.path)
 
-    def get_ico_data(self, currency_map):
+    def get_ico_data(self):
         if self.now > datetime.strptime("29.09.2017", "%d.%m.%Y"):
-            return self.get_ico_data_after_september_2017(currency_map)
+            return self.get_ico_data_after_september_2017()
 
         data = {}
         with open(self.path, "r") as file:
@@ -42,7 +42,7 @@ class CoindeskSource:
 
         return data
 
-    def get_ico_data_after_september_2017(self, currency_map):
+    def get_ico_data_after_september_2017(self):
         data = {}
         with open(self.path, "r") as file:
             reader = csv.reader(file)
@@ -57,9 +57,6 @@ class CoindeskSource:
                 except ValueError:
                     date = None
                 ico = ICO(ico[0], date, True, ico[4])
-                if ico.name.lower() in currency_map:
-                    data[currency_map[ico.name.lower()]] = ico
-                else:
-                    data[ico.name.lower()] = ico
+                data[ico.name] = ico
 
         return data

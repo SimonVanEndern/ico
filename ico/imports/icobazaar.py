@@ -15,7 +15,7 @@ class IcobazaarSource:
             reader = csv.reader(file, delimiter=";")
             self.icos = list(reader)
 
-    def getIcoData(self, currency_map):
+    def getIcoData(self):
         data = {}
         for idx, ico in enumerate(self.icos):
             if idx == 0:

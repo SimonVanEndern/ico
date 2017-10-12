@@ -25,28 +25,20 @@ class SmithandcrownSource:
         if os.path.isfile(self.path):
             return
         else:
-            # urllib.request.urlretrieve(self.html_import_address, self.path)
-            request = requests.get(self.html_import_address)
-            # with open(self.path, "w") as file:
-            # file.write(request.content)
             urllib.request.urlretrieve(self.html_import_address, self.path)
-            # conn = http.client.HTTPSConnection("coinschedule.com")
-            # conn.request("GET", "/icos.php")
-            # response = conn.getresponse()
-            # print(response.read().decode("UTF-8"))
 
-    def getIcoData(self, currency_map):
+    def getIcoData(self):
         with open(self.path, "r") as file:
             soup = BeautifulSoup(file, "html.parser")
             # TODO check whether we do data on ongoing ICOs as well
             # table_ongoing = soup.find("table", {"id": "icos-ongoing"})
             table_recent = soup.find("table", {"id": "icos-recent"})
             # self.data = self.iterate_table(table_ongoing, currency_map)
-            self.data.update(self.iterate_table(table_recent, currency_map))
+            self.data.update(self.iterate_table(table_recent))
 
         return self.data
 
-    def iterate_table(self, table, currency_map):
+    def iterate_table(self, table):
         data = {}
         for idx, row in enumerate(table.find_all("tr")):
             if idx == 0:
