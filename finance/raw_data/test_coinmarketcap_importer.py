@@ -1,12 +1,12 @@
-import os
-import sys
 import unittest
 from unittest.mock import patch
 
-from finance.coursedata.coinmarketcap_importer import CoinmarketcapImportFinanceData
+import test_commons
+from finance.raw_data.coinmarketcap_importer import CoinmarketcapImportFinanceData
+from test_commons import TestCommons
 
 
-class CoinmarketcapImporterTest(unittest.TestCase):
+class CoinmarketcapImporterTest(unittest.TestCase, TestCommons):
     coinmarketcap_importer = CoinmarketcapImportFinanceData()
 
     def test_request_data(self):
@@ -16,7 +16,8 @@ class CoinmarketcapImporterTest(unittest.TestCase):
 
         result = self.coinmarketcap_importer.request_data(currency, end, start)
 
-        self.assertEqual(str(result), self.save_or_compare_data(result))
+        regression_file = self.get_test_path()
+        self.assertEqual(str(result), test_commons.save_or_compare_data(result, regression_file))
 
     def test_request_data_monthly(self):
         currency = "ethereum"
@@ -28,14 +29,3 @@ class CoinmarketcapImporterTest(unittest.TestCase):
             self.coinmarketcap_importer.request_data_monthly(currency, start, end)
 
             self.assertEqual(mock_method.call_count, 2)
-
-    @staticmethod
-    def save_or_compare_data(data):
-        filename = os.path.join(os.path.dirname(__file__), "test_records", sys._getframe().f_code.co_name + ".txt")
-        if not os.path.isfile(filename):
-            with open(filename, "w") as file:
-                file.write(str(data))
-
-        with open(filename) as file:
-            expected = file.read()
-            return expected

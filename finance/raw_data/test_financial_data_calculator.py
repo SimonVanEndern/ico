@@ -1,5 +1,5 @@
 import unittest
-import finance.coursedata.financial_data_calculator as fdc
+import finance.raw_data.financial_data_calculator as fdc
 
 
 class FinancialDataCalculatorTest(unittest.TestCase):

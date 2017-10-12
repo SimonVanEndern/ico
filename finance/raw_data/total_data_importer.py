@@ -1,7 +1,7 @@
 import logging
 
 from common.currency_handler import CurrencyHandler
-from finance.coursedata.coinmarketcap_importer import CoinmarketcapImportFinanceData
+from finance.raw_data.coinmarketcap_importer import CoinmarketcapImportFinanceData
 
 
 logging.basicConfig(level=logging.INFO)

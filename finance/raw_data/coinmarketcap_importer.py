@@ -19,7 +19,7 @@ class CoinmarketcapImportFinanceData:
     basicUrl = "graphs.coinmarketcap.com"
     price_usd_string = "price_usd"
 
-    save_path = GlobalData.download_data_path_external
+    save_path = GlobalData.download_raw_data_path_external
     last_timestamp = GlobalData.last_date_for_download
 
     def request_currency(self, currency):
@@ -42,6 +42,8 @@ class CoinmarketcapImportFinanceData:
             os.mkdir(os.path.join(self.save_path, currency))
 
         self.request_data_monthly(currency, first_date, last_date)
+
+        open(os.path.join(self.save_path, currency, "ready.txt"), "w").close()
 
     def request_data_monthly(self, currency, first_date, last_date):
         time_month = 29 * 24 * 60 * 60 * 1000

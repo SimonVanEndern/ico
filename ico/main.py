@@ -51,7 +51,6 @@ class Main:
 
         for source in sources:
             self.add_data(self.currency_matcher.match(source))
-        print(self.data)
 
     def add_data(self, newData):
         for key in newData:
@@ -63,7 +62,6 @@ class Main:
                 self.data[key] = newData[key]
 
     def get_data(self):
-        print(self.currency_matcher.unmatch_symbol(self.data))
         return self.currency_matcher.unmatch_symbol(self.data)
 
     def log_data(self):
