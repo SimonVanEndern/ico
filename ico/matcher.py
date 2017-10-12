@@ -20,3 +20,11 @@ class CurrencyNameMatcher:
                     output[key.lower()] = value
 
         return output
+
+    def unmatch_symbol(self, input_dict):
+        output = {}
+        for key, value in input_dict.items():
+            if key in self.currency_map_reverse:
+                output[self.currency_map_reverse[key]] = value
+            else:
+                output[key] = value

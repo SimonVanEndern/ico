@@ -63,8 +63,8 @@ class Main:
                 self.data[key] = newData[key]
 
     def get_data(self):
-        print(self.data)
-        return self.data
+        print(self.currency_matcher.unmatch_symbol(self.data))
+        return self.currency_matcher.unmatch_symbol(self.data)
 
     def log_data(self):
         count_funding_data = 0
@@ -115,7 +115,7 @@ class Main:
             #     print(type(self.data[currency]))
 
 
-run_script = Main()
+# run_script = Main()
 # run_script.log_data()
 # run_script.log_important_statistics()
 # run_script.log_ordered_by_date()

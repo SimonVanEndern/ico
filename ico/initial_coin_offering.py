@@ -1,13 +1,9 @@
-from json import JSONEncoder
-
-
 class ICO:
     def __init__(self, name, close_date, dataYesNo, raised_money):
-        # super().__init__()
         self.name = name.lower()
         self.close_date = close_date
         self.funds = dataYesNo
-        self.raised_money = raised_money
+        self.raised_money = [raised_money]
 
     def __lt__(self, other):
         if self.close_date is None:
@@ -28,10 +24,5 @@ class ICO:
         return self.funds
 
     # Funktion und parameter so benennen, dass auch Aussenstehende verstehen, um was es geht
-    # money immer als Liste machen
-    def addData(self, new_data):
-        if isinstance(self.raised_money, list):
-            self.raised_money.append(new_data)
-        else:
-            self.raised_money = [self.raised_money, new_data]
-            self.funds = True
+    def addData(self, new_money_data):
+        self.raised_money.append(new_money_data)
