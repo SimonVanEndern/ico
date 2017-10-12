@@ -59,8 +59,8 @@ class CoinmarketcapImportFinanceData:
     def request_data(self, currency, start, end):
         if self.check_data_already_downloaded(currency, start, end):
             return None
-        print("Sleeping for 2 secs")
-        time.sleep(2)
+        print("Sleeping for 1 secs")
+        time.sleep(1)
         conn = http.client.HTTPSConnection(self.basicUrl)
         path = "/currencies/{}/{}/{}/".format(currency, start, end)
         conn.request("GET", path)

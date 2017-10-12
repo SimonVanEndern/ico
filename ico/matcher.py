@@ -28,3 +28,5 @@ class CurrencyNameMatcher:
                 output[self.currency_map_reverse[key]] = value
             else:
                 output[key] = value
+
+        return output
