@@ -13,7 +13,7 @@ class TestCoindesk(unittest.TestCase):
         self.coindesk.path = "Z:\Google Drive\\05 - Projekte\\bachelor-thesis\ico\imports\saved\coindesk2017929.csv"
         self.coindesk.now = datetime.strptime("28.09.2017", "%d.%m.%Y")
 
-        result = self.coindesk.get_ico_data({})
+        result = self.coindesk.get_ico_data()
         filename = os.path.join(os.path.dirname(__file__), "test_records", sys._getframe().f_code.co_name + ".txt")
         if not os.path.isfile(filename):
             with open(filename, "w") as file:
@@ -28,8 +28,9 @@ class TestCoindesk(unittest.TestCase):
         self.coindesk.path = "Z:\Google Drive\\05 - Projekte\\bachelor-thesis\ico\imports\saved\coindesk20171011.csv"
         self.coindesk.now = datetime.now()
 
-        result = self.coindesk.get_ico_data({})
+        result = self.coindesk.get_ico_data()
         filename = os.path.join(os.path.dirname(__file__), "test_records", sys._getframe().f_code.co_name + ".txt")
+        print(filename)
         if not os.path.isfile(filename):
             with open(filename, "w") as file:
                 file.write(str(result))

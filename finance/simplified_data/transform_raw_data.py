@@ -25,7 +25,6 @@ class TransformRawData:
 
         source_path = os.path.join(self.source_path, currency)
         if not os.path.isdir(source_path) or not os.path.isfile(os.path.join(self.source_path, currency, "ready.txt")):
-            print(os.path.join(self.source_path, currency, "ready.txt"))
             logging.info("{}: Currency {} not yet ready for aggregation".format(self.__class__.__name__, currency))
             return
 
