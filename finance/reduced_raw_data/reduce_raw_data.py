@@ -10,7 +10,7 @@ from global_data import GlobalData
 logging.basicConfig(level=logging.INFO)
 
 
-class ReduceRawData:
+class ReduceSimplifiedData:
     def __init__(self):
         self.currency_handler = CurrencyHandler()
         self.source_path = GlobalData.aggregated_data_path_external
@@ -19,7 +19,7 @@ class ReduceRawData:
         self.fdc = FinancialDataCalculator()
         pass
 
-    def main(self):
+    def reduce_simplified_data(self):
         for currency in self.currency_handler.get_all_currency_names_where_data_is_available():
             if not os.path.isfile(os.path.join(self.source_path, currency + ".csv")):
                 logging.info("{}: Currency {} not yet ready for reduction".format(self.__class__.__name__, currency))
@@ -59,4 +59,4 @@ class ReduceRawData:
                 writer.writerow(row)
 
 
-ReduceRawData().main()
+ReduceSimplifiedData().reduce_simplified_data()

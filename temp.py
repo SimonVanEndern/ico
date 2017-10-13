@@ -1,6 +1,3 @@
-import csv
-from datetime import datetime
-
 # with open("X:\\bachelor-thesis\\aggregated\\bitcoin.csv") as file:
 #     reader = csv.reader(file)
 #     data = list(reader)
@@ -9,8 +6,10 @@ from datetime import datetime
 #             continue
 #         print(datetime.fromtimestamp(int(row[0]) / 1e3))
 
+
 def get_data(i):
     return {"hey": i * 2}
+
 
 def example():
     output = []
@@ -19,6 +18,3 @@ def example():
         output.append(test)
 
     print(output)
-
-
-example()

@@ -7,7 +7,7 @@ from finance.raw_data.coinmarketcap_importer import CoinmarketcapImportFinanceDa
 logging.basicConfig(level=logging.INFO)
 
 
-class TotalDataImporter:
+class RawDataImporter:
 
     def __init__(self):
         self.currency_handler = CurrencyHandler()
@@ -16,11 +16,10 @@ class TotalDataImporter:
     def download_all_data(self):
         currencies = self.currency_handler.get_all_currency_names_where_data_is_available()
 
-        self.coinmarketcap_importer.request_currency("bitcoin")
-
         for currency in currencies:
             logging.info("{}:Start - Downloading currency:{}".format(self.__class__.__name__, currency))
             self.coinmarketcap_importer.request_currency(currency)
+            logging.info("{}:End - Downloading currency:{}".format(self.__class__.__name__, currency))
 
 
-TotalDataImporter().download_all_data()
+# RawDataImporter().download_all_data()

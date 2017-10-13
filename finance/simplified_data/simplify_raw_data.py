@@ -10,13 +10,14 @@ from global_data import GlobalData
 logging.basicConfig(level=logging.INFO)
 
 
-class TransformRawData:
+class SimplifyRawData:
     def __init__(self):
         self.source_path = GlobalData.download_raw_data_path_external
+        self.additional_source_path = GlobalData.save_path_additional_data
         self.destination_path = GlobalData.aggregated_data_path_external
         self.currency_handler = CurrencyHandler()
 
-    def transform_data(self):
+    def simplify_data(self):
         for currency in self.currency_handler.get_all_currency_names_where_data_is_available():
             self.aggregate_data_into_one_file(currency)
 
@@ -24,6 +25,7 @@ class TransformRawData:
         logging.info("{}: Trying to aggregate Currency {}".format(self.__class__.__name__, currency))
 
         source_path = os.path.join(self.source_path, currency)
+        additional_source_path = os.path.join(self.additional_source_path, currency)
         if not os.path.isdir(source_path) or not os.path.isfile(os.path.join(self.source_path, currency, "ready.txt")):
             logging.info("{}: Currency {} not yet ready for aggregation".format(self.__class__.__name__, currency))
             return
@@ -41,10 +43,17 @@ class TransformRawData:
                     raw_data = json.load(file)
                     currency_dto.add_data(raw_data)
 
+        if os.path.isdir(additional_source_path):
+            for filename in os.listdir(additional_source_path):
+                if filename.endswith(".json"):
+                    with open(os.path.join(additional_source_path, filename)) as file:
+                        raw_data = json.load(file)
+                        currency_dto.add_data(raw_data)
+
         with open(aggregated_file_filename, "w") as file:
             writer = csv.writer(file, delimiter=',', lineterminator='\n')
             for row in currency_dto.to_csv():
                 writer.writerow(row)
 
 
-TransformRawData().transform_data()
+SimplifyRawData().simplify_data()

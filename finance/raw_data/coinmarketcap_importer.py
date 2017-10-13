@@ -94,8 +94,15 @@ class CoinmarketcapImportFinanceData:
         if data is None:
             logging.info(
                 "{}: Currency {} from {} to {} already downloaded".format(self.__class__.__name__, currency, start,
-                                                                           end))
+                                                                          end))
             return
+
+        if len(data[self.price_usd_string]) == 2:
+            logging.info(
+                "{}: Currency {} from {} to {} has no additional data".format(self.__class__.__name__, currency, start,
+                                                                              end))
+            return
+
         else:
             logging.info("{} saved data from {} to {} --> {} entries".format(self.__class__.__name__, start, end,
                                                                              len(data[self.price_usd_string])))
