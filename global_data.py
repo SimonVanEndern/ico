@@ -14,3 +14,6 @@ class GlobalData:
     save_path_additional_data = "X:\\bachelor-thesis\\additional"
 
     last_date_for_download = int(datetime.strptime("12.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
+
+    coin_market_cap_graph_api_url = "graphs.coinmarketcap.com"
+

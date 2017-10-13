@@ -1,13 +1,13 @@
 import logging
 from datetime import datetime, timedelta
 
-from finance.raw_data.coinmarketcap_importer import CoinmarketcapImportFinanceData
+from finance.raw_data.coinmarketcap_importer import CoinMarketCapGraphAPIImporter
 
 
 class FinancialDataCalculator:
     def __init__(self):
         self.missing_data = {}
-        self.raw_data_importer = CoinmarketcapImportFinanceData()
+        self.raw_data_importer = CoinMarketCapGraphAPIImporter()
         pass
 
     def calculate_for_timestamp(self, timestamp, data_before, data_after):

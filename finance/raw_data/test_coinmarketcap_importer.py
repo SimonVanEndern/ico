@@ -2,12 +2,12 @@ import unittest
 from unittest.mock import patch
 
 import test_commons
-from finance.raw_data.coinmarketcap_importer import CoinmarketcapImportFinanceData
+from finance.raw_data.coinmarketcap_importer import CoinMarketCapGraphAPIImporter
 from test_commons import TestCommons
 
 
 class CoinmarketcapImporterTest(unittest.TestCase, TestCommons):
-    coinmarketcap_importer = CoinmarketcapImportFinanceData()
+    coinmarketcap_importer = CoinMarketCapGraphAPIImporter()
 
     def test_request_data(self):
         currency = "bitcoin"
@@ -24,8 +24,8 @@ class CoinmarketcapImporterTest(unittest.TestCase, TestCommons):
         start = 1442458164000
         end = start + 40 * 24 * 3600 * 1000
 
-        with patch.object(CoinmarketcapImportFinanceData, 'save_data', return_value=None) as mock_method:
-            self.coinmarketcap_importer = CoinmarketcapImportFinanceData()
+        with patch.object(CoinMarketCapGraphAPIImporter, 'save_data', return_value=None) as mock_method:
+            self.coinmarketcap_importer = CoinMarketCapGraphAPIImporter()
             self.coinmarketcap_importer.request_data_monthly(currency, start, end)
 
             self.assertEqual(mock_method.call_count, 2)

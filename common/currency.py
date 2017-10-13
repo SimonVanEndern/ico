@@ -75,6 +75,9 @@ class Currency:
         self.market_cap = None
         self.volume = None
 
+        # Augmentations
+        self.start_date = None
+
         # Calculations
         self.daily_return = None
         self.volatility = None
@@ -111,6 +114,8 @@ class Currency:
         self.timestamp = list(self.timestamp)
         self.timestamp.pop(0)
         self.timestamp = list(map(int, self.timestamp))
+
+        self.augment_with_start_date()
 
         self.daily_return = self.calculate_daily_return()
         self.volatility = self.calculate_rolling_volatility()
@@ -244,8 +249,12 @@ class Currency:
         for correlation in self.volume_return_correlations:
             print(correlation)
 
+    def augment_with_start_date(self):
+        self.start_date = self.timestamp[0]
+        return self.start_date
+
     def get_beginning_date(self):
-        return self.timestamp[0]
+        return self.start_date
 
     def calculate_average_volume(self):
         return scipy.mean(self.volume)

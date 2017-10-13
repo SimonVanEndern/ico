@@ -1,7 +1,7 @@
 import logging
 
 from common.currency_handler import CurrencyHandler
-from finance.raw_data.coinmarketcap_importer import CoinmarketcapImportFinanceData
+from finance.raw_data.coinmarketcap_importer import CoinMarketCapGraphAPIImporter
 
 
 logging.basicConfig(level=logging.INFO)
@@ -11,7 +11,7 @@ class RawDataImporter:
 
     def __init__(self):
         self.currency_handler = CurrencyHandler()
-        self.coinmarketcap_importer = CoinmarketcapImportFinanceData()
+        self.coinmarketcap_importer = CoinMarketCapGraphAPIImporter()
 
     def download_all_data(self):
         currencies = self.currency_handler.get_all_currency_names_where_data_is_available()
