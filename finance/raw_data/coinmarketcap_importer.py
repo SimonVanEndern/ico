@@ -24,6 +24,7 @@ def get_basic_currency_data(currency):
 
     response = conn.getresponse()
     data = json.loads(response.read().decode("UTF-8"))
+    conn.close()
 
     datapoints = data[CSVStrings.price_usd_string]
 
