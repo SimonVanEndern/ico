@@ -22,6 +22,8 @@ class CoinmarketcapImportFinanceData:
     save_path = GlobalData.download_raw_data_path_external
     last_timestamp = GlobalData.last_date_for_download
 
+    save_path_additional_data = GlobalData.save_path_additional_data
+
     def request_currency(self, currency):
         # ToDO: Replace this request with a request to the currency_handler module. Each currency should
         # have an attribute for the start date
@@ -50,16 +52,16 @@ class CoinmarketcapImportFinanceData:
 
         start = first_date
         while start + time_month < last_date:
-            data = self.request_data(currency, start, start + time_month)
-            self.save_data(data, currency, start, start + time_month)
+            data = self.request_data(currency, start, start + time_month, self.save_path)
+            self.save_data(data, currency, start, start + time_month, self.save_path)
 
             start += time_month
 
-        data = self.request_data(currency, start, last_date)
-        self.save_data(data, currency, start, last_date)
+        data = self.request_data(currency, start, last_date, self.save_path)
+        self.save_data(data, currency, start, last_date, self.save_path)
 
-    def request_data(self, currency, start, end):
-        if self.check_data_already_downloaded(currency, start, end):
+    def request_data(self, currency, start, end, save_path):
+        if self.check_data_already_downloaded(currency, start, end, save_path):
             return None
         print("Sleeping for 1 secs")
         time.sleep(1)
@@ -88,7 +90,7 @@ class CoinmarketcapImportFinanceData:
                 return False
             last = timestamp
 
-    def save_data(self, data, currency, start, end):
+    def save_data(self, data, currency, start, end, path):
         if data is None:
             logging.info(
                 "{}: Currency {} from {} to {} already downloaded".format(self.__class__.__name__, currency, start,
@@ -102,9 +104,17 @@ class CoinmarketcapImportFinanceData:
                     "For {} to {} we only got {} entries".format(start, end, len(data[self.price_usd_string])))
 
             filename = str(start) + "-" + str(end) + ".json"
-            with open(os.path.join(self.save_path, currency, filename), "w") as file:
+            if not os.path.isdir(os.path.join(path, currency)):
+                os.mkdir(os.path.join(path, currency))
+
+            with open(os.path.join(path, currency, filename), "w") as file:
                 json.dump(data, file)
 
-    def check_data_already_downloaded(self, currency, start, end):
+    def check_data_already_downloaded(self, currency, start, end, save_path):
         filename = str(start) + "-" + str(end) + ".json"
-        return os.path.isfile(os.path.join(self.save_path, currency, filename))
+        return os.path.isfile(os.path.join(save_path, currency, filename))
+
+    def request_additional_data(self, currency, timespan_tuples):
+        for timespan in timespan_tuples:
+            data = self.request_data(currency, timespan[0], timespan[1], self.save_path_additional_data)
+            self.save_data(data, currency, timespan[0], timespan[1], self.save_path_additional_data)

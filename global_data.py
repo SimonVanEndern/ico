@@ -10,4 +10,7 @@ class GlobalData:
 
     download_raw_data_path_external = "X:\\bachelor-thesis\data"
     aggregated_data_path_external = "X:\\bachelor-thesis\\aggregated"
+    reduced_data_path_external = "X:\\bachelor-thesis\\reduced"
+    save_path_additional_data = "X:\\bachelor-thesis\\additional"
+
     last_date_for_download = int(datetime.strptime("12.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
