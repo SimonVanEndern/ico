@@ -3,8 +3,8 @@ import logging
 import os
 
 from common.currency_handler import CurrencyHandler
-from finance.reduced_raw_data import financial_data_calculator
-from finance.reduced_raw_data.financial_data_calculator import FinancialDataCalculator
+from finance.reduced_simplified_data import financial_data_calculator
+from finance.reduced_simplified_data.financial_data_calculator import FinancialDataCalculator
 from global_data import GlobalData
 
 logging.basicConfig(level=logging.INFO)

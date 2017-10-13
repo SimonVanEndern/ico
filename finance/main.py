@@ -1,5 +1,5 @@
 from finance.raw_data.raw_data_importer import RawDataImporter
-from finance.reduced_raw_data.reduce_raw_data import ReduceSimplifiedData
+from finance.reduced_simplified_data.reduce_raw_data import ReduceSimplifiedData
 from finance.simplified_data.simplify_raw_data import SimplifyRawData
 
 
