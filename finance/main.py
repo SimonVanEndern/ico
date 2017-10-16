@@ -1,5 +1,5 @@
 from finance.raw_data.raw_data_importer import RawDataImporter
-from finance.reduced_simplified_data.reduce_raw_data import ReduceSimplifiedData
+from finance.aggregate_compressed_data.aggregate_compressed_data import ReduceSimplifiedData
 from finance.simplified_data.simplify_raw_data import SimplifyRawData
 
 
@@ -11,5 +11,5 @@ class MainDataImporter:
 
     def start(self):
         self.raw_data_downloader.download_all_data()
-        self.raw_data_simplifier.simplify_data()
-        self.raw_data_converter.reduce_simplified_data()
+        self.raw_data_simplifier.compress_data()
+        self.raw_data_converter.aggregate_compressed_data()

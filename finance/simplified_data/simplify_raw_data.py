@@ -12,19 +12,19 @@ logging.basicConfig(level=logging.INFO)
 
 class SimplifyRawData:
     def __init__(self):
-        self.source_path = GlobalData.download_raw_data_path_external
-        self.additional_source_path = GlobalData.save_path_additional_data
-        self.destination_path = GlobalData.aggregated_data_path_external
+        self.source_path = GlobalData.EXTERNAL_PATH_RAW_DATA
+        self.additional_source_path = GlobalData.EXTERNAL_PATH_ADDITIONAL_DATA
+        self.destination_path = GlobalData.EXTERNAL_PATH_AGGREGATED_DATA
         self.currency_handler = CurrencyHandler()
 
     # Main
-    def simplify_data(self):
+    def compress_data(self, last_time):
         for currency in self.currency_handler.get_all_currency_names_where_data_is_available():
-            currency_dto = self.aggregate_data(currency)
+            currency_dto = self.aggregate_data_from_all_files(currency)
             if currency_dto is not None:
-                self.save_simplified_data(currency_dto.to_csv(), currency)
+                self.save_compressed_data_into_one_file(currency_dto.to_csv(), currency)
 
-    def aggregate_data(self, currency, only_save_if_not_yet_saved=True):
+    def aggregate_data_from_all_files(self, currency, only_save_if_not_yet_saved=True):
         logging.info("{}: Starting to aggregate Currency {}".format(self.__class__.__name__, currency))
 
         source_path = os.path.join(self.source_path, currency)
@@ -57,7 +57,7 @@ class SimplifyRawData:
 
         return currency_dto
 
-    def save_simplified_data(self, data, currency):
+    def save_compressed_data_into_one_file(self, data, currency):
         aggregated_file_filename = os.path.join(self.destination_path, currency + ".csv")
 
         with open(aggregated_file_filename, "w") as file:

@@ -5,6 +5,9 @@ import logging
 import os.path
 import time
 
+import requests
+import requests.compat
+
 from csv_strings import CSVStrings
 from global_data import GlobalData
 
@@ -18,6 +21,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 def get_basic_currency_data(currency):
     # ToDO: Handle this request with a different module
+    time.sleep(1)
     conn = http.client.HTTPSConnection(GlobalData.coin_market_cap_graph_api_url)
     path = "/currencies/{}/".format(currency)
     conn.request("GET", path)
@@ -42,23 +46,22 @@ class CoinMarketCapGraphAPIImporter:
 
         self.price_usd_string = CSVStrings.price_usd_string
 
-        self.raw_data_path = GlobalData.download_raw_data_path_external
-        self.save_path_additional_data = GlobalData.save_path_additional_data
+        self.raw_data_path = GlobalData.EXTERNAL_PATH_RAW_DATA
+        self.save_path_additional_data = GlobalData.EXTERNAL_PATH_ADDITIONAL_DATA
 
-        self.last_timestamp = GlobalData.last_date_for_download
+    def request_currency(self, currency, last_date):
+        if os.path.isfile(os.path.join(self.raw_data_path, currency, "basic-ready" + str(last_date))):
+            return
 
-    def request_currency(self, currency):
         basic_currency_data = get_basic_currency_data(currency)
         first_date = basic_currency_data["start_date"]
-
-        last_date = self.last_timestamp
 
         if not os.path.isdir(os.path.join(self.raw_data_path, currency)):
             os.mkdir(os.path.join(self.raw_data_path, currency))
 
         self.request_data_monthly(currency, first_date, last_date)
 
-        open(os.path.join(self.raw_data_path, currency, "ready.txt"), "w").close()
+        open(os.path.join(self.raw_data_path, currency, "basic-ready" + str(last_date)), "w").close()
 
     def request_data_monthly(self, currency, first_date, last_date):
         span_month = 29 * 24 * 60 * 60 * 1000

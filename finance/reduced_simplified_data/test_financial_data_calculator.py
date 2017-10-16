@@ -1,7 +1,7 @@
 import unittest
 
-from finance.reduced_simplified_data import financial_data_calculator
-from finance.reduced_simplified_data.financial_data_calculator import FinancialDataCalculator
+from finance.aggregate_compressed_data import financial_data_calculator
+from finance.aggregate_compressed_data.financial_data_calculator import FinancialDataCalculator
 
 
 class FinancialDataCalculatorTest(unittest.TestCase):

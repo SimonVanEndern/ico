@@ -8,10 +8,12 @@ class GlobalData:
     ico_static_date = "02.10.2017"
     ico_use_static_date = True
 
-    download_raw_data_path_external = "X:\\bachelor-thesis\data"
-    aggregated_data_path_external = "X:\\bachelor-thesis\\aggregated"
-    reduced_data_path_external = "X:\\bachelor-thesis\\reduced"
-    save_path_additional_data = "X:\\bachelor-thesis\\additional"
+    EXTERNAL_PATH_RAW_DATA = "X:\\bachelor-thesis\data"
+    EXTERNAL_PATH_REDUCED_DATA = "X:\\bachelor-thesis\\reduced"
+    EXTERNAL_PATH_AGGREGATED_DATA = "X:\\bachelor-thesis\\aggregated"
+    EXTERNAL_PATH_ADDITIONAL_DATA = "X:\\bachelor-thesis\\additional"
+
+    EXTERNAL_PATH_GOOGLE_TRENDS_DATA = "X:\\bachelor-thesis\google-trends"
 
     last_date_for_download = int(datetime.strptime("12.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
 
