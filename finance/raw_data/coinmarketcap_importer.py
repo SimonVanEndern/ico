@@ -5,9 +5,6 @@ import logging
 import os.path
 import time
 
-import requests
-import requests.compat
-
 from csv_strings import CSVStrings
 from global_data import GlobalData
 
@@ -50,7 +47,8 @@ class CoinMarketCapGraphAPIImporter:
         self.save_path_additional_data = GlobalData.EXTERNAL_PATH_ADDITIONAL_DATA
 
     def request_currency(self, currency, last_date):
-        if os.path.isfile(os.path.join(self.raw_data_path, currency, "basic-ready" + str(last_date))):
+        if os.path.isfile(os.path.join(self.raw_data_path, currency, "ready" + str(last_date))):
+            logging.info("{}: All currencies until {} already downloaded".format(self.__class__.__name__, last_date))
             return
 
         basic_currency_data = get_basic_currency_data(currency)
@@ -61,7 +59,7 @@ class CoinMarketCapGraphAPIImporter:
 
         self.request_data_monthly(currency, first_date, last_date)
 
-        open(os.path.join(self.raw_data_path, currency, "basic-ready" + str(last_date)), "w").close()
+        open(os.path.join(self.raw_data_path, currency, "ready" + str(last_date)), "w").close()
 
     def request_data_monthly(self, currency, first_date, last_date):
         span_month = 29 * 24 * 60 * 60 * 1000
@@ -138,3 +136,6 @@ class CoinMarketCapGraphAPIImporter:
         for time_span in time_span_tuples:
             data = self.request_data(currency, time_span[0], time_span[1], self.save_path_additional_data)
             self.save_data(data, currency, time_span[0], time_span[1], self.save_path_additional_data)
+
+        open(os.path.join(self.save_path_additional_data, currency,
+                          "ready" + str(GlobalData.last_date_for_download)), "w").close()

@@ -14,7 +14,7 @@ class ReduceSimplifiedData:
     def __init__(self):
         self.currency_handler = CurrencyHandler()
         self.source_path = GlobalData.EXTERNAL_PATH_AGGREGATED_DATA
-        self.destination_path = GlobalData.EXTERNAL_PATH_REDUCED_DATA
+        self.destination_path = GlobalData.EXTERNAL_PATH_COMPRESSED_DATA
         self.header = None
         self.fdc = FinancialDataCalculator()
 

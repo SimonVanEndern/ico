@@ -8,10 +8,13 @@ class GlobalData:
     ico_static_date = "02.10.2017"
     ico_use_static_date = True
 
-    EXTERNAL_PATH_RAW_DATA = "X:\\bachelor-thesis\data"
-    EXTERNAL_PATH_REDUCED_DATA = "X:\\bachelor-thesis\\reduced"
-    EXTERNAL_PATH_AGGREGATED_DATA = "X:\\bachelor-thesis\\aggregated"
-    EXTERNAL_PATH_ADDITIONAL_DATA = "X:\\bachelor-thesis\\additional"
+    EXTERNAL_PATH_RAW_DATA = "X:\\bachelor-thesis\\raw-data"
+    EXTERNAL_PATH_COMPRESSED_DATA = "X:\\bachelor-thesis\\compressed-data"
+    EXTERNAL_PATH_AGGREGATED_DATA = "X:\\bachelor-thesis\\final-aggregated-data"
+    EXTERNAL_PATH_ADDITIONAL_DATA = "X:\\bachelor-thesis\\additional-data"
+
+    FOLDER_COMPRESSED_DATA_ONLY_RAW_DATA = "only-with-raw-data"
+    FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA = "with-additional-data"
 
     EXTERNAL_PATH_GOOGLE_TRENDS_DATA = "X:\\bachelor-thesis\google-trends"
 

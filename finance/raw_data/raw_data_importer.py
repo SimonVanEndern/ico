@@ -19,7 +19,7 @@ class RawDataImporter:
         currencies = self.currency_handler.get_all_currency_names_where_data_is_available()
 
         if os.path.isfile(
-                os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready-" + str(self.last_timestamp))):
+                os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready" + str(self.last_timestamp))):
             logging.info(
                 "{}: All currencies until {} already downloaded".format(self.__class__.__name__, self.last_timestamp))
 
@@ -28,7 +28,8 @@ class RawDataImporter:
             self.coinmarketcap_importer.request_currency(currency, self.last_timestamp)
             logging.info("{}:End - Downloading currency:{}".format(self.__class__.__name__, currency))
 
-        open(os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready-" + str(self.last_timestamp))).close()
+        # Mark currency download until last_date as finished
+        open(os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready" + str(self.last_timestamp))).close()
         logging.info(
             "{}: Finished downloading currencies until {}".format(self.__class__.__name__, self.last_timestamp))
 

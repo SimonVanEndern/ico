@@ -1,7 +1,7 @@
 import logging
 
 from csv_strings import CSVStrings
-from finance.simplified_data import datapoint_dto
+from finance.compressed_raw_data import datapoint_dto
 
 
 class CurrencyDTO:

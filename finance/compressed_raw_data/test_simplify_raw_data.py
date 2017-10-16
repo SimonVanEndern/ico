@@ -1,7 +1,7 @@
 import unittest
 
 import test_commons
-from finance.simplified_data.simplify_raw_data import SimplifyRawData
+from finance.compressed_raw_data.compress_raw_data import SimplifyRawData
 from test_commons import TestCommons
 
 

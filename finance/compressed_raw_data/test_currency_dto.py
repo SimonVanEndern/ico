@@ -2,7 +2,7 @@ import json
 import unittest
 
 import test_commons
-from finance.simplified_data.currency_dto import CurrencyDTO
+from finance.compressed_raw_data.currency_dto import CurrencyDTO
 from test_commons import TestCommons
 
 

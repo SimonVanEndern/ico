@@ -1,4 +1,5 @@
 import csv
+import logging
 import os
 import time
 from datetime import datetime
@@ -26,14 +27,7 @@ path = "https://trends.google.com/trends/api/widgetdata/multiline?hl=en-US" + \
        "&tz=-120"
 
 
-# print(path)
-#
-# pytrend = TrendReq()
-# pytrend.build_payload(["bitcoin"], timeframe="today 3-m")
-# pytrend.build_payload(["bitcoin"], timeframe="2017-04-16 2017-10-16")
-# interest_over_time_df = pytrend.interest_over_time()
-# print(interest_over_time_df)
-
+logging.basicConfig(level=logging.INFO)
 
 class GoogleTrends:
     def __init__(self):
@@ -47,6 +41,7 @@ class GoogleTrends:
 
     def main(self):
         for currency in self.currency_handler.get_all_currency_names_where_data_is_available():
+            logging.info("{}:Start download Google Trends data for {}".format(self.__class__.__name__, currency))
             start = self.start_2013
             step = 180 * 24 * 3600 * 1000
             while start + step < self.end:
@@ -65,6 +60,7 @@ class GoogleTrends:
         filename = currency + str(start) + "-" + str(end) + ".csv"
 
         if os.path.isfile(os.path.join(path, filename)):
+            logging.info("{}:Google Trends data for {} already downloaded".format(self.__class__.__name__, currency))
             return
         else:
             raw_data = self.get_raw_data(currency, start + " " + end)
