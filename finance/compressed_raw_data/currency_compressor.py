@@ -42,7 +42,7 @@ class CurrencyCompressor:
             return
 
         if self.check_if_raw_data_already_compressed():
-            logging.info("{}: Currency {} already aggregated".format(self.__class__.__name__, currency))
+            logging.info("{}: Currency {} already aggregated".format(self.__class__.__name__, self.currency))
             return
 
         currency_dto = self.compress_currency_raw_data()
@@ -54,7 +54,7 @@ class CurrencyCompressor:
 
     def check_if_raw_data_already_compressed(self):
         destination_folder = os.path.join(self.compressed_only_raw_data_path, self.currency)
-        destination_file = os.path.join(destination_folder, self.currency + self.last_time + ".csv")
+        destination_file = os.path.join(destination_folder, self.currency + str(self.last_time) + ".csv")
 
         if os.path.isdir(destination_folder):
             if os.path.isfile(destination_file):
@@ -65,7 +65,7 @@ class CurrencyCompressor:
     def check_if_additional_data_already_compressed(self):
         destination_folder = os.path.join(self.compressed_with_additional_data_path, self.currency)
         destination_file = os.path.join(self.compressed_with_additional_data_path,
-                                        self.currency + self.last_time + ".csv")
+                                        self.currency + str(self.last_time) + ".csv")
 
         if os.path.isdir(destination_folder):
             if os.path.isfile(destination_file):
@@ -75,7 +75,7 @@ class CurrencyCompressor:
 
     def check_if_additional_data_available(self):
         destination_folder = os.path.join(self.additional_data_path, self.currency)
-        destination_file = os.path.join(self.additional_data_path, "ready" + str(self.last_time))
+        destination_file = os.path.join(destination_folder, "ready" + str(self.last_time))
 
         if os.path.isdir(destination_folder):
             if os.path.isfile(destination_file):
@@ -104,16 +104,19 @@ class CurrencyCompressor:
 
     def save_compressed_data(self, currency_dto, with_additional_data):
         if with_additional_data:
-            filename = os.path.join(self.compressed_with_additional_data_path, self.currency,
-                                    self.currency + str(self.last_time) + ".csv")
+            destination_folder = os.path.join(self.compressed_with_additional_data_path, self.currency)
+            destination_file = os.path.join(destination_folder, self.currency + str(self.last_time) + ".csv")
         else:
-            filename = os.path.join(self.compressed_only_raw_data_path, self.currency,
-                                    self.currency + str(self.last_time) + ".csv")
+            destination_folder = os.path.join(self.compressed_only_raw_data_path, self.currency)
+            destination_file = os.path.join(destination_folder, self.currency + str(self.last_time) + ".csv")
 
-        if os.path.isfile(filename):
+        if not os.path.isdir(destination_folder):
+            os.mkdir(destination_folder)
+
+        if os.path.isfile(destination_file):
             raise Exception("File already exists")
 
-        with open(filename, "w") as file:
+        with open(destination_file, "w") as file:
             writer = csv.writer(file, delimiter=',', lineterminator='\n')
             for row in currency_dto.to_csv():
                 writer.writerow(row)

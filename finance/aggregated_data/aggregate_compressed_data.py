@@ -66,4 +66,4 @@ class ReduceSimplifiedData:
                 writer.writerow(row)
 
 
-ReduceSimplifiedData().aggregate_compressed_data()
+# ReduceSimplifiedData().aggregate_compressed_data()
