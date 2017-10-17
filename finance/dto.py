@@ -23,6 +23,9 @@ class DTO:
         if self.header is None:
             raise Exception("No header present")
 
+        if os.path.isfile(self.export_path):
+            raise Exception("File already exists")
+
         with open(self.export_path, "w") as file:
             writer = csv.writer(file, delimiter=",", lineterminator="\n")
             writer.writerow(self.header)

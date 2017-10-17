@@ -58,7 +58,6 @@ class CurrencyAggregator(DTO):
         raw_data = self.get_compressed_data(input_file)
         aggregated_data = self.aggregate_data(raw_data)
         super().save_to_csv(aggregated_data)
-        # self.save_aggregated_data(aggregated_data)
         super().set_success(True)
 
     def get_compressed_data(self, input_file):

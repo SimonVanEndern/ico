@@ -18,7 +18,7 @@ class FinancialDataCalculator:
             slope = difference_data / difference_time
             output[index] += slope * (timestamp - data_before["time"])
 
-        output = list(map(lambda x: format(x, '.2f'), output))
+        output = list(map(lambda x: round(x, 2), output))
         return {'time': timestamp, 'data': output}
 
     # End is excluded

@@ -19,6 +19,8 @@ class GlobalData:
     EXTERNAL_PATH_GOOGLE_TRENDS_DATA = "X:\\bachelor-thesis\google-trends"
     FOLDER_GOOGLE_TRENDS_6MONTHLY = "6monthly"
 
+    CURRENCY_HANDLER_PATH = "X:\\bachelor-thesis\currency-handler"
+
     last_date_for_download = int(datetime.strptime("12.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
 
     coin_market_cap_graph_api_url = "graphs.coinmarketcap.com"

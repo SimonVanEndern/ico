@@ -31,7 +31,3 @@ class CoinmarketcapImporterTest(unittest.TestCase, TestCommons):
 
             self.assertEqual(mock_method.call_count, 2)
 
-    def test_get_basic_currency_data(self):
-        result = coinmarketcap_importer.get_basic_currency_data("bitcoin")
-
-        self.assertEqual(result, {"start_date": 1367174841000})

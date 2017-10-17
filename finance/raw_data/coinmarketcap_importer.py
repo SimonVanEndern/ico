@@ -5,6 +5,7 @@ import logging
 import os.path
 import time
 
+from common.currency_handler import CurrencyHandler
 from csv_strings import CSVStrings
 from global_data import GlobalData
 
@@ -16,20 +17,20 @@ logging.basicConfig(level=logging.DEBUG)
 # ToDo: Automatically reduce received data (timestamp is there for any datapoint)
 
 
-def get_basic_currency_data(currency):
-    # ToDO: Handle this request with a different module
-    time.sleep(1)
-    conn = http.client.HTTPSConnection(GlobalData.coin_market_cap_graph_api_url)
-    path = "/currencies/{}/".format(currency)
-    conn.request("GET", path)
-
-    response = conn.getresponse()
-    data = json.loads(response.read().decode("UTF-8"))
-    conn.close()
-
-    datapoints = data[CSVStrings.price_usd_string]
-
-    return {"start_date": datapoints[0][0]}
+# def get_basic_currency_data(currency):
+#     # ToDO: Handle this request with a different module
+#     time.sleep(1)
+#     conn = http.client.HTTPSConnection(GlobalData.coin_market_cap_graph_api_url)
+#     path = "/currencies/{}/".format(currency)
+#     conn.request("GET", path)
+#
+#     response = conn.getresponse()
+#     data = json.loads(response.read().decode("UTF-8"))
+#     conn.close()
+#
+#     datapoints = data[CSVStrings.price_usd_string]
+#
+#     return {"start_date": datapoints[0][0]}
 
 
 def check_data_already_downloaded(currency, start, end, save_path):
@@ -46,12 +47,14 @@ class CoinMarketCapGraphAPIImporter:
         self.raw_data_path = GlobalData.EXTERNAL_PATH_RAW_DATA
         self.save_path_additional_data = GlobalData.EXTERNAL_PATH_ADDITIONAL_DATA
 
+        self.currency_handler = CurrencyHandler()
+
     def request_currency(self, currency, last_date):
         if os.path.isfile(os.path.join(self.raw_data_path, currency, "ready" + str(last_date))):
             logging.info("{}: All currencies until {} already downloaded".format(self.__class__.__name__, last_date))
             return
 
-        basic_currency_data = get_basic_currency_data(currency)
+        basic_currency_data = self.currency_handler.get_basic_currency_data(currency)
         first_date = basic_currency_data["start_date"]
 
         if not os.path.isdir(os.path.join(self.raw_data_path, currency)):
