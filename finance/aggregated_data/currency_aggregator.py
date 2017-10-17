@@ -65,7 +65,7 @@ class CurrencyAggregator(DTO):
         with open(input_file) as file:
             reader = csv.reader(file)
             raw_data = list(reader)
-            self.header = raw_data.pop(0)
+            super().set_header(raw_data.pop(0))
             return raw_data
 
     def aggregate_data(self, data):
@@ -76,10 +76,3 @@ class CurrencyAggregator(DTO):
         reduced_data = self.fdc.calculate_series_for_timestamp(start, end, step, data, self.currency)
         reduced_data = list(map(lambda x: [x['time']] + x['data'], reduced_data))
         return reduced_data
-
-    # def save_aggregated_data(self, data):
-    #     with open(os.path.join(self.aggregated_with_additional_data_folder, self.filename), "w") as file:
-    #         writer = csv.writer(file, delimiter=",", lineterminator="\n")
-    #         writer.writerow(self.header)
-    #         for row in data:
-    #             writer.writerow(row)
