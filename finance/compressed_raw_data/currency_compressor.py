@@ -15,11 +15,15 @@ class CurrencyCompressor:
         self.raw_data_path = GlobalData.EXTERNAL_PATH_RAW_DATA
         self.additional_data_path = GlobalData.EXTERNAL_PATH_ADDITIONAL_DATA
 
-        self.compressed_only_raw_data_path = os.path.join(GlobalData.EXTERNAL_PATH_COMPRESSED_DATA,
-                                                          GlobalData.FOLDER_COMPRESSED_DATA_ONLY_RAW_DATA)
+        self.compressed_only_raw_data_folder = os.path.join(GlobalData.EXTERNAL_PATH_COMPRESSED_DATA,
+                                                            GlobalData.FOLDER_COMPRESSED_DATA_ONLY_RAW_DATA,
+                                                            self.currency)
 
-        self.compressed_with_additional_data_path = os.path.join(GlobalData.EXTERNAL_PATH_COMPRESSED_DATA,
-                                                                 GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA)
+        self.compressed_with_additional_data_folder = os.path.join(GlobalData.EXTERNAL_PATH_COMPRESSED_DATA,
+                                                                   GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA,
+                                                                   self.currency)
+
+        self.make_folders_if_not_existing()
 
         if os.path.isdir(os.path.join(self.raw_data_path, self.currency)):
             if os.path.isfile(os.path.join(self.raw_data_path, self.currency, "ready" + str(last_time))):
@@ -32,6 +36,13 @@ class CurrencyCompressor:
             return
 
         self.compress_data()
+
+    def make_folders_if_not_existing(self):
+        if not os.path.isdir(self.compressed_with_additional_data_folder):
+            os.mkdir(self.compressed_with_additional_data_folder)
+
+        if not os.path.isdir(self.compressed_only_raw_data_folder):
+            os.mkdir(self.compressed_only_raw_data_folder)
 
     def compress_data(self):
         logging.info("{} Compressing data for {}".format(self.__class__.__name__, self.currency))
@@ -53,25 +64,16 @@ class CurrencyCompressor:
             self.save_compressed_data(currency_dto, with_additional_data=False)
 
     def check_if_raw_data_already_compressed(self):
-        destination_folder = os.path.join(self.compressed_only_raw_data_path, self.currency)
-        destination_file = os.path.join(destination_folder, self.currency + str(self.last_time) + ".csv")
-
-        if os.path.isdir(destination_folder):
-            if os.path.isfile(destination_file):
-                return True
-
-        return False
-
-    def check_if_additional_data_already_compressed(self):
-        destination_folder = os.path.join(self.compressed_with_additional_data_path, self.currency)
-        destination_file = os.path.join(self.compressed_with_additional_data_path,
+        destination_file = os.path.join(self.compressed_only_raw_data_folder,
                                         self.currency + str(self.last_time) + ".csv")
 
-        if os.path.isdir(destination_folder):
-            if os.path.isfile(destination_file):
-                return True
+        return os.path.isfile(destination_file)
 
-        return False
+    def check_if_additional_data_already_compressed(self):
+        destination_file = os.path.join(self.compressed_with_additional_data_folder,
+                                        self.currency + str(self.last_time) + ".csv")
+
+        return os.path.isfile(destination_file)
 
     def check_if_additional_data_available(self):
         destination_folder = os.path.join(self.additional_data_path, self.currency)
@@ -104,14 +106,11 @@ class CurrencyCompressor:
 
     def save_compressed_data(self, currency_dto, with_additional_data):
         if with_additional_data:
-            destination_folder = os.path.join(self.compressed_with_additional_data_path, self.currency)
-            destination_file = os.path.join(destination_folder, self.currency + str(self.last_time) + ".csv")
+            destination_file = os.path.join(self.compressed_with_additional_data_folder,
+                                            self.currency + str(self.last_time) + ".csv")
         else:
-            destination_folder = os.path.join(self.compressed_only_raw_data_path, self.currency)
-            destination_file = os.path.join(destination_folder, self.currency + str(self.last_time) + ".csv")
-
-        if not os.path.isdir(destination_folder):
-            os.mkdir(destination_folder)
+            destination_file = os.path.join(self.compressed_only_raw_data_folder,
+                                            self.currency + str(self.last_time) + ".csv")
 
         if os.path.isfile(destination_file):
             raise Exception("File already exists")

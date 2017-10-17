@@ -51,7 +51,7 @@ class GoogleTrends:
             self.save_compressed_data(compressed_data, path, filename)
 
     def get_raw_data(self, search_term, time_frame):
-        time.sleep(1)
+        time.sleep(2)
         self.trend_api.build_payload([search_term], timeframe=time_frame)
         return self.trend_api.interest_over_time()
 
