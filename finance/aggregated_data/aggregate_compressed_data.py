@@ -4,6 +4,7 @@ import os
 
 from common.currency_handler import CurrencyHandler
 from finance.aggregated_data import financial_data_calculator
+from finance.aggregated_data.currency_aggregator import CurrencyAggregator
 from finance.aggregated_data.financial_data_calculator import FinancialDataCalculator
 from global_data import GlobalData
 
@@ -20,27 +21,28 @@ class ReduceSimplifiedData:
 
         self.last_timestamp = GlobalData.last_date_for_download
 
-    def aggregate_compressed_data(self):
+    def aggregate_compressed_data(self, last_time):
         for currency in self.currency_handler.get_all_currency_names_where_data_is_available():
-            if not os.path.isfile(os.path.join(self.source_path, currency + ".csv")):
-                logging.info("{}: Currency {} not yet ready for reduction".format(self.__class__.__name__, currency))
-                continue
-
-            if os.path.isfile(os.path.join(self.destination_path, currency + ".csv")):
-                logging.info("{}: Currency {} already reduced".format(self.__class__.__name__, currency))
-                continue
-
-            logging.info("{}: Reducing Currency {}".format(self.__class__.__name__, currency))
-
-            raw_data = self.get_raw_data(currency)
-            reduced_data = self.aggregate_data(raw_data, currency)
-            self.export_aggregated_data(currency, reduced_data)
-
-        if os.path.isfile(
-                os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready-" + str(self.last_timestamp))):
-            open(os.path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA, "ready-" + str(self.last_timestamp))).close()
-            logging.info(
-                "{}: All currencies until {} already downloaded".format(self.__class__.__name__, self.last_timestamp))
+            CurrencyAggregator(currency, last_time)
+        #     if not os.path.isfile(os.path.join(self.source_path, currency + ".csv")):
+        #         logging.info("{}: Currency {} not yet ready for reduction".format(self.__class__.__name__, currency))
+        #         continue
+        #
+        #     if os.path.isfile(os.path.join(self.destination_path, currency + ".csv")):
+        #         logging.info("{}: Currency {} already reduced".format(self.__class__.__name__, currency))
+        #         continue
+        #
+        #     logging.info("{}: Reducing Currency {}".format(self.__class__.__name__, currency))
+        #
+        #     raw_data = self.get_raw_data(currency)
+        #     reduced_data = self.aggregate_data(raw_data, currency)
+        #     self.export_aggregated_data(currency, reduced_data)
+        #
+        # if os.path.isfile(
+        #         os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready-" + str(self.last_timestamp))):
+        #     open(os.path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA, "ready-" + str(self.last_timestamp))).close()
+        #     logging.info(
+        #         "{}: All currencies until {} already downloaded".format(self.__class__.__name__, self.last_timestamp))
 
     def get_raw_data(self, currency):
         with open(os.path.join(self.source_path, currency + ".csv")) as file:

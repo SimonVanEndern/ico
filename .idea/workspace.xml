@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f706f99-14d9-4e62-8eec-2dff7ea6a8b0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/finance/aggregated_data/currency_aggregator.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance/compressed_raw_data/currency_compressor.py" afterPath="$PROJECT_DIR$/finance/compressed_raw_data/currency_compressor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/google_trends/main.py" afterPath="$PROJECT_DIR$/google_trends/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance/aggregated_data/aggregate_compressed_data.py" afterPath="$PROJECT_DIR$/finance/aggregated_data/aggregate_compressed_data.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance/aggregated_data/currency_aggregator.py" afterPath="$PROJECT_DIR$/finance/aggregated_data/currency_aggregator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance/main.py" afterPath="$PROJECT_DIR$/finance/main.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,7 +41,7 @@
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_test_coindesk_py.coverage" NAME="Unittests in test_coindesk.py Coverage Results" MODIFIED="1507729102421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/imports" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$marketcapitalization.coverage" NAME="marketcapitalization Coverage Results" MODIFIED="1506695292940" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/analysis" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$total_data_importer__1_.coverage" NAME="total_data_importer (1) Coverage Results" MODIFIED="1507880885100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/raw_data" />
-    <SUITE FILE_PATH="coverage/bachelor_thesis$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1508230806308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1508236340526" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$temp.coverage" NAME="temp Coverage Results" MODIFIED="1507898338313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bachelor-thesis$blockstarter.coverage" NAME="blockstarter Coverage Results" MODIFIED="1506681878964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/sources" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$correlation.coverage" NAME="correlation Coverage Results" MODIFIED="1507640287522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/analysis" />
@@ -95,26 +95,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="coinmarketcap_importer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finance/raw_data/coinmarketcap_importer.py">
+      <file leaf-file-name="aggregate_compressed_data.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/finance/aggregated_data/aggregate_compressed_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1424">
-              <caret line="99" column="60" lean-forward="true" selection-start-line="99" selection-start-column="60" selection-end-line="99" selection-end-column="60" />
+            <state relative-caret-position="316">
+              <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#2205#2418#0" expanded="false" />
+                <element signature="e#2474#2999#0" expanded="false" />
+                <element signature="e#3063#3326#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="aggregate_compressed_data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finance/aggregated_data/aggregate_compressed_data.py">
+      <file leaf-file-name="coinmarketcap_importer.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/finance/raw_data/coinmarketcap_importer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="22" column="40" lean-forward="true" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="153">
+              <caret line="81" column="21" lean-forward="true" selection-start-line="81" selection-start-column="21" selection-end-line="81" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,9 +123,23 @@
       <file leaf-file-name="currency_aggregator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finance/aggregated_data/currency_aggregator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="-24">
+              <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="financial_data_calculator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/finance/aggregated_data/financial_data_calculator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="130">
+              <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -166,8 +181,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finance/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+            <state relative-caret-position="217">
+              <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
               <folding>
                 <element signature="e#0#82#0" expanded="true" />
               </folding>
@@ -190,24 +205,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="currency_compressor.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="currency_compressor.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finance/compressed_raw_data/currency_compressor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="32" column="22" lean-forward="true" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
+            <state relative-caret-position="63">
+              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="datapoint_dto.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finance/compressed_raw_data/datapoint_dto.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
-              <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -223,7 +228,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ethereum'</find>
       <find>btc</find>
       <find>'ethereum'</find>
       <find>downlnoaded</find>
@@ -253,6 +257,7 @@
       <find>has no addit</find>
       <find>Reducing</find>
       <find>mkdir</find>
+      <find>sleeping for</find>
     </findStrings>
     <dirStrings>
       <dir>Z:\Google Drive\05 - Projekte\bachelor-thesis\ico</dir>
@@ -310,18 +315,18 @@
         <option value="$PROJECT_DIR$/finance/simplified_data/simplify_raw_data.py" />
         <option value="$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pytrends/request.py" />
         <option value="$PROJECT_DIR$/common/currency_handler.py" />
-        <option value="$PROJECT_DIR$/finance/main.py" />
         <option value="$PROJECT_DIR$/global_data.py" />
         <option value="$PROJECT_DIR$/google_trends/google_trends_DTO.py" />
         <option value="$PROJECT_DIR$/finance/aggregated_data/financial_data_calculator.py" />
         <option value="$PROJECT_DIR$/finance/raw_data/coinmarketcap_importer.py" />
         <option value="$PROJECT_DIR$/finance/raw_data/raw_data_importer.py" />
         <option value="$PROJECT_DIR$/finance/compressed_raw_data/currency_dto.py" />
-        <option value="$PROJECT_DIR$/finance/aggregated_data/aggregate_compressed_data.py" />
         <option value="$PROJECT_DIR$/finance/compressed_raw_data/compress_raw_data.py" />
         <option value="$PROJECT_DIR$/google_trends/main.py" />
-        <option value="$PROJECT_DIR$/finance/aggregated_data/currency_aggregator.py" />
         <option value="$PROJECT_DIR$/finance/compressed_raw_data/currency_compressor.py" />
+        <option value="$PROJECT_DIR$/finance/aggregated_data/currency_aggregator.py" />
+        <option value="$PROJECT_DIR$/finance/aggregated_data/aggregate_compressed_data.py" />
+        <option value="$PROJECT_DIR$/finance/main.py" />
       </list>
     </option>
   </component>
@@ -1188,7 +1193,7 @@
       <workItem from="1506693382575" duration="38854000" />
       <workItem from="1507121588611" duration="59145000" />
       <workItem from="1507710572875" duration="56870000" />
-      <workItem from="1507904290385" duration="35591000" />
+      <workItem from="1507904290385" duration="37670000" />
     </task>
     <servers />
   </component>
@@ -1225,7 +1230,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="234142000" />
+    <option name="totallyTimeSpent" value="236221000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1641,17 +1646,7 @@
         <state relative-caret-position="255">
           <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finance/aggregated_data/financial_data_calculator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1661,17 +1656,7 @@
         <state relative-caret-position="166">
           <caret line="28" column="45" lean-forward="true" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finance/raw_data/coinmarketcap_importer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1424">
-          <caret line="99" column="60" lean-forward="true" selection-start-line="99" selection-start-column="60" selection-end-line="99" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1717,16 +1702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/finance/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#82#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/global_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
@@ -1735,31 +1710,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/finance/aggregated_data/aggregate_compressed_data.py">
+    <entry file="file://$PROJECT_DIR$/finance/compressed_raw_data/currency_compressor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="22" column="40" lean-forward="true" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
+        <state relative-caret-position="63">
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finance/aggregated_data/financial_data_calculator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finance/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#82#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finance/aggregated_data/aggregate_compressed_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#2205#2418#0" expanded="false" />
+            <element signature="e#2474#2999#0" expanded="false" />
+            <element signature="e#3063#3326#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/finance/aggregated_data/currency_aggregator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finance/compressed_raw_data/currency_compressor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="32" column="22" lean-forward="true" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
+        <state relative-caret-position="-24">
+          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finance/raw_data/coinmarketcap_importer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="81" column="21" lean-forward="true" selection-start-line="81" selection-start-column="21" selection-end-line="81" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>

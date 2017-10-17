@@ -15,7 +15,7 @@ class MainDataImporter:
     def start(self):
         self.raw_data_downloader.download_all_data()
         self.raw_data_simplifier.compress_data(self.last_time)
-        self.raw_data_converter.aggregate_compressed_data()
+        self.raw_data_converter.aggregate_compressed_data(self.last_time)
 
 
 MainDataImporter().start()
