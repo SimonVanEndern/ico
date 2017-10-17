@@ -9,25 +9,8 @@ from pytrends.request import TrendReq
 from common.currency_handler import CurrencyHandler
 from global_data import GlobalData
 
-searchterm = "bitcoin"
-path = "https://trends.google.com/trends/api/widgetdata/multiline?hl=en-US" + \
-       "&tz=-120" + \
- \
-       "&req=%7B%22time%22:%222016-10-16+2017-10-16%22," + \
-       "%22resolution%22:%22WEEK%22," + \
-       "%22locale%22:%22en-US%22," + \
-       "%22comparisonItem%22:%5B%7B%22geo%22:%7B%7D," + \
-       "%22complexKeywordsRestriction%22:%7B%22keyword%22:%5B%7B%22type%22:%22BROAD%22," + \
-       "%22value%22:%22" + searchterm + "%22%7D%5D%7D%7D%5D," + \
-       "%22requestOptions%22:%7B%22property%22:%22%22," + \
-       "%22backend%22:%22IZG%22," + \
-       "%22category%22:0%7D%7D" + \
- \
-       "&token=APP6_UEAAAAAWeW474mDKIPTRP-9wsRUk15DNpZcWOak" + \
-       "&tz=-120"
-
-
 logging.basicConfig(level=logging.INFO)
+
 
 class GoogleTrends:
     def __init__(self):

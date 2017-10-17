@@ -19,6 +19,7 @@ class SimplifyRawData:
 
     # Main
     def compress_data(self, last_time):
+        logging.info("{} Compressing data".format(self.__class__.__name__))
         for currency in self.currency_handler.get_all_currency_names_where_data_is_available():
             with_additional_data = os.path.isfile(
                 os.path.join(self.additional_source_path, currency, "ready" + str(last_time)))
@@ -67,9 +68,12 @@ class SimplifyRawData:
     def save_compressed_data_into_one_file(self, data, currency, status_folder):
         aggregated_file_filename = os.path.join(self.destination_path, status_folder, currency + ".csv")
 
+        if os.path.isfile(aggregated_file_filename):
+            os.remove(aggregated_file_filename)
+
         with open(aggregated_file_filename, "w") as file:
             writer = csv.writer(file, delimiter=',', lineterminator='\n')
             for row in data:
                 writer.writerow(row)
 
-# SimplifyRawData().simplify_data()
+# SimplifyRawData().compress_data()

@@ -82,6 +82,7 @@ class CoinMarketCapGraphAPIImporter:
         time.sleep(1)
         conn = http.client.HTTPSConnection(self.coin_market_cap_graph_api_url)
         path = "/currencies/{}/{}/{}/".format(currency, start, end)
+        print("Path: " + path)
         conn.request("GET", path)
 
         response = conn.getresponse()
@@ -137,5 +138,6 @@ class CoinMarketCapGraphAPIImporter:
             data = self.request_data(currency, time_span[0], time_span[1], self.save_path_additional_data)
             self.save_data(data, currency, time_span[0], time_span[1], self.save_path_additional_data)
 
-        open(os.path.join(self.save_path_additional_data, currency,
-                          "ready" + str(GlobalData.last_date_for_download)), "w").close()
+        if os.path.isdir(os.path.join(self.save_path_additional_data, currency)):
+            open(os.path.join(self.save_path_additional_data, currency,
+                              "ready" + str(GlobalData.last_date_for_download)), "w").close()

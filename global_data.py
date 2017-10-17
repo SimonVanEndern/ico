@@ -17,6 +17,7 @@ class GlobalData:
     FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA = "with-additional-data"
 
     EXTERNAL_PATH_GOOGLE_TRENDS_DATA = "X:\\bachelor-thesis\google-trends"
+    FOLDER_GOOGLE_TRENDS_6MONTHLY = "6monthly"
 
     last_date_for_download = int(datetime.strptime("12.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
 

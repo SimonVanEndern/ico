@@ -54,8 +54,8 @@ class FinancialDataCalculator:
         return output
 
     def get_missing_data(self, currency):
-        self.raw_data_importer.request_additional_data(currency, self.missing_data[currency])
-        pass
+        if len(self.missing_data[currency]) > 0:
+            self.raw_data_importer.request_additional_data(currency, self.missing_data[currency])
 
 
 def get_next_timestamp_at_time(timestamp, hours):

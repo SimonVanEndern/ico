@@ -8,7 +8,6 @@ class CurrencyDTO:
     def __init__(self, currency):
         self.currency = currency
         self.data = {}
-        pass
 
     def to_csv(self):
         csv = []

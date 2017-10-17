@@ -1,5 +1,5 @@
+from finance.aggregated_data.aggregate_compressed_data import ReduceSimplifiedData
 from finance.raw_data.raw_data_importer import RawDataImporter
-from finance.aggregate_compressed_data.aggregate_compressed_data import ReduceSimplifiedData
 from finance.compressed_raw_data.compress_raw_data import SimplifyRawData
 from global_data import GlobalData
 
@@ -16,3 +16,6 @@ class MainDataImporter:
         self.raw_data_downloader.download_all_data()
         self.raw_data_simplifier.compress_data(self.last_time)
         self.raw_data_converter.aggregate_compressed_data()
+
+
+MainDataImporter().start()

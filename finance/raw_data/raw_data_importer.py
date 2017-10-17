@@ -16,6 +16,7 @@ class RawDataImporter:
         self.last_timestamp = GlobalData.last_date_for_download
 
     def download_all_data(self):
+        # TODO: Change currency handler to get latest data
         currencies = self.currency_handler.get_all_currency_names_where_data_is_available()
 
         if os.path.isfile(
@@ -29,9 +30,9 @@ class RawDataImporter:
             logging.info("{}:End - Downloading currency:{}".format(self.__class__.__name__, currency))
 
         # Mark currency download until last_date as finished
-        open(os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready" + str(self.last_timestamp))).close()
+        open(os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready" + str(self.last_timestamp)), "w").close()
         logging.info(
             "{}: Finished downloading currencies until {}".format(self.__class__.__name__, self.last_timestamp))
 
 
-RawDataImporter().download_all_data()
+# RawDataImporter().download_all_data()

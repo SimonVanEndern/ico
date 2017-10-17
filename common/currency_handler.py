@@ -40,8 +40,8 @@ class CurrencyHandler:
         else:
             self.all_currencies_with_data = []
             for index, filename in enumerate(os.listdir(self.data_path)):
-
-                self.all_currencies_with_data.append(filename.split(".")[0])
+                if not os.path.isdir(os.path.join(self.data_path, filename)):
+                    self.all_currencies_with_data.append(filename.split(".")[0])
 
             if len(self.all_currencies_with_data) <= size_limit:
                 return self.all_currencies_with_data
