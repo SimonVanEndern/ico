@@ -117,7 +117,7 @@ class CoinMarketCapGraphAPIImporter:
             logging.info(
                 "{}: Currency {} from {} to {} has no additional data".format(self.__class__.__name__, currency, start,
                                                                               end))
-            return
+            # return
 
         else:
             logging.info("{}: saved data from {} to {} --> {} entries".format(self.__class__.__name__, start, end,

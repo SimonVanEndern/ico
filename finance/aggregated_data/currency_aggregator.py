@@ -4,10 +4,11 @@ import os
 
 from finance.aggregated_data import financial_data_calculator
 from finance.aggregated_data.financial_data_calculator import FinancialDataCalculator
+from finance.dto import DTO
 from global_data import GlobalData
 
 
-class CurrencyAggregator:
+class CurrencyAggregator(DTO):
     def __init__(self, currency, last_time):
         self.success = False
         self.currency = currency
@@ -30,10 +31,9 @@ class CurrencyAggregator:
 
         self.filename = self.currency + str(self.last_time) + ".csv"
 
-        self.run()
+        super().__init__(self.aggregated_with_additional_data_folder, self.filename)
 
-    def check_success(self):
-        return self.success
+        self.run()
 
     def run(self):
         if os.path.isdir(self.aggregated_with_additional_data_folder):
@@ -57,8 +57,9 @@ class CurrencyAggregator:
 
         raw_data = self.get_compressed_data(input_file)
         aggregated_data = self.aggregate_data(raw_data)
-        self.save_aggregated_data(aggregated_data)
-        self.success = True
+        super().save_to_csv(aggregated_data)
+        # self.save_aggregated_data(aggregated_data)
+        super().set_success(True)
 
     def get_compressed_data(self, input_file):
         with open(input_file) as file:
@@ -76,9 +77,9 @@ class CurrencyAggregator:
         reduced_data = list(map(lambda x: [x['time']] + x['data'], reduced_data))
         return reduced_data
 
-    def save_aggregated_data(self, data):
-        with open(os.path.join(self.aggregated_with_additional_data_folder, self.filename), "w") as file:
-            writer = csv.writer(file, delimiter=",", lineterminator="\n")
-            writer.writerow(self.header)
-            for row in data:
-                writer.writerow(row)
+    # def save_aggregated_data(self, data):
+    #     with open(os.path.join(self.aggregated_with_additional_data_folder, self.filename), "w") as file:
+    #         writer = csv.writer(file, delimiter=",", lineterminator="\n")
+    #         writer.writerow(self.header)
+    #         for row in data:
+    #             writer.writerow(row)

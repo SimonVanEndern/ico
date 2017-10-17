@@ -44,28 +44,28 @@ class ReduceSimplifiedData:
         #     logging.info(
         #         "{}: All currencies until {} already downloaded".format(self.__class__.__name__, self.last_timestamp))
 
-    def get_raw_data(self, currency):
-        with open(os.path.join(self.source_path, currency + ".csv")) as file:
-            reader = csv.reader(file)
-            raw_data = list(reader)
-            self.header = raw_data.pop(0)
-            return raw_data
-
-    def aggregate_data(self, data, currency):
-        data = list(map(lambda x: {"time": int(x[0]), "data": list(map(float, x[1:]))}, data))
-        start = financial_data_calculator.get_next_timestamp_at_time(int(data[0]["time"]), 12)
-        end = financial_data_calculator.get_last_timestamp_at_time(int(data[len(data) - 1]["time"]), 12)
-        step = 1000 * 3600 * 24
-        reduced_data = self.fdc.calculate_series_for_timestamp(start, end, step, data, currency)
-        reduced_data = list(map(lambda x: [x['time']] + x['data'], reduced_data))
-        return reduced_data
-
-    def export_aggregated_data(self, currency, data):
-        with open(os.path.join(self.destination_path, currency + ".csv"), "w") as file:
-            writer = csv.writer(file, delimiter=",", lineterminator="\n")
-            writer.writerow(self.header)
-            for row in data:
-                writer.writerow(row)
+    # def get_raw_data(self, currency):
+    #     with open(os.path.join(self.source_path, currency + ".csv")) as file:
+    #         reader = csv.reader(file)
+    #         raw_data = list(reader)
+    #         self.header = raw_data.pop(0)
+    #         return raw_data
+    #
+    # def aggregate_data(self, data, currency):
+    #     data = list(map(lambda x: {"time": int(x[0]), "data": list(map(float, x[1:]))}, data))
+    #     start = financial_data_calculator.get_next_timestamp_at_time(int(data[0]["time"]), 12)
+    #     end = financial_data_calculator.get_last_timestamp_at_time(int(data[len(data) - 1]["time"]), 12)
+    #     step = 1000 * 3600 * 24
+    #     reduced_data = self.fdc.calculate_series_for_timestamp(start, end, step, data, currency)
+    #     reduced_data = list(map(lambda x: [x['time']] + x['data'], reduced_data))
+    #     return reduced_data
+    #
+    # def export_aggregated_data(self, currency, data):
+    #     with open(os.path.join(self.destination_path, currency + ".csv"), "w") as file:
+    #         writer = csv.writer(file, delimiter=",", lineterminator="\n")
+    #         writer.writerow(self.header)
+    #         for row in data:
+    #             writer.writerow(row)
 
 
 # ReduceSimplifiedData().aggregate_compressed_data()
