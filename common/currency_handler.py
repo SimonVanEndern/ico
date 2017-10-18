@@ -1,9 +1,6 @@
-import http
 import json
-import os
-
 import math
-
+import os
 import time
 
 import requests
@@ -14,7 +11,6 @@ from global_data import GlobalData
 
 
 class CurrencyHandler:
-
     all_currencies_with_data = None
     currencies = {}
     data_path = GlobalData.financial_data_path
@@ -89,6 +85,5 @@ class CurrencyHandler:
 
         with open(file_path, "w") as file:
             json.dump(self.basic_currency_data, file)
-
 
 # CurrencyHandler().get_basic_currency_data("bitcoin")

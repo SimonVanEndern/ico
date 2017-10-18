@@ -1,6 +1,7 @@
 common/saved
 exchanges/sources/saved
 finance/analysis/aggregated
+finance/aggregated_data/test_input
 ico/sources/saved
 ico/imports/saved
 __pycache__/

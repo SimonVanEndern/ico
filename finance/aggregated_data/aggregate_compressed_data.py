@@ -12,4 +12,4 @@ class ReduceSimplifiedData:
 
     def aggregate_compressed_data(self, last_time):
         for currency in self.currency_handler.get_all_currency_names_where_data_is_available():
-            CurrencyAggregator(currency, last_time)
+            CurrencyAggregator(currency, last_time).run()

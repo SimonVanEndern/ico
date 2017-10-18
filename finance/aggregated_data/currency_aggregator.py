@@ -33,7 +33,7 @@ class CurrencyAggregator(DTO):
 
         super().__init__(self.aggregated_with_additional_data_folder, self.filename)
 
-        self.run()
+        # self.run()
 
     def run(self):
         if os.path.isdir(self.aggregated_with_additional_data_folder):
@@ -43,7 +43,9 @@ class CurrencyAggregator(DTO):
         else:
             os.mkdir(self.aggregated_with_additional_data_folder)
 
-        self.aggregate_currency()
+        aggregated_data = self.aggregate_currency()
+        super().save_to_csv(aggregated_data)
+        super().set_success(True)
 
     def aggregate_currency(self):
         input_file = os.path.join(self.compressed_with_additional_data_folder, self.filename)
@@ -55,10 +57,12 @@ class CurrencyAggregator(DTO):
 
         logging.info("{}: Aggregating Currency {}".format(self.__class__.__name__, self.currency))
 
+        if self.currency == "parallelcoin":
+            pass
+
         raw_data = self.get_compressed_data(input_file)
         aggregated_data = self.aggregate_data(raw_data)
-        super().save_to_csv(aggregated_data)
-        super().set_success(True)
+        return aggregated_data
 
     def get_compressed_data(self, input_file):
         with open(input_file) as file:
