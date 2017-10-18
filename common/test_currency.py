@@ -17,13 +17,13 @@ class CurrencyTest(unittest.TestCase):
         self.ethereum.instantiate()
 
     def test_load_data_general(self):
-        result = self.ethereum.load_data()
+        result = self.ethereum.load_financial_data()
         self.assertGreaterEqual(len(result), 793)
         self.assertEqual(result[0], ['Timestamp', 'USD', 'BTC', 'Volume', 'MarketCap'])
 
     def test_load_data_specific(self):
         self.ethereum.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
-        result = self.ethereum.load_data()
+        result = self.ethereum.load_financial_data()
         self.assertEqual(len(result), 793)
         self.assertEqual(result[0], ['Timestamp', 'USD', 'BTC', 'Volume', 'MarketCap'])
         self.assertEqual(result[1], ['1438958970000', '2.83162', '0.0101411', '90621', '0'])

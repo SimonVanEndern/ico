@@ -3,7 +3,7 @@ import logging
 from common.currency_handler import CurrencyHandler
 from finance.aggregated_data.currency_aggregator import CurrencyAggregator
 
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 
 
 class ReduceSimplifiedData:

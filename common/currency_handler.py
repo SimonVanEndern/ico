@@ -11,11 +11,12 @@ from global_data import GlobalData
 
 
 class CurrencyHandler:
-    all_currencies_with_data = None
-    currencies = {}
-    data_path = GlobalData.financial_data_path
-
     def __init__(self):
+        self.currencies = dict()
+        self.all_currencies_with_data = None
+
+        self.data_path = GlobalData.financial_data_path
+
         self.basic_currency_data = self.load_basic_currency_data()
 
     def get_currency(self, currency, date_limit=None):
@@ -85,5 +86,14 @@ class CurrencyHandler:
 
         with open(file_path, "w") as file:
             json.dump(self.basic_currency_data, file)
+
+    def load_ico_data(self):
+        pass
+        # TODO: implement
+
+    def add_ico_data(self, icos):
+        for currency in self.currencies:
+            if currency["id"] in icos:
+                currency["ico"] = icos[currency["id"]]
 
 # CurrencyHandler().get_basic_currency_data("bitcoin")

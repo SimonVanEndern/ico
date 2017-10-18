@@ -114,16 +114,8 @@ class CoinmarketCapApi:
             json.dump(self.currencies, file, cls=JsonConverter)
 
     def add_ico_data(self, icos):
-        # print(icos)
-        # print(icos.keys())
-        # print(icos["ETH"])
         for currency in self.currencies:
-            # if currency["symbol"] == "ETH":
-                # print("Here i am")
             if currency["id"] in icos:
                 currency["ico"] = icos[currency["id"]]
-            # else:
-                # if currency["symbol"] in icos:
-                    # print(icos[currency["symbol"]])
 
         print(self.currencies)

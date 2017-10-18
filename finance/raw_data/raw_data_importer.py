@@ -5,8 +5,6 @@ from common.currency_handler import CurrencyHandler
 from finance.raw_data.coinmarketcap_importer import CoinMarketCapGraphAPIImporter
 from global_data import GlobalData
 
-logging.basicConfig(level=logging.INFO)
-
 
 class RawDataImporter:
     def __init__(self):
@@ -33,6 +31,5 @@ class RawDataImporter:
         open(os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready" + str(self.last_timestamp)), "w").close()
         logging.info(
             "{}: Finished downloading currencies until {}".format(self.__class__.__name__, self.last_timestamp))
-
 
 # RawDataImporter().download_all_data()

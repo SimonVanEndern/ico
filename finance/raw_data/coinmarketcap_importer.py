@@ -9,7 +9,7 @@ from common.currency_handler import CurrencyHandler
 from csv_strings import CSVStrings
 from global_data import GlobalData
 
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
 
 # exporter = exporter.Exporter()
@@ -122,19 +122,18 @@ class CoinMarketCapGraphAPIImporter:
                                                                               end))
             # return
 
-        else:
-            logging.info("{}: saved data from {} to {} --> {} entries".format(self.__class__.__name__, start, end,
-                                                                              len(data[self.price_usd_string])))
-            if len(data[self.price_usd_string]) < 800:
-                logging.warning(
-                    "For {} to {} we only got {} entries".format(start, end, len(data[self.price_usd_string])))
+        logging.info("{}: saved data from {} to {} --> {} entries".format(self.__class__.__name__, start, end,
+                                                                          len(data[self.price_usd_string])))
+        if len(data[self.price_usd_string]) < 800:
+            logging.warning(
+                "For {} to {} we only got {} entries".format(start, end, len(data[self.price_usd_string])))
 
-            filename = str(start) + "-" + str(end) + ".json"
-            if not os.path.isdir(os.path.join(path, currency)):
-                os.mkdir(os.path.join(path, currency))
+        filename = str(start) + "-" + str(end) + ".json"
+        if not os.path.isdir(os.path.join(path, currency)):
+            os.mkdir(os.path.join(path, currency))
 
-            with open(os.path.join(path, currency, filename), "w") as file:
-                json.dump(data, file)
+        with open(os.path.join(path, currency, filename), "w") as file:
+            json.dump(data, file)
 
     def request_additional_data(self, currency, time_span_tuples):
         for time_span in time_span_tuples:

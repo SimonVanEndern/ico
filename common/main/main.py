@@ -1,28 +1,38 @@
 import logging
-import unittest
 
 import ico.main
 from common.coinmarketCapApi import CoinmarketCapApi
 from common.currency_handler import CurrencyHandler
 from finance.analysis.coinmarket_start_time import AggregateCoinmarketStartTimeAndAverageVolume
+from finance.main import MainDataImporter
 
 logging.basicConfig(level=logging.INFO)
 
 
 class Main:
-    logging.info("common:main:main - Aggregation started")
+    def __init__(self):
+        # Run financial data (coinmarketcap) importer / aggregator
+        MainDataImporter().run()
 
-    coinmarketcap = CoinmarketCapApi()
-    currency_handler = CurrencyHandler()
+        # Run ICO start and funding data importer
+        ico_handler = ico.main.Main()
 
-    ico_handler = ico.main.Main()
-    ico_data = ico_handler.get_data()
-    print(ico_data)
-    coinmarketcap.add_ico_data(ico_data)
-    coinmarketcap.save()
-    print("Saved")
+        ico_data = ico_handler.get_data()
+        self.currency_handler = CurrencyHandler()
+        self.currency_handler.add_ico_data(ico_data)
+        logging.info("common:main:main - Aggregation started")
 
-    AggregateCoinmarketStartTimeAndAverageVolume(coinmarketcap, currency_handler)
+        coinmarketcap = CoinmarketCapApi()
+
+        # print(ico_data)
+        # coinmarketcap.add_ico_data(ico_data)
+        coinmarketcap.save()
+
+    def test(self):
+        print(self.currency_handler.get_currency("bitcoin"))
 
 
-Main()
+    # AggregateCoinmarketStartTimeAndAverageVolume(coinmarketcap, currency_handler)
+
+
+Main().test()

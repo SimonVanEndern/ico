@@ -1,6 +1,12 @@
+import json
 import logging
+from datetime import datetime
+
+import os
 
 from common.coinmarketCapApi import CoinmarketCapApi
+from common.main.json_converter import JsonConverter
+from global_data import GlobalData
 from ico.imports.blockstarter import BlockstarterSource
 from ico.imports.coindesk import CoindeskSource
 from ico.imports.coinschedule import CoinscheduleSource
@@ -112,8 +118,21 @@ class Main:
             #     print(type(currency))
             #     print(type(self.data[currency]))
 
+    # def save_data(self):
+    #     filename = "ico-data" + str(datetime.now().strftime("%Y-%m-%d")) + ".json"
+    #     filepath = os.path.join(GlobalData.ICO_FUNDING_AND_START_DATA_PATH, filename)
+    #     data = self.get_data()
+    #     print(data)
+    #
+    #     if os.path.isfile(filepath):
+    #         os.remove(filepath)
+    #
+    #     with open(filepath, "w") as file:
+    #         json.dump(data, file, cls=JsonConverter)
+
 
 # run_script = Main()
+# run_script.save_data()
 # run_script.log_data()
 # run_script.log_important_statistics()
 # run_script.log_ordered_by_date()

@@ -65,10 +65,10 @@ class Currency:
         if data_path is not None:
             self.data_path = data_path
 
-        self.name = currency
+        self.currency = currency
 
         # Inputs
-        self.data = None
+        self.financial_data = None
         self.timestamp = None
         self.usd = None
         self.btc = None
@@ -93,15 +93,15 @@ class Currency:
     def limit_data(self):
         if self.date_limit is None:
             return
-        self.data.pop(0)
+        self.financial_data.pop(0)
 
-        while int(self.data[0][0]) < self.date_limit.timestamp() * 1000:
-            self.data.pop(0)
+        while int(self.financial_data[0][0]) < self.date_limit.timestamp() * 1000:
+            self.financial_data.pop(0)
 
     def instantiate(self):
-        self.data = self.load_data()
+        self.financial_data = self.load_financial_data()
         self.limit_data()
-        self.timestamp, self.usd, self.btc, self.volume, self.market_cap = zip(*self.data)
+        self.timestamp, self.usd, self.btc, self.volume, self.market_cap = zip(*self.financial_data)
 
         self.usd = list(self.usd)
         self.usd.pop(0)
@@ -125,25 +125,14 @@ class Currency:
         self.volume_relative_change = calculate_relative_change(self.volume)
         self.volume_return_correlations = self.calculate_volume_return_correlations()
 
-    def load_data(self):
-        with open(path.join(self.data_path, self.name + ".csv"), "r") as file:
+    def load_financial_data(self):
+        filename = self.currency + str(GlobalData.last_date_for_download) + ".csv"
+        filepath = path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA,
+                             GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA, self.currency, filename)
+        with open(filepath, "r") as file:
             reader = csv.reader(file)
             return list(reader)
 
-    # def validate_data(self):
-    #     last = self.timestamp[0]
-    #     for date in self.timestamp:
-    #         if ((date - last) - 60 * 60 * 1000 * 24) > 24 * 60 * 60 * 1000:
-    #             print(self.name)
-    #             # print(date - last)
-    #             print(int((date - last) / 1000 / 60 / 60))
-    #             # print(date)
-    #             day = datetime.datetime.fromtimestamp(date / 1e3)
-    #             print(day)
-    #             # break
-    #         last = date
-
-    @staticmethod
     def print_with_regression(data, regression):
         df = pandas.DataFrame(data)
         x_values = range(0, len(data))

@@ -3,7 +3,7 @@ import logging
 from common.currency_handler import CurrencyHandler
 from finance.compressed_raw_data.currency_compressor import CurrencyCompressor
 
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 
 
 class SimplifyRawData:
