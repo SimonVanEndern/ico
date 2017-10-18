@@ -19,50 +19,51 @@ class CurrencyTest(unittest.TestCase):
     def test_load_data_general(self):
         result = self.ethereum.load_financial_data()
         self.assertGreaterEqual(len(result), 793)
-        self.assertEqual(result[0], ['Timestamp', 'USD', 'BTC', 'Volume', 'MarketCap'])
+        self.assertEqual(result[0], ['Timestamp', 'USD', 'BTC', 'Volume', 'Market_cap'])
 
     def test_load_data_specific(self):
         self.ethereum.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
         result = self.ethereum.load_financial_data()
-        self.assertEqual(len(result), 793)
-        self.assertEqual(result[0], ['Timestamp', 'USD', 'BTC', 'Volume', 'MarketCap'])
-        self.assertEqual(result[1], ['1438958970000', '2.83162', '0.0101411', '90621', '0'])
+        self.assertEqual(len(result), 795)
+        self.assertEqual(result[0], ['Timestamp', 'USD', 'BTC', 'Volume', 'Market_cap'])
+        self.assertEqual(result[1], ['1439028000000', '1.52', '0.01', '152450.6', '91181131.3'])
 
     def test_calculate_daily_return(self):
         self.reset_currency_to_specific()
         result = self.ethereum.calculate_daily_return()
+        print(result[:10])
         self.assertEqual(result[:10],
-                         [0.0, -0.5300393414370572, -0.46014427954161197, -0.10390123786735472, 0.16572870082281055,
-                          0.4578791674439675, 0.31256398069611, 0.5218620521569584, -0.2546957862610788,
-                          -0.13430416738292283])
+                         [0.0, -0.5, -0.0921052631578948, 0.01449275362318847, 0.5571428571428574, 0.11009174311926584,
+                          0.6033057851239669, -0.10824742268041232, -0.34104046242774566, 0.26315789473684226]
+                         )
 
     def test_calculate_rolling_volatility(self):
         self.reset_currency_to_specific()
         result = self.ethereum.calculate_rolling_volatility()
-        self.assertEqual(result["30"][:3], [0.20709600699178304, 0.20710665533971717, 0.18275999767266785])
+        self.assertEqual(result["30"][:3], [0.20292184418490028, 0.20336324932654237, 0.17964339865288145])
         self.assertEqual(result["90"][:3], [0, 0, 0])
-        self.assertEqual(result["180"][180:183], [0.09965761335607827, 0.10070672774496256, 0.10059590110171104])
+        self.assertEqual(result["180"][180:183], [0.083490658036123683, 0.084348686513140134, 0.08439131962991514])
 
     def test_calculate_linear_regression_on_volatility(self):
         self.reset_currency_to_specific()
         result = self.ethereum.calculate_linear_regression_on_volatility()
-        self.assertEqual(result.slope, -3.2842621099404758e-05)
-        self.assertEqual(result.intercept, 0.080459598585799041)
+        self.assertEqual(result.slope, -2.4068307700859662e-06)
+        self.assertEqual(result.intercept, 0.068685488465432029)
 
     def test_datapoints_currency(self):
         result = self.ethereum.get_financial_data()
-        self.assertEqual(len(result), 792)
+        self.assertEqual(len(result), 794)
 
     def test_date_limited_currency(self):
         result = self.date_limited_currency.get_financial_data()
-        self.assertEqual(len(result), 645)
+        self.assertEqual(len(result), 647)
 
     def test_beginning_date(self):
         result = self.ethereum.get_beginning_date()
-        self.assertEqual(result, 1438958970000)
+        self.assertEqual(result, 1439028000000)
         result2 = self.bitcoin.get_beginning_date()
-        self.assertEqual(result2, 1367174841000)
+        self.assertEqual(result2, 1367229600000)
 
     def test_get_average_volume(self):
         result = self.bitcoin.calculate_average_volume()
-        self.assertEqual(result, 197185423.94779366)
+        self.assertEqual(result, 198872446.26214108)

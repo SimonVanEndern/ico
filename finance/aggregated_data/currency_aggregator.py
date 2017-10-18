@@ -67,9 +67,9 @@ class CurrencyAggregator(DTO):
     def get_compressed_data(self, input_file):
         with open(input_file) as file:
             reader = csv.reader(file)
-            raw_data = list(reader)
-            super().set_header(raw_data.pop(0))
-            return raw_data
+            compressed_raw_data = list(reader)
+            super().set_header(compressed_raw_data.pop(0))
+            return compressed_raw_data
 
     def aggregate_data(self, data):
         data = list(map(lambda x: {"time": int(x[0]), "data": list(map(float, x[1:]))}, data))

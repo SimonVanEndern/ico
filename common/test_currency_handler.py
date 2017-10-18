@@ -13,11 +13,11 @@ class CurrencyHandlerTest(unittest.TestCase):
 
     def test_add_currency(self):
         result = self.currency_handler.get_currency("bitcoin")
-        self.assertEqual(result.name, "bitcoin")
+        self.assertEqual(result.currency, "bitcoin")
 
     def test_add_currency_datapoints(self):
         result = self.currency_handler.get_currency("bitcoin").get_financial_data()
-        self.assertEqual(len(result), 1609)
+        self.assertEqual(len(result), 1616)
 
     def test_add_currency_with_date_limit(self):
         self.currency_handler.get_currency("bitcoin", "01.01.2016")
@@ -25,8 +25,8 @@ class CurrencyHandlerTest(unittest.TestCase):
         result1 = self.currency_handler.get_currency("bitcoin").get_financial_data()
         result2 = self.currency_handler.get_currency("bitcoin", "01.01.2016").get_financial_data()
 
-        self.assertEqual(len(result1), 1609)
-        self.assertEqual(len(result2), 644)
+        self.assertEqual(len(result1), 1616)
+        self.assertEqual(len(result2), 647)
 
     def test_get_all_currencies_limited(self):
         self.currency_handler.get_all_currency_names_where_data_is_available()
