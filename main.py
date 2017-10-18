@@ -1,10 +1,10 @@
+import finance.analysis.descriptive_statistics as descriptives
 from common.aggregated import Aggregator
 from common.coinmarketCapApi import CoinmarketCapApi
 from common.coinmarketcap_coin_parser import CoinmarketCapCoinParser
 from common.coinmarketcap_token_parser import CoinmarketCapTokenParser
 from common.currency import Currency
-from finance_data_import.analysis.descriptive_statistics import DescriptiveStatistics
-import finance_data_import.analysis.descriptive_statistics as descriptives
+from finance.analysis import DescriptiveStatistics
 
 
 class Main:

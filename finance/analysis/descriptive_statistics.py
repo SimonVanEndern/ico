@@ -7,7 +7,7 @@ import pandas
 import common.coinmarketCapApi
 import common.currency
 from common.currency_handler import CurrencyHandler
-from finance_data_import.analysis.coinmarket_start_time import AggregateCoinmarketStartTimeAndAverageVolume
+from finance.analysis import AggregateCoinmarketStartTimeAndAverageVolume
 
 
 def contains_keyword_coin(currencies):

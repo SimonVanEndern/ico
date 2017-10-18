@@ -3,7 +3,6 @@ import logging
 import ico_data_crawler.main
 from common.coinmarketCapApi import CoinmarketCapApi
 from common.currency_handler import CurrencyHandler
-from finance_data_import.analysis.coinmarket_start_time import AggregateCoinmarketStartTimeAndAverageVolume
 from finance_data_import.main import MainDataImporter
 
 logging.basicConfig(level=logging.INFO)

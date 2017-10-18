@@ -1,7 +1,7 @@
 import csv
 import unittest
 
-from finance_data_import.analysis.coinmarket_start_time import calculate_average_volume
+from finance.analysis import calculate_average_volume
 
 
 class CoinmarketStartTimeTest(unittest.TestCase):
