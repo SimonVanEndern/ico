@@ -68,14 +68,6 @@ class CoinmarketCapApi:
 
         return data
 
-    def get_market_cap(self):
-        data = []
-        for currency in self.currencies:
-            if currency["market_cap_usd"] is not None:
-                data.append(int(float(currency["market_cap_usd"])))
-
-        return data
-
     def get_market_cap_named(self, only_without_market_cap=False):
         data = {}
         for currency in self.currencies:
@@ -93,18 +85,6 @@ class CoinmarketCapApi:
                 currency["start_date"] = str(start_dates[currency["id"]])
 
         return
-
-    def add_highest_market_capitalization(self, highest):
-        for currency in self.currencies:
-            if currency["id"] in highest:
-                currency["highest_market_capitalization"] = highest[currency["id"]]
-
-        return
-
-    def add_volume_average(self, average_volumes):
-        for currency in self.currencies:
-            if currency["id"] in average_volumes:
-                currency["average_volume"] = average_volumes[currency["id"]]
 
     def save(self):
         if os.path.isfile(self.save_path):

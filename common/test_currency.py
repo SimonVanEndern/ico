@@ -6,6 +6,7 @@ from common.currency import Currency
 class CurrencyTest(unittest.TestCase):
     ethereum = Currency("ethereum")
     bitcoin = Currency("bitcoin")
+    iota = Currency("iota")
     date_limited_currency = Currency("ethereum", date_limit="01.01.2016")
 
     def reset_limited_currency_to_specific(self):
@@ -67,3 +68,19 @@ class CurrencyTest(unittest.TestCase):
     def test_get_average_volume(self):
         result = self.bitcoin.calculate_average_volume()
         self.assertEqual(result, 198872446.26214108)
+
+    def test_get_highest_market_capitalization(self):
+        result = self.bitcoin.calculate_highest_market_capitalization()
+
+        self.assertEqual(result, 79561291314.17)
+
+    def test_get_highest_market_capitalization_iota(self):
+        result = self.iota.calculate_highest_market_capitalization()
+
+        self.assertEqual(result, 2999824943.86)
+
+    def test_calculate_volume_average(self):
+        result = self.bitcoin.calculate_volume_average()
+
+        self.assertEqual(result, 198872446.26214108)
+

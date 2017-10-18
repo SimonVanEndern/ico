@@ -86,6 +86,9 @@ class Currency:
         self.volume_return_correlations = None
         self.volume_relative_change = None
 
+        self.highest_market_capitalization = None
+        self.volume_average = None
+
         self.instantiate()
 
         # self.validate_data()
@@ -115,6 +118,10 @@ class Currency:
         self.timestamp.pop(0)
         self.timestamp = list(map(int, self.timestamp))
 
+        self.market_cap = list(self.market_cap)
+        self.market_cap.pop(0)
+        self.market_cap = list(map(float, self.market_cap))
+
         self.augment_with_start_date()
 
         self.daily_return = self.calculate_daily_return()
@@ -124,6 +131,9 @@ class Currency:
 
         self.volume_relative_change = calculate_relative_change(self.volume)
         self.volume_return_correlations = self.calculate_volume_return_correlations()
+
+        self.highest_market_capitalization = self.calculate_highest_market_capitalization()
+        self.volume_average = self.calculate_volume_average()
 
     def load_financial_data(self):
         filename = self.currency + str(GlobalData.last_date_for_download) + ".csv"
@@ -247,6 +257,12 @@ class Currency:
 
     def calculate_average_volume(self):
         return scipy.mean(self.volume)
+
+    def calculate_highest_market_capitalization(self):
+        return max(self.market_cap)
+
+    def calculate_volume_average(self):
+        return numpy.mean(self.volume)
 
 # run_script = Currency("zcash", date_limit="01.11.2016")
 # run_script.print_volume_return_correlations()
