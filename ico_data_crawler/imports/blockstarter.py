@@ -6,8 +6,8 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 
-from ico.imports.importer import Importer
-from ico.initial_coin_offering import ICO
+from ico_data_crawler.imports.importer import Importer
+from ico_data_crawler.initial_coin_offering import ICO
 
 logging.basicConfig(level=logging.DEBUG)
 

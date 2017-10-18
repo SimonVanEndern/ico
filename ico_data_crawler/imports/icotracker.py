@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 http.client.HTTPSConnection.debuglevel = 1
 
-from ico.initial_coin_offering import ICO
+from ico_data_crawler.initial_coin_offering import ICO
 
 
 class IcotrackerSource:

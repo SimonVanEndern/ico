@@ -1,6 +1,6 @@
 import logging
 
-import ico.main
+import ico_data_crawler.main
 from common.coinmarketCapApi import CoinmarketCapApi
 from common.currency_handler import CurrencyHandler
 from finance_data_import.analysis.coinmarket_start_time import AggregateCoinmarketStartTimeAndAverageVolume
@@ -15,7 +15,7 @@ class Main:
         MainDataImporter().run()
 
         # Run ICO start and funding data importer
-        ico_handler = ico.main.Main()
+        ico_handler = ico_data_crawler.main.Main()
 
         ico_data = ico_handler.get_data()
         self.currency_handler = CurrencyHandler()

@@ -2,7 +2,7 @@ import csv
 import datetime
 
 from global_data import GlobalData
-from ico.initial_coin_offering import ICO
+from ico_data_crawler.initial_coin_offering import ICO
 
 
 class IcobazaarSource:

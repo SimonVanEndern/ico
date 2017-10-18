@@ -4,7 +4,7 @@ import json
 import os.path
 
 from common.main.json_converter import JsonConverter
-from ico.initial_coin_offering import ICO
+from ico_data_crawler.initial_coin_offering import ICO
 
 
 class CoinmarketCapApi:

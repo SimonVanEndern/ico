@@ -7,14 +7,14 @@ import os
 from common.coinmarketCapApi import CoinmarketCapApi
 from common.main.json_converter import JsonConverter
 from global_data import GlobalData
-from ico.imports.blockstarter import BlockstarterSource
-from ico.imports.coindesk import CoindeskSource
-from ico.imports.coinschedule import CoinscheduleSource
-from ico.imports.cyberfund import CyberfundSource
-from ico.imports.icobazaar import IcobazaarSource
-from ico.imports.icotracker import IcotrackerSource
-from ico.imports.smithandcrown import SmithandcrownSource
-from ico.matcher import CurrencyNameMatcher
+from ico_data_crawler.imports.blockstarter import BlockstarterSource
+from ico_data_crawler.imports.coindesk import CoindeskSource
+from ico_data_crawler.imports.coinschedule import CoinscheduleSource
+from ico_data_crawler.imports.cyberfund import CyberfundSource
+from ico_data_crawler.imports.icobazaar import IcobazaarSource
+from ico_data_crawler.imports.icotracker import IcotrackerSource
+from ico_data_crawler.imports.smithandcrown import SmithandcrownSource
+from ico_data_crawler.matcher import CurrencyNameMatcher
 
 logging.basicConfig(level=logging.INFO)
 

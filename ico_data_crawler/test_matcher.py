@@ -1,6 +1,6 @@
 import unittest
 
-from ico.matcher import CurrencyNameMatcher
+from ico_data_crawler.matcher import CurrencyNameMatcher
 
 
 class TestMatcher(unittest.TestCase):

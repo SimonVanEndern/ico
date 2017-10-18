@@ -3,7 +3,7 @@ import sys
 import unittest
 from datetime import datetime
 
-from ico.imports.coindesk import CoindeskSource
+from ico_data_crawler.imports.coindesk import CoindeskSource
 
 
 class TestCoindesk(unittest.TestCase):

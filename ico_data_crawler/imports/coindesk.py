@@ -4,7 +4,7 @@ import logging
 import os.path
 import urllib.request
 
-from ico.initial_coin_offering import ICO
+from ico_data_crawler.initial_coin_offering import ICO
 
 
 class CoindeskSource:
