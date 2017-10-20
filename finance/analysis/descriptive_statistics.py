@@ -7,7 +7,6 @@ import pandas
 import common.coinmarketCapApi
 import common.currency
 from common.currency_handler import CurrencyHandler
-from finance.analysis import AggregateCoinmarketStartTimeAndAverageVolume
 
 
 def contains_keyword_coin(currencies):
@@ -34,8 +33,7 @@ class DescriptiveStatistics:
                         "start_date" + str(now.year) + str(now.month) + str(now.day) + ".csv")
 
     def __init__(self):
-        AggregateCoinmarketStartTimeAndAverageVolume(self.coinmarketcap, self.currency_handler)
-        return
+        pass
 
     # Printing a histogram of the number of currencies started to be listed at coinmarketcap by month
     def start_time_data_analysis(self):

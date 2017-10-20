@@ -8,6 +8,7 @@ logging.basicConfig(level=logging.DEBUG, filename="logging.log")
 
 class FinancialDataCalculator:
     def __init__(self):
+        self.logger = logging.getLogger(__name__)
         self.missing_data = {}
         self.raw_data_importer = CoinMarketCapGraphAPIImporter()
         pass
@@ -25,9 +26,11 @@ class FinancialDataCalculator:
 
     # End is excluded
     def calculate_series_for_timestamp(self, start, end, step, data, currency, maximum_timespan=1):  #
-        self.missing_data[currency] = []
+        self.missing_data[currency] = list()
+        output = list()
         current_data_index = 0
-        output = []
+
+        # Iterate over all timestamps we want to have data for
         for timestamp in range(start, end, step):
             while not (data[current_data_index]["time"] <= timestamp <= data[current_data_index + 1]["time"]):
                 current_data_index += 1
@@ -37,16 +40,19 @@ class FinancialDataCalculator:
                     self.get_missing_data(currency)
                     return output
 
+            # TODO: Return the timestamps and timespans where not enough data was available.
+
             timespan = (data[current_data_index + 1]["time"] - data[current_data_index]["time"]) / 1000 / 3600
             if timespan > maximum_timespan:
                 self.missing_data[currency].append(
                     (data[current_data_index]["time"], data[current_data_index + 1]["time"]))
-                current_data_index += 1
-                logging.warning(
+                # current_data_index += 1
+                self.logger.warning(
                     "Currency : {} - No sufficient data for timestamp {}. Timespan in hours is {}".format(currency,
                                                                                                           timestamp,
                                                                                                           timespan))
-                continue
+                # TODO: Solve this issue
+                # continue
 
             calculated_data = self.calculate_for_timestamp(timestamp, data[current_data_index],
                                                            data[current_data_index + 1])

@@ -8,6 +8,7 @@ from global_data import GlobalData
 
 class RawDataImporter:
     def __init__(self):
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.currency_handler = CurrencyHandler()
         self.coinmarketcap_importer = CoinMarketCapGraphAPIImporter()
 
@@ -19,17 +20,17 @@ class RawDataImporter:
 
         if os.path.isfile(
                 os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready" + str(self.last_timestamp))):
-            logging.info(
-                "{}: All currencies until {} already downloaded".format(self.__class__.__name__, self.last_timestamp))
+            self.logger.info(
+                "All currencies until {} already downloaded".format(self.last_timestamp))
 
         for currency in currencies:
-            logging.info("{}:Start - Downloading currency:{}".format(self.__class__.__name__, currency))
+            self.logger.info("Start - Downloading currency:{}".format(currency))
             self.coinmarketcap_importer.request_currency(currency, self.last_timestamp)
-            logging.info("{}:End - Downloading currency:{}".format(self.__class__.__name__, currency))
+            self.logger.info("End - Downloading currency:{}".format(currency))
 
         # Mark currency download until last_date as finished
         open(os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready" + str(self.last_timestamp)), "w").close()
-        logging.info(
-            "{}: Finished downloading currencies until {}".format(self.__class__.__name__, self.last_timestamp))
+        self.logger.info(
+            "Finished downloading currencies until {}".format(self.last_timestamp))
 
 # RawDataImporter().download_all_data()

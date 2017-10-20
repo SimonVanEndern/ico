@@ -10,7 +10,11 @@ class CurrencyDTO:
         self.data = {}
 
     def to_csv(self):
-        csv = []
+        csv = list()
+
+        if len(self.data) == 0:
+            raise Exception("Currency {}: no financial data calculated".format(self.currency))
+
         for key, value in self.data.items():
             csv.append((value.timestamp, value.usd, value.btc, value.volume, value.market_cap))
 

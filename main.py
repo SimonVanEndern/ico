@@ -4,14 +4,13 @@ from common.coinmarketCapApi import CoinmarketCapApi
 from common.coinmarketcap_coin_parser import CoinmarketCapCoinParser
 from common.coinmarketcap_token_parser import CoinmarketCapTokenParser
 from common.currency import Currency
-from finance.analysis import DescriptiveStatistics
 
 
 class Main:
     coinmarketcap = CoinmarketCapApi()
     coinmarketcap_coins = CoinmarketCapCoinParser()
     coinmarketcap_tokens = CoinmarketCapTokenParser()
-    descriptives = DescriptiveStatistics()
+    descriptives = descriptives.DescriptiveStatistics()
 
     latest_only = False
 

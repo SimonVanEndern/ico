@@ -12,4 +12,7 @@ class ReduceSimplifiedData:
 
     def aggregate_compressed_data(self, last_time):
         for currency in self.currency_handler.get_all_currency_names_where_data_is_available():
+            if currency == "cabbage":
+                x = 4
+                pass
             CurrencyAggregator(currency, last_time).run()

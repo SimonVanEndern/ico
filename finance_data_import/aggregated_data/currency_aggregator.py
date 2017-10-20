@@ -10,6 +10,7 @@ from global_data import GlobalData
 
 class CurrencyAggregator(DTO):
     def __init__(self, currency, last_time):
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.success = False
         self.currency = currency
         self.last_time = last_time
@@ -38,7 +39,7 @@ class CurrencyAggregator(DTO):
     def run(self):
         if os.path.isdir(self.aggregated_with_additional_data_folder):
             if os.path.isfile(os.path.join(self.aggregated_with_additional_data_folder, self.filename)):
-                logging.info("{}: Currency {} already aggregated".format(self.__class__.__name__, self.currency))
+                self.logger.info("Currency {} already aggregated".format(self.currency))
                 return
         else:
             os.mkdir(self.aggregated_with_additional_data_folder)
@@ -52,13 +53,10 @@ class CurrencyAggregator(DTO):
         if not os.path.isfile(input_file):
             input_file = os.path.join(self.compressed_only_raw_data_folder, self.filename)
         if not os.path.isfile(input_file):
-            logging.info("{}: Currency {} not yet ready for aggregation".format(self.__class__.__name__, self.currency))
+            self.logger.info("Currency {} not yet ready for aggregation".format(self.currency))
             return
 
-        logging.info("{}: Aggregating Currency {}".format(self.__class__.__name__, self.currency))
-
-        if self.currency == "parallelcoin":
-            pass
+        self.logger.info("Aggregating Currency {}".format(self.currency))
 
         raw_data = self.get_compressed_data(input_file)
         aggregated_data = self.aggregate_data(raw_data)

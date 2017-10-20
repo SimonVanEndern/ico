@@ -143,7 +143,7 @@ class Currency:
             reader = csv.reader(file)
             return list(reader)
 
-    def print_with_regression(data, regression):
+    def print_with_regression(self, data, regression):
         df = pandas.DataFrame(data)
         x_values = range(0, len(data))
         y_values = [regression.slope * i + regression.intercept for i in x_values]
@@ -188,7 +188,10 @@ class Currency:
         last = self.usd[0]
         output = []
         for index, price in enumerate(self.usd):
-            relative_change = price / last - 1
+            if last == 0:
+                relative_change = 0
+            else:
+                relative_change = price / last - 1
             if with_timestamp:
                 output.append((self.timestamp[index], relative_change))
             else:
@@ -249,6 +252,7 @@ class Currency:
             print(correlation)
 
     def augment_with_start_date(self):
+        print(self.currency)
         self.start_date = self.timestamp[0]
         return self.start_date
 

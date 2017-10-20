@@ -28,7 +28,9 @@ class Main:
         coinmarketcap.save()
 
     def test(self):
-        print(self.currency_handler.get_currency("bitcoin"))
+        bitcoin = self.currency_handler.get_currency("bitcoin")
+        print(bitcoin)
+        print(bitcoin.print_course())
 
 
     # AggregateCoinmarketStartTimeAndAverageVolume(coinmarketcap, currency_handler)

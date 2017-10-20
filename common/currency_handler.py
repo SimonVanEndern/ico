@@ -68,6 +68,16 @@ class CurrencyHandler:
             self.save_basic_currency_data()
             return self.basic_currency_data[currency]
 
+    def get_financial_series_start_date(self, currency):
+        return self.currencies[currency].get_beginning_date()
+
+    def get_financial_series_start_date_of_all_currencies(self):
+        output = list()
+        for key in self.currencies:
+            output.append(self.currencies[key].get_beginning_date())
+
+        return output
+
     def load_basic_currency_data(self):
         filename = "basic-currency-data.json"
         file_path = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
@@ -96,4 +106,6 @@ class CurrencyHandler:
             if currency["id"] in icos:
                 currency["ico"] = icos[currency["id"]]
 
-# CurrencyHandler().get_basic_currency_data("bitcoin")
+    def load_all_currencies(self):
+        for currency in self.get_all_currency_names_where_data_is_available():
+            self.load_currency(currency)

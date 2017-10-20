@@ -37,3 +37,8 @@ class CurrencyHandlerTest(unittest.TestCase):
         result = self.currency_handler.get_basic_currency_data("bitcoin")
 
         self.assertEqual(result, {"start_date": 1367174841000})
+
+    def test_get_financial_series_start_date_of_all_currencies(self):
+        self.currency_handler.load_all_currencies()
+        result = self.currency_handler.get_financial_series_start_date_of_all_currencies()
+        print(result)

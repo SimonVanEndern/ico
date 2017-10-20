@@ -9,6 +9,7 @@ from common.currency_handler import CurrencyHandler
 from csv_strings import CSVStrings
 from global_data import GlobalData
 
+
 # logging.basicConfig(level=logging.DEBUG)
 
 
@@ -40,6 +41,7 @@ def check_data_already_downloaded(currency, start, end, save_path):
 
 class CoinMarketCapGraphAPIImporter:
     def __init__(self):
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.coin_market_cap_graph_api_url = GlobalData.coin_market_cap_graph_api_url
 
         self.price_usd_string = CSVStrings.price_usd_string
@@ -51,7 +53,7 @@ class CoinMarketCapGraphAPIImporter:
 
     def request_currency(self, currency, last_date):
         if os.path.isfile(os.path.join(self.raw_data_path, currency, "ready" + str(last_date))):
-            logging.info("{}: All currencies until {} already downloaded".format(self.__class__.__name__, last_date))
+            self.logger.info("All currencies until {} already downloaded".format(last_date))
             return
 
         basic_currency_data = self.currency_handler.get_basic_currency_data(currency)
@@ -111,21 +113,16 @@ class CoinMarketCapGraphAPIImporter:
 
     def save_data(self, data, currency, start, end, path):
         if data is None:
-            logging.info(
-                "{}: Currency {} from {} to {} already downloaded".format(self.__class__.__name__, currency, start,
-                                                                          end))
+            self.logger.info("Currency {} from {} to {} already downloaded".format(currency, start, end))
             return
 
         if len(data[self.price_usd_string]) == 2:
-            logging.info(
-                "{}: Currency {} from {} to {} has no additional data".format(self.__class__.__name__, currency, start,
-                                                                              end))
+            self.logger.info("Currency {} from {} to {} has no additional data".format(currency, start, end))
             # return
 
-        logging.info("{}: saved data from {} to {} --> {} entries".format(self.__class__.__name__, start, end,
-                                                                          len(data[self.price_usd_string])))
+        self.logger.info("saved data from {} to {} --> {} entries".format(start, end, len(data[self.price_usd_string])))
         if len(data[self.price_usd_string]) < 800:
-            logging.warning(
+            self.logger.warning(
                 "For {} to {} we only got {} entries".format(start, end, len(data[self.price_usd_string])))
 
         filename = str(start) + "-" + str(end) + ".json"

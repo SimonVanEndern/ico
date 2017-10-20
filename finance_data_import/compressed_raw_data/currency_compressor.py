@@ -9,6 +9,7 @@ from global_data import GlobalData
 
 class CurrencyCompressor:
     def __init__(self, currency, last_time):
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.currency = currency
         self.last_time = last_time
 
@@ -29,10 +30,10 @@ class CurrencyCompressor:
             if os.path.isfile(os.path.join(self.raw_data_path, self.currency, "ready" + str(last_time))):
                 pass
             else:
-                logging.info("{}: Currency {} not yet ready for compression".format(self.__class__.__name__, currency))
+                self.logger.info("Currency {} not yet ready for compression".format(currency))
                 return
         else:
-            logging.info("{}: Currency {} not yet ready for compression".format(self.__class__.__name__, currency))
+            self.logger.info("Currency {} not yet ready for compression".format(currency))
             return
 
         self.compress_data()
@@ -45,15 +46,14 @@ class CurrencyCompressor:
             os.mkdir(self.compressed_only_raw_data_folder)
 
     def compress_data(self):
-        logging.info("{} Compressing data for {}".format(self.__class__.__name__, self.currency))
+        self.logger.info("Compressing data for {}".format(self.currency))
 
         if self.check_if_additional_data_already_compressed():
-            logging.info("{}: Currency {} already aggregated with additional data".format(self.__class__.__name__,
-                                                                                          self.currency))
+            self.logger.info("Currency {} already aggregated with additional data".format(self.currency))
             return
 
         if self.check_if_raw_data_already_compressed():
-            logging.info("{}: Currency {} already aggregated".format(self.__class__.__name__, self.currency))
+            self.logger.info("Currency {} already aggregated".format(self.currency))
             return
 
         currency_dto = self.compress_currency_raw_data()
