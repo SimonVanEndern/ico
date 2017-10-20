@@ -13,27 +13,6 @@ from global_data import GlobalData
 # logging.basicConfig(level=logging.DEBUG)
 
 
-# exporter = exporter.Exporter()
-
-# ToDo: Automatically reduce received data (timestamp is there for any datapoint)
-
-
-# def get_basic_currency_data(currency):
-#     # ToDO: Handle this request with a different module
-#     time.sleep(1)
-#     conn = http.client.HTTPSConnection(GlobalData.coin_market_cap_graph_api_url)
-#     path = "/currencies/{}/".format(currency)
-#     conn.request("GET", path)
-#
-#     response = conn.getresponse()
-#     data = json.loads(response.read().decode("UTF-8"))
-#     conn.close()
-#
-#     datapoints = data[CSVStrings.price_usd_string]
-#
-#     return {"start_date": datapoints[0][0]}
-
-
 def check_data_already_downloaded(currency, start, end, save_path):
     filename = str(start) + "-" + str(end) + ".json"
     return os.path.isfile(os.path.join(save_path, currency, filename))
@@ -58,6 +37,10 @@ class CoinMarketCapGraphAPIImporter:
 
         basic_currency_data = self.currency_handler.get_basic_currency_data(currency)
         first_date = basic_currency_data["start_date"]
+
+        # Requesting data before data for this currency was available
+        if last_date < first_date:
+            return
 
         if not os.path.isdir(os.path.join(self.raw_data_path, currency)):
             os.mkdir(os.path.join(self.raw_data_path, currency))

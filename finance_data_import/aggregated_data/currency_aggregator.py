@@ -45,8 +45,9 @@ class CurrencyAggregator(DTO):
             os.mkdir(self.aggregated_with_additional_data_folder)
 
         aggregated_data = self.aggregate_currency()
-        super().save_to_csv(aggregated_data)
-        super().set_success(True)
+        if aggregated_data is not None:
+            super().save_to_csv(aggregated_data)
+            super().set_success(True)
 
     def aggregate_currency(self):
         input_file = os.path.join(self.compressed_with_additional_data_folder, self.filename)
@@ -54,7 +55,7 @@ class CurrencyAggregator(DTO):
             input_file = os.path.join(self.compressed_only_raw_data_folder, self.filename)
         if not os.path.isfile(input_file):
             self.logger.info("Currency {} not yet ready for aggregation".format(self.currency))
-            return
+            return None
 
         self.logger.info("Aggregating Currency {}".format(self.currency))
 

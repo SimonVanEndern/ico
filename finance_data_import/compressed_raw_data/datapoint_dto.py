@@ -36,18 +36,27 @@ class DatapointDTO:
 
     def add_volume(self, volume_tuple):
         if volume_tuple[0] == self.timestamp:
+            if self.volume is not None:
+                if self.volume != volume_tuple[1]:
+                    raise Exception("Different USD values")
             self.volume = volume_tuple[1]
         else:
             return False
 
     def add_btc(self, btc_tuple):
         if btc_tuple[0] == self.timestamp:
+            if self.btc is not None:
+                if self.btc != btc_tuple[1]:
+                    raise Exception("Different USD values")
             self.btc = btc_tuple[1]
         else:
             return False
 
     def add_usd(self, usd_tuple):
         if usd_tuple[0] == self.timestamp:
+            if self.usd is not None:
+                if self.usd != usd_tuple[1]:
+                    raise Exception("Different USD values")
             self.usd = usd_tuple[1]
         else:
             return False

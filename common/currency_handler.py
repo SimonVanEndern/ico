@@ -1,4 +1,5 @@
 import json
+import logging
 import math
 import os
 import time
@@ -15,6 +16,8 @@ class CurrencyHandler:
     def __init__(self):
         self.currencies = dict()
         self.all_currencies_with_data = None
+
+        self.logger = logging.getLogger(self.__class__.__name__)
 
         self.coinmarketcapAPI = CoinmarketCapApi()
 
@@ -65,11 +68,14 @@ class CurrencyHandler:
             path = ("https://" + GlobalData.coin_market_cap_graph_api_url + "/currencies/{}/").format(currency)
             response = requests.request("GET", path)
 
-            data = json.loads(response.text)
+            if response.status_code == 404:
+                self.logger.info("Currency {} not listed anymore".format(currency))
+                self.basic_currency_data[currency] = None
+            else:
+                data = json.loads(response.text)
+                datapoints = data[CSVStrings.price_usd_string]
 
-            datapoints = data[CSVStrings.price_usd_string]
-
-            self.basic_currency_data[currency] = {"start_date": datapoints[0][0]}
+                self.basic_currency_data[currency] = {"start_date": datapoints[0][0]}
             self.save_basic_currency_data()
             return self.basic_currency_data[currency]
 
@@ -144,9 +150,7 @@ class CurrencyHandler:
             if currency["id"] in currencies:
                 pass
             else:
-                currencies.append(currency["name"])
+                currencies.append(currency["id"])
 
         self.all_currency_names = currencies
         return self.all_currency_names
-
-

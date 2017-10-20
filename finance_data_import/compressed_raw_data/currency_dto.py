@@ -45,6 +45,11 @@ class CurrencyDTO:
 
         for capitalization in market_cap:
             datapoint = datapoint_dto.from_market_cap(capitalization)
+            if datapoint.timestamp in output:
+                if datapoint != output[datapoint.timestamp]:
+                    print(datapoint)
+                    print(output[datapoint.timestamp])
+                    raise Exception("Different data for same time")
             output[datapoint.timestamp] = datapoint
 
         for price in price_usd:
