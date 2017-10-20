@@ -10,6 +10,7 @@ from test_commons import TestCommons
 
 
 class CoinmarketcapImporterTest(unittest.TestCase, TestCommons):
+    TestCommons()
     coinmarketcap_importer = CoinMarketCapGraphAPIImporter()
 
     def test_request_data(self):
@@ -41,7 +42,7 @@ class CoinmarketcapImporterTest(unittest.TestCase, TestCommons):
 
     def test_request_currency(self):
         currency = "ripple"
-        last_date = int(datetime.strptime("12.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
+        last_date = GlobalData.last_date_for_download
 
         with patch('os.path.isfile', return_value=False) as is_file_mock:
             self.coinmarketcap_importer.request_data_monthly = MagicMock(name="request_data_monthly")
