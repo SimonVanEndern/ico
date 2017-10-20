@@ -1,4 +1,5 @@
 common/saved
+common/test_records
 exchanges/sources/saved
 finance_data_import/analysis/aggregated
 finance_data_import/aggregated_data/test_input

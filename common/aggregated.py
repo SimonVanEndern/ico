@@ -1,5 +1,3 @@
-import math
-
 import numpy
 
 from common.currency_handler import CurrencyHandler
@@ -41,10 +39,10 @@ class Aggregator:
         # print(sum(since_2017))
         # print(sum(second_2017))
 
-        return {"total": sum(total)/len(total),
-                "since_2016": sum(since_2016)/len(since_2016),
-                "since_2017": sum(since_2017)/len(since_2017),
-                "second_2017": sum(second_2017)/len(second_2017)}
+        return {"total": sum(total) / len(total),
+                "since_2016": sum(since_2016) / len(since_2016),
+                "since_2017": sum(since_2017) / len(since_2017),
+                "second_2017": sum(second_2017) / len(second_2017)}
 
     def get_volume_price_aggregation_2(self, size_limit=10):
         limits = [None, "01.01.2016", "01.01.2017", "01.07.2017"]
@@ -71,7 +69,6 @@ class Aggregator:
             summary[key] = (numpy.mean(sm1), numpy.mean(sm2), numpy.mean(sm3), numpy.mean(sm5), numpy.mean(sm10))
 
         return summary
-
 
 # run_script = Aggregator()
 # run_script.check_all_currencies()

@@ -1,9 +1,11 @@
 import unittest
 
+import test_commons
 from common.currency_handler import CurrencyHandler
+from test_commons import TestCommons
 
 
-class CurrencyHandlerTest(unittest.TestCase):
+class CurrencyHandlerTest(unittest.TestCase, TestCommons):
     currency_handler = CurrencyHandler()
     currency_handler.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
 
@@ -41,4 +43,6 @@ class CurrencyHandlerTest(unittest.TestCase):
     def test_get_financial_series_start_date_of_all_currencies(self):
         self.currency_handler.load_all_currencies()
         result = self.currency_handler.get_financial_series_start_date_of_all_currencies()
-        print(result)
+
+        regression_file = self.get_test_path()
+        self.assertEqual(str(result), test_commons.save_or_compare_data(result, regression_file))

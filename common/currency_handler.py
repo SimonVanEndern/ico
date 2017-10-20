@@ -73,8 +73,8 @@ class CurrencyHandler:
 
     def get_financial_series_start_date_of_all_currencies(self):
         output = list()
-        for key in self.currencies:
-            output.append(self.currencies[key].get_beginning_date())
+        for key, value in sorted(self.currencies.items()):
+            output.append(value[str(None)].get_beginning_date())
 
         return output
 
