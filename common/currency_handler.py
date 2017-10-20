@@ -24,7 +24,6 @@ class CurrencyHandler:
         self.data_path = GlobalData.financial_data_path
 
         self.basic_currency_data = self.load_basic_currency_data()
-
         self.all_currency_names = self.load_all_currency_names()
 
     def get_currency(self, currency, date_limit=None):
@@ -153,4 +152,5 @@ class CurrencyHandler:
                 currencies.append(currency["id"])
 
         self.all_currency_names = currencies
+        self.save_all_currency_names_data()
         return self.all_currency_names

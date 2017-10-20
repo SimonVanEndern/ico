@@ -10,9 +10,6 @@ class MainDataImporter:
     # logging.basicConfig(level=logging.INFO, filename="logging.log")
     logging.basicConfig(level=logging.INFO)
 
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.WARNING)
-
     def __init__(self):
         self.raw_data_downloader = RawDataImporter()
         self.raw_data_simplifier = SimplifyRawData()
