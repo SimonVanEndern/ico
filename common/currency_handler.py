@@ -5,6 +5,7 @@ import time
 
 import requests
 
+from common.coinmarketCapApi import CoinmarketCapApi
 from common.currency import Currency
 from csv_strings import CSVStrings
 from global_data import GlobalData
@@ -15,9 +16,13 @@ class CurrencyHandler:
         self.currencies = dict()
         self.all_currencies_with_data = None
 
+        self.coinmarketcapAPI = CoinmarketCapApi()
+
         self.data_path = GlobalData.financial_data_path
 
         self.basic_currency_data = self.load_basic_currency_data()
+
+        self.all_currency_names = self.load_all_currency_names()
 
     def get_currency(self, currency, date_limit=None):
         if currency not in self.currencies:
@@ -97,6 +102,16 @@ class CurrencyHandler:
         with open(file_path, "w") as file:
             json.dump(self.basic_currency_data, file)
 
+    def save_all_currency_names_data(self):
+        filename = "all-currency-names.json"
+        file_path = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
+
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
+        with open(file_path, "w") as file:
+            json.dump(self.all_currency_names, file)
+
     def load_ico_data(self):
         pass
         # TODO: implement
@@ -109,3 +124,29 @@ class CurrencyHandler:
     def load_all_currencies(self):
         for currency in self.get_all_currency_names_where_data_is_available():
             self.load_currency(currency)
+
+    def load_all_currency_names(self):
+        filename = "basic-currency-data.json"
+        file_path = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
+
+        if os.path.isfile(file_path):
+            with open(file_path) as file:
+                return json.load(file)
+
+        return dict()
+
+    def get_all_currency_names(self):
+        currencies = self.get_all_currency_names_where_data_is_available()
+
+        additional = self.coinmarketcapAPI.get_all_currencies()
+
+        for currency in additional:
+            if currency["id"] in currencies:
+                pass
+            else:
+                currencies.append(currency["name"])
+
+        self.all_currency_names = currencies
+        return self.all_currency_names
+
+

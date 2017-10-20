@@ -32,5 +32,3 @@ class RawDataImporter:
         open(os.path.join(GlobalData.EXTERNAL_PATH_RAW_DATA, "ready" + str(self.last_timestamp)), "w").close()
         self.logger.info(
             "Finished downloading currencies until {}".format(self.last_timestamp))
-
-# RawDataImporter().download_all_data()
