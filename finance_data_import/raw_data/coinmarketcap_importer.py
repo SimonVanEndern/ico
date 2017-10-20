@@ -51,15 +51,13 @@ class CoinMarketCapGraphAPIImporter:
     def request_data_monthly(self, currency, first_date, last_date):
         span_month = 29 * 24 * 60 * 60 * 1000
 
-        start = first_date
-        while start + span_month < last_date:
-            data = self.request_data(currency, start, start + span_month, self.raw_data_path)
-            self.save_data(data, currency, start, start + span_month, self.raw_data_path)
+        dates = list(range(first_date, last_date, span_month))
+        dates = list(map(lambda x: [x, x + span_month], dates))
+        dates[len(dates) - 1][1] = last_date
 
-            start += span_month
-
-        data = self.request_data(currency, start, last_date, self.raw_data_path)
-        self.save_data(data, currency, start, last_date, self.raw_data_path)
+        for date_tuple in dates:
+            data = self.request_data(currency, date_tuple[0], date_tuple[1], self.raw_data_path)
+            self.save_data(data, currency, date_tuple[0], date_tuple[1], self.raw_data_path)
 
     def request_data(self, currency, start, end, save_path):
         if check_data_already_downloaded(currency, start, end, save_path):
