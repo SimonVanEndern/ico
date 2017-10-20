@@ -1,9 +1,9 @@
-import datetime
-import http.client
 import json
 import logging
 import os.path
 import time
+
+import requests
 
 from common.currency_handler import CurrencyHandler
 from csv_strings import CSVStrings
@@ -21,7 +21,6 @@ def check_data_already_downloaded(currency, start, end, save_path):
 class CoinMarketCapGraphAPIImporter:
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
-        self.coin_market_cap_graph_api_url = GlobalData.coin_market_cap_graph_api_url
 
         self.price_usd_string = CSVStrings.price_usd_string
 
@@ -35,8 +34,7 @@ class CoinMarketCapGraphAPIImporter:
             self.logger.info("All currencies until {} already downloaded".format(last_date))
             return
 
-        basic_currency_data = self.currency_handler.get_basic_currency_data(currency)
-        first_date = basic_currency_data["start_date"]
+        first_date = self.currency_handler.get_basic_currency_data(currency)["start_date"]
 
         # Requesting data before data for this currency was available
         if last_date < first_date:
@@ -47,6 +45,7 @@ class CoinMarketCapGraphAPIImporter:
 
         self.request_data_monthly(currency, first_date, last_date)
 
+        # Mark currency as completely downloaded for this "last_date" time
         open(os.path.join(self.raw_data_path, currency, "ready" + str(last_date)), "w").close()
 
     def request_data_monthly(self, currency, first_date, last_date):
@@ -68,18 +67,18 @@ class CoinMarketCapGraphAPIImporter:
 
         print("Sleeping for 1 secs")
         time.sleep(1)
-        conn = http.client.HTTPSConnection(self.coin_market_cap_graph_api_url)
-        path = "/currencies/{}/{}/{}/".format(currency, start, end)
-        print("Path: " + path)
-        conn.request("GET", path)
 
-        response = conn.getresponse()
+        path = ("https://" +
+                GlobalData.coin_market_cap_graph_api_url +
+                "/currencies/{}/{}/{}/".format(currency, start, end))
+        response = requests.request("GET", path)
+        print("Path: " + path)
+
         try:
-            data = json.loads(response.read().decode("UTF-8"))
+            data = json.loads(response.text)
         except json.decoder.JSONDecodeError:
             data = None
             self.logger.warning("No results: {}".format(path))
-        conn.close()
 
         return data
 

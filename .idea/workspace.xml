@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f706f99-14d9-4e62-8eec-2dff7ea6a8b0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/raw_data/test_coinmarketcap_importer.py" afterPath="$PROJECT_DIR$/finance_data_import/raw_data/test_coinmarketcap_importer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py" afterPath="$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logging.log" afterPath="$PROJECT_DIR$/logging.log" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -49,7 +49,7 @@
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_test_financial_data_calculator_py.coverage" NAME="Unittests in test_financial_data_calculator.py Coverage Results" MODIFIED="1507896043471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/reduced_raw_data" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_test_currency_handler_py.coverage" NAME="Unittests in test_currency_handler.py Coverage Results" MODIFIED="1508486163396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_CurrencyTest_test_load_data.coverage" NAME="Unittests for test_currency.CurrencyTest.test_load_data Coverage Results" MODIFIED="1507536567802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
-    <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests.coverage" NAME="Unittests Coverage Results" MODIFIED="1508501413001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests.coverage" NAME="Unittests Coverage Results" MODIFIED="1508501894900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_coindesk_TestCoindesk_test_get_ico_data_without_currency_map.coverage" NAME="Unittests for test_coindesk.TestCoindesk.test_get_ico_data_without_currency_map Coverage Results" MODIFIED="1507727020971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/imports" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$csvcreator.coverage" NAME="csvcreator Coverage Results" MODIFIED="1507453511644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/coursedata" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$bitfinex.coverage" NAME="bitfinex Coverage Results" MODIFIED="1507450418901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exchanges/sources" />
@@ -110,11 +110,33 @@
       <file leaf-file-name="coinmarketcap_importer.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="106" column="44" lean-forward="false" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
+            <state relative-caret-position="129">
+              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="currency_handler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/currency_handler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="68" column="23" lean-forward="false" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bitfinex.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/exchanges/sources/bitfinex.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -175,28 +197,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_commons.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_commons.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/unittest/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="case.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/unittest/case.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -228,7 +228,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>endswi</find>
       <find>reader</find>
       <find>has no addit</find>
       <find>Reducing</find>
@@ -258,6 +257,7 @@
       <find>.items()</find>
       <find>aion</find>
       <find>last_date_for_download =</find>
+      <find>requests.request</find>
     </findStrings>
     <dirStrings>
       <dir>Z:\Google Drive\05 - Projekte\bachelor-thesis\ico</dir>
@@ -320,13 +320,13 @@
         <option value="$PROJECT_DIR$/finance_data_import/compressed_raw_data/currency_dto.py" />
         <option value="$PROJECT_DIR$/finance_data_import/compressed_raw_data/datapoint_dto.py" />
         <option value="$PROJECT_DIR$/finance_data_import/raw_data/raw_data_importer.py" />
-        <option value="$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py" />
         <option value="$PROJECT_DIR$/global_data.py" />
         <option value="$PROJECT_DIR$/test_commons.py" />
         <option value="$PROJECT_DIR$/common/test_currency_handler.py" />
         <option value="$PROJECT_DIR$/common/test_currency.py" />
         <option value="$PROJECT_DIR$/finance_data_import/raw_data/test_raw_data_importer.py" />
         <option value="$PROJECT_DIR$/finance_data_import/raw_data/test_coinmarketcap_importer.py" />
+        <option value="$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py" />
       </list>
     </option>
   </component>
@@ -385,18 +385,6 @@
               <item name="bachelor-thesis" type="b2602c69:ProjectViewProjectNode" />
               <item name="bachelor-thesis" type="462c0819:PsiDirectoryNode" />
               <item name="finance_data_import" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bachelor-thesis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bachelor-thesis" type="462c0819:PsiDirectoryNode" />
-              <item name="finance_data_import" type="462c0819:PsiDirectoryNode" />
-              <item name="compressed_raw_data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bachelor-thesis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bachelor-thesis" type="462c0819:PsiDirectoryNode" />
-              <item name="finance_data_import" type="462c0819:PsiDirectoryNode" />
-              <item name="raw_data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bachelor-thesis" type="b2602c69:ProjectViewProjectNode" />
@@ -1184,7 +1172,7 @@
       <workItem from="1506693382575" duration="38854000" />
       <workItem from="1507121588611" duration="59145000" />
       <workItem from="1507710572875" duration="56870000" />
-      <workItem from="1507904290385" duration="79173000" />
+      <workItem from="1507904290385" duration="79593000" />
     </task>
     <servers />
   </component>
@@ -1204,11 +1192,11 @@
     <history-entry file="Unittests - 2017.10.20 at 14h 11m 20s.xml">
       <configuration name="Unittests" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests - 2017.10.20 at 14h 13m 25s.xml">
+      <configuration name="Unittests" configurationId="tests" />
+    </history-entry>
     <history-entry file="Unittests_for_test_currency_CurrencyTest_test_calculate_daily_return - 2017.10.20 at 14h 07m 44s.xml">
       <configuration name="Unittests for test_currency.CurrencyTest.test_calculate_daily_return" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_currency_py - 2017.10.20 at 14h 02m 15s.xml">
-      <configuration name="Unittests in test_currency.py" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_test_currency_py - 2017.10.20 at 14h 02m 52s.xml">
       <configuration name="Unittests in test_currency.py" configurationId="tests" />
@@ -1221,7 +1209,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277724000" />
+    <option name="totallyTimeSpent" value="278144000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1332,7 +1320,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py</url>
-          <line>33</line>
+          <line>32</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1363,16 +1351,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/finance_data_import/compressed_raw_data/test_simplify_raw_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="115" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="15" selection-end-column="115" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/finance_data_import/compressed_raw_data/test_currency_dto.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1596,7 +1574,7 @@
         <state relative-caret-position="255">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1682,16 +1660,6 @@
         <state relative-caret-position="136">
           <caret line="1392" column="0" lean-forward="false" selection-start-line="1392" selection-start-column="0" selection-end-line="1392" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/currency_handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="38" column="55" lean-forward="true" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1799,12 +1767,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/exchanges/sources/bitfinex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/currency_handler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="68" column="23" lean-forward="false" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="106" column="44" lean-forward="false" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
+        <state relative-caret-position="129">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
