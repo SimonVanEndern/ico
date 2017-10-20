@@ -10,9 +10,6 @@ from csv_strings import CSVStrings
 from global_data import GlobalData
 
 
-# logging.basicConfig(level=logging.DEBUG)
-
-
 def check_data_already_downloaded(currency, start, end, save_path):
     filename = str(start) + "-" + str(end) + ".json"
     return os.path.isfile(os.path.join(save_path, currency, filename))
@@ -21,8 +18,6 @@ def check_data_already_downloaded(currency, start, end, save_path):
 class CoinMarketCapGraphAPIImporter:
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
-
-        self.price_usd_string = CSVStrings.price_usd_string
 
         self.raw_data_path = GlobalData.EXTERNAL_PATH_RAW_DATA
         self.save_path_additional_data = GlobalData.EXTERNAL_PATH_ADDITIONAL_DATA
@@ -70,29 +65,25 @@ class CoinMarketCapGraphAPIImporter:
                 GlobalData.coin_market_cap_graph_api_url +
                 "/currencies/{}/{}/{}/".format(currency, start, end))
         response = requests.request("GET", path)
-        print("Path: " + path)
+        self.logger.info("Downloading from " + path)
 
-        try:
-            data = json.loads(response.text)
-        except json.decoder.JSONDecodeError:
-            data = None
+        if response.status_code != 200:
             self.logger.warning("No results: {}".format(path))
-
-        return data
+        else:
+            return json.loads(response.text)
 
     def save_data(self, data, currency, start, end, path):
         if data is None:
             self.logger.info("Currency {} from {} to {} already downloaded".format(currency, start, end))
             return
 
-        if len(data[self.price_usd_string]) == 2:
+        if len(data[CSVStrings.price_usd_string]) == 2:
             self.logger.info("Currency {} from {} to {} has no additional data".format(currency, start, end))
-            # return
 
-        self.logger.info("saved data from {} to {} --> {} entries".format(start, end, len(data[self.price_usd_string])))
-        if len(data[self.price_usd_string]) < 800:
+        self.logger.info("saved data from {} to {} --> {} entries".format(start, end, len(data[CSVStrings.price_usd_string])))
+        if len(data[CSVStrings.price_usd_string]) < 800:
             self.logger.warning(
-                "For {} to {} we only got {} entries".format(start, end, len(data[self.price_usd_string])))
+                "For {} to {} we only got {} entries".format(start, end, len(data[CSVStrings.price_usd_string])))
 
         filename = str(start) + "-" + str(end) + ".json"
         if not os.path.isdir(os.path.join(path, currency)):
