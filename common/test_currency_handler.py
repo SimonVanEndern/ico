@@ -2,12 +2,15 @@ import unittest
 
 import test_commons
 from common.currency_handler import CurrencyHandler
+from global_data import GlobalData
 from test_commons import TestCommons
 
 
 class CurrencyHandlerTest(unittest.TestCase, TestCommons):
+    TestCommons()
     currency_handler = CurrencyHandler()
     currency_handler.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
+    GlobalData.last_date_for_download = GlobalData.TEST_LAST_DATE_FOR_DOWNLOAD
 
     def test_get_all_currency_names(self):
         result = self.currency_handler.get_all_currency_names_where_data_is_available()

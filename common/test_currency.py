@@ -1,9 +1,13 @@
 import unittest
 
 from common.currency import Currency
+from global_data import GlobalData
+from test_commons import TestCommons
 
 
-class CurrencyTest(unittest.TestCase):
+class CurrencyTest(unittest.TestCase, TestCommons):
+    TestCommons()
+    GlobalData.last_date_for_download = GlobalData.TEST_LAST_DATE_FOR_DOWNLOAD
     ethereum = Currency("ethereum")
     bitcoin = Currency("bitcoin")
     iota = Currency("iota")
@@ -35,8 +39,7 @@ class CurrencyTest(unittest.TestCase):
         print(result[:10])
         self.assertEqual(result[:10],
                          [0.0, -0.5, -0.0921052631578948, 0.01449275362318847, 0.5571428571428574, 0.11009174311926584,
-                          0.6033057851239669, -0.10824742268041232, -0.34104046242774566, 0.26315789473684226]
-                         )
+                          0.6033057851239669, -0.10824742268041232, -0.34104046242774566, 0.26315789473684226])
 
     def test_calculate_rolling_volatility(self):
         self.reset_currency_to_specific()
@@ -83,4 +86,3 @@ class CurrencyTest(unittest.TestCase):
         result = self.bitcoin.calculate_volume_average()
 
         self.assertEqual(result, 198872446.26214108)
-

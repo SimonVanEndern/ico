@@ -78,21 +78,10 @@ class CoinMarketCapGraphAPIImporter:
             data = json.loads(response.read().decode("UTF-8"))
         except json.decoder.JSONDecodeError:
             data = None
-            logging.warning("No results: {}".format(path))
+            self.logger.warning("No results: {}".format(path))
         conn.close()
 
         return data
-
-    def validate_data(self, data, path):
-        last = data[self.price_usd_string][0][0]
-        for timestamp, price in data[self.price_usd_string]:
-            if timestamp - last > 24 * 60 * 60 * 1000:
-                print(path)
-                print("Error: too few time")
-                print(timestamp - last)
-                print(datetime.datetime.fromtimestamp(timestamp / 1e3))
-                return False
-            last = timestamp
 
     def save_data(self, data, currency, start, end, path):
         if data is None:
