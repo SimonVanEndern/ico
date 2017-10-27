@@ -4,12 +4,14 @@ import ico_data_crawler.main
 from common.coinmarketCapApi import CoinmarketCapApi
 from common.currency_handler import CurrencyHandler
 from finance_data_import.main import MainDataImporter
+from global_data import GlobalData
 
 logging.basicConfig(level=logging.INFO)
 
 
 class Main:
     def __init__(self):
+        # GlobalData.last_date_for_download = GlobalData.TEST_LAST_DATE_FOR_DOWNLOAD
         # Run financial data (coinmarketcap) importer / aggregator
         MainDataImporter().run()
 
@@ -29,6 +31,8 @@ class Main:
 
     def test(self):
         bitcoin = self.currency_handler.get_currency("bitcoin")
+        monero = self.currency_handler.get_currency("monero", date_limit="01.01.2016")
+        monero.print_volatility()
         print(bitcoin)
         print(bitcoin.print_course())
 

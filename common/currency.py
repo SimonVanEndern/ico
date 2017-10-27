@@ -1,5 +1,6 @@
 import csv
 import datetime
+import logging
 from os import path
 
 import matplotlib.pyplot as plt
@@ -58,6 +59,7 @@ class Currency:
     data_path = GlobalData.financial_data_path
 
     def __init__(self, currency, data_path=None, date_limit=None):
+        self.logging = logging.getLogger(self.__class__.__name__)
         self.date_limit = date_limit
         if self.date_limit is not None:
             self.date_limit = datetime.datetime.strptime(date_limit, "%d.%m.%Y")
@@ -139,9 +141,13 @@ class Currency:
         filename = self.currency + str(GlobalData.last_date_for_download) + ".csv"
         filepath = path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA,
                              GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA, self.currency, filename)
-        with open(filepath, "r") as file:
-            reader = csv.reader(file)
-            return list(reader)
+        try:
+            with open(filepath, "r") as file:
+                reader = csv.reader(file)
+                return list(reader)
+        except FileNotFoundError:
+            logging.warning("Currency {} could not be loaded from {}".format(self.currency, filepath))
+            return None
 
     def print_with_regression(self, data, regression):
         df = pandas.DataFrame(data)

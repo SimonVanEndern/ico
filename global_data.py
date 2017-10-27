@@ -18,6 +18,7 @@ class GlobalData:
 
     EXTERNAL_PATH_GOOGLE_TRENDS_DATA = "X:\\bachelor-thesis\google-trends"
     FOLDER_GOOGLE_TRENDS_6MONTHLY = "6monthly"
+    RELATIVE_GOOGLE_TRENDS_DATA_PATH = "X:\\bachelor-thesis\google-trends\\relative"
 
     CURRENCY_HANDLER_PATH = "X:\\bachelor-thesis\currency-handler"
 

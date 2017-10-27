@@ -39,6 +39,7 @@ class CurrencyHandler:
         try:
             self.currencies[currency] = {str(date_limit): Currency(currency, date_limit=date_limit)}
         except FileNotFoundError:
+            logging.warning("Currency {} not found!".format(currency))
             self.currencies[currency] = {str(date_limit): None}
 
     def get_all_currency_names_where_data_is_available(self, size_limit=math.inf):

@@ -8,6 +8,7 @@ from pytrends.request import TrendReq
 
 from common.currency_handler import CurrencyHandler
 from global_data import GlobalData
+from google_trends.import_data.google_trends_DTO import GoogleTrendsDTO
 
 logging.basicConfig(level=logging.INFO)
 
@@ -23,7 +24,15 @@ class GoogleTrends:
         self.currency_handler = CurrencyHandler()
 
     def main(self):
-        for currency in self.currency_handler.get_all_currency_names_where_data_is_available():
+        self.import_data()
+        self.aggregate_data()
+
+    def aggregate_data(self):
+        for currency in self.currency_handler.get_all_currency_names():
+            GoogleTrendsDTO(currency)
+
+    def import_data(self):
+        for currency in self.currency_handler.get_all_currency_names():
             logging.info("{}:Start download Google Trends data for {}".format(self.__class__.__name__, currency))
             start = self.start_2013
             step = 180 * 24 * 3600 * 1000
