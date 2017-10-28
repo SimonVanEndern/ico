@@ -67,4 +67,4 @@ class Main:
             print(value)
 
 
-run_script = Main()
+# run_script = Main()

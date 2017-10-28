@@ -155,3 +155,10 @@ class CurrencyHandler:
         self.all_currency_names = currencies
         self.save_all_currency_names_data()
         return self.all_currency_names
+
+    def load_all_currencies_to_memory(self):
+        for currency in self.get_all_currency_names():
+            self.get_currency(currency)
+
+
+# CurrencyHandler().load_all_currencies()

@@ -25,7 +25,7 @@ class FinancialDataCalculator:
         return {'time': timestamp, 'data': output}
 
     # End is excluded
-    def calculate_series_for_timestamp(self, start, end, step, data, currency, maximum_timespan=1):  #
+    def calculate_series_for_timestamp(self, start, end, step, data, currency, maximum_timespan=24):  #
         self.missing_data[currency] = list()
         output = list()
         current_data_index = 0
@@ -44,8 +44,9 @@ class FinancialDataCalculator:
 
             timespan = (data[current_data_index + 1]["time"] - data[current_data_index]["time"]) / 1000 / 3600
             if timespan > maximum_timespan:
-                self.missing_data[currency].append(
-                    (data[current_data_index]["time"], data[current_data_index + 1]["time"]))
+                self.logger.warning("For {} timestamp {} data could not be calculated".format(currency, timestamp))
+                # self.missing_data[currency].append(
+                #     (data[current_data_index]["time"], data[current_data_index + 1]["time"]))
                 # current_data_index += 1
                 self.logger.warning(
                     "Currency : {} - No sufficient data for timestamp {}. Timespan in hours is {}".format(currency,
