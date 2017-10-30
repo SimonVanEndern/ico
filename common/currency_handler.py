@@ -158,7 +158,7 @@ class CurrencyHandler:
 
     def load_all_currencies_to_memory(self):
         for currency in self.get_all_currency_names():
-            self.get_currency(currency)
+            self.get_currency(currency).print()
 
 
-# CurrencyHandler().load_all_currencies()
+CurrencyHandler().load_all_currencies_to_memory()

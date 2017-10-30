@@ -1,5 +1,6 @@
 from typing import Tuple
 
+import pandas
 import scipy
 from scipy import stats
 
@@ -8,11 +9,6 @@ from common.time_series import TimeSeries, get_timeseries_with_same_datapoints
 
 def calculate_linear_regression(data: TimeSeries) -> Tuple[float, float, float, float, float]:
     return stats.linregress(data.timestamps, data.data)
-
-
-# Returns a named tuple with the correlation and p-value
-def calculate_correlation(data1: TimeSeries, data2: TimeSeries):
-    return scipy.stats.pearsonr(data1.data, data2.data)
 
 
 def calculate_correlation_for_timeseries(data1: TimeSeries, data2: TimeSeries) -> Tuple[float, float]:

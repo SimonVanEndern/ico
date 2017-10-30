@@ -31,9 +31,12 @@ class DataPoint:
 def from_tuple(tuple_input) -> DataPoint:
     timestamp = int(tuple_input[0])
 
-    try:
-        data = int(tuple_input[1])
-    except ValueError:
-        data = float(tuple_input[1])
+    if isinstance(tuple_input[1], str):
+        try:
+            data = int(tuple_input[1])
+        except ValueError:
+            data = float(tuple_input[1])
+    else:
+        data = tuple_input[1]
 
     return DataPoint(timestamp, data)

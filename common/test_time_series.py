@@ -28,18 +28,18 @@ class TimeSeriesTest(unittest.TestCase, TestCommons):
     def test_has_gaps_true(self):
         data = [(0, 111), (1, 222), (2, 333), (4, 4444)]
 
-        time_series = TimeSeries(data)
+        time_series = TimeSeries(data, step=1)
 
-        has_gaps = time_series.has_gaps(step=1)
+        has_gaps = time_series.has_gaps()
 
         self.assertTrue(has_gaps)
 
     def test_has_gaps_false(self):
         data = [(0, 111), (1, 222), (2, 333)]
 
-        time_series = TimeSeries(data)
+        time_series = TimeSeries(data, step=1)
 
-        has_gaps = time_series.has_gaps(step=1)
+        has_gaps = time_series.has_gaps()
 
         self.assertFalse(has_gaps)
 
@@ -67,13 +67,24 @@ class TimeSeriesTest(unittest.TestCase, TestCommons):
     def test_number_of_gaps(self):
         data = [(0, 111), (1, 222), (2, 333), (4, 4444), (6, 555), (7, 666)]
 
-        time_series = TimeSeries(data)
+        time_series = TimeSeries(data, step=1)
 
-        self.assertEqual(time_series.number_of_gaps(step=1), 2)
+        self.assertEqual(time_series.number_of_gaps(), 2)
 
     def test_number_of_gaps_with_only_one_data_point(self):
         data = [(1, 111)]
 
         time_series = TimeSeries(data)
 
-        self.assertEqual(time_series.number_of_gaps(step=1), 0)
+        self.assertEqual(time_series.number_of_gaps(), 0)
+
+    def test_calculate_relative_change(self):
+        data = [(0, 111), (1, 222), (2, 333), (4, 4444), (7, 555), (8, 666)]
+
+        time_series = TimeSeries(data, step=1)
+
+        value_rc_pandas = time_series.calculate_relative_change().fillna(value=0)
+
+        self.assertEqual(list(value_rc_pandas[value_rc_pandas.columns[0]]),
+                         [0.0, 1.0, 0.5, 6.1726726726726726, 0.86058195520200953, -0.29170417041704166, 0.0,
+                          -0.82367891559885631, 0.19999999999999996])

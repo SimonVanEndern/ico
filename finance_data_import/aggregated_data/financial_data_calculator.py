@@ -11,7 +11,6 @@ class FinancialDataCalculator:
         self.logger = logging.getLogger(__name__)
         self.missing_data = {}
         self.raw_data_importer = CoinMarketCapGraphAPIImporter()
-        pass
 
     def calculate_for_timestamp(self, timestamp, data_before, data_after):
         output = data_before["data"].copy()
@@ -53,7 +52,8 @@ class FinancialDataCalculator:
                                                                                                           timestamp,
                                                                                                           timespan))
                 # TODO: Solve this issue
-                # continue
+                output.append(None)
+                continue
 
             calculated_data = self.calculate_for_timestamp(timestamp, data[current_data_index],
                                                            data[current_data_index + 1])
