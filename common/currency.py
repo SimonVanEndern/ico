@@ -41,8 +41,6 @@ class Currency:
 
         self.load_financial_data()
 
-        # self.start_date: int = self.calculate_start_date()
-
         self.price_linear_regression = None
         self.volume_linear_regression = None
         self.volume_return_correlations = None
@@ -150,25 +148,6 @@ class Currency:
     def get_volume_financial_data(self):
         return self.volume
 
-    # def calculate_linear_regression_on_volatility(self):
-    #     y_values = self.volatility["30"]
-    #     return self.calculate_linear_regresseion(y_values)
-
-    # def calculate_linear_regresseion(self, data: pandas.DataFrame):
-    #     y_values = list(data[data.columns[0]])
-    #     while numpy.isnan(y_values[0]):
-    #         y_values.pop(0)
-    #     x_values = range(0, len(y_values))
-    #
-    #     return stats.linregress(x_values, y_values)
-
     def print_volume_return_correlations(self):
         for correlation in self.volume_return_correlations:
             print(correlation)
-
-    # def calculate_start_date(self):
-    #     return self.usd.get_first_timestamp()
-    #
-    # def get_beginning_date(self):
-    #     return self.start_date
-#
