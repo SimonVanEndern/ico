@@ -3,6 +3,7 @@ from typing import Tuple
 import numpy
 import pandas
 from scipy import stats
+from scipy.stats._stats_mstats_common import LinregressResult
 
 from common.currency import Currency
 
@@ -13,24 +14,24 @@ class CurrencyStatisticalData:
 
         self.total_volume: float = self.calculate_total_volume()
         self.average_volume: float = self.calculate_average_volume()
-        self.volume_linear_regression: Tuple(float, float)
+        self.volume_linear_regression: LinregressResult = self.calculate_volume_linreg()
 
         self.highest_market_capitalization: float = self.calculate_highest_market_capitalization()
         self.average_market_capitalization: float = self.calculate_average_market_capitalization()
-        self.market_capitalization_linear_regression: Tuple(float, float)
+        self.market_capitalization_linear_regression: LinregressResult = self.calculate_market_capitalization_linreg()
 
         self.highest_price = self.calculate_highest_price()
         self.lowest_price = self.calculate_lowest_price()
         self.first_price = self.calculate_first_price()
 
         self.average_price: float = self.calculate_average_price()
-        self.price_linear_regression: Tuple(float, float)
+        self.price_linear_regression: LinregressResult = self.calculate_usd_linreg()
 
         self.highest_price_difference: float
         self.price_change_from_beginning: float
 
         self.volatility: pandas.DataFrame
-        self.volatility_linear_regression: Tuple(float, float)
+        self.volatility_linear_regression: LinregressResult
 
         self.google_trends_correlations: dict
 
@@ -93,3 +94,27 @@ class CurrencyStatisticalData:
             output[str(window)] = pandas.rolling_std(self.currency.relative_data["usd"], window)
 
         return output
+
+    def calculate_volume_linreg(self):
+        filled_data = self.currency.data.interpolate(limit=1)
+
+        timestamps = list(filled_data["timestamps"])
+        volume = list(filled_data["volume"])
+
+        return stats.linregress(timestamps, volume)
+
+    def calculate_market_capitalization_linreg(self):
+        filled_data = self.currency.data.interpolate(limit=1)
+
+        timestamps = list(filled_data["timestamps"])
+        market_capitalization = list(filled_data["market_cap"])
+
+        return stats.linregress(timestamps, market_capitalization)
+
+    def calculate_usd_linreg(self):
+        filled_data = self.currency.data.interpolate(limit=1)
+
+        timestamps = list(filled_data["timestamps"])
+        usd = list(filled_data["usd"])
+
+        return stats.linregress(timestamps, usd)
