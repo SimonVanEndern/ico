@@ -50,7 +50,6 @@ class Currency:
         self.volume_return_correlations = None
         self.volume_relative_change = None
 
-        self.highest_market_capitalization = None
         self.volume_average = None
         self.total_volume = 0
         self.first_price = 0
@@ -58,6 +57,8 @@ class Currency:
         self.lowest_price = 0
         self.maximum_loss = 0
         self.gain_over_total_listing_period = 0
+
+        self.data: pandas.DataFrame = None
 
         self.instantiate()
 
@@ -71,11 +72,6 @@ class Currency:
         self.volume_return_corrs = self.calculate_volume_return_correlation()
 
         self.highest_market_capitalization = self.calculate_highest_market_capitalization()
-        self.volume_average = self.calculate_volume_average()
-        self.total_volume = self.calculate_total_volume()
-        self.highest_price = self.calculate_highest_price()
-        self.lowest_price = self.calculate_lowest_price()
-        self.first_price = self.usd.data[0]
         self.maximum_loss = 1 - self.lowest_price / self.highest_price
         if self.usd.data[0] != 0:
             self.gain_over_total_listing_period = self.usd.data[len(self.usd.data) - 1] / self.usd.data[0]
@@ -123,6 +119,9 @@ class Currency:
         self.btc = TimeSeries(list(zip(timestamp, btc)))
         self.volume = TimeSeries(list(zip(timestamp, volume)))
         self.market_cap = TimeSeries(list(zip(timestamp, market_cap)))
+
+        self.data = pandas.DataFrame.from_records(csv_input, columns=header, index=timestamp)
+        self.relative_data = self.data.interpolate(limit=1).pct_change()
 
     def print_with_regression(self, data, regression):
         df = pandas.DataFrame(data)
@@ -212,20 +211,6 @@ class Currency:
 
     def calculate_highest_market_capitalization(self):
         return max(self.market_cap.data)
-
-    def calculate_volume_average(self):
-        return numpy.mean(self.volume.data)
-
-    def calculate_total_volume(self):
-        return sum(self.volume.data)
-
-    def calculate_highest_price(self):
-        if max(self.usd.data) == 0:
-            print(self.currency)
-        return max(self.usd.data)
-
-    def calculate_lowest_price(self):
-        return min(self.usd.data)
 
     def calculate_daily_return(self):
         return self.usd.relative_change
