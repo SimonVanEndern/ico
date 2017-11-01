@@ -41,7 +41,7 @@ class Currency:
 
         self.load_financial_data()
 
-        self.start_date: int = self.calculate_start_date()
+        # self.start_date: int = self.calculate_start_date()
 
         self.price_linear_regression = None
         self.volume_linear_regression = None
@@ -69,7 +69,6 @@ class Currency:
             self.gain_over_total_listing_period = self.usd.data[len(self.usd.data) - 1] / self.usd.data[0]
         else:
             self.gain_over_total_listing_period = None
-
 
     def print(self):
         print("Currency: {} - Gaps: {}".format(self.currency, self.usd.number_of_gaps()))
@@ -167,8 +166,9 @@ class Currency:
         for correlation in self.volume_return_correlations:
             print(correlation)
 
-    def calculate_start_date(self):
-        return self.usd.get_first_timestamp()
-
-    def get_beginning_date(self):
-        return self.start_date
+    # def calculate_start_date(self):
+    #     return self.usd.get_first_timestamp()
+    #
+    # def get_beginning_date(self):
+    #     return self.start_date
+#

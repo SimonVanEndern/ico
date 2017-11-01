@@ -153,20 +153,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="currency.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="currency.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/common/currency.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1712">
-              <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
+            <state relative-caret-position="302">
+              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <element signature="e#4202#4434#0" expanded="false" />
-                <element signature="e#4488#4591#0" expanded="false" />
-                <element signature="e#4637#4708#0" expanded="false" />
-                <element signature="e#4752#4918#0" expanded="false" />
-                <element signature="e#5083#5158#0" expanded="false" />
-                <element signature="e#5202#5222#0" expanded="false" />
-                <element signature="e#5273#5291#0" expanded="false" />
+                <element signature="e#4203#4435#0" expanded="false" />
+                <element signature="e#4489#4592#0" expanded="false" />
+                <element signature="e#4638#4709#0" expanded="false" />
+                <element signature="e#4753#4919#0" expanded="false" />
+                <element signature="e#5084#5159#0" expanded="false" />
+                <element signature="e#5203#5223#0" expanded="false" />
+                <element signature="e#5274#5292#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -194,11 +194,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="currency_statistical_data.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="currency_statistical_data.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/currency_statistical_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-420">
-              <caret line="33" column="59" lean-forward="false" selection-start-line="33" selection-start-column="59" selection-end-line="33" selection-end-column="59" />
+            <state relative-caret-position="353">
+              <caret line="129" column="0" lean-forward="true" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -209,7 +209,7 @@
       <file leaf-file-name="_stats_mstats_common.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/scipy/stats/_stats_mstats_common.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
+            <state relative-caret-position="34">
               <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="16" />
               <folding />
             </state>
@@ -358,8 +358,8 @@
         <option value="$PROJECT_DIR$/top/between_currencies.py" />
         <option value="$PROJECT_DIR$/top/within_currencies.py" />
         <option value="$PROJECT_DIR$/top/layer_on_top_of_within_currencies.py" />
-        <option value="$PROJECT_DIR$/common/currency.py" />
         <option value="$PROJECT_DIR$/common/currency_statistical_data.py" />
+        <option value="$PROJECT_DIR$/common/currency.py" />
       </list>
     </option>
   </component>
@@ -1245,7 +1245,7 @@
       <workItem from="1507710572875" duration="56870000" />
       <workItem from="1507904290385" duration="121382000" />
       <workItem from="1509196238114" duration="28082000" />
-      <workItem from="1509386322911" duration="8901000" />
+      <workItem from="1509386322911" duration="9273000" />
     </task>
     <servers />
   </component>
@@ -1282,7 +1282,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="356916000" />
+    <option name="totallyTimeSpent" value="357288000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1297,7 +1297,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.4969743" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27987897" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1815,26 +1815,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/currency.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1712">
-          <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#4202#4434#0" expanded="false" />
-            <element signature="e#4488#4591#0" expanded="false" />
-            <element signature="e#4637#4708#0" expanded="false" />
-            <element signature="e#4752#4918#0" expanded="false" />
-            <element signature="e#5083#5158#0" expanded="false" />
-            <element signature="e#5202#5222#0" expanded="false" />
-            <element signature="e#5273#5291#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/scipy/stats/_stats_mstats_common.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
+        <state relative-caret-position="34">
           <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="16" />
           <folding />
         </state>
@@ -1842,10 +1825,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/common/currency_statistical_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-420">
-          <caret line="33" column="59" lean-forward="false" selection-start-line="33" selection-start-column="59" selection-end-line="33" selection-end-column="59" />
+        <state relative-caret-position="353">
+          <caret line="129" column="0" lean-forward="true" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/currency.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#4203#4435#0" expanded="false" />
+            <element signature="e#4489#4592#0" expanded="false" />
+            <element signature="e#4638#4709#0" expanded="false" />
+            <element signature="e#4753#4919#0" expanded="false" />
+            <element signature="e#5084#5159#0" expanded="false" />
+            <element signature="e#5203#5223#0" expanded="false" />
+            <element signature="e#5274#5292#0" expanded="false" />
           </folding>
         </state>
       </provider>

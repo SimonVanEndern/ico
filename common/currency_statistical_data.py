@@ -12,6 +12,9 @@ class CurrencyStatisticalData:
     def __init__(self, currency: Currency):
         self.currency: Currency = currency
 
+        self.first_date = self.calculate_fist_date()
+        self.total_data_points = self.calculate_total_data_points()
+
         self.total_volume: float = self.calculate_total_volume()
         self.average_volume: float = self.calculate_average_volume()
         self.volume_linear_regression: LinregressResult = self.calculate_volume_linreg()
@@ -118,3 +121,9 @@ class CurrencyStatisticalData:
         usd = list(filled_data["usd"])
 
         return stats.linregress(timestamps, usd)
+
+    def calculate_fist_date(self):
+        return self.currency.data["timestamps"].iloc[0]
+
+    def calculate_total_data_points(self):
+        return len(self.currency.data)
