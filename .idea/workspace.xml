@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7f706f99-14d9-4e62-8eec-2dff7ea6a8b0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency.py" afterPath="$PROJECT_DIR$/common/currency.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency_statistical_data.py" afterPath="$PROJECT_DIR$/common/currency_statistical_data.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -156,16 +155,17 @@
       <file leaf-file-name="currency.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/common/currency.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+            <state relative-caret-position="132">
+              <caret line="54" column="51" lean-forward="true" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
               <folding>
-                <element signature="e#4765#4997#0" expanded="false" />
-                <element signature="e#5051#5154#0" expanded="false" />
-                <element signature="e#5200#5271#0" expanded="false" />
-                <element signature="e#5315#5481#0" expanded="false" />
-                <element signature="e#5646#5721#0" expanded="false" />
-                <element signature="e#5765#5785#0" expanded="false" />
-                <element signature="e#5836#5854#0" expanded="false" />
+                <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#4202#4434#0" expanded="false" />
+                <element signature="e#4488#4591#0" expanded="false" />
+                <element signature="e#4637#4708#0" expanded="false" />
+                <element signature="e#4752#4918#0" expanded="false" />
+                <element signature="e#5083#5158#0" expanded="false" />
+                <element signature="e#5202#5222#0" expanded="false" />
+                <element signature="e#5273#5291#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1244,7 +1244,7 @@
       <workItem from="1507710572875" duration="56870000" />
       <workItem from="1507904290385" duration="121382000" />
       <workItem from="1509196238114" duration="28082000" />
-      <workItem from="1509386322911" duration="8112000" />
+      <workItem from="1509386322911" duration="8262000" />
     </task>
     <servers />
   </component>
@@ -1281,7 +1281,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="356127000" />
+    <option name="totallyTimeSpent" value="356277000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1834,16 +1834,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/common/currency.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+        <state relative-caret-position="132">
+          <caret line="54" column="51" lean-forward="true" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
           <folding>
-            <element signature="e#4765#4997#0" expanded="false" />
-            <element signature="e#5051#5154#0" expanded="false" />
-            <element signature="e#5200#5271#0" expanded="false" />
-            <element signature="e#5315#5481#0" expanded="false" />
-            <element signature="e#5646#5721#0" expanded="false" />
-            <element signature="e#5765#5785#0" expanded="false" />
-            <element signature="e#5836#5854#0" expanded="false" />
+            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#4202#4434#0" expanded="false" />
+            <element signature="e#4488#4591#0" expanded="false" />
+            <element signature="e#4637#4708#0" expanded="false" />
+            <element signature="e#4752#4918#0" expanded="false" />
+            <element signature="e#5083#5158#0" expanded="false" />
+            <element signature="e#5202#5222#0" expanded="false" />
+            <element signature="e#5273#5291#0" expanded="false" />
           </folding>
         </state>
       </provider>
