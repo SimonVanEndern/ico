@@ -153,20 +153,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="currency.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="currency.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/common/currency.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2839">
-              <caret line="186" column="8" lean-forward="false" selection-start-line="186" selection-start-column="8" selection-end-line="186" selection-end-column="8" />
+            <state relative-caret-position="187">
+              <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
               <folding>
-                <element signature="e#0#10#0" expanded="true" />
-                <element signature="e#4689#4921#0" expanded="false" />
-                <element signature="e#4975#5078#0" expanded="false" />
-                <element signature="e#5124#5195#0" expanded="false" />
-                <element signature="e#5239#5405#0" expanded="false" />
-                <element signature="e#5570#5645#0" expanded="false" />
-                <element signature="e#5689#5709#0" expanded="false" />
-                <element signature="e#5760#5778#0" expanded="false" />
+                <element signature="e#4765#4997#0" expanded="false" />
+                <element signature="e#5051#5154#0" expanded="false" />
+                <element signature="e#5200#5271#0" expanded="false" />
+                <element signature="e#5315#5481#0" expanded="false" />
+                <element signature="e#5646#5721#0" expanded="false" />
+                <element signature="e#5765#5785#0" expanded="false" />
+                <element signature="e#5836#5854#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -204,15 +203,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="currency_statistical_data.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="currency_statistical_data.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/currency_statistical_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="51" column="32" lean-forward="true" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
-                <marker date="1509556295116" expanded="true" signature="217:3246" ph="..." />
-                <marker date="1509556295116" expanded="true" signature="3157:3246" ph="..." />
               </folding>
             </state>
           </provider>
@@ -263,7 +260,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Currency(</find>
       <find>MagicMock</find>
       <find>builtin</find>
       <find>mock</find>
@@ -293,6 +289,7 @@
       <find>pct_</find>
       <find>daily</find>
       <find>correlat</find>
+      <find>daily_return</find>
     </findStrings>
     <dirStrings>
       <dir>Z:\Google Drive\05 - Projekte\bachelor-thesis\ico</dir>
@@ -360,8 +357,8 @@
         <option value="$PROJECT_DIR$/top/between_currencies.py" />
         <option value="$PROJECT_DIR$/top/within_currencies.py" />
         <option value="$PROJECT_DIR$/top/layer_on_top_of_within_currencies.py" />
-        <option value="$PROJECT_DIR$/common/currency.py" />
         <option value="$PROJECT_DIR$/common/currency_statistical_data.py" />
+        <option value="$PROJECT_DIR$/common/currency.py" />
       </list>
     </option>
   </component>
@@ -1247,7 +1244,7 @@
       <workItem from="1507710572875" duration="56870000" />
       <workItem from="1507904290385" duration="121382000" />
       <workItem from="1509196238114" duration="28082000" />
-      <workItem from="1509386322911" duration="7720000" />
+      <workItem from="1509386322911" duration="8112000" />
     </task>
     <servers />
   </component>
@@ -1284,7 +1281,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="355735000" />
+    <option name="totallyTimeSpent" value="356127000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1447,6 +1444,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="37" column="8" lean-forward="false" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1806,23 +1804,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/currency.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2839">
-          <caret line="186" column="8" lean-forward="false" selection-start-line="186" selection-start-column="8" selection-end-line="186" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#4689#4921#0" expanded="false" />
-            <element signature="e#4975#5078#0" expanded="false" />
-            <element signature="e#5124#5195#0" expanded="false" />
-            <element signature="e#5239#5405#0" expanded="false" />
-            <element signature="e#5570#5645#0" expanded="false" />
-            <element signature="e#5689#5709#0" expanded="false" />
-            <element signature="e#5760#5778#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/calculations.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1843,12 +1824,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/common/currency_statistical_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+        <state relative-caret-position="180">
+          <caret line="51" column="32" lean-forward="true" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
-            <marker date="1509556295116" expanded="true" signature="217:3246" ph="..." />
-            <marker date="1509556295116" expanded="true" signature="3157:3246" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/currency.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+          <folding>
+            <element signature="e#4765#4997#0" expanded="false" />
+            <element signature="e#5051#5154#0" expanded="false" />
+            <element signature="e#5200#5271#0" expanded="false" />
+            <element signature="e#5315#5481#0" expanded="false" />
+            <element signature="e#5646#5721#0" expanded="false" />
+            <element signature="e#5765#5785#0" expanded="false" />
+            <element signature="e#5836#5854#0" expanded="false" />
           </folding>
         </state>
       </provider>

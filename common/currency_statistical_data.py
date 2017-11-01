@@ -5,8 +5,6 @@ import pandas
 from scipy import stats
 
 from common.currency import Currency
-from csv_strings import CSVStrings
-from global_data import GlobalData
 
 
 class CurrencyStatisticalData:
@@ -85,3 +83,13 @@ class CurrencyStatisticalData:
 
     def calculate_price_market_capitalization_correlation(self):
         return self.currency.relative_data.corr(method="pearsonr")["usd"]["market_cap"]
+
+    def calculate_rolling_volatility(self, windows=None) -> dict:
+        if windows is None:
+            windows = [30, 90, 180]
+
+        output: dict = dict()
+        for window in windows:
+            output[str(window)] = pandas.rolling_std(self.currency.relative_data["usd"], window)
+
+        return output
