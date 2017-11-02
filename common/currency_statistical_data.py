@@ -130,7 +130,7 @@ class CurrencyStatisticalData:
             timestamps = list(self.volatilities[key]["timestamps"])
             volatility = list(self.volatilities[key]["volatility"])
 
-            while numpy.isnan(volatility[0])
+            while numpy.isnan(volatility[0]):
                 volatility.pop(0)
                 timestamps.pop(0)
 
