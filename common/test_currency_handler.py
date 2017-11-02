@@ -23,17 +23,13 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
         result = self.currency_handler.get_currency("bitcoin")
         self.assertEqual(result.currency, "bitcoin")
 
-    def test_add_currency_datapoints(self):
-        result = self.currency_handler.get_currency("bitcoin").get_financial_data()
-        self.assertEqual(len(result), 1632)
-
     def test_add_currency_with_date_limit(self):
         self.currency_handler.get_currency("bitcoin", "01.01.2016")
         self.currency_handler.get_currency("bitcoin")
         result1: pandas.DataFrame = self.currency_handler.get_currency("bitcoin").data
         result2: pandas.DataFrame = self.currency_handler.get_currency("bitcoin", "01.01.2016").data
 
-        self.assertEqual(len(result1), 1632)
+        self.assertEqual(len(result1), 1633)
         self.assertEqual(len(result2), 656)
 
     def test_get_all_currencies_limited(self):

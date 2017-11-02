@@ -19,7 +19,7 @@ class LayerOnTopOfWithinCurrencies:
         self.data: dict = dict()
 
         for start_date in self.start_dates:
-            self.data[start_date] = WithinCurrencies(start_date).get_data()
+            self.data[start_date] = WithinCurrencies(start_date).get_and_export_data()
 
         # Clustering according to "coin" semantics
         # Clustering according to available funding data

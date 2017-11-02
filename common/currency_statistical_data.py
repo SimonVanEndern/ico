@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from typing import Dict
 
 import numpy
 import pandas
@@ -155,3 +155,6 @@ class CurrencyStatisticalData:
             return self.last_price / self.first_price - 1
         else:
             return math.inf
+
+    def to_json_export(self):
+        return self.__dict__

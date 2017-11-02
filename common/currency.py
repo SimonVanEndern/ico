@@ -41,7 +41,7 @@ class Currency:
         self.statistical_data: CurrencyStatisticalData = None
 
     def get_statistical_data(self):
-        self.statistical_data = CurrencyStatisticalData(self)
+        self.statistical_data: CurrencyStatisticalData = CurrencyStatisticalData(self)
         return self.statistical_data
 
     def print(self):
