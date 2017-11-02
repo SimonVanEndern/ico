@@ -50,25 +50,25 @@ class CurrencyStatisticalData:
         return self.currency.data["volume"].sum()
 
     def calculate_average_volume(self) -> float:
-        return float(numpy.mean(self.currency.volume.data))
+        return float(numpy.mean(self.currency.data["volume"]))
 
     def calculate_average_market_capitalization(self) -> float:
-        return float(numpy.mean(self.currency.market_cap.data))
+        return float(numpy.mean(self.currency.data["market_cap"]))
 
     def calculate_average_price(self) -> float:
-        return float(numpy.mean(self.currency.usd.data))
+        return float(numpy.mean(self.currency.data["usd"]))
 
     def calculate_highest_market_capitalization(self) -> float:
-        return max(self.currency.market_cap.data)
+        return max(self.currency.data["market_cap"])
 
     def calculate_highest_price(self) -> float:
-        return max(self.currency.usd.data)
+        return max(self.currency.data["usd"])
 
     def calculate_lowest_price(self) -> float:
-        return min(self.currency.usd.data)
+        return min(self.currency.data["usd"])
 
     def calculate_first_price(self) -> float:
-        return self.currency.usd.data[0]
+        return list(self.currency.data["usd"])[0]
 
     def calculate_volume_return_correlations(self):
         shifts = [0, 1, 2, 3]
