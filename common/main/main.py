@@ -32,9 +32,9 @@ class Main:
     def test(self):
         bitcoin = self.currency_handler.get_currency("bitcoin")
         monero = self.currency_handler.get_currency("monero", date_limit="01.01.2016")
-        monero.print_volatility()
-        print(bitcoin)
-        print(bitcoin.print_course())
+        # monero.print_volatility()
+        # print(bitcoin)
+        # print(bitcoin.print_course())
 
 
 Main().test()

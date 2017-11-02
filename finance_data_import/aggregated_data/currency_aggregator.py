@@ -76,5 +76,7 @@ class CurrencyAggregator(DTO):
         end = financial_data_calculator.get_last_timestamp_at_time(int(data[len(data) - 1]["time"]), 12)
         step = 1000 * 3600 * 24
         reduced_data = self.fdc.calculate_series_for_timestamp(start, end, step, data, self.currency)
+        if reduced_data is None:
+            v = 3+7
         reduced_data = list(map(lambda x: [x['time']] + x['data'], reduced_data))
         return reduced_data

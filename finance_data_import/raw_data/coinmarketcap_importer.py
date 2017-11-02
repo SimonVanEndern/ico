@@ -61,11 +61,12 @@ class CoinMarketCapGraphAPIImporter:
         print("Sleeping for 1 secs")
         time.sleep(1)
 
-        path = ("https://" +
-                GlobalData.coin_market_cap_graph_api_url +
-                "/currencies/{}/{}/{}/".format(currency, start, end))
+        path = (
+            "https://" + GlobalData.coin_market_cap_graph_api_url + "/currencies/{}/{}/{}/".format(currency, start,
+                                                                                                   end))
+        self.logger.info("Start: Downloading from " + path)
         response = requests.request("GET", path)
-        self.logger.info("Downloading from " + path)
+        self.logger.info("End: Downloading from " + path)
 
         if response.status_code != 200:
             self.logger.warning("No results: {}".format(path))
@@ -80,7 +81,8 @@ class CoinMarketCapGraphAPIImporter:
         if len(data[CSVStrings.price_usd_string]) == 2:
             self.logger.info("Currency {} from {} to {} has no additional data".format(currency, start, end))
 
-        self.logger.info("saved data from {} to {} --> {} entries".format(start, end, len(data[CSVStrings.price_usd_string])))
+        self.logger.info(
+            "saved data from {} to {} --> {} entries".format(start, end, len(data[CSVStrings.price_usd_string])))
         if len(data[CSVStrings.price_usd_string]) < 800:
             self.logger.warning(
                 "For {} to {} we only got {} entries".format(start, end, len(data[CSVStrings.price_usd_string])))

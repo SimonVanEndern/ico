@@ -12,7 +12,7 @@ class FinancialDataCalculator:
         self.missing_data = {}
         self.raw_data_importer = CoinMarketCapGraphAPIImporter()
 
-    def calculate_for_timestamp(self, timestamp, data_before, data_after):
+    def calculate_for_timestamp(self, timestamp, data_before, data_after) -> dict:
         output = data_before["data"].copy()
         for index, value in enumerate(output):
             difference_data = data_after["data"][index] - data_before["data"][index]
@@ -44,15 +44,15 @@ class FinancialDataCalculator:
             timespan = (data[current_data_index + 1]["time"] - data[current_data_index]["time"]) / 1000 / 3600
             if timespan > maximum_timespan:
                 self.logger.warning("For {} timestamp {} data could not be calculated".format(currency, timestamp))
-                # self.missing_data[currency].append(
-                #     (data[current_data_index]["time"], data[current_data_index + 1]["time"]))
+                self.missing_data[currency].append(
+                    (data[current_data_index]["time"], data[current_data_index + 1]["time"]))
                 # current_data_index += 1
                 self.logger.warning(
                     "Currency : {} - No sufficient data for timestamp {}. Timespan in hours is {}".format(currency,
                                                                                                           timestamp,
                                                                                                           timespan))
                 # TODO: Solve this issue
-                output.append(None)
+                output.append({'time': timestamp, 'data': [None, None, None, None, None]})
                 continue
 
             calculated_data = self.calculate_for_timestamp(timestamp, data[current_data_index],
