@@ -4,11 +4,8 @@ import logging
 from os import path
 
 import matplotlib.pyplot as plt
-import numpy
 import pandas
-from scipy import stats
 
-from common.calculations import calculate_linear_regression
 from common.currency_statistical_data import CurrencyStatisticalData
 from common.time_series import TimeSeries
 from global_data import GlobalData
@@ -52,21 +49,21 @@ class Currency:
         self.data: pandas.DataFrame = None
         self.relative_data: pandas.DataFrame = None
 
-        self.instantiate()
+        # self.instantiate()
 
         self.statistical_data = CurrencyStatisticalData(self)
 
-    def instantiate(self):
-        self.logger.info("Initiating currency {}".format(self.currency))
+        # def instantiate(self):
+        # self.logger.info("Initiating currency {}".format(self.currency))
 
-        self.price_linear_regression = calculate_linear_regression(self.usd)
-        self.volume_linear_regression = calculate_linear_regression(self.volume)
+        # self.price_linear_regression = calculate_linear_regression(self.usd)
+        # self.volume_linear_regression = calculate_linear_regression(self.volume)
 
-        self.maximum_loss = 1 - self.lowest_price / self.highest_price
-        if self.usd.data[0] != 0:
-            self.gain_over_total_listing_period = self.usd.data[len(self.usd.data) - 1] / self.usd.data[0]
-        else:
-            self.gain_over_total_listing_period = None
+        # self.maximum_loss = 1 - self.lowest_price / self.highest_price
+        # if self.usd.data[0] != 0:
+        #     self.gain_over_total_listing_period = self.usd.data[len(self.usd.data) - 1] / self.usd.data[0]
+        # else:
+        #     self.gain_over_total_listing_period = None
 
     def print(self):
         print("Currency: {} - Gaps: {}".format(self.currency, self.usd.number_of_gaps()))

@@ -1,5 +1,3 @@
-from typing import Tuple
-
 import numpy
 import pandas
 from scipy import stats
@@ -26,15 +24,16 @@ class CurrencyStatisticalData:
         self.highest_price = self.calculate_highest_price()
         self.lowest_price = self.calculate_lowest_price()
         self.first_price = self.calculate_first_price()
+        self.last_price = self.calculate_last_price()
 
         self.average_price: float = self.calculate_average_price()
         self.price_linear_regression: LinregressResult = self.calculate_usd_linreg()
 
         self.highest_price_difference: float
-        self.price_change_from_beginning: float
+        self.price_change_from_beginning: float = self.calculate_price_change_from_beginning()
 
-        self.volatility: pandas.DataFrame
-        self.volatility_linear_regression: LinregressResult
+        self.volatilities: pandas.DataFrame = self.calculate_rolling_volatility()
+        self.volatility_linear_regression: LinregressResult = self.calculate_volatility_linreg()
 
         self.google_trends_correlations: dict
 
@@ -42,6 +41,9 @@ class CurrencyStatisticalData:
 
         self.volume_return_correlations: dict = self.calculate_volume_return_correlations()
         self.price_market_capitalization_correlation: float = self.calculate_price_market_capitalization_correlation()
+
+        # TODO: Maximum loss in terms of highest price / lowest price after this one
+        # TODO: Same for highest gain
 
     def calculate_total_volume(self) -> float:
         return sum(self.currency.volume.data)
@@ -114,7 +116,7 @@ class CurrencyStatisticalData:
 
         return stats.linregress(timestamps, market_capitalization)
 
-    def calculate_usd_linreg(self):
+    def calculate_usd_linreg(self) -> LinregressResult:
         filled_data = self.currency.data.interpolate(limit=1)
 
         timestamps = list(filled_data["timestamps"])
@@ -122,8 +124,31 @@ class CurrencyStatisticalData:
 
         return stats.linregress(timestamps, usd)
 
+    def calculate_volatility_linreg(self) -> dict(LinregressResult):
+        output = dict()
+        for key in self.volatilities:
+            timestamps = list(self.volatilities[key]["timestamps"])
+            volatility = list(self.volatilities[key]["volatility"])
+
+            while numpy.isnan(volatility[0])
+                volatility.pop(0)
+                timestamps.pop(0)
+
+            output[key] = stats.linregress(timestamps, volatility)
+
+        return output
+
     def calculate_fist_date(self):
         return self.currency.data["timestamps"].iloc[0]
 
+    def calculate_last_price(self):
+        return self.currency.data["timestamps"].iloc[len(self.currency.data) - 1]
+
     def calculate_total_data_points(self):
         return len(self.currency.data)
+
+    def calculate_price_change_from_beginning(self):
+        if self.first_date != 0:
+            return self.last_price / self.first_price - 1
+        else:
+            return numpy.inf
