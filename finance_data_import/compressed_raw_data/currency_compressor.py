@@ -49,11 +49,7 @@ class CurrencyCompressor:
         self.logger.info("Compressing data for {}".format(self.currency))
 
         if self.check_if_additional_data_already_compressed():
-            self.logger.info("Currency {} already aggregated with additional data".format(self.currency))
-            return
-
-        if self.check_if_raw_data_already_compressed():
-            self.logger.info("Currency {} already aggregated".format(self.currency))
+            self.logger.info("Currency {} already compressed with additional data".format(self.currency))
             return
 
         currency_dto = self.compress_currency_raw_data()
@@ -61,7 +57,11 @@ class CurrencyCompressor:
             currency_dto = self.compress_additional_data(currency_dto)
             self.save_compressed_data(currency_dto, with_additional_data=True)
         else:
-            self.save_compressed_data(currency_dto, with_additional_data=False)
+            if self.check_if_raw_data_already_compressed():
+                self.logger.info("Currency {} already compressed".format(self.currency))
+                return
+            else:
+                self.save_compressed_data(currency_dto, with_additional_data=False)
 
     def check_if_raw_data_already_compressed(self):
         destination_file = os.path.join(self.compressed_only_raw_data_folder,

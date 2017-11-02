@@ -1,6 +1,7 @@
 import csv
 import logging
 import os
+from typing import List
 
 from finance_data_import.aggregated_data import financial_data_calculator
 from finance_data_import.aggregated_data.financial_data_calculator import FinancialDataCalculator
@@ -70,13 +71,11 @@ class CurrencyAggregator(DTO):
             super().set_header(compressed_raw_data.pop(0))
             return compressed_raw_data
 
-    def aggregate_data(self, data):
+    def aggregate_data(self, data) -> List[list]:
         data = list(map(lambda x: {"time": int(x[0]), "data": list(map(float, x[1:]))}, data))
-        start = financial_data_calculator.get_next_timestamp_at_time(int(data[0]["time"]), 12)
-        end = financial_data_calculator.get_last_timestamp_at_time(int(data[len(data) - 1]["time"]), 12)
-        step = 1000 * 3600 * 24
+        start: int = financial_data_calculator.get_next_timestamp_at_time(int(data[0]["time"]), 12)
+        end: int = financial_data_calculator.get_last_timestamp_at_time(int(data[len(data) - 1]["time"]), 12)
+        step: int = 1000 * 3600 * 24
         reduced_data = self.fdc.calculate_series_for_timestamp(start, end, step, data, self.currency)
-        if reduced_data is None:
-            v = 3+7
         reduced_data = list(map(lambda x: [x['time']] + x['data'], reduced_data))
         return reduced_data

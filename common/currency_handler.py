@@ -165,4 +165,5 @@ class CurrencyHandler:
         for currency in self.get_all_currency_names():
             self.get_currency(currency).print()
 
-# CurrencyHandler().load_all_currencies_to_memory()
+
+CurrencyHandler().get_currency("mincoin")

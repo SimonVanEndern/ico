@@ -1,6 +1,7 @@
 import csv
 import datetime
 import logging
+import math
 from os import path
 
 import matplotlib.pyplot as plt
@@ -66,12 +67,14 @@ class Currency:
         if header != ["Timestamp", "USD", "BTC", "Volume", "Market_cap"]:
             raise Exception("Wrong file format input")
 
+        # csv_input = list(map(lambda x: ))
+
         timestamp, usd, btc, volume, market_cap = zip(*csv_input)
         timestamp = list(map(int, timestamp))
-        usd = list(map(float, usd))
-        btc = list(map(float, btc))
-        volume = list(map(float, volume))
-        market_cap = list(map(float, market_cap))
+        usd = list(map(lambda x: math.nan if x == "" else float(x), usd))
+        btc = list(map(lambda x: math.nan if x == "" else float(x), btc))
+        volume = list(map(lambda x: math.nan if x == "" else float(x), volume))
+        market_cap = list(map(lambda x: math.nan if x == "" else float(x), market_cap))
 
         if self.date_limit is not None:
             while timestamp[0] < self.date_limit:
