@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import pandas
 
 from common.currency_statistical_data import CurrencyStatisticalData
-from common.time_series import TimeSeries
 from global_data import GlobalData
 
 logging.basicConfig(level=logging.INFO)
@@ -29,13 +28,6 @@ class Currency:
         if data_path is not None:
             self.data_path: str = data_path
 
-
-        # Inputs
-        self.usd: TimeSeries = None
-        self.btc: TimeSeries = None
-        self.market_cap: TimeSeries = None
-        self.volume: TimeSeries = None
-
         self.data: pandas.DataFrame = None
         self.relative_data: pandas.DataFrame = None
 
@@ -47,22 +39,12 @@ class Currency:
 
         self.statistical_data: CurrencyStatisticalData = None
 
-        # def instantiate(self):
-        # self.logger.info("Initiating currency {}".format(self.currency))
-
-        # self.price_linear_regression = calculate_linear_regression(self.usd)
-        # self.volume_linear_regression = calculate_linear_regression(self.volume)
-
-        # self.maximum_loss = 1 - self.lowest_price / self.highest_price
-        # if self.usd.data[0] != 0:
-        #     self.gain_over_total_listing_period = self.usd.data[len(self.usd.data) - 1] / self.usd.data[0]
-        # else:
-        #     self.gain_over_total_listing_period = None
     def get_statistical_data(self):
         self.statistical_data = CurrencyStatisticalData(self)
         return self.statistical_data
 
     def print(self):
+        # TODO: fix if needed
         print("Currency: {} - Gaps: {}".format(self.currency, self.usd.number_of_gaps()))
 
     def load_financial_data(self) -> None:
@@ -101,11 +83,6 @@ class Currency:
 
         pandas_dict = {"timestamp": timestamp, "usd": usd, "btc": btc, "volume": volume, "market_cap": market_cap}
 
-        self.usd = TimeSeries(list(zip(timestamp, usd)))
-        self.btc = TimeSeries(list(zip(timestamp, btc)))
-        self.volume = TimeSeries(list(zip(timestamp, volume)))
-        self.market_cap = TimeSeries(list(zip(timestamp, market_cap)))
-
         self.data = pandas.DataFrame.from_records(pandas_dict, index=timestamp)
         self.relative_data = self.data.interpolate(limit=1).pct_change()
 
@@ -125,7 +102,7 @@ class Currency:
         plt.show()
 
     def print_course(self) -> None:
-        self.print_with_regression(self.usd.data, self.price_linear_regression)
+        self.print_with_regression(list(self.data["usd"]), self.price_linear_regression)
 
     def print_daily_return(self):
         df = pandas.DataFrame(self.daily_return)
@@ -140,14 +117,21 @@ class Currency:
         plt.show()
 
     def print_volume(self):
-        self.print_with_regression(self.volume.data, self.volume_linear_regression)
+        self.print_with_regression(list(self.data["volume"]), self.volume_linear_regression)
 
     def get_financial_data(self):
-        return self.usd.data
+        return list(self.data["usd"])
 
     def get_volume_financial_data(self):
-        return self.volume
+        return list(self.data["volume"])
 
     def print_volume_return_correlations(self):
         for correlation in self.volume_return_correlations:
             print(correlation)
+
+    def is_coin(self):
+        # TODO: implement
+        pass
+
+    def contains_keyword(self):
+        return "coin" in self.currency or "bit" in self.currency or "token" in self.currency

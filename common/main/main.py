@@ -37,7 +37,4 @@ class Main:
         print(bitcoin.print_course())
 
 
-    # AggregateCoinmarketStartTimeAndAverageVolume(coinmarketcap, currency_handler)
-
-
 Main().test()
