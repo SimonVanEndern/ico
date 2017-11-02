@@ -161,4 +161,4 @@ class CurrencyHandler:
             self.get_currency(currency).print()
 
 
-CurrencyHandler().load_all_currencies_to_memory()
+# CurrencyHandler().load_all_currencies_to_memory()

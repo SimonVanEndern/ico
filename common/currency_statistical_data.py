@@ -1,14 +1,14 @@
+from typing import Dict
+
 import numpy
 import pandas
 from scipy import stats
 from scipy.stats._stats_mstats_common import LinregressResult
 
-from common.currency import Currency
-
 
 class CurrencyStatisticalData:
-    def __init__(self, currency: Currency):
-        self.currency: Currency = currency
+    def __init__(self, currency: 'Currency'):
+        self.currency: 'Currency' = currency
 
         self.first_date = self.calculate_fist_date()
         self.total_data_points = self.calculate_total_data_points()
@@ -33,7 +33,8 @@ class CurrencyStatisticalData:
         self.price_change_from_beginning: float = self.calculate_price_change_from_beginning()
 
         self.volatilities: pandas.DataFrame = self.calculate_rolling_volatility()
-        self.volatility_linear_regression: LinregressResult = self.calculate_volatility_linreg()
+        # TODO: Make it work
+        # self.volatility_linear_regression: LinregressResult = self.calculate_volatility_linreg()
 
         self.google_trends_correlations: dict
 
@@ -79,8 +80,8 @@ class CurrencyStatisticalData:
         output = dict()
 
         for shift in shifts:
-            correlation_1 = stats.pearsonr(volume[shift:], usd_return[: len(usd_return) - 1 - shift])
-            correlation_2 = stats.pearsonr(usd_return[shift:], volume[: len(volume) - 1 - shift])
+            correlation_1 = stats.pearsonr(volume[shift:], usd_return[: len(usd_return) - shift])
+            correlation_2 = stats.pearsonr(usd_return[shift:], volume[: len(volume) - shift])
 
             output[str(shift)] = correlation_1
             output[str(-shift)] = correlation_2
@@ -88,7 +89,7 @@ class CurrencyStatisticalData:
         return output
 
     def calculate_price_market_capitalization_correlation(self):
-        return self.currency.relative_data.corr(method="pearsonr")["usd"]["market_cap"]
+        return self.currency.relative_data.corr(method="pearson")["usd"]["market_cap"]
 
     def calculate_rolling_volatility(self, windows=None) -> dict:
         if windows is None:
@@ -96,14 +97,14 @@ class CurrencyStatisticalData:
 
         output: dict = dict()
         for window in windows:
-            output[str(window)] = pandas.rolling_std(self.currency.relative_data["usd"], window)
+            output[str(window)] = pandas.rolling_std(self.currency.relative_data, window)
 
         return output
 
     def calculate_volume_linreg(self):
         filled_data = self.currency.data.interpolate(limit=1)
 
-        timestamps = list(filled_data["timestamps"])
+        timestamps = list(filled_data["timestamp"])
         volume = list(filled_data["volume"])
 
         return stats.linregress(timestamps, volume)
@@ -111,7 +112,7 @@ class CurrencyStatisticalData:
     def calculate_market_capitalization_linreg(self):
         filled_data = self.currency.data.interpolate(limit=1)
 
-        timestamps = list(filled_data["timestamps"])
+        timestamps = list(filled_data["timestamp"])
         market_capitalization = list(filled_data["market_cap"])
 
         return stats.linregress(timestamps, market_capitalization)
@@ -119,16 +120,16 @@ class CurrencyStatisticalData:
     def calculate_usd_linreg(self) -> LinregressResult:
         filled_data = self.currency.data.interpolate(limit=1)
 
-        timestamps = list(filled_data["timestamps"])
+        timestamps = list(filled_data["timestamp"])
         usd = list(filled_data["usd"])
 
         return stats.linregress(timestamps, usd)
 
-    def calculate_volatility_linreg(self) -> dict(LinregressResult):
+    def calculate_volatility_linreg(self) -> Dict[str, LinregressResult]:
         output = dict()
         for key in self.volatilities:
-            timestamps = list(self.volatilities[key]["timestamps"])
-            volatility = list(self.volatilities[key]["volatility"])
+            timestamps = list(self.volatilities[key].index.values)
+            volatility = list(self.volatilities[key]["usd"])
 
             while numpy.isnan(volatility[0]):
                 volatility.pop(0)
@@ -139,10 +140,10 @@ class CurrencyStatisticalData:
         return output
 
     def calculate_fist_date(self):
-        return self.currency.data["timestamps"].iloc[0]
+        return self.currency.data["timestamp"].iloc[0]
 
     def calculate_last_price(self):
-        return self.currency.data["timestamps"].iloc[len(self.currency.data) - 1]
+        return self.currency.data["timestamp"].iloc[len(self.currency.data) - 1]
 
     def calculate_total_data_points(self):
         return len(self.currency.data)

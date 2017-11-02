@@ -1,14 +1,16 @@
 from datetime import datetime
+from typing import Dict
 
 from common.currency import Currency
 from common.currency_handler import CurrencyHandler
+from common.currency_statistical_data import CurrencyStatisticalData
 
 
 class WithinCurrencies:
-    def __init__(self, start_date: datetime):
-        self.start_date:datetime = start_date
+    def __init__(self, start_date: datetime = None):
+        self.start_date: datetime = start_date
         self.currency_handler: CurrencyHandler = CurrencyHandler()
-        self.data: dict = dict()
+        self.data: Dict[str, CurrencyStatisticalData] = dict()
 
     def get_data(self):
         for currency in self.currency_handler.get_all_currency_names():
@@ -17,26 +19,5 @@ class WithinCurrencies:
 
         return self.data
 
-            # Correlation between Volume and return
-            # Each time 3,2,1 day after / before shift
-            # Correlation between market capitalization change and price change
 
-            # Correlation with google search data
-
-            # Total volume
-            # Average volume
-            # Volume linear regression
-
-            # Average market capitalization
-            # Market cap linear regression
-
-            # Average price
-            # price linear regression
-
-            # highest / lowest price
-            # price change from beginning on
-
-            # volatility
-            # linear regression on volatility
-
-            # percentage of total market capitalization according to coinmarketcap
+WithinCurrencies().get_data()

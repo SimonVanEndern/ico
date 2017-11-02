@@ -18,6 +18,7 @@ class Currency:
 
     def __init__(self, currency, data_path=None, date_limit=None):
         self.logger = logging.getLogger(self.__class__.__name__)
+        self.currency: str = currency
         self.logger.info("Initiating currency {}".format(self.currency))
 
         self.date_limit = date_limit
@@ -28,7 +29,6 @@ class Currency:
         if data_path is not None:
             self.data_path: str = data_path
 
-        self.currency: str = currency
 
         # Inputs
         self.usd: TimeSeries = None
@@ -36,22 +36,16 @@ class Currency:
         self.market_cap: TimeSeries = None
         self.volume: TimeSeries = None
 
-        self.load_financial_data()
-
-        self.price_linear_regression = None
-        self.volume_linear_regression = None
-        self.volume_return_correlations = None
-        self.volume_relative_change = None
-
-        self.maximum_loss = 0
-        self.gain_over_total_listing_period = 0
-
         self.data: pandas.DataFrame = None
         self.relative_data: pandas.DataFrame = None
 
+        self.load_financial_data()
+
+        self.maximum_loss = 0
+
         # self.instantiate()
 
-        self.statistical_data = CurrencyStatisticalData(self)
+        self.statistical_data: CurrencyStatisticalData = None
 
         # def instantiate(self):
         # self.logger.info("Initiating currency {}".format(self.currency))
@@ -64,6 +58,9 @@ class Currency:
         #     self.gain_over_total_listing_period = self.usd.data[len(self.usd.data) - 1] / self.usd.data[0]
         # else:
         #     self.gain_over_total_listing_period = None
+    def get_statistical_data(self):
+        self.statistical_data = CurrencyStatisticalData(self)
+        return self.statistical_data
 
     def print(self):
         print("Currency: {} - Gaps: {}".format(self.currency, self.usd.number_of_gaps()))
@@ -89,6 +86,12 @@ class Currency:
 
         timestamp, usd, btc, volume, market_cap = zip(*csv_input)
         timestamp = list(map(int, timestamp))
+        usd = list(map(float, usd))
+        btc = list(map(float, btc))
+        volume = list(map(float, volume))
+        market_cap = list(map(float, market_cap))
+
+        pandas_dict = {"timestamp": timestamp, "usd": usd, "btc": btc, "volume": volume, "market_cap": market_cap}
 
         if self.date_limit is not None:
             while timestamp[0] < self.date_limit:
@@ -103,7 +106,7 @@ class Currency:
         self.volume = TimeSeries(list(zip(timestamp, volume)))
         self.market_cap = TimeSeries(list(zip(timestamp, market_cap)))
 
-        self.data = pandas.DataFrame.from_records(csv_input, columns=header, index=timestamp)
+        self.data = pandas.DataFrame.from_records(pandas_dict, index=timestamp)
         self.relative_data = self.data.interpolate(limit=1).pct_change()
 
     def print_with_regression(self, data, regression):
