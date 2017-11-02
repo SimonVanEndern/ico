@@ -35,8 +35,6 @@ class CurrencyAggregator(DTO):
 
         super().__init__(self.aggregated_with_additional_data_folder, self.filename)
 
-        # self.run()
-
     def run(self):
         if os.path.isdir(self.aggregated_with_additional_data_folder):
             if os.path.isfile(os.path.join(self.aggregated_with_additional_data_folder, self.filename)):
