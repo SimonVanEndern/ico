@@ -18,7 +18,7 @@ class WithinCurrencies:
         self.save_path: str = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, self.filename)
 
     def get_and_export_data(self):
-        file = open(self.save_path)
+        file = open(self.save_path, "w")
         writer = csv.writer(file)
 
         for currency in self.currency_handler.get_all_currency_names():

@@ -157,4 +157,13 @@ class CurrencyStatisticalData:
             return math.inf
 
     def to_json_export(self):
-        return self.__dict__
+        export = self.__dict__
+        export.pop("currency")
+
+        for key in export["volume_return_correlations"]:
+            export["volume_return_correlations_" + key + "-r-value"] = export["volume_return_correlations"][key][0]
+            export["volume_return_correlations_" + key + "-p-value"] = export["volume_return_correlations"][key][1]
+
+        export.pop("volume_return_correlations")
+
+        return export
