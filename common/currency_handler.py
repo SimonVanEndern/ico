@@ -3,6 +3,7 @@ import logging
 import math
 import os
 import time
+from typing import Dict
 
 import requests
 
@@ -14,7 +15,7 @@ from global_data import GlobalData
 
 class CurrencyHandler:
     def __init__(self):
-        self.currencies = dict()
+        self.currencies: Dict(str, 'Currency') = dict()
         self.all_currencies_with_data = None
 
         self.logger = logging.getLogger(self.__class__.__name__)
@@ -82,10 +83,14 @@ class CurrencyHandler:
     def get_financial_series_start_date(self, currency):
         return self.currencies[currency].get_beginning_date()
 
-    def get_financial_series_start_date_of_all_currencies(self):
+    def get_financial_series_start_date_of_all_currencies(self, limit=math.inf):
         output = list()
         for key, value in sorted(self.currencies.items()):
-            output.append(value[str(None)].get_beginning_date())
+            value[str(None)].get_statistical_data()
+            output.append(value[str(None)].statistical_data.first_date)
+
+            if len(output) > limit:
+                break
 
         return output
 
@@ -159,6 +164,5 @@ class CurrencyHandler:
     def load_all_currencies_to_memory(self):
         for currency in self.get_all_currency_names():
             self.get_currency(currency).print()
-
 
 # CurrencyHandler().load_all_currencies_to_memory()

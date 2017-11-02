@@ -91,8 +91,6 @@ class Currency:
         volume = list(map(float, volume))
         market_cap = list(map(float, market_cap))
 
-        pandas_dict = {"timestamp": timestamp, "usd": usd, "btc": btc, "volume": volume, "market_cap": market_cap}
-
         if self.date_limit is not None:
             while timestamp[0] < self.date_limit:
                 timestamp = timestamp[1:]
@@ -100,6 +98,8 @@ class Currency:
                 volume = volume[1:]
                 btc = btc[1:]
                 market_cap = market_cap[1:]
+
+        pandas_dict = {"timestamp": timestamp, "usd": usd, "btc": btc, "volume": volume, "market_cap": market_cap}
 
         self.usd = TimeSeries(list(zip(timestamp, usd)))
         self.btc = TimeSeries(list(zip(timestamp, btc)))

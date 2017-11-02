@@ -1,6 +1,9 @@
 import unittest
 
+import pandas
+
 import test_commons
+from common.currency import Currency
 from common.currency_handler import CurrencyHandler
 from global_data import GlobalData
 from test_commons import TestCommons
@@ -27,8 +30,8 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
     def test_add_currency_with_date_limit(self):
         self.currency_handler.get_currency("bitcoin", "01.01.2016")
         self.currency_handler.get_currency("bitcoin")
-        result1 = self.currency_handler.get_currency("bitcoin").get_financial_data()
-        result2 = self.currency_handler.get_currency("bitcoin", "01.01.2016").get_financial_data()
+        result1: pandas.DataFrame = self.currency_handler.get_currency("bitcoin").data
+        result2: pandas.DataFrame = self.currency_handler.get_currency("bitcoin", "01.01.2016").data
 
         self.assertEqual(len(result1), 1632)
         # TODO: FIx!
@@ -46,7 +49,7 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
 
     def test_get_financial_series_start_date_of_all_currencies(self):
         self.currency_handler.load_all_currencies()
-        result = self.currency_handler.get_financial_series_start_date_of_all_currencies()
+        result = self.currency_handler.get_financial_series_start_date_of_all_currencies(limit=10)
 
         regression_file = self.get_test_path()
         self.assertEqual(str(result), test_commons.save_or_compare_data(result, regression_file))

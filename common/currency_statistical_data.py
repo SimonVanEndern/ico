@@ -2,7 +2,7 @@ from typing import Dict, Tuple
 
 import numpy
 import pandas
-from scipy import stats
+from scipy import stats, math
 from scipy.stats._stats_mstats_common import LinregressResult
 
 
@@ -154,4 +154,4 @@ class CurrencyStatisticalData:
         if self.first_date != 0:
             return self.last_price / self.first_price - 1
         else:
-            return numpy.inf
+            return math.inf
