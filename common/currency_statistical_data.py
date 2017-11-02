@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Tuple
 
 import numpy
 import pandas
@@ -47,7 +47,7 @@ class CurrencyStatisticalData:
         # TODO: Same for highest gain
 
     def calculate_total_volume(self) -> float:
-        return sum(self.currency.volume.data)
+        return self.currency.data["volume"].sum()
 
     def calculate_average_volume(self) -> float:
         return float(numpy.mean(self.currency.volume.data))
@@ -58,24 +58,26 @@ class CurrencyStatisticalData:
     def calculate_average_price(self) -> float:
         return float(numpy.mean(self.currency.usd.data))
 
-    def calculate_highest_market_capitalization(self):
+    def calculate_highest_market_capitalization(self) -> float:
         return max(self.currency.market_cap.data)
 
-    def calculate_highest_price(self):
+    def calculate_highest_price(self) -> float:
         return max(self.currency.usd.data)
 
-    def calculate_lowest_price(self):
+    def calculate_lowest_price(self) -> float:
         return min(self.currency.usd.data)
 
-    def calculate_first_price(self):
+    def calculate_first_price(self) -> float:
         return self.currency.usd.data[0]
 
     def calculate_volume_return_correlations(self):
-        # volume_return_correlation = self.currency.relative_data.corr(method="pearsonr")["volume"]["usd"]
-        #
         shifts = [0, 1, 2, 3]
         volume = list(self.currency.relative_data["volume"])
         usd_return = list(self.currency.relative_data["usd"])
+
+        while numpy.isnan(volume[0]) or numpy.isinf(volume[0]):
+            volume.pop(0)
+            usd_return.pop(0)
 
         output = dict()
 
@@ -88,10 +90,10 @@ class CurrencyStatisticalData:
 
         return output
 
-    def calculate_price_market_capitalization_correlation(self):
+    def calculate_price_market_capitalization_correlation(self) -> float:
         return self.currency.relative_data.corr(method="pearson")["usd"]["market_cap"]
 
-    def calculate_rolling_volatility(self, windows=None) -> dict:
+    def calculate_rolling_volatility(self, windows=None) -> Dict[str, pandas.DataFrame]:
         if windows is None:
             windows = [30, 90, 180]
 
@@ -101,7 +103,7 @@ class CurrencyStatisticalData:
 
         return output
 
-    def calculate_volume_linreg(self):
+    def calculate_volume_linreg(self) -> LinregressResult:
         filled_data = self.currency.data.interpolate(limit=1)
 
         timestamps = list(filled_data["timestamp"])
@@ -109,7 +111,7 @@ class CurrencyStatisticalData:
 
         return stats.linregress(timestamps, volume)
 
-    def calculate_market_capitalization_linreg(self):
+    def calculate_market_capitalization_linreg(self) -> LinregressResult:
         filled_data = self.currency.data.interpolate(limit=1)
 
         timestamps = list(filled_data["timestamp"])
@@ -139,16 +141,16 @@ class CurrencyStatisticalData:
 
         return output
 
-    def calculate_fist_date(self):
+    def calculate_fist_date(self) -> int:
         return self.currency.data["timestamp"].iloc[0]
 
-    def calculate_last_price(self):
-        return self.currency.data["timestamp"].iloc[len(self.currency.data) - 1]
+    def calculate_last_price(self) -> float:
+        return self.currency.data["usd"].iloc[len(self.currency.data) - 1]
 
-    def calculate_total_data_points(self):
+    def calculate_total_data_points(self) -> int:
         return len(self.currency.data)
 
-    def calculate_price_change_from_beginning(self):
+    def calculate_price_change_from_beginning(self) -> float:
         if self.first_date != 0:
             return self.last_price / self.first_price - 1
         else:
