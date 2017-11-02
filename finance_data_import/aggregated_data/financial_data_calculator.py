@@ -19,7 +19,7 @@ class FinancialDataCalculator:
             difference_data: float = data_after["data"][index] - data_before["data"][index]
             difference_time: int = data_after["time"] - data_before["time"]
             slope: float = difference_data / difference_time
-            output[index]: float += slope * (timestamp - data_before["time"])
+            output[index] += slope * (timestamp - data_before["time"])
 
         output = list(map(lambda x: round(x, 8), output))
         return {'time': timestamp, 'data': output}
