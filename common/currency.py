@@ -17,14 +17,14 @@ logging.basicConfig(level=logging.INFO)
 class Currency:
     data_path = GlobalData.financial_data_path
 
-    def __init__(self, currency, data_path=None, date_limit=None):
+    def __init__(self, currency, data_path=None, date_limit: datetime = None):
         self.logger = logging.getLogger(self.__class__.__name__)
         self.currency: str = currency
         self.logger.info("Initiating currency {}".format(self.currency))
 
         self.date_limit = date_limit
         if self.date_limit is not None:
-            self.date_limit = datetime.datetime.strptime(date_limit, "%d.%m.%Y")
+            self.date_limit = date_limit
             self.date_limit = int(self.date_limit.timestamp() * 1e3)
 
         if data_path is not None:

@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime
 
 from common.currency import Currency
 from global_data import GlobalData
@@ -11,7 +12,7 @@ class CurrencyTest(unittest.TestCase, TestCommons):
     ethereum = Currency("ethereum")
     bitcoin = Currency("bitcoin")
     iota = Currency("iota")
-    date_limited_currency = Currency("ethereum", date_limit="01.01.2016")
+    date_limited_currency = Currency("ethereum", date_limit=datetime.strptime("01.01.2016", "%d.%m.%Y"))
 
     def reset_limited_currency_to_specific(self):
         self.date_limited_currency.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"

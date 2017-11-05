@@ -33,7 +33,7 @@ class LayerOnTopOfWithinCurrencies:
             # Clustering according to available funding data
             # Clustering according to volume
 
-    def filter_for_keyword(self) -> Tuple(dict, dict):
+    def filter_for_keyword(self) -> Tuple[Dict, Dict]:
         contains_keyword = dict()
         no_keyword = dict()
         for start_date in self.data:

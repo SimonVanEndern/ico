@@ -1,9 +1,9 @@
 import unittest
+from datetime import datetime
 
 import pandas
 
 import test_commons
-from common.currency import Currency
 from common.currency_handler import CurrencyHandler
 from global_data import GlobalData
 from test_commons import TestCommons
@@ -24,10 +24,11 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
         self.assertEqual(result.currency, "bitcoin")
 
     def test_add_currency_with_date_limit(self):
-        self.currency_handler.get_currency("bitcoin", "01.01.2016")
+        self.currency_handler.get_currency("bitcoin", datetime.strptime("01.01.2016", "%d.%m.%Y"))
         self.currency_handler.get_currency("bitcoin")
         result1: pandas.DataFrame = self.currency_handler.get_currency("bitcoin").data
-        result2: pandas.DataFrame = self.currency_handler.get_currency("bitcoin", "01.01.2016").data
+        result2: pandas.DataFrame = self.currency_handler.get_currency("bitcoin",
+                                                                       datetime.strptime("01.01.2016", "%d.%m.%Y")).data
 
         self.assertEqual(len(result1), 1633)
         self.assertEqual(len(result2), 656)

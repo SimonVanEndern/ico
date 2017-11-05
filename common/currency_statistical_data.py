@@ -10,7 +10,7 @@ class CurrencyStatisticalData:
     def __init__(self, currency: 'Currency'):
         self.currency: 'Currency' = currency
 
-        self.first_date = self.calculate_fist_date()
+        self.first_date: int = self.calculate_fist_date()
         self.total_data_points = self.calculate_total_data_points()
 
         self.total_volume: float = self.calculate_total_volume()
@@ -157,13 +157,12 @@ class CurrencyStatisticalData:
             return math.inf
 
     def to_json_export(self):
-        export = self.__dict__
+        export = self.__dict__.copy()
         export.pop("currency")
 
         for key in export["volume_return_correlations"]:
             export["volume_return_correlations_" + key + "-r-value"] = export["volume_return_correlations"][key][0]
             export["volume_return_correlations_" + key + "-p-value"] = export["volume_return_correlations"][key][1]
 
-        export.pop("volume_return_correlations")
 
         return export

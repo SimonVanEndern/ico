@@ -3,6 +3,7 @@ import logging
 import math
 import os
 import time
+from datetime import datetime
 from typing import Dict
 
 import requests
@@ -27,7 +28,7 @@ class CurrencyHandler:
         self.basic_currency_data = self.load_basic_currency_data()
         self.all_currency_names = self.load_all_currency_names()
 
-    def get_currency(self, currency, date_limit=None) -> Currency:
+    def get_currency(self, currency, date_limit: datetime=None) -> Currency:
         if currency not in self.currencies:
             self.load_currency(currency, date_limit)
         else:
@@ -36,7 +37,7 @@ class CurrencyHandler:
 
         return self.currencies[currency][str(date_limit)]
 
-    def load_currency(self, currency, date_limit=None) -> None:
+    def load_currency(self, currency, date_limit: datetime=None) -> None:
         if currency not in self.currencies:
             self.currencies[currency]: dict = dict()
         try:
