@@ -19,17 +19,13 @@ class GoogleTrends:
         self.save_path = GlobalData.EXTERNAL_PATH_GOOGLE_TRENDS_DATA
         self.save_path = os.path.join(self.save_path, "6monthly")
         self.start_2013 = 1356998400000
-        self.end = 1508157562847
+        self.end = GlobalData.last_date_for_download
 
         self.currency_handler = CurrencyHandler()
 
     def main(self):
         self.import_data()
         self.aggregate_data()
-
-    def aggregate_data(self):
-        for currency in self.currency_handler.get_all_currency_names():
-            GoogleTrendsDTO(currency)
 
     def import_data(self):
         for currency in self.currency_handler.get_all_currency_names():
@@ -42,6 +38,14 @@ class GoogleTrends:
                 start += step
 
                 self.get_or_download(currency, start_date, end_date)
+
+            start_date = datetime.fromtimestamp(start / 1e3).strftime("%Y-%m-%d")
+            end_date = datetime.fromtimestamp(self.end / 1e3).strftime("%Y-%m-%d")
+            self.get_or_download(currency, start_date, end_date)
+
+    def aggregate_data(self):
+        for currency in self.currency_handler.get_all_currency_names():
+            GoogleTrendsDTO(currency)
 
     def get_or_download(self, currency, start, end):
         path = os.path.join(self.save_path, currency)

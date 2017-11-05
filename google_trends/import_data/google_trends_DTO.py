@@ -24,8 +24,7 @@ class GoogleTrendsDTO:
                                                        GlobalData.FOLDER_GOOGLE_TRENDS_6MONTHLY,
                                                        self.filename)
 
-        self.relative_change_6monthly = dict()
-        self.relative_change_6monthly = self.load_aggregated_data()
+        self.relative_change_6monthly: list = self.load_aggregated_data()
         if not self.relative_change_6monthly:
             self.load_6monthly_raw_data()
             if not self.relative_change_6monthly:
@@ -75,7 +74,7 @@ class GoogleTrendsDTO:
             for element in self.relative_change_6monthly:
                 writer.writerow([element[0], element[1]])
 
-    def load_aggregated_data(self):
+    def load_aggregated_data(self) -> list:
         try:
             with open(self.path_saved_aggregated_data) as file:
                 reader = csv.reader(file, delimiter=",", lineterminator="\n")

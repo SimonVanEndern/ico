@@ -9,6 +9,7 @@ import pandas
 
 from common.currency_statistical_data import CurrencyStatisticalData
 from global_data import GlobalData
+from google_trends.import_data.google_trends_DTO import GoogleTrendsDTO
 
 logging.basicConfig(level=logging.INFO)
 
@@ -36,7 +37,7 @@ class Currency:
 
         self.maximum_loss = 0
 
-        # self.instantiate()
+        self.google_trends_data = GoogleTrendsDTO(self.currency)
 
         self.statistical_data: CurrencyStatisticalData = None
 
