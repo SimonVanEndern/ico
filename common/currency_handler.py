@@ -15,7 +15,7 @@ from global_data import GlobalData
 
 class CurrencyHandler:
     def __init__(self, static=False):
-        self.currencies: Dict(str, 'Currency') = dict()
+        self.currencies: Dict(str, Dict[str, 'Currency']) = dict()
         self.all_currencies_with_data = None
 
         self.logger = logging.getLogger(self.__class__.__name__)
@@ -27,7 +27,7 @@ class CurrencyHandler:
         self.basic_currency_data = self.load_basic_currency_data()
         self.all_currency_names = self.load_all_currency_names()
 
-    def get_currency(self, currency, date_limit=None):
+    def get_currency(self, currency, date_limit=None) -> Currency:
         if currency not in self.currencies:
             self.load_currency(currency, date_limit)
         else:
@@ -36,12 +36,14 @@ class CurrencyHandler:
 
         return self.currencies[currency][str(date_limit)]
 
-    def load_currency(self, currency, date_limit=None):
+    def load_currency(self, currency, date_limit=None) -> None:
+        if currency not in self.currencies:
+            self.currencies[currency]: dict = dict()
         try:
-            self.currencies[currency] = {str(date_limit): Currency(currency, date_limit=date_limit)}
+            self.currencies[currency][str(date_limit)] = Currency(currency, date_limit=date_limit)
         except FileNotFoundError:
             logging.warning("Currency {} not found!".format(currency))
-            self.currencies[currency] = {str(date_limit): None}
+            self.currencies[currency][str(date_limit)] = None
 
     def get_all_currency_names_where_data_is_available(self, size_limit=math.inf) -> list:
         if self.all_currencies_with_data is not None:
@@ -80,9 +82,6 @@ class CurrencyHandler:
             self.save_basic_currency_data()
             return self.basic_currency_data[currency]
 
-    def get_financial_series_start_date(self, currency):
-        return self.currencies[currency].get_beginning_date()
-
     def get_financial_series_start_date_of_all_currencies(self, limit=math.inf):
         output = list()
         for key, value in sorted(self.currencies.items()):
@@ -114,8 +113,8 @@ class CurrencyHandler:
             json.dump(self.basic_currency_data, file)
 
     def save_all_currency_names_data(self) -> None:
-        filename:str = "all-currency-names.json"
-        file_path:str = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
+        filename: str = "all-currency-names.json"
+        file_path: str = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
 
         if os.path.isfile(file_path):
             os.remove(file_path)
@@ -137,8 +136,8 @@ class CurrencyHandler:
             self.load_currency(currency)
 
     def load_all_currency_names(self) -> dict:
-        filename:str = "basic-currency-data.json"
-        file_path:str = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
+        filename: str = "basic-currency-data.json"
+        file_path: str = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
 
         if os.path.isfile(file_path):
             with open(file_path) as file:
@@ -160,7 +159,3 @@ class CurrencyHandler:
         self.all_currency_names = currencies
         self.save_all_currency_names_data()
         return self.all_currency_names
-
-    def load_all_currencies_to_memory(self) -> None:
-        for currency in self.get_all_currency_names():
-            self.get_currency(currency).print()

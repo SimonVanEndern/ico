@@ -35,24 +35,24 @@ class Currency:
 
         self.load_financial_data()
 
-        self.maximum_loss = 0
+        self.maximum_loss: int = 0
 
-        self.google_trends_data = GoogleTrendsDTO(self.currency)
+        self.google_trends_data: GoogleTrendsDTO = GoogleTrendsDTO(self.currency)
 
         self.statistical_data: CurrencyStatisticalData = None
 
-    def get_statistical_data(self):
-        self.statistical_data: CurrencyStatisticalData = CurrencyStatisticalData(self)
+    def get_statistical_data(self) -> CurrencyStatisticalData:
+        self.statistical_data = CurrencyStatisticalData(self)
         return self.statistical_data
 
-    def print(self):
+    def print(self) -> None:
         # TODO: fix if needed
         print("Currency: {} - Gaps: {}".format(self.currency, self.usd.number_of_gaps()))
 
     def load_financial_data(self) -> None:
-        filename = self.currency + str(GlobalData.last_date_for_download) + ".csv"
-        filepath = path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA,
-                             GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA, self.currency, filename)
+        filename: str = self.currency + str(GlobalData.last_date_for_download) + ".csv"
+        filepath: str = path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA,
+                                  GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA, self.currency, filename)
         try:
             with open(filepath, "r") as file:
                 reader = csv.reader(file)
@@ -85,10 +85,10 @@ class Currency:
                 btc = btc[1:]
                 market_cap = market_cap[1:]
 
-        pandas_dict = {"timestamp": timestamp, "usd": usd, "btc": btc, "volume": volume, "market_cap": market_cap}
+        pandas_dict: dict = {"timestamp": timestamp, "usd": usd, "btc": btc, "volume": volume, "market_cap": market_cap}
 
-        self.data = pandas.DataFrame.from_records(pandas_dict, index=timestamp)
-        self.relative_data = self.data.interpolate(limit=1).pct_change()
+        self.data: pandas.DataFrame = pandas.DataFrame.from_records(pandas_dict, index=timestamp)
+        self.relative_data: pandas.DataFrames = self.data.interpolate(limit=1).pct_change()
 
     def print_with_regression(self, data, regression):
         df = pandas.DataFrame(data)
@@ -126,16 +126,16 @@ class Currency:
     def get_financial_data(self):
         return list(self.data["usd"])
 
-    def get_volume_financial_data(self):
+    def get_volume_financial_data(self) -> list:
         return list(self.data["volume"])
 
     def print_volume_return_correlations(self):
         for correlation in self.volume_return_correlations:
             print(correlation)
 
-    def is_coin(self):
+    def is_coin(self) -> bool:
         # TODO: implement
         pass
 
-    def contains_keyword(self):
+    def contains_keyword(self) -> bool:
         return "coin" in self.currency or "bit" in self.currency or "token" in self.currency
