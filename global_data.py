@@ -6,7 +6,7 @@ class GlobalData:
     ico_data_path = 'Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\Listings'
 
     ico_static_date = "05.11.2017"
-    ico_use_static_date = True
+    ico_use_static_date: bool = True
 
     EXTERNAL_PATH_RAW_DATA = "X:\\bachelor-thesis\\raw-data"
     EXTERNAL_PATH_COMPRESSED_DATA = "X:\\bachelor-thesis\\compressed-data"
@@ -27,7 +27,7 @@ class GlobalData:
     EXTERNAL_PATH_ANALYSIS_DATA = "X:\\bachelor-thesis\\analysis"
 
     last_date_for_download: int = int(datetime.strptime("01.11.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
-    TEST_LAST_DATE_FOR_DOWNLOAD = int(datetime.strptime("19.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
+    TEST_LAST_DATE_FOR_DOWNLOAD: int = int(datetime.strptime("19.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
     # TEST_LAST_DATE_FOR_DOWNLOAD = int(datetime.strptime("12.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
 
     coin_market_cap_graph_api_url = "graphs.coinmarketcap.com"

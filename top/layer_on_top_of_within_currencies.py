@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 from common.currency_statistical_data import CurrencyStatisticalData
 from top.within_currencies import WithinCurrencies
@@ -8,7 +8,7 @@ from top.within_currencies import WithinCurrencies
 class LayerOnTopOfWithinCurrencies:
     def __init__(self):
         # Using data for whole period
-        self.start_total = None
+        self.start_total: datetime = None
 
         # Using data from begin 2017 on
         self.start_2017: datetime = datetime.strptime("01.01.2017", "%d.%m.%Y")
@@ -33,7 +33,7 @@ class LayerOnTopOfWithinCurrencies:
             # Clustering according to available funding data
             # Clustering according to volume
 
-    def filter_for_keyword(self):
+    def filter_for_keyword(self) -> Tuple(dict, dict):
         contains_keyword = dict()
         no_keyword = dict()
         for start_date in self.data:
