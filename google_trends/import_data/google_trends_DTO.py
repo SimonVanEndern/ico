@@ -28,7 +28,7 @@ class GoogleTrendsDTO:
         if not self.relative_change_6monthly:
             self.load_6monthly_raw_data()
             if not self.relative_change_6monthly:
-                self.logger.warning("Error in Google Trends for Currency {}".format(self.currency))
+                self.logger.warning("No Google Trends data for Currency {}".format(self.currency))
             else:
                 self.first_date = self.relative_change_6monthly[0]
                 self.last_date = self.relative_change_6monthly[len(self.relative_change_6monthly) - 1]

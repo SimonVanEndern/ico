@@ -24,17 +24,17 @@ class CoinmarketCapApi:
 
         if os.path.isfile(self.save_path):
             with open(self.save_path, "r") as file:
-                self.currencies = json.load(file)
+                self.currencies: dict = json.load(file)
         else:
             conn = http.client.HTTPSConnection(self.api_path)
             conn.request("GET", self.api_section1)
             response = conn.getresponse()
-            self.currencies = json.loads(response.read().decode("UTF-8"))
+            self.currencies: dict = json.loads(response.read().decode("UTF-8"))
 
             with open(self.save_path, "w") as file:
                 json.dump(self.currencies, file)
 
-    def get_all_currencies(self):
+    def get_all_currencies(self) -> dict:
         return self.currencies
 
     # returns fullname

@@ -20,9 +20,9 @@ class CurrencyHandler:
 
         self.logger = logging.getLogger(self.__class__.__name__)
 
-        self.coinmarketcapAPI = CoinmarketCapApi(static=static)
+        self.coinmarketcapAPI: CoinmarketCapApi = CoinmarketCapApi(static=static)
 
-        self.data_path = GlobalData.financial_data_path
+        self.data_path: str = GlobalData.financial_data_path
 
         self.basic_currency_data = self.load_basic_currency_data()
         self.all_currency_names = self.load_all_currency_names()
@@ -43,7 +43,7 @@ class CurrencyHandler:
             logging.warning("Currency {} not found!".format(currency))
             self.currencies[currency] = {str(date_limit): None}
 
-    def get_all_currency_names_where_data_is_available(self, size_limit=math.inf):
+    def get_all_currency_names_where_data_is_available(self, size_limit=math.inf) -> list:
         if self.all_currencies_with_data is not None:
             if len(self.all_currencies_with_data) <= size_limit:
                 return self.all_currencies_with_data
@@ -94,18 +94,18 @@ class CurrencyHandler:
 
         return output
 
-    def load_basic_currency_data(self):
-        filename = "basic-currency-data.json"
-        file_path = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
+    def load_basic_currency_data(self) -> dict:
+        filename: str = "basic-currency-data.json"
+        file_path: str = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
         if os.path.isfile(file_path):
             with open(file_path) as file:
                 return json.load(file)
 
         return dict()
 
-    def save_basic_currency_data(self):
-        filename = "basic-currency-data.json"
-        file_path = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
+    def save_basic_currency_data(self) -> None:
+        filename: str = "basic-currency-data.json"
+        file_path: str = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
 
         if os.path.isfile(file_path):
             os.remove(file_path)
@@ -113,9 +113,9 @@ class CurrencyHandler:
         with open(file_path, "w") as file:
             json.dump(self.basic_currency_data, file)
 
-    def save_all_currency_names_data(self):
-        filename = "all-currency-names.json"
-        file_path = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
+    def save_all_currency_names_data(self) -> None:
+        filename:str = "all-currency-names.json"
+        file_path:str = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
 
         if os.path.isfile(file_path):
             os.remove(file_path)
@@ -132,13 +132,13 @@ class CurrencyHandler:
             if currency["id"] in icos:
                 currency["ico"] = icos[currency["id"]]
 
-    def load_all_currencies(self):
+    def load_all_currencies(self) -> None:
         for currency in self.get_all_currency_names_where_data_is_available():
             self.load_currency(currency)
 
-    def load_all_currency_names(self):
-        filename = "basic-currency-data.json"
-        file_path = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
+    def load_all_currency_names(self) -> dict:
+        filename:str = "basic-currency-data.json"
+        file_path:str = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
 
         if os.path.isfile(file_path):
             with open(file_path) as file:
@@ -146,10 +146,10 @@ class CurrencyHandler:
 
         return dict()
 
-    def get_all_currency_names(self):
-        currencies = self.get_all_currency_names_where_data_is_available()
+    def get_all_currency_names(self) -> list:
+        currencies: list = self.get_all_currency_names_where_data_is_available()
 
-        additional = self.coinmarketcapAPI.get_all_currencies()
+        additional: list = self.coinmarketcapAPI.get_all_currencies()
 
         for currency in additional:
             if currency["id"] in currencies:
@@ -161,9 +161,6 @@ class CurrencyHandler:
         self.save_all_currency_names_data()
         return self.all_currency_names
 
-    def load_all_currencies_to_memory(self):
+    def load_all_currencies_to_memory(self) -> None:
         for currency in self.get_all_currency_names():
             self.get_currency(currency).print()
-
-
-CurrencyHandler().get_currency("mincoin")
