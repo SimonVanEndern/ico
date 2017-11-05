@@ -9,7 +9,7 @@ from global_data import GlobalData
 class RawDataImporter:
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
-        self.currency_handler = CurrencyHandler()
+        self.currency_handler = CurrencyHandler(static=True)
         self.coinmarketcap_importer = CoinMarketCapGraphAPIImporter()
 
         self.last_timestamp = GlobalData.last_date_for_download

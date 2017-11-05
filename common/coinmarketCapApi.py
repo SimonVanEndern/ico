@@ -2,27 +2,28 @@ import datetime
 import http.client
 import json
 import os.path
+from typing import Dict
 
 from common.main.json_converter import JsonConverter
 from ico_data_crawler.initial_coin_offering import ICO
 
 
 class CoinmarketCapApi:
-    currencies = []
+    currencies: list = list()
 
-    api_path = "api.coinmarketcap.com"
-    api_section1 = "/v1/ticker/"
+    api_path: str = "api.coinmarketcap.com"
+    api_section1: str = "/v1/ticker/"
 
-    now = datetime.datetime.now()
-    path = os.path.join(os.path.dirname(__file__) + "\saved",
-                        "coinmarketcap-tickers" + str(now.year) + str(now.month) + str(now.day) + ".json")
-    save_path = os.path.join(os.path.dirname(__file__) + "\saved",
-                             "coinmarketcap-data" + str(now.year) + str(now.month) + str(now.day) + ".json")
+    now: datetime = datetime.datetime.now()
+    save_path: str = os.path.join(os.path.dirname(__file__) + "\saved",
+                                  "coinmarketcap-tickers" + str(now.year) + str(now.month) + str(now.day) + ".json")
 
-    def __init__(self):
+    def __init__(self, static=False):
+        if static:
+            self.save_path = os.path.join(os.path.dirname(__file__) + "\saved", "coinmarketcap-tickers2017115.json")
 
-        if os.path.isfile(self.path):
-            with open(self.path, "r") as file:
+        if os.path.isfile(self.save_path):
+            with open(self.save_path, "r") as file:
                 self.currencies = json.load(file)
         else:
             conn = http.client.HTTPSConnection(self.api_path)
@@ -30,7 +31,7 @@ class CoinmarketCapApi:
             response = conn.getresponse()
             self.currencies = json.loads(response.read().decode("UTF-8"))
 
-            with open(self.path, "w") as file:
+            with open(self.save_path, "w") as file:
                 json.dump(self.currencies, file)
 
     def get_all_currencies(self):
@@ -39,7 +40,7 @@ class CoinmarketCapApi:
     # returns fullname
     # for multiple = True returns tuple of shortcut and fullname
     def get_currencies(self, multiple=False):
-        tickerSymbols = []
+        tickerSymbols: list = list()
 
         # Get ticker symbol of currencies for requests.
         for currency in self.currencies:
@@ -50,8 +51,8 @@ class CoinmarketCapApi:
         return tickerSymbols
 
     def getShortnameMap(self, reverse=False):
-        shortnames = []
-        names = []
+        shortnames: list = list()
+        names: list = list()
         for currency in self.currencies:
             shortnames.append(currency["symbol"])
             names.append(currency["id"])
@@ -62,14 +63,14 @@ class CoinmarketCapApi:
             return dict(zip(names, shortnames))
 
     def getIcoData(self):
-        data = {}
+        data: Dict[str, ICO] = dict()
         for currency in self.currencies:
             data[currency["id"]] = ICO(currency["id"], None, False, None)
 
         return data
 
     def get_market_cap_named(self, only_without_market_cap=False):
-        data = {}
+        data: Dict[str, int] = dict()
         for currency in self.currencies:
             if not only_without_market_cap:
                 if currency["market_cap_usd"] is not None:

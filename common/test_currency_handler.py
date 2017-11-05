@@ -48,3 +48,10 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
 
         regression_file = self.get_test_path()
         self.assertEqual(str(result), test_commons.save_or_compare_data(result, regression_file))
+
+    def test_get_all_currency_names_static(self):
+        currency_handler = CurrencyHandler(static=True)
+
+        result = currency_handler.get_all_currency_names()
+
+        self.assertEqual(len(result), 1276)

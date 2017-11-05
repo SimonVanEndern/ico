@@ -17,6 +17,3 @@ class Importer:
 
     def get_filename_date(self):
         return str(self.now.year) + str(self.now.month) + str(self.now.day)
-    # def construct_path(self):
-    #     self.path = os.path.join(os.path.dirname(__file__) + "\saved",
-    #                              "blockstarter" + str(self.now.year) + str(self.now.month) + str(self.now.day) + ".html")

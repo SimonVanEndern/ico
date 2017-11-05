@@ -20,7 +20,7 @@ class BlockstarterSource(Importer):
     def __init__(self):
         super().__init__()
         self.path = os.path.join(os.path.dirname(__file__) + "\saved",
-                                 "blockstarter" + super().get_filename_date() + ".html")
+                                 "blockstarter2017102.html")
         self.data = {}
         if os.path.isfile(self.path):
             return

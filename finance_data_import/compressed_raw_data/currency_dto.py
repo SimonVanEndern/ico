@@ -31,7 +31,8 @@ class CurrencyDTO:
                 if self.data[key] != value:
                     print(self.data[key])
                     print(value)
-                    raise Exception("Different double value")
+                    if self.data[key] != 0 and value != 0:
+                        raise Exception("Different double value")
 
             self.data[key] = value
 

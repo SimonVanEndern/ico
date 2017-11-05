@@ -52,8 +52,8 @@ class CurrencyCompressor:
             self.logger.info("Currency {} already compressed with additional data".format(self.currency))
             return
 
-        currency_dto = self.compress_currency_raw_data()
         if self.check_if_additional_data_available():
+            currency_dto = self.compress_currency_raw_data()
             currency_dto = self.compress_additional_data(currency_dto)
             self.save_compressed_data(currency_dto, with_additional_data=True)
         else:
@@ -61,6 +61,7 @@ class CurrencyCompressor:
                 self.logger.info("Currency {} already compressed".format(self.currency))
                 return
             else:
+                currency_dto = self.compress_currency_raw_data()
                 self.save_compressed_data(currency_dto, with_additional_data=False)
 
     def check_if_raw_data_already_compressed(self):

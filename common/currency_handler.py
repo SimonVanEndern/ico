@@ -14,13 +14,13 @@ from global_data import GlobalData
 
 
 class CurrencyHandler:
-    def __init__(self):
+    def __init__(self, static=False):
         self.currencies: Dict(str, 'Currency') = dict()
         self.all_currencies_with_data = None
 
         self.logger = logging.getLogger(self.__class__.__name__)
 
-        self.coinmarketcapAPI = CoinmarketCapApi()
+        self.coinmarketcapAPI = CoinmarketCapApi(static=static)
 
         self.data_path = GlobalData.financial_data_path
 
