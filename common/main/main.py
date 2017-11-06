@@ -37,4 +37,4 @@ class Main:
         # print(bitcoin.print_course())
 
 
-Main().test()
+# Main().test()

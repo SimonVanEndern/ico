@@ -86,4 +86,4 @@ class GoogleTrendsDTO:
             return list()
 
 
-GoogleTrendsDTO("bitcoin").print_last_500_days()
+# GoogleTrendsDTO("bitcoin").print_last_500_days()
