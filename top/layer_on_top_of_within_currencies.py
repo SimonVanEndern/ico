@@ -81,5 +81,54 @@ class LayerOnTopOfWithinCurrencies:
 
         return figure_1
 
+    def get_start_time_analysis(self):
+        standard_set = self.data["None"]
+        index = list()
+        output = list()
+
+        for key in standard_set:
+            index.append(standard_set[key].first_date)
+            output.append(True)
+
+        df = pandas.DataFrame(index, index=index, columns=["date"]).sort_index()
+
+        df["date"] = df["date"].astype("datetime64[ms]")
+        print(df)
+        df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).count()
+        print(df2)
+
+        df2.plot(kind="bar")
+        plt.show()
+
+        return
+
+    def get_average_volume_data(self):
+        standard_set = self.data["None"]
+        index = list()
+        output = list()
+
+        for key in standard_set:
+            output.append(standard_set[key].average_volume)
+            index.append(standard_set[key].first_date)
+
+        print(output)
+
+        plt.hist(output)
+        plt.show()
+
+        df = pandas.Series(output).hist(bins=[0, 10, 100, 1000, 10000, 100000, 1000000], log=True)
+        df2 = pandas.Series(output).hist(bins=30, log=True)
+
+        df.plot(kind="bar", width=1)
+
+        plt.show()
+
+        df2.plot(kind="bar")
+        plt.show()
+
+        out = pandas.cut(pandas.Series(output), bins=[0, 10, 100, 1000, 10000, 100000, 1000000], include_lowest=True)
+        ax = out.value_counts(sort=False).plot.bar(rot=0, color="b", figsize=(6, 4))
+        ax.set_xticklabels([c[1:-1].replace(",", " to") for c in out.cat.categories])
+        plt.show()
 
 # LayerOnTopOfWithinCurrencies().get_keyword_data()

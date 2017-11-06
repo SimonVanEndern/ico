@@ -33,8 +33,10 @@ class Main:
             # Stat4: Number of platforms for tokens listed on coinmarketcap
             print("Platforms: " + str(self.coinmarketcap_tokens.get_platform_statistics()))
 
+            self.layer_on_top_of_within_currencies = LayerOnTopOfWithinCurrencies()
+
             # Figure02
-            # self.descriptives.start_time_data_analysis()
+            self.layer_on_top_of_within_currencies.get_start_time_analysis()
 
             # Includes keyword analysis
             keyword_data = descriptives.contains_keyword_coin(self.coinmarketcap.get_currencies())
@@ -47,11 +49,8 @@ class Main:
             # Stat7: Number of Cryptocurrencies containing the word "bit"
             print("Contains 'bit': " + str(keyword_data["bit"]))
 
-            self.layer_on_top_of_within_currencies = LayerOnTopOfWithinCurrencies()
-
             # Figure03: Histogram of containing "coin"
             self.layer_on_top_of_within_currencies.get_keyword_data()
-            # self.descriptives.start_time_data_analysis_including_keyword()
 
             # Figure04:
             self.descriptives.keyword_comparison_to_market_capitalilzation2()
@@ -62,6 +61,10 @@ class Main:
             print("CCs without available market cap: " + str(stats["total"]))
             # Stat8
             print("Percentage containing 'coin' of ccs without market cap: " + str(stats["coin"] / stats["total"]))
+
+        # Figure04:
+        # Average volume plot
+        self.layer_on_top_of_within_currencies.get_average_volume_data()
 
         # Table1: Showing the correlation of volume and usd with increasing correlation
         bitcoin = Currency("ripple", date_limit=datetime.strptime("01.11.2016", "%d.%m.%Y"))
