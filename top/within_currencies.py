@@ -23,17 +23,17 @@ class WithinCurrencies:
 
         for index, currency in enumerate(self.currency_handler.get_all_currency_names()):
             # TODO: Remove after testing reasons
-            if index == 50:
-                break
-
+            # if index == 100:
+            #     break
+            #
             handle_on_currency: Currency = self.currency_handler.get_currency(currency, date_limit=self.start_date)
             self.data[currency] = handle_on_currency.get_statistical_data()
             # writer.writerow(self.data[currency].to_csv())
-            print(currency)
-            print(self.data[currency].to_json_export())
+            # print(currency)
+            # print(self.data[currency].to_json_export())
 
         file.close()
         return self.data
 
 
-WithinCurrencies().get_and_export_data()
+# WithinCurrencies().get_and_export_data()

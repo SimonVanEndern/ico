@@ -55,4 +55,4 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
 
         result = currency_handler.get_all_currency_names()
 
-        self.assertEqual(len(result), 1276)
+        self.assertEqual(len(result), 1243)

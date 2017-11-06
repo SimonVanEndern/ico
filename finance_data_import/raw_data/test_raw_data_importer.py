@@ -15,4 +15,4 @@ class RawDataImporterTest(unittest.TestCase, TestCommons):
             self.raw_data_importer.coinmarketcap_importer = CoinMarketCapGraphAPIImporter()
             self.raw_data_importer.download_all_data()
 
-            self.assertEqual(mock_method.call_count, 1276)
+            self.assertEqual(mock_method.call_count, 1243)

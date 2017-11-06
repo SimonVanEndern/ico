@@ -4,7 +4,7 @@ import math
 import os
 import time
 from datetime import datetime
-from typing import Dict
+from typing import Dict, List
 
 import requests
 
@@ -46,7 +46,7 @@ class CurrencyHandler:
             logging.warning("Currency {} not found!".format(currency))
             self.currencies[currency][str(date_limit)] = None
 
-    def get_all_currency_names_where_data_is_available(self, size_limit=math.inf) -> list:
+    def get_all_currency_names_where_data_is_available(self, size_limit=math.inf) -> List[str]:
         if self.all_currencies_with_data is not None:
             if len(self.all_currencies_with_data) <= size_limit:
                 return self.all_currencies_with_data
@@ -157,6 +157,46 @@ class CurrencyHandler:
             else:
                 currencies.append(currency["id"])
 
+        currencies.reverse()
         self.all_currency_names = currencies
         self.save_all_currency_names_data()
+
+        # Manually removing currencies for bachelor thesis because data became available only after 31.10.2017
+        # self.all_currency_names.remove("revain")
+        # self.all_currency_names.remove("gimli")
+        # self.all_currency_names.remove("altcommunity-coin")
+        # self.all_currency_names.remove("ellaism")
+        # self.all_currency_names.remove("rupaya-old")
+        # self.all_currency_names.remove("fapcoin")
+        # self.all_currency_names.remove("ethgas")
+        # self.all_currency_names.remove("vulcano")
+        # self.all_currency_names.remove("ebit")
+        # self.all_currency_names.remove("ibtc")
+        # self.all_currency_names.remove("flypme")
+        # self.all_currency_names.remove("russian-mining-coin")
+        # self.all_currency_names.remove("qvolta")
+        # self.all_currency_names.remove("shield-coin")
+        # self.all_currency_names.remove("roofs")
+        # self.all_currency_names.remove("egold")
+        # self.all_currency_names.remove("ebtcnew")
+        # self.all_currency_names.remove("eltcoin")
+        # self.all_currency_names.remove("btcmoon")
+        # self.all_currency_names.remove("desire")
+        # self.all_currency_names.remove("atlant")
+        # self.all_currency_names.remove("unikoin-gold")
+        # self.all_currency_names.remove("etherparty")
+        # self.all_currency_names.remove("grid")
+        # self.all_currency_names.remove("natcoin")
+        # self.all_currency_names.remove("minexcoin")
+        # self.all_currency_names.remove("credence-coin")
+        # self.all_currency_names.remove("force")
+        # self.all_currency_names.remove("pure")
+        # self.all_currency_names.remove("high-gain")
+        # self.all_currency_names.remove("enjin-coin")
+        # self.all_currency_names.remove("bitbase")
+        # self.all_currency_names.remove("electroneum")
+        # self.all_currency_names.remove("streamr-datacoin")
+        # self.all_currency_names.remove("power-ledger")
+        # self.all_currency_names.remove("playercoin")
+
         return self.all_currency_names

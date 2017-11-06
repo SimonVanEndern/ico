@@ -12,14 +12,17 @@ from common.currency_handler import CurrencyHandler
 def contains_keyword_coin(currencies):
     contain_coin = 0
     contain_token = 0
+    contain_bit = 0
 
     for currency in currencies:
         if currency.find("coin") != -1:
             contain_coin += 1
         if currency.find("token") != -1:
             contain_token += 1
+        if currency.find("bit") != -1:
+            contain_bit += 1
 
-    return {"total": len(currencies), "coin": contain_coin, "token": contain_token}
+    return {"total": len(currencies), "coin": contain_coin, "token": contain_token, "bit": contain_bit}
 
 
 class DescriptiveStatistics:

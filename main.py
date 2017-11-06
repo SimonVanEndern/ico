@@ -5,13 +5,16 @@ from common.coinmarketCapApi import CoinmarketCapApi
 from common.coinmarketcap_coin_parser import CoinmarketCapCoinParser
 from common.coinmarketcap_token_parser import CoinmarketCapTokenParser
 from common.currency import Currency
+from top.layer_on_top_of_within_currencies import LayerOnTopOfWithinCurrencies
 
 
 class Main:
-    coinmarketcap = CoinmarketCapApi()
+    coinmarketcap = CoinmarketCapApi(static=True)
     coinmarketcap_coins = CoinmarketCapCoinParser()
     coinmarketcap_tokens = CoinmarketCapTokenParser()
     descriptives = descriptives.DescriptiveStatistics()
+
+    layer_on_top_of_within_currencies: LayerOnTopOfWithinCurrencies = None
 
     latest_only = False
 
@@ -41,8 +44,13 @@ class Main:
             print("Contains 'token': " + str(keyword_data["token"]))
             # Stat6: Number of Cryptocurrencies containing the word coin
             print("Contains 'coin': " + str(keyword_data["coin"]))
+            # Stat7: Number of Cryptocurrencies containing the word "bit"
+            print("Contains 'bit': " + str(keyword_data["bit"]))
+
+            self.layer_on_top_of_within_currencies = LayerOnTopOfWithinCurrencies()
 
             # Figure03: Histogram of containing "coin"
+            self.layer_on_top_of_within_currencies.get_keyword_data()
             # self.descriptives.start_time_data_analysis_including_keyword()
 
             # Figure04:

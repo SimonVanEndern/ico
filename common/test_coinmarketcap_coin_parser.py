@@ -14,8 +14,8 @@ class TestCoinmarketcapCoins(unittest.TestCase):
     def test_get_coin_data_sample(self):
         self.coinmarketcap_source.path_to_save = "Z:\Google Drive\\05 - Projekte\\bachelor-thesis\common\saved\coinmarketcap-coins2017108.html"
         result = self.coinmarketcap_source.get_all_coins()
-        self.assertEqual(result[0], "Bitcoin")
-        self.assertEqual(result[9], "Monero")
+        self.assertEqual(result[0], "bitcoin")
+        self.assertEqual(result[9], "monero")
         self.assertEqual(len(result), 871)
 
 

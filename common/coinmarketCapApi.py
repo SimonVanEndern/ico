@@ -24,17 +24,33 @@ class CoinmarketCapApi:
 
         if os.path.isfile(self.save_path):
             with open(self.save_path, "r") as file:
-                self.currencies: dict = json.load(file)
+                self.currencies: list = json.load(file)
         else:
             conn = http.client.HTTPSConnection(self.api_path)
             conn.request("GET", self.api_section1)
             response = conn.getresponse()
-            self.currencies: dict = json.loads(response.read().decode("UTF-8"))
+            self.currencies: list = json.loads(response.read().decode("UTF-8"))
 
             with open(self.save_path, "w") as file:
                 json.dump(self.currencies, file)
 
-    def get_all_currencies(self) -> dict:
+        dict_currencies: dict = dict()
+        for currency in self.currencies:
+            dict_currencies[currency["id"]] = currency
+
+        for to_remove in ["revain", "gimli", "altcommunity-coin", "ellaism", "rupaya-old", "fapcoin", "ethgas",
+                          "vulcano", "ebit", "ibtc", "flypme", "russian-mining-coin", "qvolta", "shield-coin", "roofs",
+                          "egold", "ebtcnew", "eltcoin", "btcmoon", "desire", "atlant", "unikoin-gold", "etherparty",
+                          "grid", "natcoin", "minexcoin", "credence-coin", "force", "pure", "high-gain", "enjin-coin",
+                          "bitbase", "electroneum", "streamr-datacoin", "power-ledger", "playercoin"]:
+            if to_remove in dict_currencies:
+                dict_currencies.pop(to_remove)
+
+        self.currencies = list()
+        for currency in dict_currencies:
+            self.currencies.append(dict_currencies[currency])
+
+    def get_all_currencies(self) -> list:
         return self.currencies
 
     # returns fullname

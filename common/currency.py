@@ -137,5 +137,8 @@ class Currency:
         # TODO: implement
         pass
 
-    def contains_keyword(self) -> bool:
-        return "coin" in self.currency or "bit" in self.currency or "token" in self.currency
+    def contains_keyword(self, keyword) -> bool:
+        if keyword == "any":
+            return "coin" in self.currency or "bit" in self.currency or "token" in self.currency
+        else:
+            return keyword in self.currency

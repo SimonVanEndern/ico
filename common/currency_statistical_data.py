@@ -164,5 +164,4 @@ class CurrencyStatisticalData:
             export["volume_return_correlations_" + key + "-r-value"] = export["volume_return_correlations"][key][0]
             export["volume_return_correlations_" + key + "-p-value"] = export["volume_return_correlations"][key][1]
 
-
         return export
