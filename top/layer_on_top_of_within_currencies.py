@@ -4,6 +4,8 @@ from typing import List, Dict, Tuple
 import matplotlib.pyplot as plt
 import numpy
 import pandas
+import scipy
+from scipy import stats
 
 from common.currency_statistical_data import CurrencyStatisticalData
 from top.within_currencies import WithinCurrencies
@@ -139,8 +141,60 @@ class LayerOnTopOfWithinCurrencies:
         ax.set_xscale('log', basex=10)
         plt.show()
 
-    def get_correation_between_average_volume_and_average_market_capitalization(self):
+    def get_average_market_capitalization_plot(self):
         standard_set = self.data["None"]
+        index = list()
+        output = list()
 
+        for key in standard_set:
+            output.append(standard_set[key].average_market_capitalization)
+            index.append(standard_set[key].first_date)
+
+        series = pandas.Series(output)
+
+        fig, ax = plt.subplots()
+        series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
+        ax.set_xscale('log', basex=10)
+        plt.show()
+
+    def get_correlation_between_average_volume_and_average_market_capitalization(self):
+        standard_set = self.data["None"]
+        index = list()
+        volume = list()
+        market_cap = list()
+
+        for key in standard_set:
+            volume.append(standard_set[key].average_volume)
+            market_cap.append(standard_set[key].average_market_capitalization)
+
+        correlation = numpy.corrcoef(volume, market_cap)
+        print(correlation)
+
+        correlation = stats.pearsonr(volume, market_cap)
+        print("Pearson")
+        print(correlation)
+
+    def get_average_market_capitalization_divided_by_average_volume_plot(self):
+        standard_set = self.data["None"]
+        volume = list()
+        market_cap = list()
+
+        for key in standard_set:
+            volume.append(standard_set[key].average_volume)
+            market_cap.append(standard_set[key].average_market_capitalization)
+
+        combined = numpy.array(market_cap) / numpy.array(volume)
+        print(list(combined))
+
+        fig, ax = plt.subplots()
+        series = pandas.Series(combined)
+        series.hist(ax=ax, bins=numpy.logspace(0, 16, num=16, base=2)).plot(spacing=0.5)
+        ax.set_xscale('log')
+        plt.show()
+
+        average = combined.mean()
+        print("Average market capitalization / volume")
+        print(1 / average)
+        print(scipy.stats.describe(combined))
 
 # LayerOnTopOfWithinCurrencies().get_keyword_data()

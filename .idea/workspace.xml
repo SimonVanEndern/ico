@@ -4,7 +4,6 @@
     <list default="true" id="7f706f99-14d9-4e62-8eec-2dff7ea6a8b0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/layer_on_top_of_within_currencies.py" afterPath="$PROJECT_DIR$/top/layer_on_top_of_within_currencies.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/within_currencies.py" afterPath="$PROJECT_DIR$/top/within_currencies.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,7 +22,7 @@
     <SUITE FILE_PATH="coverage/bachelor_thesis$cyberfund.coverage" NAME="cyberfund Coverage Results" MODIFIED="1506933261987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/sources" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_time_series_TimeSeriesTest_test_add_data_point.coverage" NAME="Unittests for test_time_series.TimeSeriesTest.test_add_data_point Coverage Results" MODIFIED="1509376743854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$testing.coverage" NAME="testing Coverage Results" MODIFIED="1507729193501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico" />
-    <SUITE FILE_PATH="coverage/bachelor_thesis$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1510050512460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1510053890766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_CurrencyTest_test_calculate_rolling_volatility_30.coverage" NAME="Unittests for test_currency.CurrencyTest.test_calculate_rolling_volatility_30 Coverage Results" MODIFIED="1509370922690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_simplified_data.coverage" NAME="Unittests in simplified_data Coverage Results" MODIFIED="1507903324500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/simplified_data" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_data_point_DataPointTest_test_instantiation_from_tuple.coverage" NAME="Unittests for test_data_point.DataPointTest.test_instantiation_from_tuple Coverage Results" MODIFIED="1509197103533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
@@ -108,7 +107,7 @@
     <SUITE FILE_PATH="coverage/bachelor-thesis$csvcreator.coverage" NAME="csvcreator Coverage Results" MODIFIED="1506616340645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_test_financial_data_calculator_py.coverage" NAME="Unittests in test_financial_data_calculator.py Coverage Results" MODIFIED="1507896043471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/reduced_raw_data" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_statistical_data_CurrencyStatisticalDataTest_test_calculate_volume_linreg.coverage" NAME="Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_volume_linreg Coverage Results" MODIFIED="1509615215115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
-    <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests.coverage" NAME="Unittests Coverage Results" MODIFIED="1510050573433" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests.coverage" NAME="Unittests Coverage Results" MODIFIED="1510051412788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$csvcreator.coverage" NAME="csvcreator Coverage Results" MODIFIED="1507453511644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/coursedata" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_statistical_data_CurrencyStatisticalDataTest_test_calculate_first_price.coverage" NAME="Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_first_price Coverage Results" MODIFIED="1509612785784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_statistical_data_CurrencyStatisticalDataTest_test_calculate_price_market_capitalization_correlation.coverage" NAME="Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_price_market_capitalization_correlation Coverage Results" MODIFIED="1509614580594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
@@ -157,11 +156,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
+            <state relative-caret-position="27">
+              <caret line="80" column="91" lean-forward="false" selection-start-line="80" selection-start-column="91" selection-end-line="80" selection-end-column="91" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -169,11 +168,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layer_on_top_of_within_currencies.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="layer_on_top_of_within_currencies.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/top/layer_on_top_of_within_currencies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+            <state relative-caret-position="-24">
+              <caret line="176" column="8" lean-forward="false" selection-start-line="176" selection-start-column="8" selection-end-line="176" selection-end-column="8" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -212,7 +211,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>save</find>
       <find>date_limit</find>
       <find>first</find>
       <find>numpy.inf</find>
@@ -242,6 +240,7 @@
       <find>Token</find>
       <find>btcmoon</find>
       <find>14133</find>
+      <find>pearson</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;timestamp&quot;</replace>
@@ -1189,17 +1188,11 @@
       <workItem from="1507710572875" duration="56870000" />
       <workItem from="1507904290385" duration="121382000" />
       <workItem from="1509196238114" duration="28082000" />
-      <workItem from="1509386322911" duration="69033000" />
+      <workItem from="1509386322911" duration="72749000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests - 2017.11.05 at 17h 51m 33s.xml">
-      <configuration name="Unittests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests - 2017.11.05 at 17h 52m 21s.xml">
-      <configuration name="Unittests" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests - 2017.11.06 at 10h 13m 30s.xml">
       <configuration name="Unittests" configurationId="tests" />
     </history-entry>
@@ -1224,9 +1217,15 @@
     <history-entry file="Unittests - 2017.11.06 at 16h 29m 25s.xml">
       <configuration name="Unittests" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests - 2017.11.07 at 11h 31m 08s.xml">
+      <configuration name="Unittests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests - 2017.11.07 at 11h 44m 06s.xml">
+      <configuration name="Unittests" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="417048000" />
+    <option name="totallyTimeSpent" value="420764000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1239,7 +1238,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5030257" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3287037" sideWeight="0.4969743" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3287037" sideWeight="0.4969743" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -4370,9 +4369,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="167" column="0" lean-forward="true" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4501,20 +4498,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/top/layer_on_top_of_within_currencies.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+        <state relative-caret-position="27">
+          <caret line="80" column="91" lean-forward="false" selection-start-line="80" selection-start-column="91" selection-end-line="80" selection-end-column="91" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/top/layer_on_top_of_within_currencies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
+        <state relative-caret-position="-24">
+          <caret line="176" column="8" lean-forward="false" selection-start-line="176" selection-start-column="8" selection-end-line="176" selection-end-column="8" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
