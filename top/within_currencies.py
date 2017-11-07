@@ -12,7 +12,7 @@ from global_data import GlobalData
 class WithinCurrencies:
     def __init__(self, start_date: datetime = None):
         self.start_date: datetime = start_date
-        self.currency_handler: CurrencyHandler = CurrencyHandler()
+        self.currency_handler: CurrencyHandler = CurrencyHandler(static=True)
         self.data: Dict[str, CurrencyStatisticalData] = dict()
         self.filename: str = "within-currencies-analysis" + str(datetime.now().timestamp() * 1e3) + ".csv"
         self.save_path: str = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, self.filename)

@@ -62,9 +62,12 @@ class Main:
             # Stat8
             print("Percentage containing 'coin' of ccs without market cap: " + str(stats["coin"] / stats["total"]))
 
-        # Figure04:
+        # Figure05:
         # Average volume plot
         self.layer_on_top_of_within_currencies.get_average_volume_data()
+
+        # Correlation between average volume and average market capitalization
+
 
         # Table1: Showing the correlation of volume and usd with increasing correlation
         bitcoin = Currency("ripple", date_limit=datetime.strptime("01.11.2016", "%d.%m.%Y"))

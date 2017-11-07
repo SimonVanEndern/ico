@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import List, Dict, Tuple
 
 import matplotlib.pyplot as plt
+import numpy
 import pandas
 
 from common.currency_statistical_data import CurrencyStatisticalData
@@ -113,22 +114,33 @@ class LayerOnTopOfWithinCurrencies:
 
         print(output)
 
-        plt.hist(output)
+        # plt.hist(output)
+        # plt.show()
+        #
+        # df = pandas.Series(output).hist(bins=[0, 10, 100, 1000, 10000, 100000, 1000000], log=True)
+        # df2 = pandas.Series(output).hist(bins=30, log=True)
+        #
+        # df.plot(kind="bar", width=1)
+        #
+        # plt.show()
+        #
+        # df2.plot(kind="bar")
+        # plt.show()
+        #
+        # out = pandas.cut(pandas.Series(output), bins=[0, 10, 100, 1000, 10000, 100000, 1000000], include_lowest=True)
+        # ax = out.value_counts(sort=False).plot.bar(rot=0, color="b", figsize=(6, 4))
+        # # ax.set_xticklabels([c[1:-1].replace(",", " to") for c in out.cat.categories])
+        # plt.show()
+
+        series = pandas.Series(output)
+
+        fig, ax = plt.subplots()
+        series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
+        ax.set_xscale('log', basex=10)
         plt.show()
 
-        df = pandas.Series(output).hist(bins=[0, 10, 100, 1000, 10000, 100000, 1000000], log=True)
-        df2 = pandas.Series(output).hist(bins=30, log=True)
+    def get_correation_between_average_volume_and_average_market_capitalization(self):
+        standard_set = self.data["None"]
 
-        df.plot(kind="bar", width=1)
-
-        plt.show()
-
-        df2.plot(kind="bar")
-        plt.show()
-
-        out = pandas.cut(pandas.Series(output), bins=[0, 10, 100, 1000, 10000, 100000, 1000000], include_lowest=True)
-        ax = out.value_counts(sort=False).plot.bar(rot=0, color="b", figsize=(6, 4))
-        ax.set_xticklabels([c[1:-1].replace(",", " to") for c in out.cat.categories])
-        plt.show()
 
 # LayerOnTopOfWithinCurrencies().get_keyword_data()
