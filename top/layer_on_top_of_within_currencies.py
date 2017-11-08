@@ -120,30 +120,13 @@ class LayerOnTopOfWithinCurrencies:
 
         print(output)
 
-        # plt.hist(output)
-        # plt.show()
-        #
-        # df = pandas.Series(output).hist(bins=[0, 10, 100, 1000, 10000, 100000, 1000000], log=True)
-        # df2 = pandas.Series(output).hist(bins=30, log=True)
-        #
-        # df.plot(kind="bar", width=1)
-        #
-        # plt.show()
-        #
-        # df2.plot(kind="bar")
-        # plt.show()
-        #
-        # out = pandas.cut(pandas.Series(output), bins=[0, 10, 100, 1000, 10000, 100000, 1000000], include_lowest=True)
-        # ax = out.value_counts(sort=False).plot.bar(rot=0, color="b", figsize=(6, 4))
-        # # ax.set_xticklabels([c[1:-1].replace(",", " to") for c in out.cat.categories])
-        # plt.show()
-
         series = pandas.Series(output)
 
         fig, ax = plt.subplots()
         series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
         ax.set_xscale('log', basex=10)
-        plt.show()
+        # plt.show()
+        return fig, "average-volume-plot"
 
     def get_average_market_capitalization_plot(self):
         standard_set = self.data["None"]
@@ -159,7 +142,8 @@ class LayerOnTopOfWithinCurrencies:
         fig, ax = plt.subplots()
         series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
         ax.set_xscale('log', basex=10)
-        plt.show()
+        # plt.show()
+        return fig, "average-market-capitalization-plot"
 
     def get_correlation_between_average_volume_and_average_market_capitalization(self):
         standard_set = self.data["None"]
@@ -178,6 +162,8 @@ class LayerOnTopOfWithinCurrencies:
         print("Pearson")
         print(correlation)
 
+        return correlation
+
     def get_average_market_capitalization_divided_by_average_volume_plot(self):
         standard_set = self.data["None"]
         volume = list()
@@ -188,25 +174,81 @@ class LayerOnTopOfWithinCurrencies:
             market_cap.append(standard_set[key].average_market_capitalization)
 
         combined = numpy.array(market_cap) / numpy.array(volume)
-        print(list(combined))
+        # print(list(combined))
 
         fig, ax = plt.subplots()
         series = pandas.Series(combined)
         series.hist(ax=ax, bins=numpy.logspace(0, 16, num=16, base=2)).plot(spacing=0.5)
         ax.set_xscale('log')
-        plt.show()
+        # plt.show()
+        return fig, "average-market-capitalization-divided-by-average-volume"
 
         average = combined.mean()
         print("Average market capitalization / volume")
         print(1 / average)
         print(scipy.stats.describe(combined))
 
-    def get_volume_price_correlation_plot(self):
+    def get_average_market_capitalization_divided_by_average_volume(self):
+        standard_set = self.data["None"]
+        volume = list()
+        market_cap = list()
+
+        for key in standard_set:
+            volume.append(standard_set[key].average_volume)
+            market_cap.append(standard_set[key].average_market_capitalization)
+
+        combined = numpy.array(market_cap) / numpy.array(volume)
+        # print(list(combined))
+
+        average = combined.mean()
+        print("Average market capitalization / volume")
+        return 1 / average, 1 / numpy.median(combined)
+        # print(scipy.stats.describe(combined))
+
+    def get_volume_return_correlation_plot(self):
         standard_set = self.data["None"]
         correlations: List[Dict[str, [Tuple[float, float]]]] = list()
 
         for key in standard_set:
             correlations.append(standard_set[key].volume_return_correlations)
+
+        correlations = list(map(lambda x: x["0"], correlations))
+        correlations_all = list(map(lambda x: x[0], correlations))
+        correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
+
+        fig, ax = plt.subplots()
+        series = pandas.Series(correlations_all)
+        series.hist(ax=ax, bins=20).plot()
+
+        fig2, ax = plt.subplots()
+        series = pandas.Series(correlations_adjusted)
+        series.hist(ax=ax, bins=20).plot()
+
+        return fig, fig2, "volume-return-correlations-plot", "volume-return-correlations-only-significatn-plot"
+
+    def get_volume_return_correlation_data(self):
+        standard_set = self.data["None"]
+        correlations: List[Dict[str, [Tuple[float, float]]]] = list()
+
+        for key in standard_set:
+            correlations.append(standard_set[key].volume_return_correlations)
+
+        correlations = list(map(lambda x: x["0"], correlations))
+        correlations_all = list(map(lambda x: x[0], correlations))
+        correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
+
+        series = pandas.Series(correlations_all)
+
+        series2 = pandas.Series(correlations_adjusted)
+
+        return series.describe(), series2[series2 > 0].describe()
+
+    def get_absolute_volume_price_correlation_plot(self):
+        standard_set = self.data["None"]
+        correlations: List[Dict[str, [Tuple[float, float]]]] = list()
+
+        for key in standard_set:
+            correlations.append(standard_set[key].volume_price_correlations)
 
         print(correlations)
         correlations = list(map(lambda x: x["0"], correlations))

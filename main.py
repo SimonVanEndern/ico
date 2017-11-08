@@ -1,10 +1,13 @@
+import os
 from datetime import datetime
+from pprint import pprint
 
 import finance.analysis.descriptive_statistics as descriptives
 from common.coinmarketCapApi import CoinmarketCapApi
 from common.coinmarketcap_coin_parser import CoinmarketCapCoinParser
 from common.coinmarketcap_token_parser import CoinmarketCapTokenParser
 from common.currency import Currency
+from global_data import GlobalData
 from top.layer_on_top_of_within_currencies import LayerOnTopOfWithinCurrencies
 
 
@@ -60,45 +63,85 @@ class Main:
             # Stat8
             print("Percentage containing 'coin' of ccs without market cap: " + str(stats["coin"] / stats["total"]))
 
-            # Figure05:
-            # Average volume plot
-            self.layer_on_top_of_within_currencies.get_average_volume_data()
+        frame_name = "all-currencies"
+        save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, frame_name)
+        if not os.path.isdir(save_path):
+            os.mkdir(save_path)
 
-            # Figure06:
-            # Average market capitalization plot
-            self.layer_on_top_of_within_currencies.get_average_market_capitalization_plot()
+        data = list()
 
-            # Stat8
-            # Correlation between average volume and average market capitalization
-            self.layer_on_top_of_within_currencies.get_correlation_between_average_volume_and_average_market_capitalization()
+        # Figure05:
+        # Average volume plot
+        fig, fig_name = self.layer_on_top_of_within_currencies.get_average_volume_data()
+        fig.savefig(os.path.join(save_path, "Figure05-" + fig_name + ".png"))
 
-            # Figure 07:
-            # Average market capitalization divided by average volume
-            # Stat9
-            # Average average of this
-            self.layer_on_top_of_within_currencies.get_average_market_capitalization_divided_by_average_volume_plot()
+        # Figure06:
+        # Average market capitalization plot
+        fig, fig_name = self.layer_on_top_of_within_currencies.get_average_market_capitalization_plot()
+        fig.savefig(os.path.join(save_path, "Figure06-" + fig_name + ".png"))
 
-            # Figure 08:
-            # Correlation of price and volume change
-            self.layer_on_top_of_within_currencies.get_volume_price_correlation_plot()
+        # Stat8
+        # Correlation between average volume and average market capitalization
+        correlation = self.layer_on_top_of_within_currencies.get_correlation_between_average_volume_and_average_market_capitalization()
+        data.append((frame_name,
+                     "Correlation Average Volume and Average Market Capitalization",
+                     "coefficient: " + str(correlation[0]),
+                     "p-value: " + str(correlation[1])))
 
-            # Figure 09:
-            # Correlation of price and volume change predictor search
-            self.layer_on_top_of_within_currencies.get_volume_price_correlation_cause_search_plot()
+        # Figure 07:
+        # Average market capitalization divided by average volume
+        fig, fig_name = self.layer_on_top_of_within_currencies.get_average_market_capitalization_divided_by_average_volume_plot()
+        fig.savefig(os.path.join(save_path, "Figure07-" + fig_name + ".png"))
 
-            # Stat 10
-            # Correlation between age and average market capitalization
-            # Stat 11
-            # Correlation between age and last market capitalization
-            self.layer_on_top_of_within_currencies.print_age_market_capitalization_correlations()
+        # Stat9
+        # Average average of this
+        mean, median = self.layer_on_top_of_within_currencies.get_average_market_capitalization_divided_by_average_volume()
+        data.append((frame_name,
+                     "Average of average market capitalization divided by average volume",
+                     "mean: " + str(mean),
+                     "median: " + str(median)))
 
-            # Stat 11
-            # Correlation between age and average volume
-            self.layer_on_top_of_within_currencies.print_age_average_volume_correlation()
+        # Figure 08:
+        # Correlation of price and volume change
+        fig, fig2, fig_name, fig_name2 = self.layer_on_top_of_within_currencies.get_volume_return_correlation_plot()
+        fig.canvas.set_window_title("Figure XX")
+        fig.savefig(os.path.join(save_path, "Figure08-" + fig_name + ".png"))
+        fig2.savefig(os.path.join(save_path, "Figure09-" + fig_name2 + ".png"))
+
+        # Stat 10:
+        # Descriptive statistics of price and volume change
+        des1, des2 = self.layer_on_top_of_within_currencies.get_volume_return_correlation_data()
+        data.append((frame_name,
+                     "Mean of correlation volume and return all",
+                     "mean: " + str(des1["mean"]),
+                     "count: " + str(des1["count"])))
+        data.append((frame_name,
+                     "Mean of correlation volume and return only significant ones",
+                     "mean: " + str(des2["mean"]),
+                     "count: " + str(des2["count"])))
+
+        pprint(data)
+
+        # Figure 09:
+        # Correlation of price and volume change predictor search
+        self.layer_on_top_of_within_currencies.get_volume_price_correlation_cause_search_plot()
+
+        # Stat 10
+        # Correlation between age and average market capitalization
+        # Stat 11
+        # Correlation between age and last market capitalization
+        self.layer_on_top_of_within_currencies.print_age_market_capitalization_correlations()
+
+        # Stat 11
+        # Correlation between age and average volume
+        self.layer_on_top_of_within_currencies.print_age_average_volume_correlation()
 
         # Figure 10:
         # Slope of linear regression on price
         self.layer_on_top_of_within_currencies.get_linear_price_regressions_plot()
+
+        # TODO:
+        self.layer_on_top_of_within_currencies.get_absolute_volume_price_correlation_plot()
 
         # Table1: Showing the correlation of volume and usd with increasing correlation
         bitcoin = Currency("ripple", date_limit=datetime.strptime("01.11.2016", "%d.%m.%Y"))

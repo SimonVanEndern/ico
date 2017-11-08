@@ -47,6 +47,7 @@ class CurrencyStatisticalData:
         self.percentage_of_total_market_capitalization: pandas.DataFrame
 
         self.volume_return_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_return_correlations()
+        self.volume_price_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_price_correlations()
         self.price_market_capitalization_correlation: float = self.calculate_price_market_capitalization_correlation()
 
         # TODO: Maximum loss in terms of highest price / lowest price after this one
@@ -84,6 +85,26 @@ class CurrencyStatisticalData:
         # print("Volume:")
         # print(volume)
         # time.sleep(5)
+        while numpy.isnan(volume[0]) or numpy.isinf(volume[0]):
+            volume.pop(0)
+            usd_return.pop(0)
+
+        output = dict()
+
+        for shift in shifts:
+            correlation_1 = stats.pearsonr(volume[shift:], usd_return[: len(usd_return) - shift])
+            correlation_2 = stats.pearsonr(usd_return[shift:], volume[: len(volume) - shift])
+
+            output[str(shift)] = correlation_1
+            output[str(-shift)] = correlation_2
+
+        return output
+
+    def calculate_volume_price_correlations(self) -> Dict[str, Tuple[float, float]]:
+        shifts = [0, 1, 2, 3]
+        volume = list(self.currency.data["volume"])
+        usd_return = list(self.currency.data["usd"])
+
         while numpy.isnan(volume[0]) or numpy.isinf(volume[0]):
             volume.pop(0)
             usd_return.pop(0)
