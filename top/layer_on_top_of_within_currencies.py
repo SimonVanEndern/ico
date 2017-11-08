@@ -1,11 +1,10 @@
 from datetime import datetime
 from pprint import pprint
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Any
 
 import matplotlib.pyplot as plt
 import numpy
 import pandas
-import scipy
 from scipy import stats
 
 from common.currency_handler import CurrencyHandler
@@ -118,14 +117,11 @@ class LayerOnTopOfWithinCurrencies:
             output.append(standard_set[key].average_volume)
             index.append(standard_set[key].first_date)
 
-        print(output)
-
         series = pandas.Series(output)
 
         fig, ax = plt.subplots()
         series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
         ax.set_xscale('log', basex=10)
-        # plt.show()
         return fig, "average-volume-plot"
 
     def get_average_market_capitalization_plot(self):
@@ -142,12 +138,10 @@ class LayerOnTopOfWithinCurrencies:
         fig, ax = plt.subplots()
         series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
         ax.set_xscale('log', basex=10)
-        # plt.show()
         return fig, "average-market-capitalization-plot"
 
     def get_correlation_between_average_volume_and_average_market_capitalization(self):
         standard_set = self.data["None"]
-        index = list()
         volume = list()
         market_cap = list()
 
@@ -155,14 +149,7 @@ class LayerOnTopOfWithinCurrencies:
             volume.append(standard_set[key].average_volume)
             market_cap.append(standard_set[key].average_market_capitalization)
 
-        correlation = numpy.corrcoef(volume, market_cap)
-        print(correlation)
-
-        correlation = stats.pearsonr(volume, market_cap)
-        print("Pearson")
-        print(correlation)
-
-        return correlation
+        return stats.pearsonr(volume, market_cap)
 
     def get_average_market_capitalization_divided_by_average_volume_plot(self):
         standard_set = self.data["None"]
@@ -174,7 +161,6 @@ class LayerOnTopOfWithinCurrencies:
             market_cap.append(standard_set[key].average_market_capitalization)
 
         combined = numpy.array(market_cap) / numpy.array(volume)
-        # print(list(combined))
 
         fig, ax = plt.subplots()
         series = pandas.Series(combined)
@@ -183,12 +169,7 @@ class LayerOnTopOfWithinCurrencies:
         # plt.show()
         return fig, "average-market-capitalization-divided-by-average-volume"
 
-        average = combined.mean()
-        print("Average market capitalization / volume")
-        print(1 / average)
-        print(scipy.stats.describe(combined))
-
-    def get_average_market_capitalization_divided_by_average_volume(self):
+    def get_average_market_capitalization_divided_by_average_volume_data(self):
         standard_set = self.data["None"]
         volume = list()
         market_cap = list()
@@ -250,32 +231,38 @@ class LayerOnTopOfWithinCurrencies:
         for key in standard_set:
             correlations.append(standard_set[key].volume_price_correlations)
 
-        print(correlations)
         correlations = list(map(lambda x: x["0"], correlations))
-        print(correlations)
         correlations_all = list(map(lambda x: x[0], correlations))
         correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
-        print(correlations_all)
 
         fig, ax = plt.subplots()
         series = pandas.Series(correlations_all)
-        print("Description of statistics for all correlations")
-        print(series.describe())
         series.hist(ax=ax, bins=20).plot()
-        # ax.set_xscale('log')
-        plt.title("Figure XX")
-        fig.canvas.set_window_title("Figure XX")
-        fig.savefig('test.png')
-        plt.show()
 
-        fig, ax = plt.subplots()
+        fig2, ax = plt.subplots()
         series = pandas.Series(correlations_adjusted)
-        print("Description of statistics for only significant correlations")
-        print(series.describe())
-        print("Description of statistics for only significant correlations, excluding 0")
-        print(series[series > 0].describe())
         series.hist(ax=ax, bins=20).plot()
-        plt.show()
+
+        return fig, fig2, "raw-volume-price-correlations", "raw-volume-price-correlations-only-significant"
+
+    def get_absolute_volume_price_correlation_data(self):
+        standard_set = self.data["None"]
+        correlations: List[Dict[str, [Tuple[float, float]]]] = list()
+
+        for key in standard_set:
+            correlations.append(standard_set[key].volume_price_correlations)
+
+        correlations = list(map(lambda x: x["0"], correlations))
+        correlations_all = list(map(lambda x: x[0], correlations))
+        correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
+
+        series = pandas.Series(correlations_all)
+        print("Description of statistics for all correlations")
+
+        series2 = pandas.Series(correlations_adjusted)
+        print("Description of statistics for only significant correlations, excluding 0")
+
+        return series.describe(), series2[series2 > 0].describe()
 
     def get_volume_price_correlation_cause_search_plot(self):
         standard_set = self.data["None"]
@@ -351,30 +338,23 @@ class LayerOnTopOfWithinCurrencies:
         pandas.Series(currency_characteristics_2).hist(bins=20).plot()
         plt.show()
 
-    def print_age_market_capitalization_correlations(self):
+    def get_age_market_capitalization_correlations(self) -> Tuple[Any, Any]:
         standard_set = self.data["None"]
 
         age = list(map(lambda x: x.age_in_days, standard_set.values()))
         average_market_capitalization = list(map(lambda x: x.average_market_capitalization, standard_set.values()))
         last_market_capitalization = list(map(lambda x: x.last_market_capitalization, standard_set.values()))
-        print(last_market_capitalization)
         last_market_capitalization = list(map(lambda x: 0 if numpy.isnan(x) else x, last_market_capitalization))
-        print(last_market_capitalization)
 
-        print("Correlation age and average market capitalization")
-        print(stats.pearsonr(age, average_market_capitalization))
+        return stats.pearsonr(age, average_market_capitalization), stats.pearsonr(age, last_market_capitalization)
 
-        print("Correlation age and last market capitalization")
-        print(stats.pearsonr(age, last_market_capitalization))
-
-    def print_age_average_volume_correlation(self):
+    def get_age_average_volume_correlation(self) -> Tuple[float, float]:
         standard_set = self.data["None"]
 
         age = list(map(lambda x: x.age_in_days, standard_set.values()))
         average_volume = list(map(lambda x: x.average_volume, standard_set.values()))
 
-        print("Correlation age and average volume")
-        print(stats.pearsonr(age, average_volume))
+        return stats.pearsonr(age, average_volume)
 
     def get_linear_price_regressions_plot(self):
         standard_set: Dict[str, CurrencyStatisticalData] = self.data["None"]
@@ -393,18 +373,37 @@ class LayerOnTopOfWithinCurrencies:
             else:
                 linear_regressions.append(item.price_linear_regression_standardized.slope)
 
-        linear_regressions = list(map(lambda x: numpy.log10(x) if x > 0 else - numpy.log10(-x), linear_regressions))
+        linear_regressions = list(map(lambda x: -numpy.log10(x) if x > 0 else numpy.log10(-x), linear_regressions))
         linear_regressions_completely_interpolated = list(
-            map(lambda x: numpy.log10(x) if x > 0 else -numpy.log10(-x), linear_regressions_completely_interpolated))
-        print(linear_regressions)
-        print(len(linear_regressions))
-        print(linear_regressions_completely_interpolated)
-        print(len(linear_regressions_completely_interpolated))
+            map(lambda x: -numpy.log10(x) if x > 0 else numpy.log10(-x), linear_regressions_completely_interpolated))
 
+        fig, ax = plt.subplots()
         series: pandas.Series = pandas.Series(linear_regressions)
         series.hist(bins=30).plot()
-        plt.show()
 
+        fig2, ax = plt.subplots()
         series = pandas.Series(linear_regressions_completely_interpolated)
         series.hist(bins=30).plot()
-        plt.show()
+
+        return fig, fig2, "linear-regression-slope-limited-interpolation", "linear-regression-slope-unlimited-interpolation"
+
+    def get_linear_regression_data(self):
+        standard_set = self.data["None"]
+
+        linear_regressions = list()
+        linear_regressions_completely_interpolated = list()
+
+        for item in standard_set.values():
+            if numpy.isnan(item.price_linear_regression_standardized.slope):
+                linear_regressions_completely_interpolated.append(
+                    item.price_linear_regression_standardized_completely_interpolated.slope)
+            else:
+                linear_regressions.append(item.price_linear_regression_standardized.slope)
+
+        positives = len(list(filter(lambda x: x > 0, linear_regressions)))
+        negatives = len(linear_regressions) - positives
+
+        positives_interpolated = len(list(filter(lambda x: x > 0, linear_regressions_completely_interpolated)))
+        negatives_interpolated = len(linear_regressions_completely_interpolated) - positives_interpolated
+
+        return positives, negatives, positives_interpolated, negatives_interpolated
