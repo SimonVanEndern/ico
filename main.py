@@ -14,9 +14,9 @@ class Main:
     coinmarketcap_tokens = CoinmarketCapTokenParser()
     descriptives = descriptives.DescriptiveStatistics()
 
-    layer_on_top_of_within_currencies: LayerOnTopOfWithinCurrencies = None
+    layer_on_top_of_within_currencies = LayerOnTopOfWithinCurrencies()
 
-    latest_only = False
+    latest_only = True
 
     def __init__(self):
         if not self.latest_only:
@@ -32,8 +32,6 @@ class Main:
             # Figure01
             # Stat4: Number of platforms for tokens listed on coinmarketcap
             print("Platforms: " + str(self.coinmarketcap_tokens.get_platform_statistics()))
-
-            self.layer_on_top_of_within_currencies = LayerOnTopOfWithinCurrencies()
 
             # Figure02
             self.layer_on_top_of_within_currencies.get_start_time_analysis()
@@ -62,23 +60,45 @@ class Main:
             # Stat8
             print("Percentage containing 'coin' of ccs without market cap: " + str(stats["coin"] / stats["total"]))
 
-        # Figure05:
-        # Average volume plot
-        self.layer_on_top_of_within_currencies.get_average_volume_data()
+            # Figure05:
+            # Average volume plot
+            self.layer_on_top_of_within_currencies.get_average_volume_data()
 
-        # Figure06:
-        # Average market capitalization plot
-        self.layer_on_top_of_within_currencies.get_average_market_capitalization_plot()
+            # Figure06:
+            # Average market capitalization plot
+            self.layer_on_top_of_within_currencies.get_average_market_capitalization_plot()
 
-        # Stat8
-        # Correlation between average volume and average market capitalization
-        self.layer_on_top_of_within_currencies.get_correlation_between_average_volume_and_average_market_capitalization()
+            # Stat8
+            # Correlation between average volume and average market capitalization
+            self.layer_on_top_of_within_currencies.get_correlation_between_average_volume_and_average_market_capitalization()
 
-        # Figure 07:
-        # Average market capitalization divided by average volume
-        # Stat9
-        # Average average of this
-        self.layer_on_top_of_within_currencies.get_average_market_capitalization_divided_by_average_volume_plot()
+            # Figure 07:
+            # Average market capitalization divided by average volume
+            # Stat9
+            # Average average of this
+            self.layer_on_top_of_within_currencies.get_average_market_capitalization_divided_by_average_volume_plot()
+
+            # Figure 08:
+            # Correlation of price and volume change
+            self.layer_on_top_of_within_currencies.get_volume_price_correlation_plot()
+
+            # Figure 09:
+            # Correlation of price and volume change predictor search
+            self.layer_on_top_of_within_currencies.get_volume_price_correlation_cause_search_plot()
+
+            # Stat 10
+            # Correlation between age and average market capitalization
+            # Stat 11
+            # Correlation between age and last market capitalization
+            self.layer_on_top_of_within_currencies.print_age_market_capitalization_correlations()
+
+            # Stat 11
+            # Correlation between age and average volume
+            self.layer_on_top_of_within_currencies.print_age_average_volume_correlation()
+
+        # Figure 10:
+        # Slope of linear regression on price
+        self.layer_on_top_of_within_currencies.get_linear_price_regressions_plot()
 
         # Table1: Showing the correlation of volume and usd with increasing correlation
         bitcoin = Currency("ripple", date_limit=datetime.strptime("01.11.2016", "%d.%m.%Y"))

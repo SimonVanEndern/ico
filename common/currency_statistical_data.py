@@ -1,9 +1,11 @@
-from typing import Dict
+from typing import Dict, Tuple
 
 import numpy
 import pandas
 from scipy import stats, math
 from scipy.stats._stats_mstats_common import LinregressResult
+
+from global_data import GlobalData
 
 
 class CurrencyStatisticalData:
@@ -12,12 +14,14 @@ class CurrencyStatisticalData:
 
         self.first_date: int = self.calculate_fist_date()
         self.total_data_points = self.calculate_total_data_points()
+        self.age_in_days = (GlobalData.last_date_for_analysis - self.first_date) / (1000 * 3600 * 24)
 
         self.total_volume: float = self.calculate_total_volume()
         self.average_volume: float = self.calculate_average_volume()
         self.volume_linear_regression: LinregressResult = self.calculate_volume_linreg()
 
         self.highest_market_capitalization: float = self.calculate_highest_market_capitalization()
+        self.last_market_capitalization: float = self.calculate_last_market_capitalization()
         self.average_market_capitalization: float = self.calculate_average_market_capitalization()
         self.market_capitalization_linear_regression: LinregressResult = self.calculate_market_capitalization_linreg()
 
@@ -28,6 +32,8 @@ class CurrencyStatisticalData:
 
         self.average_price: float = self.calculate_average_price()
         self.price_linear_regression: LinregressResult = self.calculate_usd_linreg()
+        self.price_linear_regression_standardized: LinregressResult = self.calculate_usd_linreq_standardized()
+        self.price_linear_regression_standardized_completely_interpolated: LinregressResult = self.calculate_usd_linreq_standardized_completely_interpolated()
 
         self.highest_price_difference: float
         self.price_change_from_beginning: float = self.calculate_price_change_from_beginning()
@@ -40,7 +46,7 @@ class CurrencyStatisticalData:
 
         self.percentage_of_total_market_capitalization: pandas.DataFrame
 
-        self.volume_return_correlations: dict = self.calculate_volume_return_correlations()
+        self.volume_return_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_return_correlations()
         self.price_market_capitalization_correlation: float = self.calculate_price_market_capitalization_correlation()
 
         # TODO: Maximum loss in terms of highest price / lowest price after this one
@@ -70,11 +76,14 @@ class CurrencyStatisticalData:
     def calculate_first_price(self) -> float:
         return list(self.currency.data["usd"])[0]
 
-    def calculate_volume_return_correlations(self):
+    def calculate_volume_return_correlations(self) -> Dict[str, Tuple[float, float]]:
         shifts = [0, 1, 2, 3]
         volume = list(self.currency.relative_data["volume"])
         usd_return = list(self.currency.relative_data["usd"])
 
+        # print("Volume:")
+        # print(volume)
+        # time.sleep(5)
         while numpy.isnan(volume[0]) or numpy.isinf(volume[0]):
             volume.pop(0)
             usd_return.pop(0)
@@ -127,6 +136,26 @@ class CurrencyStatisticalData:
 
         return stats.linregress(timestamps, usd)
 
+    def calculate_usd_linreq_standardized(self) -> LinregressResult:
+        filled_data = self.currency.data.interpolate(limit=1)
+
+        timestamps = list(filled_data["timestamp"])
+        usd = list(filled_data["usd"])
+        usd = numpy.array(usd)
+        usd = usd / usd[len(usd) - 1]
+
+        return stats.linregress(timestamps, usd)
+
+    def calculate_usd_linreq_standardized_completely_interpolated(self) -> LinregressResult:
+        filled_data = self.currency.data.interpolate()
+
+        timestamps = list(filled_data["timestamp"])
+        usd = list(filled_data["usd"])
+        usd = numpy.array(usd)
+        usd = usd / usd[len(usd) - 1]
+
+        return stats.linregress(timestamps, usd)
+
     def calculate_volatility_linreg(self) -> Dict[str, LinregressResult]:
         output = dict()
         for key in self.volatilities:
@@ -147,6 +176,9 @@ class CurrencyStatisticalData:
     def calculate_last_price(self) -> float:
         return self.currency.data["usd"].iloc[len(self.currency.data) - 1]
 
+    def calculate_last_market_capitalization(self) -> float:
+        return self.currency.data["market_cap"].iloc[len(self.currency.data) - 1]
+
     def calculate_total_data_points(self) -> int:
         return len(self.currency.data)
 
@@ -156,7 +188,7 @@ class CurrencyStatisticalData:
         else:
             return math.inf
 
-    def to_json_export(self):
+    def to_json_export(self) -> dict:
         export = self.__dict__.copy()
         export.pop("currency")
 

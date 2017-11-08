@@ -59,19 +59,19 @@ class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
         for key in [-3, -2, -1, 0, 1, 2, 3]:
             self.assertTrue(str(key) in result)
 
-        self.assertEqual(result, {'0': (0.017299315110373168, 0.5192945504199955),
-                                  '1': (0.00086104773522949186, 0.97442280462097053),
-                                  '-1': (0.005468073415928823, 0.83865885298856735),
-                                  '2': (0.018346639989570614, 0.49463102258404745),
-                                  '-2': (-0.034211661018907775, 0.20273082914304377),
-                                  '3': (-0.0053091784683158586, 0.84339721301539883),
-                                  '-3': (-0.0046439144932314243, 0.86281197970922507)}
+        self.assertEqual(result, {'0': (0.008747074681059978, 0.74455491874386359),
+                                  '1': (0.031672902356229403, 0.23813554503904538),
+                                  '-1': (-0.00074715713397255899, 0.97780495656478783),
+                                  '2': (0.035638940289499974, 0.18451361244169548),
+                                  '-2': (-0.037872455200061543, 0.15847885150672111),
+                                  '3': (0.0083249259000856522, 0.75673855708049198),
+                                  '-3': (0.012979762277408243, 0.62910805789333457)}
                          )
 
     def test_calculate_price_market_capitalization_correlation(self):
         result = self.statistical_data.calculate_price_market_capitalization_correlation()
 
-        self.assertEqual(result, 0.99999627842490912)
+        self.assertEqual(result, 0.99999627711062111)
 
     def test_calculate_rolling_volatility(self):
         result = self.statistical_data.calculate_rolling_volatility()

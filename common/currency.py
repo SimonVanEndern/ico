@@ -5,6 +5,7 @@ import math
 from os import path
 
 import matplotlib.pyplot as plt
+import numpy
 import pandas
 
 from common.currency_statistical_data import CurrencyStatisticalData
@@ -88,7 +89,8 @@ class Currency:
         pandas_dict: dict = {"timestamp": timestamp, "usd": usd, "btc": btc, "volume": volume, "market_cap": market_cap}
 
         self.data: pandas.DataFrame = pandas.DataFrame.from_records(pandas_dict, index=timestamp)
-        self.relative_data: pandas.DataFrames = self.data.interpolate(limit=1).pct_change()
+        self.relative_data: pandas.DataFrame = numpy.log(self.data.interpolate(limit=1).pct_change().apply(lambda x: x + 1))
+        # print(self.relative_data)
 
     def print_with_regression(self, data, regression):
         df = pandas.DataFrame(data)
