@@ -321,7 +321,8 @@ class StatisticalAnalysisCalculator:
         except ValueError:
             print(price_changes)
         ax.set_xscale('log')
-        return fig, "average-market-capitalization-divided-by-average-volume"
+
+        return fig, "price-change-beginning-plot"
 
     def get_first_price_plot(self):
         prices = list()

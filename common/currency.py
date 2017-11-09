@@ -21,12 +21,13 @@ class Currency:
     def __init__(self, currency, data_path=None, date_limit: datetime = None):
         self.logger = logging.getLogger(self.__class__.__name__)
         self.currency: str = currency
-        self.logger.info("Initiating currency {}".format(self.currency))
 
         self.date_limit = date_limit
         if self.date_limit is not None:
             self.date_limit = date_limit
             self.date_limit = int(self.date_limit.timestamp() * 1e3)
+
+        self.logger.info("Initiating currency {} for date {}".format(self.currency, self.date_limit))
 
         if data_path is not None:
             self.data_path: str = data_path
@@ -43,7 +44,8 @@ class Currency:
         self.statistical_data: CurrencyStatisticalData = None
 
     def get_statistical_data(self) -> CurrencyStatisticalData:
-        self.statistical_data = CurrencyStatisticalData(self)
+        if self.statistical_data is None:
+            self.statistical_data = CurrencyStatisticalData(self)
         return self.statistical_data
 
     def print(self) -> None:
@@ -63,7 +65,8 @@ class Currency:
 
     def load_financial_data_from_csv_input(self, csv_input: list) -> None:
         if csv_input is None or len(csv_input) < 3:
-            raise Exception("Empty csv input")
+            print(GlobalData.last_date_for_download)
+            raise Exception("Empty csv input for {}".format(self.currency))
 
         header = csv_input.pop(0)
         if header != ["Timestamp", "USD", "BTC", "Volume", "Market_cap"]:

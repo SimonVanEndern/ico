@@ -22,6 +22,7 @@ class CurrencyHandler:
         self.all_currencies_with_data = None
 
         self.logger = logging.getLogger(self.__class__.__name__)
+        self.logger.info("CurrencyHandler instantiated")
 
         self.coinmarketcapAPI: CoinmarketCapApi = CoinmarketCapApi(static=static)
 
@@ -34,8 +35,10 @@ class CurrencyHandler:
         if currency not in self.currencies:
             self.load_currency(currency, date_limit)
         else:
-            if date_limit not in self.currencies[currency]:
+            if str(date_limit) not in self.currencies[currency]:
                 self.load_currency(currency, date_limit)
+            else:
+                self.logger.info("Currency {} already loaded".format(currency))
 
         return self.currencies[currency][str(date_limit)]
 

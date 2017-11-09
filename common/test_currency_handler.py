@@ -1,9 +1,11 @@
 import unittest
 from datetime import datetime
+from unittest.mock import patch
 
 import pandas
 
 import test_commons
+from common.currency import Currency
 from common.currency_handler import CurrencyHandler
 from global_data import GlobalData
 from test_commons import TestCommons
@@ -13,7 +15,7 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
     TestCommons()
     currency_handler = CurrencyHandler.Instance()
     currency_handler.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
-    # GlobalData.last_date_for_download = GlobalData.TEST_LAST_DATE_FOR_DOWNLOAD
+    GlobalData.last_date_for_download = GlobalData.last_date_for_download2
 
     def test_get_all_currency_names(self):
         result = self.currency_handler.get_all_currency_names_where_data_is_available()
@@ -30,8 +32,8 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
         result2: pandas.DataFrame = self.currency_handler.get_currency("bitcoin",
                                                                        datetime.strptime("01.01.2016", "%d.%m.%Y")).data
 
-        self.assertEqual(len(result1), 1633)
-        self.assertEqual(len(result2), 656)
+        self.assertEqual(len(result1), 1647)
+        self.assertEqual(len(result2), 670)
 
     def test_get_all_currencies_limited(self):
         self.currency_handler.get_all_currency_names_where_data_is_available()
@@ -44,6 +46,7 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
         self.assertEqual(result, {"start_date": 1367174841000})
 
     def test_get_financial_series_start_date_of_all_currencies(self):
+        GlobalData.last_date_for_download = GlobalData.last_date_for_download2
         self.currency_handler.load_all_currencies()
         result = self.currency_handler.get_financial_series_start_date_of_all_currencies(limit=10)
 
@@ -56,3 +59,12 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
         result = currency_handler.get_all_currency_names()
 
         self.assertEqual(len(result), 1243)
+
+    def test_load_currency_only_ones(self):
+        with patch.object(Currency, '__init__', return_value=None) as mock_method:
+            currency_handler = CurrencyHandler.Instance()
+
+            currency_handler.get_currency("2give")
+            currency_handler.get_currency("2give")
+
+            self.assertLessEqual(mock_method.call_count, 1)

@@ -37,7 +37,7 @@ class CurrencyTest(unittest.TestCase, TestCommons):
         volume = list(self.ethereum.data["volume"])[0]
         market_cap = list(self.ethereum.data["market_cap"])[0]
 
-        self.assertEqual(len(usd), 802)
+        self.assertEqual(len(usd), 816)
         self.assertEqual([timestamp, usd[0], btc, volume, market_cap],
                          [1439028000000, 1.517101, 0.00545335, 152450.6, 91181131.3])
 

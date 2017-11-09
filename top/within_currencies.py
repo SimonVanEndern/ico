@@ -15,8 +15,8 @@ class WithinCurrencies:
         self.currency_handler: CurrencyHandler = CurrencyHandler.Instance()
         self.data: Dict[str, CurrencyStatisticalData] = dict()
 
-    def get_and_export_data(self) -> Dict[str, CurrencyStatisticalData]:
-        for index, currency in enumerate(self.currency_handler.get_all_currency_names()):
+    def get_and_export_data(self, currencies) -> Dict[str, CurrencyStatisticalData]:
+        for index, currency in enumerate(currencies):
 
             handle_on_currency: Currency = self.currency_handler.get_currency(currency, date_limit=self.start_date)
             self.data[currency] = handle_on_currency.get_statistical_data()

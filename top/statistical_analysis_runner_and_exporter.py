@@ -6,9 +6,13 @@ from top.statistical_analysis_calculator import StatisticalAnalysisCalculator
 
 
 class StatisticalAnalysisRunnerAndExporter:
-    def __init__(self, name, data):
+    def __init__(self, name, data, subfolder=None):
         self.frame_name = name
         self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name)
+        if not os.path.isdir(self.save_path):
+            os.mkdir(self.save_path)
+        if subfolder is not None:
+            self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name, subfolder)
         self.sac = StatisticalAnalysisCalculator(data)
         self.figure_counter = 1
 
@@ -147,7 +151,7 @@ class StatisticalAnalysisRunnerAndExporter:
         # Price change since beginning
         self.save_plot(self.sac.get_price_change_beginning_plot)
 
-        with open(os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name, "data.csv"), "w") as file:
+        with open(os.path.join(self.save_path, "data.csv"), "w") as file:
             writer = csv.writer(file, delimiter=',', lineterminator='\n')
             for row in self.data:
                 writer.writerow(list(row))

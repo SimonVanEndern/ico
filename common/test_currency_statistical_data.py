@@ -15,32 +15,32 @@ class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
     def test_calculate_total_volume(self):
         result = self.statistical_data.calculate_total_volume()
 
-        self.assertEqual(result, 337449855463.59094)
+        self.assertEqual(result, 366485790299.45538)
 
     def test_calculate_average_volume(self):
         result = self.statistical_data.calculate_average_volume()
 
-        self.assertEqual(result, 206770744.7693572)
+        self.assertEqual(result, 222652363.48691094)
 
     def test_calculate_average_market_capitalization(self):
         result = self.statistical_data.calculate_average_market_capitalization()
 
-        self.assertEqual(result, 11585424962.709578)
+        self.assertEqual(result, 12310495002.19807)
 
     def test_calculate_average_price(self):
         result = self.statistical_data.calculate_average_price()
 
-        self.assertEqual(result, 754.4710237714522)
+        self.assertEqual(result, 797.5379286798056)
 
     def test_calculate_highest_market_capitalization(self):
         result = self.statistical_data.calculate_highest_market_capitalization()
 
-        self.assertEqual(result, 96057813175.93333)
+        self.assertEqual(result, 102779046944.41667)
 
     def test_calculate_highest_price(self):
         result = self.statistical_data.calculate_highest_price()
 
-        self.assertEqual(result, 5776.66577778)
+        self.assertEqual(result, 6170.6728999999996)
 
     def test_calculate_lowest_price(self):
         result = self.statistical_data.calculate_lowest_price()
@@ -59,19 +59,19 @@ class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
         for key in [-3, -2, -1, 0, 1, 2, 3]:
             self.assertTrue(str(key) in result)
 
-        self.assertEqual(result, {'0': (0.008747074681059978, 0.74455491874386359),
-                                  '1': (0.031672902356229403, 0.23813554503904538),
-                                  '-1': (-0.00074715713397255899, 0.97780495656478783),
-                                  '2': (0.035638940289499974, 0.18451361244169548),
-                                  '-2': (-0.037872455200061543, 0.15847885150672111),
-                                  '3': (0.0083249259000856522, 0.75673855708049198),
-                                  '-3': (0.012979762277408243, 0.62910805789333457)}
+        self.assertEqual(result, {'0': (0.011391796968243922, 0.66975509724866922),
+                                  '1': (0.028815768305037202, 0.28076436616619521),
+                                  '-1': (-0.0030013457650709093, 0.91056938008848531),
+                                  '2': (0.036604344731026028, 0.1707419503448033),
+                                  '-2': (-0.036734695465532541, 0.16922291913936377),
+                                  '3': (0.0089204654865205502, 0.73868062691616576),
+                                  '-3': (0.013972164300115586, 0.60129725860069438)}
                          )
 
     def test_calculate_price_market_capitalization_correlation(self):
         result = self.statistical_data.calculate_price_market_capitalization_correlation()
 
-        self.assertEqual(result, 0.99999627711062111)
+        self.assertEqual(result, 0.99999626701395294)
 
     def test_calculate_rolling_volatility(self):
         result = self.statistical_data.calculate_rolling_volatility()
@@ -85,19 +85,19 @@ class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
     def test_calculate_volume_linreg(self):
         result = self.statistical_data.calculate_volume_linreg()
 
-        self.assertEqual(result.slope, 0.0068275558158194423)
-        self.assertEqual(result.intercept, -9609539380.8704166)
+        self.assertEqual(result.slope, 0.0073183566261530381)
+        self.assertEqual(result.intercept, -10303732603.100521)
 
     def test_calculate_market_capitalization_linreg(self):
         result = self.statistical_data.calculate_market_capitalization_linreg()
 
-        self.assertEqual(result.slope, 0.24176004890900188)
+        self.assertEqual(result.slope, 0.26594527236174342)
 
     def test_calculate_usd_linreg(self):
         result = self.statistical_data.calculate_usd_linreg()
 
-        self.assertEqual(result.slope, 1.3854071415722353e-08)
-        self.assertEqual(result.intercept, -19164.291295649055)
+        self.assertEqual(result.slope, 1.5303367198897639e-08)
+        self.assertEqual(result.intercept, -21214.202216383652)
 
     def test_calculate_volatility_linreg(self):
         result = self.statistical_data.calculate_volatility_linreg()
@@ -116,14 +116,14 @@ class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
     def test_calculate_last_price(self):
         result = self.statistical_data.calculate_last_price()
 
-        self.assertEqual(result, 5776.6657777800001)
+        self.assertEqual(result, 6170.6728999999996)
 
     def test_calculate_total_data_points(self):
         result = self.statistical_data.calculate_total_data_points()
 
-        self.assertEqual(result, 1633)
+        self.assertEqual(result, 1647)
 
     def test_calculate_price_change_from_beginning(self):
         result = self.statistical_data.calculate_price_change_from_beginning()
 
-        self.assertEqual(result, 41.714858877091949)
+        self.assertEqual(result, 44.560090388182211)

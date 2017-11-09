@@ -1,8 +1,8 @@
+import os
 from datetime import datetime
 from typing import List, Dict, Tuple
 
 import matplotlib.pyplot as plt
-import os
 import pandas
 
 from common.currency_handler import CurrencyHandler
@@ -40,12 +40,23 @@ class LayerOnTopOfWithinCurrencies:
         self.currency_handler = CurrencyHandler.Instance()
 
         for start_date in self.start_dates:
-            self.data[str(start_date)] = WithinCurrencies(start_date).get_and_export_data()
+            self.data[str(start_date)] = WithinCurrencies(start_date).get_and_export_data(
+                self.currency_handler.get_all_currency_names())
 
             if start_date is None:
-                StatisticalAnalysisRunnerAndExporter(str(start_date), self.data[str(start_date)]).run()
+                start_date_name = str(start_date)
             else:
-                StatisticalAnalysisRunnerAndExporter(str(start_date.timestamp()), self.data[str(start_date)]).run()
+                start_date_name = str(start_date.timestamp())
+
+            StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)]).run()
+
+            with_keyword, without_keyword = self.create_clusters()
+            StatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                 WithinCurrencies(start_date).get_and_export_data(with_keyword),
+                                                 subfolder="with-keyword").run()
+            StatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                 WithinCurrencies(start_date).get_and_export_data(without_keyword),
+                                                 subfolder="without_keyword").run()
 
             # Clustering according to "coin" semantics
             # self.data_semantic_cluster: Dict = dict()
@@ -53,7 +64,7 @@ class LayerOnTopOfWithinCurrencies:
             #     "no_keyword"] = self.filter_for_keyword()
             # Clustering according to available funding data
             # Clustering according to volume
-                
+
         self.create_clusters()
 
     def filter_for_keyword(self) -> Tuple[Dict, Dict]:
@@ -120,12 +131,12 @@ class LayerOnTopOfWithinCurrencies:
 
         return
 
-    def create_clusters(self):
+    def create_clusters(self) -> Tuple[List[str], List[str]]:
         with_keyword = list()
         without_keyword = list()
 
         for currency in self.currency_handler.get_all_currency_names():
-            if currency.contains_keyword():
+            if self.currency_handler.get_currency(currency).contains_keyword("any"):
                 with_keyword.append(currency)
             else:
                 without_keyword.append(currency)

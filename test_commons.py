@@ -17,7 +17,8 @@ def save_or_compare_data(data, path):
 
 class TestCommons:
     def __init__(self):
-        GlobalData.last_date_for_download = GlobalData.TEST_LAST_DATE_FOR_DOWNLOAD
+        # GlobalData.last_date_for_download = GlobalData.TEST_LAST_DATE_FOR_DOWNLOAD
+        pass
 
     def get_test_path(self):
         print(os.path.join(os.path.dirname(sys.modules[self.__class__.__module__].__file__), "test_records",

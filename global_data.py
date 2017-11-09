@@ -28,9 +28,9 @@ class GlobalData:
     EXTERNAL_PATH_ANALYSIS_DATA_TODAY = None
 
     last_date_for_download: int = int(datetime.strptime("01.11.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
+    last_date_for_download2: int = int(datetime.strptime("01.11.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
     last_date_for_analysis: int = int(datetime.strptime("31.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
     TEST_LAST_DATE_FOR_DOWNLOAD: int = int(datetime.strptime("19.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
-    # TEST_LAST_DATE_FOR_DOWNLOAD = int(datetime.strptime("12.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
 
     coin_market_cap_graph_api_url = "graphs.coinmarketcap.com"
 
