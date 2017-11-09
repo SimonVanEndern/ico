@@ -29,7 +29,7 @@ class DescriptiveStatistics:
     example_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-09-28"
     coinmarketcap = common.coinmarketCapApi.CoinmarketCapApi()
 
-    currency_handler = CurrencyHandler()
+    currency_handler = CurrencyHandler.Instance()
 
     now = datetime.now()
     path = os.path.join(os.path.dirname(__file__) + "\\aggregated",

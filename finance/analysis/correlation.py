@@ -15,7 +15,7 @@ from common.currency_handler import CurrencyHandler
 
 
 class Correlation:
-    currency_handler = CurrencyHandler()
+    currency_handler = CurrencyHandler.Instance()
 
     def __init__(self):
         return

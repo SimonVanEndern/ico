@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import os
 import pandas
 
+from common.currency_handler import CurrencyHandler
 from common.currency_statistical_data import CurrencyStatisticalData
 from global_data import GlobalData
 from top.statistical_analysis_runner_and_exporter import StatisticalAnalysisRunnerAndExporter
@@ -36,6 +37,8 @@ class LayerOnTopOfWithinCurrencies:
             os.rmdir(path_today)
         os.mkdir(path_today)
 
+        self.currency_handler = CurrencyHandler.Instance()
+
         for start_date in self.start_dates:
             self.data[str(start_date)] = WithinCurrencies(start_date).get_and_export_data()
 
@@ -50,6 +53,8 @@ class LayerOnTopOfWithinCurrencies:
             #     "no_keyword"] = self.filter_for_keyword()
             # Clustering according to available funding data
             # Clustering according to volume
+                
+        self.create_clusters()
 
     def filter_for_keyword(self) -> Tuple[Dict, Dict]:
         contains_keyword = dict()
@@ -114,3 +119,15 @@ class LayerOnTopOfWithinCurrencies:
         plt.show()
 
         return
+
+    def create_clusters(self):
+        with_keyword = list()
+        without_keyword = list()
+
+        for currency in self.currency_handler.get_all_currency_names():
+            if currency.contains_keyword():
+                with_keyword.append(currency)
+            else:
+                without_keyword.append(currency)
+
+        return with_keyword, without_keyword

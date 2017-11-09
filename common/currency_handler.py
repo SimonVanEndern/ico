@@ -12,10 +12,12 @@ from common.coinmarketCapApi import CoinmarketCapApi
 from common.currency import Currency
 from csv_strings import CSVStrings
 from global_data import GlobalData
+from singleton import Singleton
 
 
+@Singleton
 class CurrencyHandler:
-    def __init__(self, static=False):
+    def __init__(self, static=True):
         self.currencies: Dict(str, Dict[str, 'Currency']) = dict()
         self.all_currencies_with_data = None
 

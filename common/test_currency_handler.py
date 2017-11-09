@@ -11,13 +11,13 @@ from test_commons import TestCommons
 
 class CurrencyHandlerTest(unittest.TestCase, TestCommons):
     TestCommons()
-    currency_handler = CurrencyHandler()
+    currency_handler = CurrencyHandler.Instance()
     currency_handler.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
-    GlobalData.last_date_for_download = GlobalData.TEST_LAST_DATE_FOR_DOWNLOAD
+    # GlobalData.last_date_for_download = GlobalData.TEST_LAST_DATE_FOR_DOWNLOAD
 
     def test_get_all_currency_names(self):
         result = self.currency_handler.get_all_currency_names_where_data_is_available()
-        self.assertEqual(len(result), 1148)
+        self.assertEqual(len(result), 1243)
 
     def test_add_currency(self):
         result = self.currency_handler.get_currency("bitcoin")
@@ -51,7 +51,7 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
         self.assertEqual(str(result), test_commons.save_or_compare_data(result, regression_file))
 
     def test_get_all_currency_names_static(self):
-        currency_handler = CurrencyHandler(static=True)
+        currency_handler = CurrencyHandler.Instance()
 
         result = currency_handler.get_all_currency_names()
 

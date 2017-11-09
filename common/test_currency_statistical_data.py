@@ -8,7 +8,7 @@ from test_commons import TestCommons
 
 class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
     TestCommons()
-    currency_handler = CurrencyHandler()
+    currency_handler = CurrencyHandler.Instance()
     bitcoin = currency_handler.get_currency("bitcoin")
     statistical_data = CurrencyStatisticalData(bitcoin)
 

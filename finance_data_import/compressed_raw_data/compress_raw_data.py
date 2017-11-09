@@ -8,7 +8,7 @@ from finance_data_import.compressed_raw_data.currency_compressor import Currency
 
 class SimplifyRawData:
     def __init__(self):
-        self.currency_handler = CurrencyHandler()
+        self.currency_handler = CurrencyHandler.Instance()
 
     # Main
     def compress_data(self, last_time):

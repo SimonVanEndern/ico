@@ -12,7 +12,7 @@ from global_data import GlobalData
 class WithinCurrencies:
     def __init__(self, start_date: datetime = None):
         self.start_date: datetime = start_date
-        self.currency_handler: CurrencyHandler = CurrencyHandler(static=True)
+        self.currency_handler: CurrencyHandler = CurrencyHandler.Instance()
         self.data: Dict[str, CurrencyStatisticalData] = dict()
 
     def get_and_export_data(self) -> Dict[str, CurrencyStatisticalData]:

@@ -19,7 +19,7 @@ class Main:
         ico_handler = ico_data_crawler.main.Main()
 
         ico_data = ico_handler.get_data()
-        self.currency_handler = CurrencyHandler()
+        self.currency_handler = CurrencyHandler.Instance()
         self.currency_handler.add_ico_data(ico_data)
         logging.info("common:main:main - Aggregation started")
 

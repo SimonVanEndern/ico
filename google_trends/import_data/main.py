@@ -21,7 +21,7 @@ class GoogleTrends:
         self.start_2013 = 1356998400000
         self.end = GlobalData.last_date_for_download
 
-        self.currency_handler = CurrencyHandler()
+        self.currency_handler = CurrencyHandler.Instance()
 
     def main(self):
         self.import_data()

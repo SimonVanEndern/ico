@@ -11,7 +11,7 @@ from common.parser import Parser
 
 
 class CoinmarketCapTokenParser(Parser):
-    currency_handler: CurrencyHandler = CurrencyHandler()
+    currency_handler: CurrencyHandler = CurrencyHandler.Instance()
     import_address = "https://coinmarketcap.com/tokens/views/all/"
     now = datetime.now()
     path_to_save = path.join(path.dirname(__file__) + "\saved",

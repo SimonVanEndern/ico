@@ -13,7 +13,7 @@ class StatisticalAnalysisCalculator:
     def __init__(self, data):
         self.data = data
 
-        self.currency_handler = CurrencyHandler(static=True)
+        self.currency_handler = CurrencyHandler.Instance()
 
     def get_average_volume_data(self):
         index = list()

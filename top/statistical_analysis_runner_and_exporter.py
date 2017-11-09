@@ -9,8 +9,7 @@ class StatisticalAnalysisRunnerAndExporter:
     def __init__(self, name, data):
         self.frame_name = name
         self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name)
-        self.data = data
-        self.sac = StatisticalAnalysisCalculator(self.data)
+        self.sac = StatisticalAnalysisCalculator(data)
         self.figure_counter = 1
 
         self.data = list()

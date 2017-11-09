@@ -22,7 +22,7 @@ class CoinMarketCapGraphAPIImporter:
         self.raw_data_path = GlobalData.EXTERNAL_PATH_RAW_DATA
         self.save_path_additional_data = GlobalData.EXTERNAL_PATH_ADDITIONAL_DATA
 
-        self.currency_handler = CurrencyHandler()
+        self.currency_handler = CurrencyHandler.Instance()
 
     def request_currency(self, currency, last_date):
         if os.path.isfile(os.path.join(self.raw_data_path, currency, "ready" + str(last_date))):
