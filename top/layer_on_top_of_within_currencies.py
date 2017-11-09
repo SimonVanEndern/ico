@@ -2,10 +2,11 @@ from datetime import datetime
 from typing import List, Dict, Tuple
 
 import matplotlib.pyplot as plt
+import os
 import pandas
 
-from common.currency_handler import CurrencyHandler
 from common.currency_statistical_data import CurrencyStatisticalData
+from global_data import GlobalData
 from top.statistical_analysis_runner_and_exporter import StatisticalAnalysisRunnerAndExporter
 from top.within_currencies import WithinCurrencies
 
@@ -28,21 +29,27 @@ class LayerOnTopOfWithinCurrencies:
 
         self.data: Dict[str, Dict[str, CurrencyStatisticalData]] = dict()
 
+        folder_today = str(datetime.now().year) + "-" + str(datetime.now().month) + "-" + str(datetime.now().day)
+        path_today = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, folder_today)
+        GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY = path_today
+        if os.path.isdir(path_today):
+            os.rmdir(path_today)
+        os.mkdir(path_today)
+
         for start_date in self.start_dates:
-            if start_date is not None:
-                break
             self.data[str(start_date)] = WithinCurrencies(start_date).get_and_export_data()
 
+            if start_date is None:
+                StatisticalAnalysisRunnerAndExporter(str(start_date), self.data[str(start_date)]).run()
+            else:
+                StatisticalAnalysisRunnerAndExporter(str(start_date.timestamp()), self.data[str(start_date)]).run()
+
             # Clustering according to "coin" semantics
-            self.data_semantic_cluster: Dict = dict()
-            self.data_semantic_cluster["contains_keyword"], self.data_semantic_cluster[
-                "no_keyword"] = self.filter_for_keyword()
+            # self.data_semantic_cluster: Dict = dict()
+            # self.data_semantic_cluster["contains_keyword"], self.data_semantic_cluster[
+            #     "no_keyword"] = self.filter_for_keyword()
             # Clustering according to available funding data
             # Clustering according to volume
-
-        self.currency_handler = CurrencyHandler(static=True)
-
-        StatisticalAnalysisRunnerAndExporter("all-currencies", self.data["None"]).run()
 
     def filter_for_keyword(self) -> Tuple[Dict, Dict]:
         contains_keyword = dict()

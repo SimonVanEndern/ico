@@ -8,7 +8,7 @@ from top.statistical_analysis_calculator import StatisticalAnalysisCalculator
 class StatisticalAnalysisRunnerAndExporter:
     def __init__(self, name, data):
         self.frame_name = name
-        self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, self.frame_name)
+        self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name)
         self.data = data
         self.sac = StatisticalAnalysisCalculator(self.data)
         self.figure_counter = 1
@@ -78,7 +78,7 @@ class StatisticalAnalysisRunnerAndExporter:
                           "median: " + str(median)))
 
         # Correlation of price and volume change
-        self.save_plots(self.sac.get_volume_return_correlation_plot)
+        self.save_plot(self.sac.get_volume_return_correlation_plot)
 
         # Stat 10:
         # Descriptive statistics of price and volume change
@@ -86,10 +86,19 @@ class StatisticalAnalysisRunnerAndExporter:
                                               "Mean of correlation volume and return only significant ones",
                                               self.sac.get_volume_return_correlation_data)
 
+        # Correlation of volume and market capitalization
+        self.save_plot(self.sac.get_volume_market_capitalization_correlation_plot)
+
+        # Stat
+        # Descriptive statistics of volume and market capitalization correlation
+        self.add_mean_and_count_data_multiple("Mean of correlation volume and market capitalization all",
+                                              "Mean of correlation volume and market capitalization only significant ones",
+                                              self.sac.get_volume_market_capitalization_correlation_data)
+
         # Figure 09:
         # Correlation of price and volume change predictor search
         # TODO
-        self.sac.get_volume_price_correlation_cause_search_plot()
+        # self.sac.get_volume_price_correlation_cause_search_plot()
 
         # Stat 10
         # Correlation between age and average market capitalization
@@ -123,7 +132,7 @@ class StatisticalAnalysisRunnerAndExporter:
                           "negatives: " + str(negatives2)))
 
         # Correlations of volume and price raw data
-        self.save_plots(self.sac.get_absolute_volume_price_correlation_plot)
+        self.save_plot(self.sac.get_absolute_volume_price_correlation_plot)
 
         # Stats:
         # Descriptive statistics of volume and price raw data correlations
@@ -131,7 +140,15 @@ class StatisticalAnalysisRunnerAndExporter:
                                               "Mean of correlation volume and price only significant ones (excluding nan)",
                                               self.sac.get_absolute_volume_price_correlation_data)
 
-        with open(os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, self.frame_name, "data.csv"), "w") as file:
+        # Figure:
+        # First price since listing on coinmarketcap
+        self.save_plot(self.sac.get_first_price_plot)
+
+        # Figure:
+        # Price change since beginning
+        self.save_plot(self.sac.get_price_change_beginning_plot)
+
+        with open(os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name, "data.csv"), "w") as file:
             writer = csv.writer(file, delimiter=',', lineterminator='\n')
             for row in self.data:
                 writer.writerow(list(row))

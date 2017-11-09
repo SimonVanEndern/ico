@@ -25,6 +25,7 @@ class GlobalData:
     ICO_FUNDING_AND_START_DATA_PATH = "X:\\bachelor-thesis\ico-data"
 
     EXTERNAL_PATH_ANALYSIS_DATA = "X:\\bachelor-thesis\\analysis"
+    EXTERNAL_PATH_ANALYSIS_DATA_TODAY = None
 
     last_date_for_download: int = int(datetime.strptime("01.11.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
     last_date_for_analysis: int = int(datetime.strptime("31.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)

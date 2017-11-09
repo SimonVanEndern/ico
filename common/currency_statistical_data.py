@@ -47,6 +47,7 @@ class CurrencyStatisticalData:
         self.percentage_of_total_market_capitalization: pandas.DataFrame
 
         self.volume_return_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_return_correlations()
+        self.volume_market_capitalization_correlation: Tuple[float, float] = self.calculate_volume_market_capitalization_correlation()
         self.volume_price_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_price_correlations()
         self.price_market_capitalization_correlation: float = self.calculate_price_market_capitalization_correlation()
 
@@ -75,19 +76,41 @@ class CurrencyStatisticalData:
         return min(self.currency.data["usd"])
 
     def calculate_first_price(self) -> float:
-        return list(self.currency.data["usd"])[0]
+        prices = list(self.currency.data["usd"])
+        if numpy.isnan(list(self.currency.data["usd"])[0]):
+            print("NAN Price: " + self.currency.currency)
+            print(list(self.currency.data["usd"]))
+            i = 0
+            while numpy.isnan(prices[i]):
+                i += 1
+            price = prices[i]
+        else:
+            price = list(self.currency.data["usd"])[0]
+        if list(self.currency.data["usd"])[0] > 100:
+            print("Zu viel: " + self.currency.currency)
+
+        return price
 
     def calculate_volume_return_correlations(self) -> Dict[str, Tuple[float, float]]:
         shifts = [0, 1, 2, 3]
         volume = list(self.currency.relative_data["volume"])
         usd_return = list(self.currency.relative_data["usd"])
 
-        # print("Volume:")
-        # print(volume)
-        # time.sleep(5)
-        while numpy.isnan(volume[0]) or numpy.isinf(volume[0]):
-            volume.pop(0)
-            usd_return.pop(0)
+        try:
+            while numpy.isnan(volume[0]) or numpy.isinf(volume[0]):
+                volume.pop(0)
+                usd_return.pop(0)
+        except IndexError:
+            print(self.first_date)
+            print(volume)
+            print(self.currency.currency)
+            return {"-3": (numpy.nan, numpy.nan),
+                    "-2": (numpy.nan, numpy.nan),
+                    "-1": (numpy.nan, numpy.nan),
+                    "0": (numpy.nan, numpy.nan),
+                    "1": (numpy.nan, numpy.nan),
+                    "2": (numpy.nan, numpy.nan),
+                    "3": (numpy.nan, numpy.nan)}
 
         output = dict()
 
@@ -122,6 +145,23 @@ class CurrencyStatisticalData:
 
     def calculate_price_market_capitalization_correlation(self) -> float:
         return self.currency.relative_data.corr(method="pearson")["usd"]["market_cap"]
+
+    def calculate_volume_market_capitalization_correlation(self) -> Tuple[float, float]:
+        volume = list(self.currency.data["volume"])
+        market_cap = list(self.currency.data["market_cap"])
+
+        combined = list()
+        for index, element in enumerate(volume):
+            if (not numpy.isnan(volume[index])) and (not numpy.isnan(market_cap[index])):
+                combined.append((volume[index], market_cap[index]))
+
+        if (len(volume) - len(combined)) / len(volume) > 0.1:
+            print(self.currency.currency)
+            print((len(volume) - len(combined)) / len(volume))
+            print("WARNING: BAD DATA IN MAKRET CAP")
+
+        volume, market_cap = zip(*combined)
+        return stats.pearsonr(volume, market_cap)
 
     def calculate_rolling_volatility(self, windows=None) -> Dict[str, pandas.DataFrame]:
         if windows is None:
@@ -195,7 +235,19 @@ class CurrencyStatisticalData:
         return self.currency.data["timestamp"].iloc[0]
 
     def calculate_last_price(self) -> float:
-        return self.currency.data["usd"].iloc[len(self.currency.data) - 1]
+        prices = list(self.currency.data["usd"])
+        if numpy.isnan(self.currency.data["usd"].iloc[len(self.currency.data) - 1]):
+            print("LAST PRICE: " + self.currency.currency)
+            i = len(prices) - 1
+            while numpy.isnan(prices[i]):
+                i -= 1
+            price = prices[i]
+            if len(prices) - i > 10:
+                print("WARNING: Bad data")
+        else:
+            price = self.currency.data["usd"].iloc[len(self.currency.data) - 1]
+
+        return price
 
     def calculate_last_market_capitalization(self) -> float:
         return self.currency.data["market_cap"].iloc[len(self.currency.data) - 1]
@@ -204,8 +256,8 @@ class CurrencyStatisticalData:
         return len(self.currency.data)
 
     def calculate_price_change_from_beginning(self) -> float:
-        if self.first_date != 0:
-            return self.last_price / self.first_price - 1
+        if self.first_price != 0:
+            return self.last_price / self.first_price
         else:
             return math.inf
 

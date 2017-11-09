@@ -126,4 +126,4 @@ class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
     def test_calculate_price_change_from_beginning(self):
         result = self.statistical_data.calculate_price_change_from_beginning()
 
-        self.assertEqual(result, 40.714858877091949)
+        self.assertEqual(result, 41.714858877091949)

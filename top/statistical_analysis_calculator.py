@@ -81,7 +81,6 @@ class StatisticalAnalysisCalculator:
             market_cap.append(self.data[key].average_market_capitalization)
 
         combined = numpy.array(market_cap) / numpy.array(volume)
-        # print(list(combined))
 
         average = combined.mean()
         print("Average market capitalization / volume")
@@ -102,11 +101,10 @@ class StatisticalAnalysisCalculator:
         series = Series(correlations_all)
         series.hist(ax=ax, bins=20).plot()
 
-        fig2, ax = plt.subplots()
         series = Series(correlations_adjusted)
-        series.hist(ax=ax, bins=20).plot()
+        series[series != 0].hist(ax=ax, bins=20).plot()
 
-        return fig, fig2, "volume-return-correlations-plot", "volume-return-correlations-only-significatn-plot"
+        return fig, "volume-return-correlations-plot-significant-marked"
 
     def get_volume_return_correlation_data(self):
         correlations: List[Dict[str, [Tuple[float, float]]]] = list()
@@ -115,6 +113,39 @@ class StatisticalAnalysisCalculator:
             correlations.append(self.data[key].volume_return_correlations)
 
         correlations = list(map(lambda x: x["0"], correlations))
+        correlations_all = list(map(lambda x: x[0], correlations))
+        correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
+
+        series = Series(correlations_all)
+
+        series2 = Series(correlations_adjusted)
+
+        return series.describe(), series2[series2 != 0].describe()
+
+    def get_volume_market_capitalization_correlation_plot(self):
+        correlations: List[Dict[str, [Tuple[float, float]]]] = list()
+
+        for key in self.data:
+            correlations.append(self.data[key].volume_market_capitalization_correlation)
+
+        correlations_all = list(map(lambda x: x[0], correlations))
+        correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
+
+        fig, ax = plt.subplots()
+        series = Series(correlations_all)
+        series.hist(ax=ax, bins=20).plot()
+
+        series = Series(correlations_adjusted)
+        series[series != 0].hist(ax=ax, bins=20).plot()
+
+        return fig, "volume-market-cap-correlations-plot-significant-ones-marked"
+
+    def get_volume_market_capitalization_correlation_data(self):
+        correlations: List[Dict[str, [Tuple[float, float]]]] = list()
+
+        for key in self.data:
+            correlations.append(self.data[key].volume_market_capitalization_correlation)
+
         correlations_all = list(map(lambda x: x[0], correlations))
         correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
 
@@ -138,11 +169,10 @@ class StatisticalAnalysisCalculator:
         series = Series(correlations_all)
         series.hist(ax=ax, bins=20).plot()
 
-        fig2, ax = plt.subplots()
         series = Series(correlations_adjusted)
         series[series != 0].hist(ax=ax, bins=20).plot()
 
-        return fig, fig2, "raw-volume-price-correlations", "raw-volume-price-correlations-only-significant"
+        return fig, "raw-volume-price-correlations-significant-marked"
 
     def get_absolute_volume_price_correlation_data(self):
         correlations: List[Dict[str, [Tuple[float, float]]]] = list()
@@ -171,30 +201,11 @@ class StatisticalAnalysisCalculator:
             names.append(self.data[key].currency.currency)
 
         correlations_0 = list(map(lambda x: x["0"], correlations))
-        correlations_all = list(map(lambda x: x[0], correlations_0))
         correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations_0))
         names_adjusted = list()
         for index, element in enumerate(correlations_adjusted):
             if element != 0:
                 names_adjusted.append(names[index])
-
-        fig, ax = plt.subplots()
-        series = Series(correlations_all)
-        print("Description of statistics for all correlations")
-        print(series.describe())
-        print(series.median())
-        series.hist(ax=ax, bins=20).plot()
-        plt.title("Figure XX")
-        fig.canvas.set_window_title("Figure XX")
-        # fig.savefig('test.png')
-        plt.show()
-
-        series = Series(correlations_adjusted)
-        print("Description of statistics for only significant correlations, excluding 0")
-        print(series[series != 0].describe())
-        print(series[series != 0].median())
-        series[series != 0].hist(bins=20).plot()
-        plt.show()
 
         shift_results = list()
         shift_results.append(("Shift", "mean", "median", "observations"))
@@ -296,3 +307,31 @@ class StatisticalAnalysisCalculator:
         negatives_interpolated = len(linear_regressions_completely_interpolated) - positives_interpolated
 
         return positives, negatives, positives_interpolated, negatives_interpolated
+
+    def get_price_change_beginning_plot(self):
+        price_changes = list()
+
+        for key in self.data:
+            price_changes.append(self.data[key].price_change_from_beginning)
+
+        fig, ax = plt.subplots()
+        series = Series(price_changes)
+        try:
+            series.hist(ax=ax, bins=numpy.logspace(-8, 5, num=30, base=10)).plot(spacing=0.5)
+        except ValueError:
+            print(price_changes)
+        ax.set_xscale('log')
+        return fig, "average-market-capitalization-divided-by-average-volume"
+
+    def get_first_price_plot(self):
+        prices = list()
+
+        for key in self.data:
+            prices.append(self.data[key].first_price)
+
+        fig, ax = plt.subplots()
+        series = Series(prices)
+        series.hist(ax=ax, bins=numpy.logspace(-10, 5, num=150, base=10)).plot(spacing=0.5)
+        ax.set_xscale('log')
+
+        return fig, "first-price-in-usd"

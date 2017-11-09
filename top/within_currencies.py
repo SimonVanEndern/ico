@@ -14,25 +14,13 @@ class WithinCurrencies:
         self.start_date: datetime = start_date
         self.currency_handler: CurrencyHandler = CurrencyHandler(static=True)
         self.data: Dict[str, CurrencyStatisticalData] = dict()
-        self.filename: str = "within-currencies-analysis" + str(datetime.now().timestamp() * 1e3) + ".csv"
-        self.save_path: str = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, self.filename)
 
     def get_and_export_data(self) -> Dict[str, CurrencyStatisticalData]:
-        file = open(self.save_path, "w")
-        writer = csv.writer(file)
-
         for index, currency in enumerate(self.currency_handler.get_all_currency_names()):
-            # TODO: Remove after testing reasons
-            # if index == 100:
-            #     break
-            #
+
             handle_on_currency: Currency = self.currency_handler.get_currency(currency, date_limit=self.start_date)
             self.data[currency] = handle_on_currency.get_statistical_data()
-            # writer.writerow(self.data[currency].to_csv())
-            # print(currency)
-            # print(self.data[currency].to_json_export())
 
-        file.close()
         return self.data
 
 
