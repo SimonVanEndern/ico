@@ -6,14 +6,13 @@ import matplotlib.pyplot as plt
 import pandas
 
 from common.currency_handler import CurrencyHandler
-from global_data import GlobalData
 
 
 class BetweenCurrencies:
-    def __init__(self):
+    def __init__(self, save_path, currencies):
         self.currency_handler = CurrencyHandler.Instance()
 
-        all_currencies = self.currency_handler.get_all_currency_names()
+        all_currencies = currencies
 
         counter = 0
         max = len(all_currencies) ** 2 / 2
@@ -39,7 +38,7 @@ class BetweenCurrencies:
             for key2 in correlations[key]:
                 as_list.append((key, key2, correlations[key][key2][0], correlations[key][key2][1]))
 
-        with open(os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, "all-correlations"), "w") as file:
+        with open(os.path.join(save_path, "all-correlations.csv"), "w") as file:
             writer = csv.writer(file, delimiter=",", lineterminator="\n")
             writer.writerow(["Currency1", "Currency2", "correlation", "p-value"])
             for row in as_list:
@@ -49,8 +48,3 @@ class BetweenCurrencies:
         series.hist().plot()
 
         plt.show()
-
-        print(as_list)
-
-
-BetweenCurrencies()

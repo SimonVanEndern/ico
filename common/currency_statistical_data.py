@@ -44,6 +44,8 @@ class CurrencyStatisticalData:
         # self.volatility_linear_regression: LinregressResult = self.calculate_volatility_linreg()
 
         self.google_trends_correlations: dict = self.load_google_trends_data()
+        self.price_correlation_change_with_google_trends_data: Tuple[
+            Tuple[float, float], Tuple[float, float]] = self.calculate_price_correlation_with_google_trends()
 
         self.percentage_of_total_market_capitalization: pandas.DataFrame
 
@@ -275,6 +277,27 @@ class CurrencyStatisticalData:
 
         return export
 
-    def load_google_trends_data(self):
+    def load_google_trends_data(self) -> list:
         gtd = GoogleTrendsDTO(self.currency.currency)
-        gtd.load_aggregated_data()
+        return gtd.load_aggregated_data()
+
+    def calculate_price_correlation_with_google_trends(self) -> Tuple[Tuple[float, float], Tuple[float, float]]:
+        if self.google_trends_correlations is None or len(self.google_trends_correlations) == 0:
+            return None
+        trends_adjusted = list(map(lambda x: ((x[0] + 12 * 3600) * 1000, x[1]), self.google_trends_correlations))
+        trends_adjusted2 = list(map(lambda x: ((x[0] - 12 * 3600) * 1000, x[1]), self.google_trends_correlations))
+        index, trends = zip(*trends_adjusted)
+        index2, trends2 = zip(*trends_adjusted2)
+        trends_df = pandas.DataFrame(list(trends), index=list(index))
+        trends_df2 = pandas.DataFrame(list(trends2), index=list(index2))
+        usd = self.currency.relative_data["usd"]
+
+        combined: pandas.DataFrame = pandas.concat([usd, trends_df], axis=1)
+        combined2: pandas.DataFrame = pandas.concat([usd, trends_df2], axis=1)
+        combined.columns = ["a", "b"]
+        combined2.columns = ["a", "b"]
+        combined = combined.dropna()
+        combined2 = combined2.dropna()
+
+        return stats.pearsonr(list(combined["a"]), list(combined["b"])), stats.pearsonr(list(combined2["a"]),
+                                                                                        list(combined2["b"]))

@@ -16,14 +16,3 @@ class GoogleTrendsDTOTest(unittest.TestCase, TestCommons):
 
         regression_file = self.get_test_path()
         self.assertEqual(str(result), test_commons.save_or_compare_data(result, regression_file))
-
-        # def test_save_6monthly_data(self):
-        #     GlobalData.EXTERNAL_PATH_GOOGLE_TRENDS_DATA = "Z:\Google Drive\\05 - Projekte\\bachelor-thesis\google_trends\import_data\\test_input"
-        #     GlobalData.RELATIVE_GOOGLE_TRENDS_DATA_PATH = "Z:\Google Drive\\05 - Projekte\\bachelor-thesis\google_trends\import_data\\test_input\\relative"
-        #
-        #     google_trends_bitcoin = GoogleTrendsDTO("bitcoin")
-        #
-        #     with patch.object(CSVWriter, "writerow", return_value=False) as csv_writerow_mock:
-        #         google_trends_bitcoin.save_6_monthly_data()
-        #
-        #         csv_writerow_mock.assert_any_call(["Date", "RelativeChange"])

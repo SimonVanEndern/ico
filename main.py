@@ -2,7 +2,6 @@ import finance.analysis.descriptive_statistics as descriptives
 from common.coinmarketCapApi import CoinmarketCapApi
 from common.coinmarketcap_coin_parser import CoinmarketCapCoinParser
 from common.coinmarketcap_token_parser import CoinmarketCapTokenParser
-from top.between_currencies import BetweenCurrencies
 from top.layer_on_top_of_within_currencies import LayerOnTopOfWithinCurrencies
 
 
@@ -11,8 +10,6 @@ class Main:
     coinmarketcap_coins = CoinmarketCapCoinParser()
     coinmarketcap_tokens = CoinmarketCapTokenParser()
     descriptives = descriptives.DescriptiveStatistics()
-
-    # between_currencies = BetweenCurrencies()
 
     layer_on_top_of_within_currencies = LayerOnTopOfWithinCurrencies()
 

@@ -127,3 +127,28 @@ class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
         result = self.statistical_data.calculate_price_change_from_beginning()
 
         self.assertEqual(result, 43.122143759258392)
+
+    def test_load_google_trends_data(self):
+        result = self.statistical_data.load_google_trends_data()
+
+        self.assertEqual(result[:10],
+                         [(1356998400, 0.5), (1357084800, 0.0), (1357171200, 0.0), (1357257600, 0.33333333333333326),
+                          (1357344000, 0.0), (1357430400, -0.25), (1357516800, 0.0), (1357603200, 0.0),
+                          (1357689600, 0.0), (1357776000, 0.0)]
+                         )
+
+        print(result[len(result) - 10:])
+
+        self.assertEqual(result[len(result) - 10:],
+                         [(1508630400, 0.171875), (1508716800, 0.06666666666666665), (1508803200, -0.09999999999999998),
+                          (1508889600, -0.02777777777777779), (1508976000, -0.12857142857142856),
+                          (1509062400, -0.1311475409836066), (1509148800, 0.05660377358490565),
+                          (1509235200, 0.2142857142857142), (1509321600, 0.16176470588235303),
+                          (1509408000, 0.21518987341772156)]
+                         )
+
+    def test_calculate_price_correlation_with_google_trends(self):
+        result = self.statistical_data.calculate_price_correlation_with_google_trends()
+
+        self.assertEqual(result, ((0.062800655452990239, 0.010844019531653032),
+                                  (0.038082906096002976, 0.12259431553104663)))

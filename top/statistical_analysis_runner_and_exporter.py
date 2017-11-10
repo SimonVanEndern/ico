@@ -2,11 +2,13 @@ import csv
 import os
 
 from global_data import GlobalData
+from top.between_currencies import BetweenCurrencies
 from top.statistical_analysis_calculator import StatisticalAnalysisCalculator
 
 
 class StatisticalAnalysisRunnerAndExporter:
     def __init__(self, name, data, subfolder=None):
+        self.original_data = data
         self.frame_name = name
         self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name)
         if not os.path.isdir(self.save_path):
@@ -151,7 +153,15 @@ class StatisticalAnalysisRunnerAndExporter:
         # Price change since beginning
         self.save_plot(self.sac.get_price_change_beginning_plot)
 
+        # Figure:
+        # Price correlation with google trends
+        self.save_plot(self.sac.get_google_trends_correlation_plot)
+        self.save_plot(self.sac.get_google_trends_correlation_plot2)
+
         with open(os.path.join(self.save_path, "data.csv"), "w") as file:
             writer = csv.writer(file, delimiter=',', lineterminator='\n')
             for row in self.data:
                 writer.writerow(list(row))
+
+        BetweenCurrencies(self.save_path, list(self.original_data.keys()))
+

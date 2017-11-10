@@ -336,3 +336,41 @@ class StatisticalAnalysisCalculator:
         ax.set_xscale('log')
 
         return fig, "first-price-in-usd"
+
+    def get_google_trends_correlation_plot(self, switch=0) -> Tuple[Any, str]:
+        if switch != 1 and switch != 0:
+            raise Exception()
+        trends = list()
+
+        for key in self.data:
+            if self.data[key].price_correlation_change_with_google_trends_data is not None:
+                trends.append(self.data[key].price_correlation_change_with_google_trends_data[switch])
+
+        fig, ax = plt.subplots()
+        series = Series(list(map(lambda x: x[0], trends)))
+        series.hist(ax=ax, bins=20).plot()
+
+        trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
+        series = Series(trends)
+        series[series != 0].hist(ax=ax, bins=20).plot()
+
+        return fig, "google-trends-price-usd-correlation-significant-ones-marked"
+
+    def get_google_trends_correlation_plot2(self, switch=1) -> Tuple[Any, str]:
+        if switch != 1 and switch != 2:
+            raise Exception()
+        trends = list()
+
+        for key in self.data:
+            if self.data[key].price_correlation_change_with_google_trends_data is not None:
+                trends.append(self.data[key].price_correlation_change_with_google_trends_data[switch])
+
+        fig, ax = plt.subplots()
+        series = Series(list(map(lambda x: x[0], trends)))
+        series.hist(ax=ax, bins=20).plot()
+
+        trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
+        series = Series(trends)
+        series[series != 0].hist(ax=ax, bins=20).plot()
+
+        return fig, "google-trends-price-usd-correlation-significant-ones-marked"
