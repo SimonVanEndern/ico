@@ -1,5 +1,5 @@
 class CSVStrings:
-    market_cap_string: str = "market_cap_by_available_supply"
-    price_usd_string: str = "price_usd"
-    price_btc_string: str = "price_btc"
-    volume_string: str = "volume_usd"
+    MARKET_CAP_STRING: str = "market_cap_by_available_supply"
+    PRICE_USD_STRING: str = "price_usd"
+    PRICE_BTC_STRING: str = "price_btc"
+    VOLUME_STRING: str = "volume_usd"

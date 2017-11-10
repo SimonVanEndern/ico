@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f706f99-14d9-4e62-8eec-2dff7ea6a8b0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency.py" afterPath="$PROJECT_DIR$/common/currency.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency_handler.py" afterPath="$PROJECT_DIR$/common/currency_handler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency_statistical_data.py" afterPath="$PROJECT_DIR$/common/currency_statistical_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/test_currency_handler.py" afterPath="$PROJECT_DIR$/common/test_currency_handler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/main.py" afterPath="$PROJECT_DIR$/finance_data_import/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/csv_strings.py" afterPath="$PROJECT_DIR$/csv_strings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/compressed_raw_data/currency_dto.py" afterPath="$PROJECT_DIR$/finance_data_import/compressed_raw_data/currency_dto.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py" afterPath="$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/raw_data/raw_data_importer.py" afterPath="$PROJECT_DIR$/finance_data_import/raw_data/raw_data_importer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/raw_data/test_coinmarketcap_importer.py" afterPath="$PROJECT_DIR$/finance_data_import/raw_data/test_coinmarketcap_importer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/global_data.py" afterPath="$PROJECT_DIR$/global_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/google_trends/import_data/main.py" afterPath="$PROJECT_DIR$/google_trends/import_data/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico_data_crawler/imports/icobazaar.py" afterPath="$PROJECT_DIR$/ico_data_crawler/imports/icobazaar.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico_data_crawler/imports/icotracker.py" afterPath="$PROJECT_DIR$/ico_data_crawler/imports/icotracker.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico_data_crawler/imports/importer.py" afterPath="$PROJECT_DIR$/ico_data_crawler/imports/importer.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -186,28 +177,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="47" column="51" lean-forward="false" selection-start-line="47" selection-start-column="51" selection-end-line="47" selection-end-column="51" />
-              <folding>
-                <element signature="e#0#62#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="coinmarketCapApi.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/coinmarketCapApi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="test_google_trends_DTO.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/google_trends/import_data/test_google_trends_DTO.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -240,11 +209,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="global_data.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="global_data.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/global_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
+            <state relative-caret-position="561">
               <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="singleton.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/singleton.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="521">
+              <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_commons.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_commons.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="19" column="21" lean-forward="true" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="csv_strings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/csv_strings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -269,18 +268,6 @@
               <caret line="53" column="64" lean-forward="true" selection-start-line="53" selection-start-column="64" selection-end-line="53" selection-end-column="64" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="within_currencies.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/top/within_currencies.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -368,7 +355,6 @@
         <option value="$PROJECT_DIR$/finance_data_import/compressed_raw_data/datapoint_dto.py" />
         <option value="$PROJECT_DIR$/finance_data_import/compressed_raw_data/currency_dto.py" />
         <option value="$PROJECT_DIR$/finance_data_import/raw_data/raw_data_importer.py" />
-        <option value="$PROJECT_DIR$/csv_strings.py" />
         <option value="$PROJECT_DIR$/finance/analysis/descriptive_statistics.py" />
         <option value="$PROJECT_DIR$/common/coinmarketCapApi.py" />
         <option value="$PROJECT_DIR$/common/coinmarketcap_coin_parser.py" />
@@ -402,6 +388,7 @@
         <option value="$PROJECT_DIR$/top/statistical_analysis_calculator.py" />
         <option value="$PROJECT_DIR$/google_trends/import_data/main.py" />
         <option value="$PROJECT_DIR$/global_data.py" />
+        <option value="$PROJECT_DIR$/csv_strings.py" />
       </list>
     </option>
   </component>
@@ -1233,7 +1220,7 @@
       <workItem from="1507710572875" duration="56870000" />
       <workItem from="1507904290385" duration="121382000" />
       <workItem from="1509196238114" duration="28082000" />
-      <workItem from="1509386322911" duration="145161000" />
+      <workItem from="1509386322911" duration="145256000" />
     </task>
     <servers />
   </component>
@@ -1270,7 +1257,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="493176000" />
+    <option name="totallyTimeSpent" value="493271000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1420,16 +1407,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/common/coinmarketcap_coin_parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="45" column="12" lean-forward="false" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/finance_data_import/raw_data/test_raw_data_importer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1528,14 +1505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/singleton.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/finance_data_import/raw_data/raw_data_importer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1564,14 +1533,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="30" column="106" lean-forward="false" selection-start-line="30" selection-start-column="92" selection-end-line="30" selection-end-column="106" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_commons.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="20" column="8" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -1842,8 +1803,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/global_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
+        <state relative-caret-position="561">
           <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/singleton.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_commons.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="21" lean-forward="true" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/csv_strings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>

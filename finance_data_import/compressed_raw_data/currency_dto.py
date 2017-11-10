@@ -39,10 +39,10 @@ class CurrencyDTO:
     def extract_data(self, data):
         output = {}
 
-        market_cap = list(data[CSVStrings.market_cap_string])
-        price_usd = list(data[CSVStrings.price_usd_string])
-        price_btc = list(data[CSVStrings.price_btc_string])
-        volume_usd = list(data[CSVStrings.volume_string])
+        market_cap = list(data[CSVStrings.MARKET_CAP_STRING])
+        price_usd = list(data[CSVStrings.PRICE_USD_STRING])
+        price_btc = list(data[CSVStrings.PRICE_BTC_STRING])
+        volume_usd = list(data[CSVStrings.VOLUME_STRING])
 
         for capitalization in market_cap:
             datapoint = datapoint_dto.from_market_cap(capitalization)

@@ -82,7 +82,7 @@ class CurrencyHandler:
                 self.basic_currency_data[currency] = None
             else:
                 data = json.loads(response.text)
-                datapoints = data[CSVStrings.price_usd_string]
+                datapoints = data[CSVStrings.PRICE_USD_STRING]
 
                 self.basic_currency_data[currency] = {"start_date": datapoints[0][0]}
             self.save_basic_currency_data()

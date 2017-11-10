@@ -78,14 +78,14 @@ class CoinMarketCapGraphAPIImporter:
             self.logger.info("Currency {} from {} to {} already downloaded".format(currency, start, end))
             return
 
-        if len(data[CSVStrings.price_usd_string]) == 2:
+        if len(data[CSVStrings.PRICE_USD_STRING]) == 2:
             self.logger.info("Currency {} from {} to {} has no additional data".format(currency, start, end))
 
         self.logger.info(
-            "saved data from {} to {} --> {} entries".format(start, end, len(data[CSVStrings.price_usd_string])))
-        if len(data[CSVStrings.price_usd_string]) < 800:
+            "saved data from {} to {} --> {} entries".format(start, end, len(data[CSVStrings.PRICE_USD_STRING])))
+        if len(data[CSVStrings.PRICE_USD_STRING]) < 800:
             self.logger.warning(
-                "For {} to {} we only got {} entries".format(start, end, len(data[CSVStrings.price_usd_string])))
+                "For {} to {} we only got {} entries".format(start, end, len(data[CSVStrings.PRICE_USD_STRING])))
 
         filename = str(start) + "-" + str(end) + ".json"
         if not os.path.isdir(os.path.join(path, currency)):
