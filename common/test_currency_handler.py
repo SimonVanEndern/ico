@@ -15,7 +15,7 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
     TestCommons()
     currency_handler = CurrencyHandler.Instance()
     currency_handler.data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
-    GlobalData.last_date_for_download = GlobalData.last_date_for_download2
+    GlobalData.LAST_DATA_FOR_DOWNLOAD = GlobalData.LAST_DATA_FOR_DOWNLOAD_2
 
     def test_get_all_currency_names(self):
         result = self.currency_handler.get_all_currency_names_where_data_is_available()
@@ -46,7 +46,7 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
         self.assertEqual(result, {"start_date": 1367174841000})
 
     def test_get_financial_series_start_date_of_all_currencies(self):
-        GlobalData.last_date_for_download = GlobalData.last_date_for_download2
+        GlobalData.LAST_DATA_FOR_DOWNLOAD = GlobalData.LAST_DATA_FOR_DOWNLOAD_2
         self.currency_handler.load_all_currencies()
         result = self.currency_handler.get_financial_series_start_date_of_all_currencies(limit=10)
 

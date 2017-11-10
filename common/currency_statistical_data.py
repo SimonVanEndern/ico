@@ -15,7 +15,7 @@ class CurrencyStatisticalData:
 
         self.first_date: int = self.calculate_fist_date()
         self.total_data_points = self.calculate_total_data_points()
-        self.age_in_days = (GlobalData.last_date_for_analysis - self.first_date) / (1000 * 3600 * 24)
+        self.age_in_days = (GlobalData.LAST_DATE_FOR_ANALYSIS - self.first_date) / (1000 * 3600 * 24)
 
         self.total_volume: float = self.calculate_total_volume()
         self.average_volume: float = self.calculate_average_volume()

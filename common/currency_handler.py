@@ -26,7 +26,7 @@ class CurrencyHandler:
 
         self.coinmarketcapAPI: CoinmarketCapApi = CoinmarketCapApi(static=static)
 
-        self.data_path: str = GlobalData.financial_data_path
+        self.data_path: str = GlobalData.FINANCIAL_DATA_PATH
 
         self.basic_currency_data = self.load_basic_currency_data()
         self.all_currency_names = self.load_all_currency_names()
@@ -74,7 +74,7 @@ class CurrencyHandler:
             return self.basic_currency_data[currency]
         else:
             time.sleep(1)
-            path = ("https://" + GlobalData.coin_market_cap_graph_api_url + "/currencies/{}/").format(currency)
+            path = ("https://" + GlobalData.COIN_MARKET_CAP_GRAPH_API_URL + "/currencies/{}/").format(currency)
             response = requests.request("GET", path)
 
             if response.status_code == 404:

@@ -62,7 +62,7 @@ class CoinMarketCapGraphAPIImporter:
         time.sleep(1)
 
         path = (
-            "https://" + GlobalData.coin_market_cap_graph_api_url + "/currencies/{}/{}/{}/".format(currency, start,
+            "https://" + GlobalData.COIN_MARKET_CAP_GRAPH_API_URL + "/currencies/{}/{}/{}/".format(currency, start,
                                                                                                    end))
         self.logger.info("Start: Downloading from " + path)
         response = requests.request("GET", path)
@@ -101,4 +101,4 @@ class CoinMarketCapGraphAPIImporter:
 
         if os.path.isdir(os.path.join(self.save_path_additional_data, currency)):
             open(os.path.join(self.save_path_additional_data, currency,
-                              "ready" + str(GlobalData.last_date_for_download)), "w").close()
+                              "ready" + str(GlobalData.LAST_DATA_FOR_DOWNLOAD)), "w").close()

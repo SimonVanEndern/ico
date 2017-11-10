@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f706f99-14d9-4e62-8eec-2dff7ea6a8b0" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/google_trends/import_data/google_trends_data.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency.py" afterPath="$PROJECT_DIR$/common/currency.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency_handler.py" afterPath="$PROJECT_DIR$/common/currency_handler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency_statistical_data.py" afterPath="$PROJECT_DIR$/common/currency_statistical_data.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/test_currency_handler.py" afterPath="$PROJECT_DIR$/common/test_currency_handler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/main.py" afterPath="$PROJECT_DIR$/finance_data_import/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py" afterPath="$PROJECT_DIR$/finance_data_import/raw_data/coinmarketcap_importer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/raw_data/raw_data_importer.py" afterPath="$PROJECT_DIR$/finance_data_import/raw_data/raw_data_importer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/raw_data/test_coinmarketcap_importer.py" afterPath="$PROJECT_DIR$/finance_data_import/raw_data/test_coinmarketcap_importer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/global_data.py" afterPath="$PROJECT_DIR$/global_data.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/google_trends/import_data/main.py" afterPath="$PROJECT_DIR$/google_trends/import_data/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/statistical_analysis_calculator.py" afterPath="$PROJECT_DIR$/top/statistical_analysis_calculator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico_data_crawler/imports/icobazaar.py" afterPath="$PROJECT_DIR$/ico_data_crawler/imports/icobazaar.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico_data_crawler/imports/icotracker.py" afterPath="$PROJECT_DIR$/ico_data_crawler/imports/icotracker.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ico_data_crawler/imports/importer.py" afterPath="$PROJECT_DIR$/ico_data_crawler/imports/importer.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -198,18 +208,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_currency_statistical_data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/test_currency_statistical_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="139" column="40" lean-forward="true" selection-start-line="139" selection-start-column="40" selection-end-line="139" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="test_google_trends_DTO.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/google_trends/import_data/test_google_trends_DTO.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -232,11 +230,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/google_trends/import_data/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="21" column="23" lean-forward="false" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="global_data.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/global_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="498">
+              <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -372,7 +380,6 @@
         <option value="$PROJECT_DIR$/temp.py" />
         <option value="$PROJECT_DIR$/temp2.py" />
         <option value="$PROJECT_DIR$/singleton.py" />
-        <option value="$PROJECT_DIR$/global_data.py" />
         <option value="$PROJECT_DIR$/test_commons.py" />
         <option value="$PROJECT_DIR$/common/currency_handler.py" />
         <option value="$PROJECT_DIR$/finance_data_import/aggregated_data/financial_data_calculator.py" />
@@ -394,6 +401,7 @@
         <option value="$PROJECT_DIR$/top/statistical_analysis_runner_and_exporter.py" />
         <option value="$PROJECT_DIR$/top/statistical_analysis_calculator.py" />
         <option value="$PROJECT_DIR$/google_trends/import_data/main.py" />
+        <option value="$PROJECT_DIR$/global_data.py" />
       </list>
     </option>
   </component>
@@ -1225,7 +1233,7 @@
       <workItem from="1507710572875" duration="56870000" />
       <workItem from="1507904290385" duration="121382000" />
       <workItem from="1509196238114" duration="28082000" />
-      <workItem from="1509386322911" duration="144974000" />
+      <workItem from="1509386322911" duration="145161000" />
     </task>
     <servers />
   </component>
@@ -1257,15 +1265,16 @@
     <history-entry file="Unittests - 2017.11.10 at 15h 47m 27s.xml">
       <configuration name="Unittests" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_currency_statistical_data_CurrencyStatisticalDataTest_test_calculate_price_correlation_with_google_trends - 2017.11.10 at 14h 20m 37s.xml">
-      <configuration name="Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_price_correlation_with_google_trends" configurationId="tests" />
+    <history-entry file="Unittests - 2017.11.10 at 16h 00m 08s.xml">
+      <configuration name="Unittests" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="492989000" />
+    <option name="totallyTimeSpent" value="493176000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1274,7 +1283,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5030257" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3287037" sideWeight="0.4969743" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.4969743" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1693,14 +1702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/global_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="29" column="4" lean-forward="false" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pytrends/request.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1835,6 +1836,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="21" column="23" lean-forward="false" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/global_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding />
         </state>
       </provider>

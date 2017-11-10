@@ -6,7 +6,7 @@ from ico_data_crawler.initial_coin_offering import ICO
 
 
 class IcobazaarSource:
-    baseAddress = GlobalData.ico_data_path
+    baseAddress = GlobalData.ICO_DATA_PATH
 
     filename = "\icobazaar-2017-09-26-11-16uhr.csv"
 

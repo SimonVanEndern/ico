@@ -19,7 +19,7 @@ class GoogleTrends:
         self.save_path = GlobalData.EXTERNAL_PATH_GOOGLE_TRENDS_DATA
         self.save_path = os.path.join(self.save_path, "6monthly")
         self.start_2013 = 1356998400000
-        self.end = GlobalData.last_date_for_download
+        self.end = GlobalData.LAST_DATA_FOR_DOWNLOAD
 
         self.currency_handler = CurrencyHandler.Instance()
 

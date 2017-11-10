@@ -10,8 +10,8 @@ class Importer:
     def __init__(self):
         self.path = None
 
-        if GlobalData.ico_use_static_date:
-            self.now = datetime.strptime(GlobalData.ico_static_date, "%d.%m.%Y")
+        if GlobalData.ICO_USE_STATIC_DATE:
+            self.now = datetime.strptime(GlobalData.ICO_STATIC_DATE, "%d.%m.%Y")
         else:
             self.now = datetime.now()
 

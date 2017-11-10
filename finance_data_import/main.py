@@ -15,7 +15,7 @@ class MainDataImporter:
         self.raw_data_simplifier = SimplifyRawData()
         self.raw_data_converter = ReduceSimplifiedData()
 
-        self.last_time = GlobalData.last_date_for_download
+        self.last_time = GlobalData.LAST_DATA_FOR_DOWNLOAD
 
     def run(self):
         self.raw_data_downloader.download_all_data()

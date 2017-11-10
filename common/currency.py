@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 class Currency:
-    data_path = GlobalData.financial_data_path
+    data_path = GlobalData.FINANCIAL_DATA_PATH
 
     def __init__(self, currency, data_path=None, date_limit: datetime = None):
         self.logger = logging.getLogger(self.__class__.__name__)
@@ -57,7 +57,7 @@ class Currency:
         print("Currency: {} - Gaps: {}".format(self.currency, self.usd.number_of_gaps()))
 
     def load_financial_data(self) -> None:
-        filename: str = self.currency + str(GlobalData.last_date_for_download) + ".csv"
+        filename: str = self.currency + str(GlobalData.LAST_DATA_FOR_DOWNLOAD) + ".csv"
         filepath: str = path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA,
                                   GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA, self.currency, filename)
         try:
@@ -69,7 +69,7 @@ class Currency:
 
     def load_financial_data_from_csv_input(self, csv_input: list) -> None:
         if csv_input is None or len(csv_input) < 3:
-            print(GlobalData.last_date_for_download)
+            print(GlobalData.LAST_DATA_FOR_DOWNLOAD)
             raise Exception("Empty csv input for {}".format(self.currency))
 
         header = csv_input.pop(0)

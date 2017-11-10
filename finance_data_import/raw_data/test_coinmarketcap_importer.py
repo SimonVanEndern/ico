@@ -42,7 +42,7 @@ class CoinmarketcapImporterTest(unittest.TestCase, TestCommons):
 
     def test_request_currency(self):
         currency = "ripple"
-        last_date = GlobalData.last_date_for_download
+        last_date = GlobalData.LAST_DATA_FOR_DOWNLOAD
 
         with patch('os.path.isfile', return_value=False) as is_file_mock:
             self.coinmarketcap_importer.request_data_monthly = MagicMock(name="request_data_monthly")

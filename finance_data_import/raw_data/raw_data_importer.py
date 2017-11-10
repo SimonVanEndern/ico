@@ -12,7 +12,7 @@ class RawDataImporter:
         self.currency_handler = CurrencyHandler.Instance()
         self.coinmarketcap_importer = CoinMarketCapGraphAPIImporter()
 
-        self.last_timestamp = GlobalData.last_date_for_download
+        self.last_timestamp = GlobalData.LAST_DATA_FOR_DOWNLOAD
 
     def download_all_data(self):
         currencies = self.currency_handler.get_all_currency_names()

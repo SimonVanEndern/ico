@@ -2,11 +2,11 @@ from datetime import datetime
 
 
 class GlobalData:
-    financial_data_path = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
-    ico_data_path = 'Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\Listings'
+    FINANCIAL_DATA_PATH = "Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\coinmarketcap-2017-10-08\\"
+    ICO_DATA_PATH = 'Z:\Google Drive\\01 - Studium\Bachelorarbeit\data\Listings'
 
-    ico_static_date = "05.11.2017"
-    ico_use_static_date: bool = True
+    ICO_STATIC_DATE = "05.11.2017"
+    ICO_USE_STATIC_DATE: bool = True
 
     EXTERNAL_PATH_RAW_DATA = "X:\\bachelor-thesis\\raw-data"
     EXTERNAL_PATH_COMPRESSED_DATA = "X:\\bachelor-thesis\\compressed-data"
@@ -22,19 +22,12 @@ class GlobalData:
 
     CURRENCY_HANDLER_PATH = "X:\\bachelor-thesis\currency-handler"
 
-    ICO_FUNDING_AND_START_DATA_PATH = "X:\\bachelor-thesis\ico-data"
-
     EXTERNAL_PATH_ANALYSIS_DATA = "X:\\bachelor-thesis\\analysis"
     EXTERNAL_PATH_ANALYSIS_DATA_TODAY = None
 
-    last_date_for_download: int = int(datetime.strptime("01.11.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
-    last_date_for_download2: int = int(datetime.strptime("01.11.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
-    last_date_for_analysis: int = int(datetime.strptime("31.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
+    LAST_DATA_FOR_DOWNLOAD: int = int(datetime.strptime("01.11.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
+    LAST_DATA_FOR_DOWNLOAD_2: int = int(datetime.strptime("01.11.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
+    LAST_DATE_FOR_ANALYSIS: int = int(datetime.strptime("31.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
     TEST_LAST_DATE_FOR_DOWNLOAD: int = int(datetime.strptime("19.10.2017 10:00", "%d.%m.%Y %H:%M").timestamp() * 1e3)
 
-    coin_market_cap_graph_api_url = "graphs.coinmarketcap.com"
-
-
-
-
-
+    COIN_MARKET_CAP_GRAPH_API_URL = "graphs.coinmarketcap.com"
