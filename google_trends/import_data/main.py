@@ -83,5 +83,3 @@ class GoogleTrends:
 
 
 GoogleTrends().main()
-# data = trends.get_raw_data("bitcoin", "2017-04-16 2017-10-16")
-# print(trends.compress_raw_data(data))
