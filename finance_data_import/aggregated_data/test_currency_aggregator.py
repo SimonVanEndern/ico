@@ -30,6 +30,6 @@ class CurrencyAggregatorTest(unittest.TestCase, TestCommons):
         input_data.pop(0)
         result = self.currency_aggregator.aggregate_data(input_data)
 
-        self.assertEqual(result, [[1388142000000, 752.7169683, 1.0, 63158044.89775, 9168463288.7],
-                                  [1388228400000, None, None, None, None, None]])
+        self.assertEqual(result, [[1388145600000, 751.8836313, 1.0, 61978113.7897, 9158451713.36],
+                                  [1388232000000, None, None, None, None, None]])
         self.assertTrue(isinstance(result, list))

@@ -1,6 +1,7 @@
 import csv
 import logging
 import os
+from typing import List, Tuple
 
 import pandas
 import matplotlib.pyplot as plt
@@ -74,7 +75,7 @@ class GoogleTrendsDTO:
             for element in self.relative_change_6monthly:
                 writer.writerow([element[0], element[1]])
 
-    def load_aggregated_data(self) -> list:
+    def load_aggregated_data(self) -> List[Tuple[int, float]]:
         try:
             with open(self.path_saved_aggregated_data) as file:
                 reader = csv.reader(file, delimiter=",", lineterminator="\n")

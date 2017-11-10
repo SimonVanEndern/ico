@@ -1,12 +1,9 @@
-import csv
-import os
 from datetime import datetime
 from typing import Dict
 
 from common.currency import Currency
 from common.currency_handler import CurrencyHandler
 from common.currency_statistical_data import CurrencyStatisticalData
-from global_data import GlobalData
 
 
 class WithinCurrencies:
@@ -19,9 +16,10 @@ class WithinCurrencies:
         for index, currency in enumerate(currencies):
 
             handle_on_currency: Currency = self.currency_handler.get_currency(currency, date_limit=self.start_date)
-            self.data[currency] = handle_on_currency.get_statistical_data()
+            data = handle_on_currency.get_statistical_data()
+            if data is not None:
+                self.data[currency] = data
 
         return self.data
-
 
 # WithinCurrencies().get_and_export_data()

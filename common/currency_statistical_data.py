@@ -6,6 +6,7 @@ from scipy import stats, math
 from scipy.stats._stats_mstats_common import LinregressResult
 
 from global_data import GlobalData
+from google_trends.import_data.google_trends_DTO import GoogleTrendsDTO
 
 
 class CurrencyStatisticalData:
@@ -42,12 +43,13 @@ class CurrencyStatisticalData:
         # TODO: Make it work
         # self.volatility_linear_regression: LinregressResult = self.calculate_volatility_linreg()
 
-        self.google_trends_correlations: dict
+        self.google_trends_correlations: dict = self.load_google_trends_data()
 
         self.percentage_of_total_market_capitalization: pandas.DataFrame
 
         self.volume_return_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_return_correlations()
-        self.volume_market_capitalization_correlation: Tuple[float, float] = self.calculate_volume_market_capitalization_correlation()
+        self.volume_market_capitalization_correlation: Tuple[
+            float, float] = self.calculate_volume_market_capitalization_correlation()
         self.volume_price_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_price_correlations()
         self.price_market_capitalization_correlation: float = self.calculate_price_market_capitalization_correlation()
 
@@ -83,6 +85,8 @@ class CurrencyStatisticalData:
             i = 0
             while numpy.isnan(prices[i]):
                 i += 1
+                if i > len(prices) - 1:
+                    raise RuntimeError("No data for this currency")
             price = prices[i]
         else:
             price = list(self.currency.data["usd"])[0]
@@ -270,3 +274,7 @@ class CurrencyStatisticalData:
             export["volume_return_correlations_" + key + "-p-value"] = export["volume_return_correlations"][key][1]
 
         return export
+
+    def load_google_trends_data(self):
+        gtd = GoogleTrendsDTO(self.currency.currency)
+        gtd.load_aggregated_data()

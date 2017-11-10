@@ -7,6 +7,7 @@ from os import path
 import matplotlib.pyplot as plt
 import numpy
 import pandas
+from scipy.stats import stats
 
 from common.currency_statistical_data import CurrencyStatisticalData
 from global_data import GlobalData
@@ -45,7 +46,10 @@ class Currency:
 
     def get_statistical_data(self) -> CurrencyStatisticalData:
         if self.statistical_data is None:
-            self.statistical_data = CurrencyStatisticalData(self)
+            try:
+                self.statistical_data = CurrencyStatisticalData(self)
+            except RuntimeError:
+                return None
         return self.statistical_data
 
     def print(self) -> None:
@@ -147,3 +151,15 @@ class Currency:
             return "coin" in self.currency or "bit" in self.currency or "token" in self.currency
         else:
             return keyword in self.currency
+
+    def get_absolute_price_correlation(self, other: 'Currency'):
+        frame1 = self.data["usd"]
+        frame2 = other.data["usd"]
+
+        combined: pandas.DataFrame = pandas.concat([frame1, frame2], axis=1)
+        combined.columns = ["a", "b"]
+        combined = combined.dropna()
+
+        return stats.pearsonr(list(combined["a"]), list(combined["b"]))
+
+

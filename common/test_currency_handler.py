@@ -32,8 +32,8 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
         result2: pandas.DataFrame = self.currency_handler.get_currency("bitcoin",
                                                                        datetime.strptime("01.01.2016", "%d.%m.%Y")).data
 
-        self.assertEqual(len(result1), 1647)
-        self.assertEqual(len(result2), 670)
+        self.assertEqual(len(result1), 1646)
+        self.assertEqual(len(result2), 669)
 
     def test_get_all_currencies_limited(self):
         self.currency_handler.get_all_currency_names_where_data_is_available()

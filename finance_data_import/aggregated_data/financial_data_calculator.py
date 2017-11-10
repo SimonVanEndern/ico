@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import List
 
 from finance_data_import.raw_data.coinmarketcap_importer import CoinMarketCapGraphAPIImporter
@@ -69,12 +69,12 @@ class FinancialDataCalculator:
 
 
 def get_next_timestamp_at_time(timestamp: int, hours: int) -> int:
-    date: datetime = datetime.fromtimestamp(timestamp / 1e3)
+    date: datetime = datetime.utcfromtimestamp(timestamp / 1e3)
     if date.hour < hours:
-        new_date = date.replace(hour=hours, minute=0, second=0)
+        new_date = date.replace(hour=hours, minute=0, second=0, tzinfo=timezone.utc)
     else:
         new_date = date + timedelta(days=1)
-        new_date = new_date.replace(hour=hours, minute=0, second=0)
+        new_date = new_date.replace(hour=hours, minute=0, second=0, tzinfo=timezone.utc)
 
     return int(new_date.timestamp() * 1e3)
 
@@ -82,9 +82,9 @@ def get_next_timestamp_at_time(timestamp: int, hours: int) -> int:
 def get_last_timestamp_at_time(timestamp: int, hours: int) -> int:
     date: datetime = datetime.fromtimestamp(timestamp / 1e3)
     if date.hour >= hours:
-        new_date = date.replace(hour=hours, minute=0, second=0)
+        new_date = date.replace(hour=hours, minute=0, second=0, tzinfo=timezone.utc)
     else:
         new_date = date - timedelta(days=1)
-        new_date = new_date.replace(hour=hours, minute=0, second=0)
+        new_date = new_date.replace(hour=hours, minute=0, second=0, tzinfo=timezone.utc)
 
     return int(new_date.timestamp() * 1e3)

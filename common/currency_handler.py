@@ -151,7 +151,7 @@ class CurrencyHandler:
 
         return dict()
 
-    def get_all_currency_names(self) -> list:
+    def get_all_currency_names(self) -> List[str]:
         currencies: list = self.get_all_currency_names_where_data_is_available()
 
         additional: list = self.coinmarketcapAPI.get_all_currencies()
@@ -204,4 +204,4 @@ class CurrencyHandler:
         # self.all_currency_names.remove("power-ledger")
         # self.all_currency_names.remove("playercoin")
 
-        return self.all_currency_names
+        return sorted(self.all_currency_names)

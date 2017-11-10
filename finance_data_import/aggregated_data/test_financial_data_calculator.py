@@ -43,8 +43,8 @@ class FinancialDataCalculatorTest(unittest.TestCase):
         result = financial_data_calculator.get_next_timestamp_at_time(input_data, 12)
         result2 = financial_data_calculator.get_next_timestamp_at_time(input_data2, 12)
 
-        self.assertEqual(result, 1455015600000)
-        self.assertEqual(result2, 1455015600000)
+        self.assertEqual(result, 1455019200000)
+        self.assertEqual(result2, 1455019200000)
 
     def test_get_last_timestamp_at_time(self):
         input_data = 1454963764000
@@ -52,5 +52,5 @@ class FinancialDataCalculatorTest(unittest.TestCase):
         result = financial_data_calculator.get_last_timestamp_at_time(input_data, 12)
         result2 = financial_data_calculator.get_last_timestamp_at_time(input_data2, 12)
 
-        self.assertEqual(result, 1454929200000)
-        self.assertEqual(result2, 1454929200000)
+        self.assertEqual(result, 1454932800000)
+        self.assertEqual(result2, 1454932800000)

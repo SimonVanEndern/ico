@@ -4,6 +4,7 @@ from typing import List, Dict, Tuple
 
 import matplotlib.pyplot as plt
 import pandas
+import shutil
 
 from common.currency_handler import CurrencyHandler
 from common.currency_statistical_data import CurrencyStatisticalData
@@ -14,6 +15,8 @@ from top.within_currencies import WithinCurrencies
 
 class LayerOnTopOfWithinCurrencies:
     def __init__(self):
+        self.currency_handler = CurrencyHandler.Instance()
+
         # Using data for whole period
         self.start_total: datetime = None
 
@@ -34,10 +37,8 @@ class LayerOnTopOfWithinCurrencies:
         path_today = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, folder_today)
         GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY = path_today
         if os.path.isdir(path_today):
-            os.rmdir(path_today)
+            shutil.rmtree(path_today)
         os.mkdir(path_today)
-
-        self.currency_handler = CurrencyHandler.Instance()
 
         for start_date in self.start_dates:
             self.data[str(start_date)] = WithinCurrencies(start_date).get_and_export_data(
@@ -50,13 +51,29 @@ class LayerOnTopOfWithinCurrencies:
 
             StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)]).run()
 
-            with_keyword, without_keyword = self.create_clusters()
+            with_keyword, without_keyword = self.create_semantic_clusters()
             StatisticalAnalysisRunnerAndExporter(start_date_name,
                                                  WithinCurrencies(start_date).get_and_export_data(with_keyword),
                                                  subfolder="with-keyword").run()
             StatisticalAnalysisRunnerAndExporter(start_date_name,
                                                  WithinCurrencies(start_date).get_and_export_data(without_keyword),
                                                  subfolder="without_keyword").run()
+
+            low_volume, high_volume = self.create_volume_clusters()
+            StatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                 WithinCurrencies(start_date).get_and_export_data(low_volume),
+                                                 subfolder="low_volume").run()
+            StatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                 WithinCurrencies(start_date).get_and_export_data(high_volume),
+                                                 subfolder="high_volume").run()
+
+            low_start_price, high_start_price = self.create_start_price_clusters()
+            StatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                 WithinCurrencies(start_date).get_and_export_data(low_start_price),
+                                                 subfolder="low_start_price")
+            StatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                 WithinCurrencies(start_date).get_and_export_data(high_start_price),
+                                                 subfolder="high_start_price")
 
             # Clustering according to "coin" semantics
             # self.data_semantic_cluster: Dict = dict()
@@ -65,7 +82,7 @@ class LayerOnTopOfWithinCurrencies:
             # Clustering according to available funding data
             # Clustering according to volume
 
-        self.create_clusters()
+        self.create_semantic_clusters()
 
     def filter_for_keyword(self) -> Tuple[Dict, Dict]:
         contains_keyword = dict()
@@ -131,7 +148,7 @@ class LayerOnTopOfWithinCurrencies:
 
         return
 
-    def create_clusters(self) -> Tuple[List[str], List[str]]:
+    def create_semantic_clusters(self) -> Tuple[List[str], List[str]]:
         with_keyword = list()
         without_keyword = list()
 
@@ -142,3 +159,27 @@ class LayerOnTopOfWithinCurrencies:
                 without_keyword.append(currency)
 
         return with_keyword, without_keyword
+
+    def create_volume_clusters(self) -> Tuple[List[str], List[str]]:
+        currencies = self.currency_handler.get_all_currency_names()
+        currencies = list(map(lambda x: self.currency_handler.get_currency(x), currencies))
+
+        volume = list(map(lambda x: (x.currency, x.get_statistical_data().average_volume), currencies))
+        volume = sorted(volume, key=lambda x: x[1])
+        volume = list(map(lambda x: x[0], volume))
+
+        middle = int(len(volume) / 2)
+
+        return volume[:middle], volume[middle:]
+
+    def create_start_price_clusters(self) -> Tuple[List[str], List[str]]:
+        currencies = self.currency_handler.get_all_currency_names()
+        currencies = list(map(lambda x: self.currency_handler.get_currency(x), currencies))
+
+        start_prices = list(map(lambda x: (x.currency, x.get_statistical_data().first_price), currencies))
+        start_prices = sorted(start_prices, key=lambda x: x[1])
+        start_prices = list(map(lambda x: x[0], start_prices))
+
+        middle = int(len(start_prices) / 2)
+
+        return start_prices[:middle], start_prices[middle:]
