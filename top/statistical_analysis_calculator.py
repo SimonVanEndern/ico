@@ -15,15 +15,40 @@ class StatisticalAnalysisCalculator:
 
         self.currency_handler = CurrencyHandler.Instance()
 
-    def get_average_volume_data(self):
-        index = list()
+    def get_series_of_attribute(self, attribute: str) -> Series:
         output = list()
 
         for key in self.data:
-            output.append(self.data[key].average_volume)
-            index.append(self.data[key].first_date)
+            output.append(getattr(self.data[key], attribute))
 
-        series = Series(output)
+        return Series(output)
+
+    def get_pearsonr(self, attribute_1: str, attribute_2: str):
+        list_1 = list()
+        list_2 = list()
+
+        for key in self.data:
+            list_1.append(getattr(self.data[key], attribute_1))
+            list_2.append(getattr(self.data[key], attribute_2))
+
+        return stats.pearsonr(list_1, list_2)
+
+    def get_correlation_figure_from_correlations_list(self, correlations: List[Tuple[float, float]]):
+        correlations_all: List[float] = list(map(lambda x: x[0], correlations))
+        correlations_significant: List[float] = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
+        correlations_significant = list(filter(lambda x: x != 0, correlations_significant))
+
+        fig, ax = plt.subplots()
+        series = Series(correlations_all)
+        series.hist(ax=ax, bins=20).plot()
+
+        series = Series(correlations_significant)
+        series.hist(ax=ax, bins=20).plot()
+
+        return fig
+
+    def get_average_volume_plot(self) -> Tuple[Any, str]:
+        series = self.get_series_of_attribute("average_volume")
 
         fig, ax = plt.subplots()
         series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
@@ -31,29 +56,15 @@ class StatisticalAnalysisCalculator:
         return fig, "average-volume-plot"
 
     def get_average_market_capitalization_plot(self):
-        index = list()
-        output = list()
-
-        for key in self.data:
-            output.append(self.data[key].average_market_capitalization)
-            index.append(self.data[key].first_date)
-
-        series = Series(output)
+        series = self.get_series_of_attribute("average_market_capitalization")
 
         fig, ax = plt.subplots()
         series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
         ax.set_xscale('log', basex=10)
         return fig, "average-market-capitalization-plot"
 
-    def get_correlation_between_average_volume_and_average_market_capitalization(self):
-        volume = list()
-        market_cap = list()
-
-        for key in self.data:
-            volume.append(self.data[key].average_volume)
-            market_cap.append(self.data[key].average_market_capitalization)
-
-        return stats.pearsonr(volume, market_cap)
+    def get_correlation_between_average_volume_and_average_market_capitalization(self) -> Tuple[float, float]:
+        return self.get_pearsonr("average_volume", "average_market_capitalization")
 
     def get_average_market_capitalization_divided_by_average_volume_plot(self):
         volume = list()
@@ -94,15 +105,7 @@ class StatisticalAnalysisCalculator:
             correlations.append(self.data[key].volume_return_correlations)
 
         correlations = list(map(lambda x: x["0"], correlations))
-        correlations_all = list(map(lambda x: x[0], correlations))
-        correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
-
-        fig, ax = plt.subplots()
-        series = Series(correlations_all)
-        series.hist(ax=ax, bins=20).plot()
-
-        series = Series(correlations_adjusted)
-        series[series != 0].hist(ax=ax, bins=20).plot()
+        fig = self.get_correlation_figure_from_correlations_list(correlations)
 
         return fig, "volume-return-correlations-plot-significant-marked"
 
@@ -128,15 +131,7 @@ class StatisticalAnalysisCalculator:
         for key in self.data:
             correlations.append(self.data[key].volume_market_capitalization_correlation)
 
-        correlations_all = list(map(lambda x: x[0], correlations))
-        correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
-
-        fig, ax = plt.subplots()
-        series = Series(correlations_all)
-        series.hist(ax=ax, bins=20).plot()
-
-        series = Series(correlations_adjusted)
-        series[series != 0].hist(ax=ax, bins=20).plot()
+        fig = self.get_correlation_figure_from_correlations_list(correlations)
 
         return fig, "volume-market-cap-correlations-plot-significant-ones-marked"
 
@@ -162,15 +157,8 @@ class StatisticalAnalysisCalculator:
             correlations.append(self.data[key].volume_price_correlations)
 
         correlations = list(map(lambda x: x["0"], correlations))
-        correlations_all = list(map(lambda x: x[0], correlations))
-        correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
 
-        fig, ax = plt.subplots()
-        series = Series(correlations_all)
-        series.hist(ax=ax, bins=20).plot()
-
-        series = Series(correlations_adjusted)
-        series[series != 0].hist(ax=ax, bins=20).plot()
+        fig = self.get_correlation_figure_from_correlations_list(correlations)
 
         return fig, "raw-volume-price-correlations-significant-marked"
 
@@ -309,29 +297,20 @@ class StatisticalAnalysisCalculator:
         return positives, negatives, positives_interpolated, negatives_interpolated
 
     def get_price_change_beginning_plot(self):
-        price_changes = list()
-
-        for key in self.data:
-            price_changes.append(self.data[key].price_change_from_beginning)
-
+        series = self.get_series_of_attribute("price_change_from_beginning")
         fig, ax = plt.subplots()
-        series = Series(price_changes)
         try:
             series.hist(ax=ax, bins=numpy.logspace(-8, 5, num=30, base=10)).plot(spacing=0.5)
         except ValueError:
-            print(price_changes)
+            print(series)
         ax.set_xscale('log')
 
         return fig, "price-change-beginning-plot"
 
     def get_first_price_plot(self):
-        prices = list()
-
-        for key in self.data:
-            prices.append(self.data[key].first_price)
+        series = self.get_series_of_attribute("first_price")
 
         fig, ax = plt.subplots()
-        series = Series(prices)
         series.hist(ax=ax, bins=numpy.logspace(-10, 5, num=150, base=10)).plot(spacing=0.5)
         ax.set_xscale('log')
 

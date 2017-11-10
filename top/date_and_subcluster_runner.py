@@ -13,28 +13,22 @@ from top.statistical_analysis_runner_and_exporter import StatisticalAnalysisRunn
 from top.within_currencies import WithinCurrencies
 
 
-class LayerOnTopOfWithinCurrencies:
+class DateAndSubClusterRunner:
     def __init__(self):
         self.currency_handler = CurrencyHandler.Instance()
 
-        # Using data for whole period
+        # Start Dates of Time Series
         self.start_total: datetime = None
-
-        # Using data from begin 2017 on
         self.start_2017: datetime = datetime.strptime("01.01.2017", "%d.%m.%Y")
-
-        # Using data of last 6 month
         self.month_6: datetime = datetime.strptime("01.05.2017", "%d.%m.%Y")
-
-        # Using data of last 3 month
         self.month_3: datetime = datetime.strptime("01.08.2017", "%d.%m.%Y")
 
         self.start_dates: List(datetime) = [self.start_total, self.start_2017, self.month_6, self.month_3]
 
         self.data: Dict[str, Dict[str, CurrencyStatisticalData]] = dict()
 
-        folder_today = str(datetime.now().year) + "-" + str(datetime.now().month) + "-" + str(datetime.now().day)
-        path_today = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, folder_today)
+        folder_today: str = str(datetime.now().year) + "-" + str(datetime.now().month) + "-" + str(datetime.now().day)
+        path_today: str = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA, folder_today)
         GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY = path_today
         if os.path.isdir(path_today):
             shutil.rmtree(path_today)
@@ -45,7 +39,7 @@ class LayerOnTopOfWithinCurrencies:
                 self.currency_handler.get_all_currency_names())
 
             if start_date is None:
-                start_date_name = str(start_date)
+                start_date_name = "all-time"
             else:
                 start_date_name = str(start_date.timestamp())
 
@@ -74,15 +68,6 @@ class LayerOnTopOfWithinCurrencies:
             StatisticalAnalysisRunnerAndExporter(start_date_name,
                                                  WithinCurrencies(start_date).get_and_export_data(high_start_price),
                                                  subfolder="high_start_price")
-
-            # Clustering according to "coin" semantics
-            # self.data_semantic_cluster: Dict = dict()
-            # self.data_semantic_cluster["contains_keyword"], self.data_semantic_cluster[
-            #     "no_keyword"] = self.filter_for_keyword()
-            # Clustering according to available funding data
-            # Clustering according to volume
-
-        self.create_semantic_clusters()
 
     def filter_for_keyword(self) -> Tuple[Dict, Dict]:
         contains_keyword = dict()
@@ -139,9 +124,7 @@ class LayerOnTopOfWithinCurrencies:
         df = pandas.DataFrame(index, index=index, columns=["date"]).sort_index()
 
         df["date"] = df["date"].astype("datetime64[ms]")
-        print(df)
         df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).count()
-        print(df2)
 
         df2.plot(kind="bar")
         plt.show()

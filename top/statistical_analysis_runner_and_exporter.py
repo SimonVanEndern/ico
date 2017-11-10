@@ -8,60 +8,63 @@ from top.statistical_analysis_calculator import StatisticalAnalysisCalculator
 
 class StatisticalAnalysisRunnerAndExporter:
     def __init__(self, name, data, subfolder=None):
-        self.original_data = data
-        self.frame_name = name
-        self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name)
+        self.original_data: dict = data
+        self.frame_name: str = name
+        self.save_path: str = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name)
         if not os.path.isdir(self.save_path):
             os.mkdir(self.save_path)
         if subfolder is not None:
             self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name, subfolder)
-        self.sac = StatisticalAnalysisCalculator(data)
-        self.figure_counter = 1
+        self.sac: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data)
+        self.figure_counter: int = 1
 
         self.data = list()
 
-    def save_plot(self, func):
+    def save_plot(self, func) -> None:
         fig, fig_name = func()
 
         fig.suptitle("Figure " + str(self.figure_counter))
         fig.canvas.set_window_title("Figure " + str(self.figure_counter))
 
+        self.save_figure(fig, fig_name)
+
+    def save_figure(self, fig, fig_name) -> None:
         fig.savefig(os.path.join(self.save_path, "Figure" + str(self.figure_counter) + "-" + fig_name + ".png"))
 
         self.figure_counter += 1
 
-    def save_plots(self, func):
+    def save_plots(self, func) -> None:
         fig1, fig2, fig_name1, fig_name2 = func()
 
+        fig1.suptitle("Figure " + str(self.figure_counter))
+        fig2.suptitle("Figure " + str(self.figure_counter))
         fig1.canvas.set_window_title("Figure " + str(self.figure_counter))
         fig2.canvas.set_window_title("Figure " + str(self.figure_counter))
 
-        fig1.savefig(os.path.join(self.save_path, "Figure" + str(self.figure_counter) + "-" + fig_name1 + ".png"))
-        self.figure_counter += 1
-        fig2.savefig(os.path.join(self.save_path, "Figure" + str(self.figure_counter) + "-" + fig_name2 + ".png"))
-        self.figure_counter += 1
+        self.save_figure(fig1, fig_name1)
+        self.save_figure(fig2, fig_name2)
 
-    def add_correlation_data(self, name, func):
+    def add_correlation_data(self, name, func) -> None:
         correlation = func()
         self.data.append(
             (self.frame_name, name, "coefficient: " + str(correlation[0]), "p-value: " + str(correlation[1])))
 
-    def add_correlations_data(self, name1, name2, func):
+    def add_correlations_data(self, name1, name2, func) -> None:
         corr1, corr2 = func()
         self.data.append((self.frame_name, name1, "coefficient: " + str(corr1[0]), "p-value: " + str(corr1[1])))
         self.data.append((self.frame_name, name2, "coefficient: " + str(corr2[0]), "p-value: " + str(corr2[1])))
 
-    def add_mean_and_count_data_multiple(self, name1, name2, func):
+    def add_mean_and_count_data_multiple(self, name1, name2, func) -> None:
         des1, des2 = func()
         self.data.append((self.frame_name, name1, "mean: " + str(des1["mean"]), "count: " + str(des1["count"])))
         self.data.append((self.frame_name, name2, "mean: " + str(des2["mean"]), "count: " + str(des2["count"])))
 
-    def run(self):
+    def run(self) -> None:
         if not os.path.isdir(self.save_path):
             os.mkdir(self.save_path)
 
         # Average volume plot
-        self.save_plot(self.sac.get_average_volume_data)
+        self.save_plot(self.sac.get_average_volume_plot)
 
         # Average market capitalization plot
         self.save_plot(self.sac.get_average_market_capitalization_plot)
@@ -97,7 +100,7 @@ class StatisticalAnalysisRunnerAndExporter:
         # Stat
         # Descriptive statistics of volume and market capitalization correlation
         self.add_mean_and_count_data_multiple("Mean of correlation volume and market capitalization all",
-                                              "Mean of correlation volume and market capitalization only significant ones",
+                                              "Mean of correlation volume and market cap only significant ones",
                                               self.sac.get_volume_market_capitalization_correlation_data)
 
         # Figure 09:
@@ -142,7 +145,7 @@ class StatisticalAnalysisRunnerAndExporter:
         # Stats:
         # Descriptive statistics of volume and price raw data correlations
         self.add_mean_and_count_data_multiple("Mean of correlation volume and price all (excluding nans)",
-                                              "Mean of correlation volume and price only significant ones (excluding nan)",
+                                              "Mean of correlation volume and price only significant ones (excl nan)",
                                               self.sac.get_absolute_volume_price_correlation_data)
 
         # Figure:
@@ -164,4 +167,3 @@ class StatisticalAnalysisRunnerAndExporter:
                 writer.writerow(list(row))
 
         BetweenCurrencies(self.save_path, list(self.original_data.keys()))
-

@@ -21,5 +21,3 @@ class WithinCurrencies:
                 self.data[currency] = data
 
         return self.data
-
-# WithinCurrencies().get_and_export_data()
