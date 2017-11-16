@@ -55,11 +55,46 @@ class CoinmarketCapTokenParser(Parser):
         tokens = list(map(lambda x: x["platform"], tokens))
 
         token_counts = Counter(tokens)
+        token_counts["Ethereum Cl."] = token_counts["Ethereum Classic"]
+        token_counts.pop("Ethereum Classic")
 
+        fig, ax = plt.subplots(2, 1, sharex="all")
+        ax[1].set_ylim(0, 30)
+        ax[0].set_ylim(230, 250)
+
+        ax[0].spines['bottom'].set_visible(False)
+        ax[1].spines['top'].set_visible(False)
+
+        ax[0].xaxis.tick_top()
+        ax[0].tick_params(labeltop='off')  # don't put tick labels at the top
+        ax[1].xaxis.tick_bottom()
+
+        d = .015  # how big to make the diagonal lines in axes coordinates
+        # arguments to pass to plot, just so we don't keep repeating them
+        kwargs = dict(transform=ax[0].transAxes, color='k', clip_on=False)
+        ax[0].plot((-d, +d), (-d, +d), **kwargs)        # top-left diagonal
+        ax[0].plot((1 - d, 1 + d), (-d, +d), **kwargs)  # top-right diagonal
+
+        kwargs.update(transform=ax[1].transAxes)  # switch to the bottom axes
+        ax[1].plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
+        ax[1].plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagonal
+
+        fig.suptitle("Distribution of crypto-currencies according to used blockchain",
+                     fontsize=10)
         df = pandas.DataFrame.from_dict(token_counts, orient='index')
-        df.plot(kind='bar')
 
-        print("Figure 01: ")
+        print(df)
+        df.plot(kind='bar', ax=ax[0], legend=False)
+        df.plot(kind='bar', ax=ax[1], legend=False)
+        ax[1].set_xticklabels(df.index, rotation=90, fontsize=10)
+        ax[1].set(xlabel="Used crypto-currency", ylabel="Absolute count")
+        # fig.bottom = 0.55
+        # fig.tight_layout()
+        fig.subplots_adjust(top=0.9, bottom=0.3)
+        # fig.set_size_inches(18.5, 10.5)
+
+
+
         plt.show()
 
         return len(token_counts)

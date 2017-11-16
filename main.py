@@ -13,7 +13,7 @@ class Main:
 
     layer_on_top_of_within_currencies = DateAndSubClusterRunner()
 
-    latest_only = True
+    latest_only = False
 
     def __init__(self):
         if not self.latest_only:

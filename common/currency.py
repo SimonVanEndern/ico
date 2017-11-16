@@ -3,6 +3,7 @@ import datetime
 import logging
 import math
 from os import path
+from typing import Tuple
 
 import matplotlib.pyplot as plt
 import numpy
@@ -152,7 +153,13 @@ class Currency:
         else:
             return keyword in self.currency
 
-    def get_absolute_price_correlation(self, other: 'Currency'):
+    def get_absolute_price_correlation(self, other: 'Currency') -> Tuple[float, float]:
+        currency_name_0 = other.currency
+        currency_name_self = self.currency
+
+        if currency_name_0 in self.statistical_data.correlation_other_currencies:
+            return self.statistical_data.correlation_other_currencies[currency_name_0]
+
         frame1 = self.data["usd"]
         frame2 = other.data["usd"]
 
@@ -160,6 +167,10 @@ class Currency:
         combined.columns = ["a", "b"]
         combined = combined.dropna()
 
-        return stats.pearsonr(list(combined["a"]), list(combined["b"]))
+        correlation = stats.pearsonr(list(combined["a"]), list(combined["b"]))
+        self.statistical_data.correlation_other_currencies[currency_name_0] = correlation
+        other.statistical_data.correlation_other_currencies[currency_name_self] = correlation
+
+        return correlation
 
 

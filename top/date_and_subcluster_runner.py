@@ -9,7 +9,7 @@ import shutil
 from common.currency_handler import CurrencyHandler
 from common.currency_statistical_data import CurrencyStatisticalData
 from global_data import GlobalData
-from top.statistical_analysis_runner_and_exporter import StatisticalAnalysisRunnerAndExporter
+from top.plot_and_data_exporter import StatisticalAnalysisRunnerAndExporter
 from top.within_currencies import WithinCurrencies
 
 

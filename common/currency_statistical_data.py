@@ -55,6 +55,8 @@ class CurrencyStatisticalData:
         self.volume_price_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_price_correlations()
         self.price_market_capitalization_correlation: float = self.calculate_price_market_capitalization_correlation()
 
+        self.correlation_other_currencies: Dict[str, Tuple[float, float]] = dict()
+
         # TODO: Maximum loss in terms of highest price / lowest price after this one
         # TODO: Same for highest gain
 
