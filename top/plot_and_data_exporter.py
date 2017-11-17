@@ -23,7 +23,7 @@ class StatisticalAnalysisRunnerAndExporter:
     def save_plot(self, func) -> None:
         fig, fig_name = func()
 
-        fig.suptitle("Figure " + str(self.figure_counter))
+        # fig.suptitle("Figure " + str(self.figure_counter) + fig_name)
         fig.canvas.set_window_title("Figure " + str(self.figure_counter))
 
         self.save_figure(fig, fig_name)
@@ -36,8 +36,8 @@ class StatisticalAnalysisRunnerAndExporter:
     def save_plots(self, func) -> None:
         fig1, fig2, fig_name1, fig_name2 = func()
 
-        fig1.suptitle("Figure " + str(self.figure_counter))
-        fig2.suptitle("Figure " + str(self.figure_counter))
+        # fig1.suptitle("Figure " + str(self.figure_counter) + fig_name1)
+        # fig2.suptitle("Figure " + str(self.figure_counter) + fig_name2)
         fig1.canvas.set_window_title("Figure " + str(self.figure_counter))
         fig2.canvas.set_window_title("Figure " + str(self.figure_counter))
 
@@ -166,4 +166,4 @@ class StatisticalAnalysisRunnerAndExporter:
             for row in self.data:
                 writer.writerow(list(row))
 
-        BetweenCurrencies(self.save_path, list(self.original_data.keys()))
+        BetweenCurrencies(self.save_path, list(self.original_data.keys()), sleep=True)

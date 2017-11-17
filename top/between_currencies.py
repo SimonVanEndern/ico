@@ -9,7 +9,9 @@ from common.currency_handler import CurrencyHandler
 
 
 class BetweenCurrencies:
-    def __init__(self, save_path, currencies):
+    def __init__(self, save_path, currencies, sleep=False):
+        if sleep:
+            return
         self.currency_handler = CurrencyHandler.Instance()
 
         all_currencies = currencies

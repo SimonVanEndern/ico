@@ -87,7 +87,7 @@ class CoinmarketCapTokenParser(Parser):
         df.plot(kind='bar', ax=ax[0], legend=False)
         df.plot(kind='bar', ax=ax[1], legend=False)
         ax[1].set_xticklabels(df.index, rotation=90, fontsize=10)
-        ax[1].set(xlabel="Used crypto-currency", ylabel="Absolute count")
+        ax[1].set(xlabel="Used crypto-currency", ylabel="Frequency")
         # fig.bottom = 0.55
         # fig.tight_layout()
         fig.subplots_adjust(top=0.9, bottom=0.3)

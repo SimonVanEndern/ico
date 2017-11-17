@@ -22,8 +22,9 @@ class DateAndSubClusterRunner:
         self.start_2017: datetime = datetime.strptime("01.01.2017", "%d.%m.%Y")
         self.month_6: datetime = datetime.strptime("01.05.2017", "%d.%m.%Y")
         self.month_3: datetime = datetime.strptime("01.08.2017", "%d.%m.%Y")
+        self.month_1: datetime = datetime.strptime("01.10.2017", "%d.%m.%Y")
 
-        self.start_dates: List(datetime) = [self.start_total, self.start_2017, self.month_6, self.month_3]
+        self.start_dates: List(datetime) = [self.start_total, self.start_2017, self.month_6, self.month_3, self.month_1]
 
         self.data: Dict[str, Dict[str, CurrencyStatisticalData]] = dict()
 
@@ -122,11 +123,18 @@ class DateAndSubClusterRunner:
             output.append(True)
 
         df = pandas.DataFrame(index, index=index, columns=["date"]).sort_index()
+        fig, ax = plt.subplots()
 
         df["date"] = df["date"].astype("datetime64[ms]")
         df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).count()
 
-        df2.plot(kind="bar")
+        df2.plot(kind="bar", ax=ax, legend=False)
+        ax.set_xticklabels(df.index, rotation=90, fontsize=10)
+        ax.set(xlabel="Time in months", ylabel="Frequency")
+        fig.subplots_adjust(bottom=0.3)
+
+        # fig.bottom = 0.55
+        # fig.tight_layout()
         plt.show()
 
         return

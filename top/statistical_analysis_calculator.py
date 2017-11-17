@@ -26,6 +26,7 @@ def get_correlation_figure_from_correlations_list(correlations: List[Tuple[float
     correlations_significant = list(filter(lambda x: x != 0, correlations_significant))
 
     fig, ax = plt.subplots()
+    ax.set(ylabel="Frequency")
     series = Series(correlations_all)
     series.hist(ax=ax, bins=20).plot()
 
@@ -63,6 +64,10 @@ class StatisticalAnalysisCalculator:
         series = self._get_series_of_attribute("average_volume")
 
         fig, ax = plt.subplots()
+        ax.suptitle("Historgram of average volume in USD")
+        ax.set(xlabel="Average Volume in USD", ylabel="Frequency")
+
+        ax.set(ylabel="Frequency")
         series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
         ax.set_xscale('log', basex=10)
         return fig, "average-volume-plot"
@@ -71,6 +76,8 @@ class StatisticalAnalysisCalculator:
         series = self._get_series_of_attribute("average_market_capitalization")
 
         fig, ax = plt.subplots()
+        ax.suptitle("Historgram of average market capitalization in USD")
+        ax.set(xlabel="Average market capitalization in USD", ylabel="Frequency")
         series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
         ax.set_xscale('log', basex=10)
         return fig, "average-market-capitalization-plot"
@@ -89,6 +96,7 @@ class StatisticalAnalysisCalculator:
         combined = numpy.array(market_cap) / numpy.array(volume)
 
         fig, ax = plt.subplots()
+        ax.set(ylabel="Frequency")
         series = Series(combined)
         series.hist(ax=ax, bins=numpy.logspace(0, 16, num=16, base=2)).plot(spacing=0.5)
         ax.set_xscale('log', basex=10)
@@ -254,10 +262,12 @@ class StatisticalAnalysisCalculator:
             map(lambda x: -numpy.log10(x) if x > 0 else numpy.log10(-x), linear_regressions_completely_interpolated))
 
         fig, ax = plt.subplots()
+        ax.set(ylabel="Frequency")
         series: Series = Series(linear_regressions)
         series.hist(bins=30).plot()
 
         fig2, ax = plt.subplots()
+        ax.set(ylabel="Frequency")
         series = Series(linear_regressions_completely_interpolated)
         series.hist(bins=30).plot()
 
@@ -285,6 +295,7 @@ class StatisticalAnalysisCalculator:
     def get_price_change_beginning_plot(self):
         series = self._get_series_of_attribute("price_change_from_beginning")
         fig, ax = plt.subplots()
+        ax.set(ylabel="Frequency")
         try:
             series.hist(ax=ax, bins=numpy.logspace(-8, 5, num=30, base=10)).plot(spacing=0.5)
         except ValueError:
@@ -297,6 +308,7 @@ class StatisticalAnalysisCalculator:
         series = self._get_series_of_attribute("first_price")
 
         fig, ax = plt.subplots()
+        ax.set(ylabel="Frequency")
         series.hist(ax=ax, bins=numpy.logspace(-10, 5, num=150, base=10)).plot(spacing=0.5)
         ax.set_xscale('log')
 
@@ -312,12 +324,13 @@ class StatisticalAnalysisCalculator:
                 trends.append(self.data[key].price_correlation_change_with_google_trends_data[switch])
 
         fig, ax = plt.subplots()
+        ax.set(ylabel="Frequency")
         series = Series(list(map(lambda x: x[0], trends)))
-        series.hist(ax=ax, bins=20).plot()
+        series.hist(ax=ax, bins=20).plot(alpha=0.5)
 
         trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
         series = Series(trends)
-        series[series != 0].hist(ax=ax, bins=20).plot()
+        series[series != 0].hist(ax=ax, bins=20).plot(alpha=0.5)
 
         return fig, "google-trends-price-usd-correlation-significant-ones-marked"
 
@@ -331,6 +344,7 @@ class StatisticalAnalysisCalculator:
                 trends.append(self.data[key].price_correlation_change_with_google_trends_data[switch])
 
         fig, ax = plt.subplots()
+        ax.set(ylabel="Frequency")
         series = Series(list(map(lambda x: x[0], trends)))
         series.hist(ax=ax, bins=20).plot()
 
