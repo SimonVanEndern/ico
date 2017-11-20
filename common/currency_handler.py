@@ -50,6 +50,9 @@ class CurrencyHandler:
         except FileNotFoundError:
             logging.warning("Currency {} not found!".format(currency))
             self.currencies[currency][str(date_limit)] = None
+        except ImportError:
+            logging.warning("No data for currency {}".format(currency))
+            self.currencies[currency][str(date_limit)] = None
 
     def get_all_currency_names_where_data_is_available(self, size_limit=math.inf) -> List[str]:
         if self.all_currencies_with_data is not None:

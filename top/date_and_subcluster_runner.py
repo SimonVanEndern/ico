@@ -1,10 +1,10 @@
 import os
+import shutil
 from datetime import datetime
 from typing import List, Dict, Tuple
 
 import matplotlib.pyplot as plt
 import pandas
-import shutil
 
 from common.currency_handler import CurrencyHandler
 from common.currency_statistical_data import CurrencyStatisticalData
@@ -24,7 +24,7 @@ class DateAndSubClusterRunner:
         self.month_3: datetime = datetime.strptime("01.08.2017", "%d.%m.%Y")
         self.month_1: datetime = datetime.strptime("01.10.2017", "%d.%m.%Y")
 
-        self.start_dates: List(datetime) = [self.start_total, self.start_2017, self.month_6, self.month_3, self.month_1]
+        self.start_dates: List(datetime) = [self.month_1, self.start_total, self.start_2017, self.month_6, self.month_3]
 
         self.data: Dict[str, Dict[str, CurrencyStatisticalData]] = dict()
 
@@ -42,6 +42,7 @@ class DateAndSubClusterRunner:
             if start_date is None:
                 start_date_name = "all-time"
             else:
+                # continue
                 start_date_name = str(start_date.timestamp())
 
             StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)]).run()
@@ -65,10 +66,10 @@ class DateAndSubClusterRunner:
             low_start_price, high_start_price = self.create_start_price_clusters()
             StatisticalAnalysisRunnerAndExporter(start_date_name,
                                                  WithinCurrencies(start_date).get_and_export_data(low_start_price),
-                                                 subfolder="low_start_price")
+                                                 subfolder="low_start_price").run()
             StatisticalAnalysisRunnerAndExporter(start_date_name,
                                                  WithinCurrencies(start_date).get_and_export_data(high_start_price),
-                                                 subfolder="high_start_price")
+                                                 subfolder="high_start_price").run()
 
     def filter_for_keyword(self) -> Tuple[Dict, Dict]:
         contains_keyword = dict()
@@ -129,7 +130,9 @@ class DateAndSubClusterRunner:
         df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).count()
 
         df2.plot(kind="bar", ax=ax, legend=False)
-        ax.set_xticklabels(df.index, rotation=90, fontsize=10)
+        index = list(df2.index)
+        print(index)
+        ax.set_xticklabels(index, rotation=90, fontsize=10)
         ax.set(xlabel="Time in months", ylabel="Frequency")
         fig.subplots_adjust(bottom=0.3)
 

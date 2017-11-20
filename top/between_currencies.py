@@ -48,5 +48,8 @@ class BetweenCurrencies:
 
         series = pandas.Series(list(map(lambda x: x[2], as_list)))
         series.hist().plot()
+        as_list = list(filter(lambda x: x[3] < 0.1, as_list))
+        series2 = pandas.Series(list(map(lambda x: x[2], as_list)))
+        series2.hist().plot()
 
         plt.show()

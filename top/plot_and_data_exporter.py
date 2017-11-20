@@ -29,6 +29,7 @@ class StatisticalAnalysisRunnerAndExporter:
         self.save_figure(fig, fig_name)
 
     def save_figure(self, fig, fig_name) -> None:
+        fig.set_size_inches(6, 4)
         fig.savefig(os.path.join(self.save_path, "Figure" + str(self.figure_counter) + "-" + fig_name + ".png"))
 
         self.figure_counter += 1

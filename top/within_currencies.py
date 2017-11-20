@@ -16,6 +16,8 @@ class WithinCurrencies:
         for index, currency in enumerate(currencies):
 
             handle_on_currency: Currency = self.currency_handler.get_currency(currency, date_limit=self.start_date)
+            if handle_on_currency is None:
+                continue
             data = handle_on_currency.get_statistical_data()
             if data is not None:
                 self.data[currency] = data

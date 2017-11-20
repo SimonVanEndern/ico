@@ -86,13 +86,16 @@ class Currency:
         volume = list(map(lambda x: math.nan if x == "" else float(x), volume))
         market_cap = list(map(lambda x: math.nan if x == "" else float(x), market_cap))
 
-        if self.date_limit is not None:
-            while timestamp[0] < self.date_limit:
-                timestamp = timestamp[1:]
-                usd = usd[1:]
-                volume = volume[1:]
-                btc = btc[1:]
-                market_cap = market_cap[1:]
+        try:
+            if self.date_limit is not None:
+                while timestamp[0] < self.date_limit:
+                    timestamp = timestamp[1:]
+                    usd = usd[1:]
+                    volume = volume[1:]
+                    btc = btc[1:]
+                    market_cap = market_cap[1:]
+        except IndexError:
+            raise ImportError
 
         pandas_dict: dict = {"timestamp": timestamp, "usd": usd, "btc": btc, "volume": volume, "market_cap": market_cap}
 

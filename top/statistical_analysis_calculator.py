@@ -20,18 +20,21 @@ def get_correlation_series_descriptions(correlations):
     return series.describe(), series2.describe()
 
 
-def get_correlation_figure_from_correlations_list(correlations: List[Tuple[float, float]]):
+def get_correlation_figure_from_correlations_list(correlations: List[Tuple[float, float]], xlabel=None):
     correlations_all: List[float] = list(map(lambda x: x[0], correlations))
     correlations_significant: List[float] = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
     correlations_significant = list(filter(lambda x: x != 0, correlations_significant))
 
     fig, ax = plt.subplots()
     ax.set(ylabel="Frequency")
-    series = Series(correlations_all)
-    series.hist(ax=ax, bins=20).plot()
+    if xlabel is not None:
+        ax.set(xlabel=xlabel)
+    series = Series(correlations_all, name="All correlations")
+    series.hist(ax=ax, bins=20, label="All correlations").plot(alpha=0.5)
 
-    series = Series(correlations_significant)
-    series.hist(ax=ax, bins=20).plot()
+    series = Series(correlations_significant, name="Correlations significant at 0.1")
+    series.hist(ax=ax, bins=20, label="Correlations significant at 0.1").plot(alpha=0.5)
+    plt.legend()
 
     return fig
 
@@ -64,22 +67,28 @@ class StatisticalAnalysisCalculator:
         series = self._get_series_of_attribute("average_volume")
 
         fig, ax = plt.subplots()
-        ax.suptitle("Historgram of average volume in USD")
+        fig.suptitle("Historgram of average volume in USD")
         ax.set(xlabel="Average Volume in USD", ylabel="Frequency")
 
         ax.set(ylabel="Frequency")
-        series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
-        ax.set_xscale('log', basex=10)
+        series = numpy.log10(series)
+        series = series[numpy.isfinite(series)]
+        series.hist(ax=ax, bins=30)
+        # series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
+        # ax.set_xscale('log', basex=10)
         return fig, "average-volume-plot"
 
     def get_average_market_capitalization_plot(self):
         series = self._get_series_of_attribute("average_market_capitalization")
 
         fig, ax = plt.subplots()
-        ax.suptitle("Historgram of average market capitalization in USD")
+        fig.suptitle("Historgram of average market capitalization in USD")
         ax.set(xlabel="Average market capitalization in USD", ylabel="Frequency")
-        series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
-        ax.set_xscale('log', basex=10)
+        series = numpy.log10(series)
+        series = series[numpy.isfinite(series)]
+        series.hist(ax=ax, bins=30)
+        # series.hist(ax=ax, bins=numpy.logspace(0, 15, num=30, base=10))
+        # ax.set_xscale('log', basex=10)
         return fig, "average-market-capitalization-plot"
 
     def get_correlation_between_average_volume_and_average_market_capitalization(self) -> Tuple[float, float]:
@@ -94,9 +103,11 @@ class StatisticalAnalysisCalculator:
             market_cap.append(self.data[key].average_market_capitalization)
 
         combined = numpy.array(market_cap) / numpy.array(volume)
+        combined = combined[numpy.isfinite(combined)]
 
         fig, ax = plt.subplots()
-        ax.set(ylabel="Frequency")
+        fig.suptitle("Histogram of average market cap / average volume")
+        ax.set(xlabel="average market cap / average volume", ylabel="Frequency")
         series = Series(combined)
         series.hist(ax=ax, bins=numpy.logspace(0, 16, num=16, base=2)).plot(spacing=0.5)
         ax.set_xscale('log', basex=10)
@@ -161,7 +172,8 @@ class StatisticalAnalysisCalculator:
 
         correlations = list(map(lambda x: x["0"], correlations))
 
-        fig = get_correlation_figure_from_correlations_list(correlations)
+        fig = get_correlation_figure_from_correlations_list(correlations, xlabel="Correlation between volume and price")
+        fig.suptitle("Histogram of correlations between volume and price")
 
         return fig, "raw-volume-price-correlations-significant-marked"
 
@@ -262,14 +274,15 @@ class StatisticalAnalysisCalculator:
             map(lambda x: -numpy.log10(x) if x > 0 else numpy.log10(-x), linear_regressions_completely_interpolated))
 
         fig, ax = plt.subplots()
+        fig.suptitle("Histogram of log10 linear regression slope")
         ax.set(ylabel="Frequency")
+        ax.set(xlabel="log 10 slope of linear regression slope")
         series: Series = Series(linear_regressions)
-        series.hist(bins=30).plot()
+        series.hist(bins=2, ax=ax).plot()
 
-        fig2, ax = plt.subplots()
-        ax.set(ylabel="Frequency")
+        fig2, ax2 = plt.subplots()
         series = Series(linear_regressions_completely_interpolated)
-        series.hist(bins=30).plot()
+        series.hist(bins=2, ax=ax2).plot()
 
         return fig, fig2, "linear-regression-slope-limited-interpolation", "linear-regression-slope-unlimited-interpolation"
 
@@ -301,6 +314,7 @@ class StatisticalAnalysisCalculator:
         except ValueError:
             print(series)
         ax.set_xscale('log')
+        ax.set(xlabel="last price divided by first available price")
 
         return fig, "price-change-beginning-plot"
 
