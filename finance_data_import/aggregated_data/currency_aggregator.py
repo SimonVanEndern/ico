@@ -19,17 +19,17 @@ class CurrencyAggregator(DTO):
 
         self.fdc: FinancialDataCalculator = FinancialDataCalculator()
 
-        self.compressed_only_raw_data_folder:str = os.path.join(GlobalData.EXTERNAL_PATH_COMPRESSED_DATA,
-                                                            GlobalData.FOLDER_COMPRESSED_DATA_ONLY_RAW_DATA,
-                                                            self.currency)
+        self.compressed_only_raw_data_folder: str = os.path.join(GlobalData.EXTERNAL_PATH_COMPRESSED_DATA,
+                                                                 GlobalData.FOLDER_COMPRESSED_DATA_ONLY_RAW_DATA,
+                                                                 self.currency)
 
         self.compressed_with_additional_data_folder: str = os.path.join(GlobalData.EXTERNAL_PATH_COMPRESSED_DATA,
-                                                                   GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA,
-                                                                   self.currency)
+                                                                        GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA,
+                                                                        self.currency)
 
         self.aggregated_with_additional_data_folder: str = os.path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA,
-                                                                   GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA,
-                                                                   self.currency)
+                                                                        GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA,
+                                                                        self.currency)
 
         self.filename: str = self.currency + str(self.last_time) + ".csv"
 

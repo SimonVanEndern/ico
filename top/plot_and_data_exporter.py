@@ -200,4 +200,4 @@ class StatisticalAnalysisRunnerAndExporter:
 
         self.data_to_export.save(self.save_path)
 
-        BetweenCurrencies(self.save_path, list(self.original_data.keys()), sleep=True)
+        BetweenCurrencies(self.save_path, list(self.original_data.keys()), sleep=False)

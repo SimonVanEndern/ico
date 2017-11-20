@@ -46,6 +46,8 @@ class Currency:
         self.statistical_data: CurrencyStatisticalData = None
 
     def get_statistical_data(self) -> CurrencyStatisticalData:
+        if self.currency == "0x":
+            aa = 7
         if self.statistical_data is None:
             try:
                 self.statistical_data = CurrencyStatisticalData(self)
@@ -157,11 +159,16 @@ class Currency:
             return keyword in self.currency
 
     def get_absolute_price_correlation(self, other: 'Currency') -> Tuple[float, float]:
-        currency_name_0 = other.currency
+        currency_name_other = other.currency
         currency_name_self = self.currency
 
-        if currency_name_0 in self.statistical_data.correlation_other_currencies:
-            return self.statistical_data.correlation_other_currencies[currency_name_0]
+        try:
+            if currency_name_other in self.statistical_data.correlation_other_currencies:
+                return self.statistical_data.correlation_other_currencies[currency_name_other]
+        except AttributeError:
+            print("Error")
+            print(currency_name_other)
+            print(currency_name_self)
 
         frame1 = self.data["usd"]
         frame2 = other.data["usd"]
@@ -171,7 +178,7 @@ class Currency:
         combined = combined.dropna()
 
         correlation = stats.pearsonr(list(combined["a"]), list(combined["b"]))
-        self.statistical_data.correlation_other_currencies[currency_name_0] = correlation
+        self.statistical_data.correlation_other_currencies[currency_name_other] = correlation
         other.statistical_data.correlation_other_currencies[currency_name_self] = correlation
 
         return correlation
