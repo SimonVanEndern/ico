@@ -9,6 +9,7 @@ import pandas
 from common.currency_handler import CurrencyHandler
 from common.currency_statistical_data import CurrencyStatisticalData
 from global_data import GlobalData
+from top.clustered_plot_and_data_exporter import ClusteredStatisticalAnalysisRunnerAndExporter
 from top.plot_and_data_exporter import StatisticalAnalysisRunnerAndExporter
 from top.within_currencies import WithinCurrencies
 
@@ -45,9 +46,16 @@ class DateAndSubClusterRunner:
                 # continue
                 start_date_name = str(start_date.timestamp())
 
+            with_keyword, without_keyword = self.create_semantic_clusters()
+            ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                          WithinCurrencies(start_date).get_and_export_data(
+                                                              with_keyword),
+                                                          WithinCurrencies(start_date).get_and_export_data(
+                                                              without_keyword),
+                                                          subfolder="test").run()
+
             StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)]).run()
 
-            with_keyword, without_keyword = self.create_semantic_clusters()
             StatisticalAnalysisRunnerAndExporter(start_date_name,
                                                  WithinCurrencies(start_date).get_and_export_data(with_keyword),
                                                  subfolder="with-keyword").run()

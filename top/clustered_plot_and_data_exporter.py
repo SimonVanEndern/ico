@@ -1,27 +1,40 @@
 import csv
 import os
 
+import matplotlib.pyplot as plt
+
 from global_data import GlobalData
 from top.between_currencies import BetweenCurrencies
+from top.plot_and_data_exporter import StatisticalAnalysisRunnerAndExporter
 from top.statistical_analysis_calculator import StatisticalAnalysisCalculator
 
 
-class StatisticalAnalysisRunnerAndExporter:
-    def __init__(self, name, data, subfolder=None):
-        self.original_data: dict = data
+class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAndExporter):
+    def __init__(self, name, data_cluster_1, data_cluster_2, subfolder=None):
+        super().__init__(name, data_cluster_1, subfolder=subfolder)
+        self.original_data_1: dict = data_cluster_1
+        self.original_data_2: dict = data_cluster_2
         self.frame_name: str = name
         self.save_path: str = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name)
         if not os.path.isdir(self.save_path):
             os.mkdir(self.save_path)
         if subfolder is not None:
             self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name, subfolder)
-        self.sac: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data)
+        self.sac: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data_cluster_1)
+        self.sac_1: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data_cluster_1)
+        self.sac_2: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data_cluster_2)
         self.figure_counter: int = 1
 
         self.data = list()
 
     def save_plot(self, func) -> None:
-        fig, ax, fig_name = func()
+        fig, ax = plt.subplots()
+
+        fig, ax, fig_name = func(fig=fig, ax=ax, multiple=False)
+        self.sac.data = self.sac_2.data
+        fig, ax, fig_name = func(fig=fig, ax=ax, multiple=True)
+        self.sac.data = self.sac_1.data
+        # plt.show()
 
         # fig.suptitle("Figure " + str(self.figure_counter) + fig_name)
         fig.canvas.set_window_title("Figure " + str(self.figure_counter))
@@ -49,6 +62,8 @@ class StatisticalAnalysisRunnerAndExporter:
         correlation = func()
         self.data.append(
             (self.frame_name, name, "coefficient: " + str(correlation[0]), "p-value: " + str(correlation[1])))
+
+        # self.calculation_result_container.add_calculation(cluster, calculation_name, result)
 
     def add_correlations_data(self, name1, name2, func) -> None:
         corr1, corr2 = func()
