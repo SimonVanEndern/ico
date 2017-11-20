@@ -1,6 +1,8 @@
 import csv
 import os
 
+import matplotlib.pyplot as plt
+
 from global_data import GlobalData
 from top.between_currencies import BetweenCurrencies
 from top.statistical_analysis_calculator import StatisticalAnalysisCalculator
@@ -31,6 +33,7 @@ class StatisticalAnalysisRunnerAndExporter:
     def save_figure(self, fig, fig_name) -> None:
         fig.set_size_inches(6, 4)
         fig.savefig(os.path.join(self.save_path, "Figure" + str(self.figure_counter) + "-" + fig_name + ".png"))
+        plt.close(fig)
 
         self.figure_counter += 1
 

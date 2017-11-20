@@ -76,11 +76,12 @@ class DateAndSubClusterRunner:
                                                               high_start_price),
                                                           subfolder="start_price_clustering").run()
 
+            coins, tokens = self.create_token_coin_clusters()
             ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,
                                                           WithinCurrencies(start_date).get_and_export_data(
-                                                              self.coinmarketcap_tokens.get_all_tokens()),
+                                                              coins),
                                                           WithinCurrencies(start_date).get_and_export_data(
-                                                              self.coinmarketcap_coins.get_all_coins()),
+                                                              tokens),
                                                           subfolder="coin_token_clustering").run()
 
     def filter_for_keyword(self) -> Tuple[Dict, Dict]:
@@ -189,3 +190,11 @@ class DateAndSubClusterRunner:
         middle = int(len(start_prices) / 2)
 
         return start_prices[:middle], start_prices[middle:]
+
+    def create_token_coin_clusters(self) -> Tuple[List[str], List[str]]:
+        tokens = self.coinmarketcap_tokens.get_all_tokens()
+        tokens = list(map(lambda x: x["currency"], tokens))
+
+        coins = self.coinmarketcap_coins.get_all_coins()
+
+        return coins, tokens

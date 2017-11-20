@@ -12,7 +12,7 @@ class WithinCurrencies:
         self.currency_handler: CurrencyHandler = CurrencyHandler.Instance()
         self.data: Dict[str, CurrencyStatisticalData] = dict()
 
-    def get_and_export_data(self, currencies) -> Dict[str, CurrencyStatisticalData]:
+    def get_and_export_data(self, currencies: list) -> Dict[str, CurrencyStatisticalData]:
         for index, currency in enumerate(currencies):
 
             handle_on_currency: Currency = self.currency_handler.get_currency(currency, date_limit=self.start_date)
