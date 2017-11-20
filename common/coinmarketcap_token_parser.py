@@ -24,7 +24,7 @@ class CoinmarketCapTokenParser(Parser):
             self.path_to_save = path.join(path.dirname(__file__) + "\saved", "coinmarketcap-tokens2017112.html")
 
     def get_all_tokens(self):
-        output: list = list()
+        tokens: list = list()
         with open(self.path_to_save, "r", encoding="utf8") as file:
             soup = BeautifulSoup(file, "html.parser")
             table = soup.find("table", {"id": "assets-all"})
@@ -37,18 +37,18 @@ class CoinmarketCapTokenParser(Parser):
                 splits = currency_href.split("/")
                 currency_name = splits[len(splits) - 2]
                 platform_name = row.find("td", {"class": "platform-name"}).find("a").text
-                output.append({"currency": currency_name, "platform": platform_name})
+                tokens.append({"currency": currency_name, "platform": platform_name})
 
         all_currencies = self.currency_handler.get_all_currency_names()
         to_remove = list()
-        for currency in output:
+        for currency in tokens:
             if currency["currency"] not in all_currencies:
                 to_remove.append(currency)
 
         for currency in to_remove:
-            output.remove(currency)
+            tokens.remove(currency)
 
-        return output
+        return tokens
 
     def get_platform_statistics(self):
         tokens = self.get_all_tokens()

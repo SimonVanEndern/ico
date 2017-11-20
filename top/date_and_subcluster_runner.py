@@ -6,6 +6,8 @@ from typing import List, Dict, Tuple
 import matplotlib.pyplot as plt
 import pandas
 
+from common.coinmarketcap_coin_parser import CoinmarketCapCoinParser
+from common.coinmarketcap_token_parser import CoinmarketCapTokenParser
 from common.currency_handler import CurrencyHandler
 from common.currency_statistical_data import CurrencyStatisticalData
 from global_data import GlobalData
@@ -15,6 +17,10 @@ from top.within_currencies import WithinCurrencies
 
 
 class DateAndSubClusterRunner:
+
+    coinmarketcap_coins = CoinmarketCapCoinParser()
+    coinmarketcap_tokens = CoinmarketCapTokenParser()
+
     def __init__(self):
         self.currency_handler = CurrencyHandler.Instance()
 
@@ -46,38 +52,36 @@ class DateAndSubClusterRunner:
                 # continue
                 start_date_name = str(start_date.timestamp())
 
+            StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)]).run()
+
             with_keyword, without_keyword = self.create_semantic_clusters()
             ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,
                                                           WithinCurrencies(start_date).get_and_export_data(
                                                               with_keyword),
                                                           WithinCurrencies(start_date).get_and_export_data(
                                                               without_keyword),
-                                                          subfolder="test").run()
-
-            StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)]).run()
-
-            StatisticalAnalysisRunnerAndExporter(start_date_name,
-                                                 WithinCurrencies(start_date).get_and_export_data(with_keyword),
-                                                 subfolder="with-keyword").run()
-            StatisticalAnalysisRunnerAndExporter(start_date_name,
-                                                 WithinCurrencies(start_date).get_and_export_data(without_keyword),
-                                                 subfolder="without_keyword").run()
+                                                          subfolder="keyword-clustering").run()
 
             low_volume, high_volume = self.create_volume_clusters()
-            StatisticalAnalysisRunnerAndExporter(start_date_name,
-                                                 WithinCurrencies(start_date).get_and_export_data(low_volume),
-                                                 subfolder="low_volume").run()
-            StatisticalAnalysisRunnerAndExporter(start_date_name,
-                                                 WithinCurrencies(start_date).get_and_export_data(high_volume),
-                                                 subfolder="high_volume").run()
+            ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                          WithinCurrencies(start_date).get_and_export_data(low_volume),
+                                                          WithinCurrencies(start_date).get_and_export_data(high_volume),
+                                                          subfolder="volume_clustering").run()
 
             low_start_price, high_start_price = self.create_start_price_clusters()
-            StatisticalAnalysisRunnerAndExporter(start_date_name,
-                                                 WithinCurrencies(start_date).get_and_export_data(low_start_price),
-                                                 subfolder="low_start_price").run()
-            StatisticalAnalysisRunnerAndExporter(start_date_name,
-                                                 WithinCurrencies(start_date).get_and_export_data(high_start_price),
-                                                 subfolder="high_start_price").run()
+            ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                          WithinCurrencies(start_date).get_and_export_data(
+                                                              low_start_price),
+                                                          WithinCurrencies(start_date).get_and_export_data(
+                                                              high_start_price),
+                                                          subfolder="start_price_clustering").run()
+
+            ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                          WithinCurrencies(start_date).get_and_export_data(
+                                                              self.coinmarketcap_tokens.get_all_tokens()),
+                                                          WithinCurrencies(start_date).get_and_export_data(
+                                                              self.coinmarketcap_coins.get_all_coins()),
+                                                          subfolder="coin_token_clustering").run()
 
     def filter_for_keyword(self) -> Tuple[Dict, Dict]:
         contains_keyword = dict()

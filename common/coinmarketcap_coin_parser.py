@@ -22,7 +22,7 @@ class CoinmarketCapCoinParser(Parser):
             self.path_to_save = path.join(path.dirname(__file__) + "\saved", "coinmarketcap-coins2017112.html")
 
     def get_all_coins(self):
-        output: List(str) = list()
+        coins: List(str) = list()
         with open(self.path_to_save, "r", encoding="utf8") as file:
             soup = BeautifulSoup(file, "html.parser")
             table = soup.find("table", {"id": "currencies-all"})
@@ -34,18 +34,18 @@ class CoinmarketCapCoinParser(Parser):
                 currency_href = row.find("td", {"class": "currency-name"}).find("a")['href']
                 splits = currency_href.split("/")
                 currency_name = splits[len(splits) - 2]
-                output.append(currency_name)
+                coins.append(currency_name)
 
         all_currencies = self.currency_handler.get_all_currency_names()
         to_remove = list()
-        for currency in output:
+        for currency in coins:
             if currency not in all_currencies:
                 to_remove.append(currency)
 
         for currency in to_remove:
-            output.remove(currency)
+            coins.remove(currency)
 
-        return output
+        return coins
 
 # run_script = CoinmarketCapCoinParser()
 # run_script.get_all_coins()
