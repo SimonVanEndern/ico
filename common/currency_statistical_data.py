@@ -39,7 +39,9 @@ class CurrencyStatisticalData:
         self.highest_price_difference: float
         self.price_change_from_beginning: float = self.calculate_price_change_from_beginning()
 
-        self.volatilities: pandas.DataFrame = self.calculate_rolling_volatility()
+        self.volatilities: Dict[str, pandas.DataFrame] = self.calculate_rolling_volatility()
+        self.average_volatility_90 = numpy.mean(self.volatilities["90"]["usd"])
+
         # TODO: Make it work
         # self.volatility_linear_regression: LinregressResult = self.calculate_volatility_linreg()
 

@@ -366,9 +366,9 @@ class StatisticalAnalysisCalculator:
 
         return fig, ax, "price-change-beginning-plot"
 
-    def get_price_change_beginning_data(self):
+    def get_price_change_beginning_data(self) -> dict:
         series = self._get_series_of_attribute("price_change_from_beginning")
-        return series.describe()
+        return series.describe().to_dict()
 
     def get_first_price_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
         series = self._get_series_of_attribute("first_price")
@@ -385,9 +385,28 @@ class StatisticalAnalysisCalculator:
 
         return fig, ax, "first-price-in-usd"
 
-    def get_first_price_data(self):
+    def get_volatility_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
+        series = self._get_series_of_attribute("average_volatility_90")
+        print(series)
+
+        if fig is None and ax is None:
+            fig, ax = plt.subplots()
+        ax.set(ylabel="Frequency", xlabel="Average volatility calculated for 90 day windows")
+        if not multiple:
+            series.hist(ax=ax, bins=50, label=legend_name).plot(spacing=0.5)
+        else:
+            series.hist(ax=ax, bins=50, alpha=.8, label=legend_name).plot(spacing=0.5)
+            plt.legend(prop={'size': 6})
+
+        return fig, ax, "average-volatility-90-day-window"
+
+    def get_volatility_data(self):
+        series = self._get_series_of_attribute("average_volatility_90")
+        return series.describe().to_dict()
+
+    def get_first_price_data(self) -> dict:
         series = self._get_series_of_attribute("first_price")
-        return series.describe()
+        return series.describe().to_dict()
 
     def get_google_trends_correlation_plot(self, switch=0, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[Any, Any, str]:
         if switch != 1 and switch != 0:
@@ -401,8 +420,8 @@ class StatisticalAnalysisCalculator:
         if fig is None and ax is None:
             fig, ax = plt.subplots()
         ax.set(ylabel="Frequency")
-        series = Series(list(map(lambda x: x[0], trends)))
-        series.hist(ax=ax, bins=20).plot(alpha=0.5)
+        # series = Series(list(map(lambda x: x[0], trends)))
+        # series.hist(ax=ax, bins=20).plot(alpha=0.5)
 
         trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
         trends_significant = list(filter(lambda x: x != 0, trends))
@@ -466,7 +485,7 @@ class StatisticalAnalysisCalculator:
         # Every 4th ticklable shows the month and day
         ticklabels[::6] = [datetime(item[0], item[1], 1).strftime('%b %d') for item in df2.index[::6]]
         # Every 12th ticklabel includes the year
-        ticklabels[::12] = [datetime(item[0], item[1], 1).strftime('%b %d\n%Y') for item in df2.index[::12]]
+        ticklabels[::6] = [datetime(item[0], item[1], 1).strftime('%b %d\n%Y') for item in df2.index[::6]]
         ax.xaxis.set_major_formatter(ticker.FixedFormatter(ticklabels))
         fig.autofmt_xdate()
 

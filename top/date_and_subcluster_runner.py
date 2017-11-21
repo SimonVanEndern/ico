@@ -3,9 +3,6 @@ import shutil
 from datetime import datetime
 from typing import List, Dict, Tuple
 
-import matplotlib.pyplot as plt
-import pandas
-
 from common.coinmarketcap_coin_parser import CoinmarketCapCoinParser
 from common.coinmarketcap_token_parser import CoinmarketCapTokenParser
 from common.currency_handler import CurrencyHandler
@@ -17,7 +14,6 @@ from top.within_currencies import WithinCurrencies
 
 
 class DateAndSubClusterRunner:
-
     coinmarketcap_coins = CoinmarketCapCoinParser()
     coinmarketcap_tokens = CoinmarketCapTokenParser()
 
@@ -84,6 +80,21 @@ class DateAndSubClusterRunner:
                                                               tokens),
                                                           subfolder="coin_token_clustering").run()
 
+            low_start_date, high_start_date = self.create_property_cluster("start_date")
+            ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                          WithinCurrencies(start_date).get_and_export_data(
+                                                              low_start_date),
+                                                          WithinCurrencies(start_date).get_and_export_data(
+                                                              high_start_date),
+                                                          subfolder="start_date_clustering").run()
+            low_market_cap, high_market_cap = self.create_property_cluster("average_market_capitalization")
+            ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,
+                                                          WithinCurrencies(start_date).get_and_export_data(
+                                                              low_market_cap),
+                                                          WithinCurrencies(start_date).get_and_export_data(
+                                                              high_market_cap),
+                                                          subfolder="market_cap_clustering").run()
+
     def filter_for_keyword(self) -> Tuple[Dict, Dict]:
         contains_keyword = dict()
         no_keyword = dict()
@@ -140,3 +151,28 @@ class DateAndSubClusterRunner:
         coins = self.coinmarketcap_coins.get_all_coins()
 
         return coins, tokens
+
+    def create_property_cluster(self, property_name: str) -> Tuple[List[str], List[str]]:
+        currencies = self.currency_handler.get_all_currency_names()
+        currencies = list(map(lambda x: self.currency_handler.get_currency(x), currencies))
+
+        property_list = list(map(lambda x: (x.currency, getattr(x.get_statistical_data(), property_name)), currencies))
+        property_list = sorted(property_list, key=lambda x: x[1])
+        property_list = list(map(lambda x: x[0], property_list))
+
+        middle = int(len(property_list) / 2)
+
+        return property_list[:middle], property_list[middle:]
+
+    def create_cluster_significant_volume_price_correlation(self) -> Tuple[List[str], List[str]]:
+        currencies = self.currency_handler.get_all_currency_names()
+        currencies = list(map(lambda x: self.currency_handler.get_currency(x), currencies))
+
+        correlations = list(map(lambda x: (x.currency, x.get_statistical_data().volume_price_correlations["0"]), currencies))
+        correlations = sorted(correlations, key=lambda x: x[1][1])
+        correlations_significant = list(filter(lambda x: x[1][1] < 0.1, correlations))
+        correlations_significant = list(map(lambda x: x[0], correlations_significant))
+        correlations_not_significant = list(filter(lambda x: x[1][1] >= 0.1, correlations))
+        correlations_not_significant = list(map(lambda x: x[0], correlations_not_significant))
+
+        return correlations_significant, correlations_not_significant

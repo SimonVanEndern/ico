@@ -33,7 +33,7 @@ class ClusterResultContainer:
                 if result.result_cluster_1.name_value_dict is not None:
                     writer.writerow([result_name] + list(result.result_cluster_1.name_value_dict.keys()))
                     writer.writerow(["cluster1"] + list(result.result_cluster_1.name_value_dict.values()))
-                    if result.result_cluster_2.name_value_dict is not None:
+                    if result.result_cluster_2 is not None and result.result_cluster_2.name_value_dict is not None:
                         writer.writerow(["cluster2"] + list(result.result_cluster_2.name_value_dict.values()))
                 else:
                     writer.writerow([result_name,

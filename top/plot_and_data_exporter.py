@@ -1,5 +1,6 @@
 import csv
 import os
+from typing import Callable
 
 import matplotlib.pyplot as plt
 
@@ -25,7 +26,7 @@ class StatisticalAnalysisRunnerAndExporter:
         self.data = list()
         self.data_to_export: ClusterResultContainer = ClusterResultContainer(self.frame_name, "no_cluster")
 
-    def save_plot(self, func) -> None:
+    def save_plot(self, func: Callable) -> None:
         fig, ax, fig_name = func()
         fig.set_size_inches(7, 3.5)
 
@@ -41,7 +42,7 @@ class StatisticalAnalysisRunnerAndExporter:
 
         self.figure_counter += 1
 
-    def save_plots(self, func) -> None:
+    def save_plots(self, func: Callable) -> None:
         fig1, fig2, fig_name1, fig_name2 = func()
         fig1.set_size_inches(7, 3.5)
         fig2.set_size_inches(7, 3.5)
@@ -54,7 +55,7 @@ class StatisticalAnalysisRunnerAndExporter:
         self.save_figure(fig1, fig_name1)
         self.save_figure(fig2, fig_name2)
 
-    def add_correlation_data(self, name, func) -> None:
+    def add_correlation_data(self, name, func: Callable) -> None:
         correlation = func()
         self.data.append(
             (self.frame_name, name, "coefficient: " + str(correlation[0]), "p-value: " + str(correlation[1])))
@@ -62,7 +63,7 @@ class StatisticalAnalysisRunnerAndExporter:
         result = CalculationResult(name, "coefficient", correlation[0], "p-value", correlation[1])
         self.data_to_export.add_result(result, name)
 
-    def add_correlations_data(self, name1, name2, func) -> None:
+    def add_correlations_data(self, name1, name2, func: Callable) -> None:
         corr1, corr2 = func()
         self.data.append((self.frame_name, name1, "coefficient: " + str(corr1[0]), "p-value: " + str(corr1[1])))
         self.data.append((self.frame_name, name2, "coefficient: " + str(corr2[0]), "p-value: " + str(corr2[1])))
@@ -72,7 +73,7 @@ class StatisticalAnalysisRunnerAndExporter:
         self.data_to_export.add_result(result, name1)
         self.data_to_export.add_result(result2, name2)
 
-    def add_mean_and_count_data_multiple(self, name1, name2, func) -> None:
+    def add_mean_and_count_data_multiple(self, name1, name2, func: Callable) -> None:
         des1, des2 = func()
         self.data.append((self.frame_name, name1, "mean: " + str(des1["mean"]), "count: " + str(des1["count"])))
         self.data.append((self.frame_name, name2, "mean: " + str(des2["mean"]), "count: " + str(des2["count"])))
@@ -82,7 +83,7 @@ class StatisticalAnalysisRunnerAndExporter:
         self.data_to_export.add_result(result, name1)
         self.data_to_export.add_result(result2, name2)
 
-    def add_descriptive_data(self, result_name, func) -> None:
+    def add_descriptive_data(self, result_name, func: Callable) -> None:
         result = CalculationResult(result_name, name_value_dict=func())
         self.data_to_export.add_result(result, result_name)
 
@@ -207,13 +208,16 @@ class StatisticalAnalysisRunnerAndExporter:
         self.save_plot(self.sac.get_google_trends_correlation_plot)
         self.save_plot(self.sac.get_google_trends_correlation_plot2)
 
+        self.save_plot(self.sac.get_volatility_plot)
+        self.add_descriptive_data("Volatility 90 window data", self.sac.get_volatility_data)
+
         with open(os.path.join(self.save_path, "data.csv"), "w") as file:
             writer = csv.writer(file, delimiter=',', lineterminator='\n')
             for row in self.data:
                 writer.writerow(list(row))
 
-        self.data_to_export.save(self.save_path)
-
         correlation_calculations = BetweenCurrencies(self.save_path, list(self.original_data.keys()), sleep=False)
-        self.save_plot(correlation_calculations.get_correlation_plot())
-        self.add_descriptive_data("Correlations", correlation_calculations.get_correlation_data())
+        self.save_plot(correlation_calculations.get_correlation_plot)
+        self.add_descriptive_data("Correlations", correlation_calculations.get_correlation_data)
+
+        self.data_to_export.save(self.save_path)
