@@ -97,36 +97,6 @@ class DateAndSubClusterRunner:
 
         return contains_keyword, no_keyword
 
-    def get_keyword_data(self):
-        standard_set = self.data["None"]
-        index = list()
-        figure_1 = list()
-        for key in standard_set:
-            currency = standard_set[key].currency
-            item = (standard_set[key].first_date,
-                    currency.contains_keyword("coin"),
-                    currency.contains_keyword("token"),
-                    currency.contains_keyword("bit"),
-                    currency.contains_keyword("any"),
-                    True)
-            figure_1.append(item)
-            index.append(standard_set[key].first_date)
-
-        df = pandas.DataFrame(figure_1, index=index,
-                              columns=["date", "coin", "token", "bit", "any", "all"]).sort_index()
-
-        df["date"] = df["date"].astype("datetime64[ms]")
-        df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).sum()
-        df2["coin"] = df2["coin"] / df2["all"]
-        df2["token"] = df2["token"] / df2["all"]
-        df2["bit"] = df2["bit"] / df2["all"]
-        df2["any"] = df2["any"] / df2["all"]
-        del df2["all"]
-        df2.plot(kind="bar")
-        plt.show()
-
-        return figure_1
-
     def create_semantic_clusters(self) -> Tuple[List[str], List[str]]:
         with_keyword = list()
         without_keyword = list()

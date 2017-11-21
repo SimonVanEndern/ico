@@ -411,7 +411,10 @@ class StatisticalAnalysisCalculator:
         df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).count()
         print(df2)
 
-        df2.plot(kind="bar", ax=ax, legend=False)
+        if not multiple:
+            df2.plot(kind="bar", ax=ax, legend=False, position=0, color="seagreen", width=.4)
+        else:
+            df2.plot(kind="bar", ax=ax, position=1, color="cornflowerblue", width=.4)
 
         # Make most of the ticklabels empty so the labels don't get too crowded
         ticklabels = [''] * len(df2.index)

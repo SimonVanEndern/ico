@@ -30,9 +30,6 @@ class Main:
             # Stat4: Number of platforms for tokens listed on coinmarketcap
             print("Platforms: " + str(self.coinmarketcap_tokens.get_platform_statistics()))
 
-            # Figure02
-            # self.layer_on_top_of_within_currencies.get_start_time_analysis()
-
             # Includes keyword analysis
             keyword_data = descriptives.contains_keyword_coin(self.coinmarketcap.get_currencies())
             # Stat4: Total Cryptocurrencies investigated for keywords
@@ -43,9 +40,6 @@ class Main:
             print("Contains 'coin': " + str(keyword_data["coin"]))
             # Stat7: Number of Cryptocurrencies containing the word "bit"
             print("Contains 'bit': " + str(keyword_data["bit"]))
-
-            # Figure03: Histogram of containing "coin"
-            self.layer_on_top_of_within_currencies.get_keyword_data()
 
             # Figure04:
             self.descriptives.keyword_comparison_to_market_capitalilzation2()
