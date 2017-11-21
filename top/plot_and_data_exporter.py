@@ -50,16 +50,6 @@ class StatisticalAnalysisRunnerAndExporter:
         self.save_figure(fig1, fig_name1)
         self.save_figure(fig2, fig_name2)
 
-    def add_mean_and_count_data_multiple(self, name1, name2, func: Callable) -> None:
-        des1, des2 = func()
-        self.data.append((self.frame_name, name1, "mean: " + str(des1["mean"]), "count: " + str(des1["count"])))
-        self.data.append((self.frame_name, name2, "mean: " + str(des2["mean"]), "count: " + str(des2["count"])))
-
-        result = CalculationResult(name1, "mean", des1["mean"], "count", des1["count"])
-        result2 = CalculationResult(name2, "mean", des2["mean"], "count", des2["count"])
-        self.data_to_export.add_result(result, name1)
-        self.data_to_export.add_result(result2, name2)
-
     def add_descriptive_data(self, result_name, func: Callable) -> None:
         result = CalculationResult(result_name, name_value_dict=func())
         self.data_to_export.add_result(result, result_name)
@@ -91,15 +81,13 @@ class StatisticalAnalysisRunnerAndExporter:
 
         # Stat 10:
         # Descriptive statistics of price and volume change
-        self.add_mean_and_count_data_multiple("Mean of correlation volume and return all",
-                                              "Mean of correlation volume and return only significant ones",
-                                              self.sac.get_volume_return_correlation_data)
+        self.add_descriptive_data("correlation volume and return descriptives",
+                                  self.sac.get_volume_return_correlation_data)
 
         # Stat
         # Descriptive statistics of volume and market capitalization correlation
-        self.add_mean_and_count_data_multiple("Mean of correlation volume and market capitalization all",
-                                              "Mean of correlation volume and market cap only significant ones",
-                                              self.sac.get_volume_market_capitalization_correlation_data)
+        self.add_descriptive_data("correlation volume and market capitalization descriptives",
+                                  self.sac.get_volume_market_capitalization_correlation_data)
 
         # Figure 09:
         # Correlation of price and volume change predictor search
@@ -141,9 +129,8 @@ class StatisticalAnalysisRunnerAndExporter:
 
         # Stats:
         # Descriptive statistics of volume and price raw data correlations
-        self.add_mean_and_count_data_multiple("Mean of correlation volume and price all (excluding nans)",
-                                              "Mean of correlation volume and price only significant ones (excl nan)",
-                                              self.sac.get_absolute_volume_price_correlation_data)
+        self.add_descriptive_data("correlation volume and price descriptives",
+                                  self.sac.get_absolute_volume_price_correlation_data)
 
         self.add_descriptive_data("First price data", self.sac.get_first_price_data)
         self.add_descriptive_data("Price change beginning data", self.sac.get_price_change_beginning_data)

@@ -42,10 +42,12 @@ def get_correlation_figure_from_correlations_list(correlations: List[Tuple[float
     series = Series(correlations_significant, name="Correlations significant at 0.1, else replaces with 0")
     if not multiple:
         series.hist(ax=ax, bins=20, label=legend_name + " (only if significant at 10%: " + str(
-            len(correlations_significant)) + " of " + str(len(correlations)) + ")", alpha=1.0, figure=fig, color="C0").plot()
+            len(correlations_significant)) + " of " + str(len(correlations)) + ")", alpha=1.0, figure=fig,
+                    color="C0").plot()
     else:
         series.hist(ax=ax, bins=20, label=legend_name + " (only if significant at 10%: " + str(
-            len(correlations_significant)) + " of " + str(len(correlations)) + ")", alpha=0.8, figure=fig, color="C1").plot()
+            len(correlations_significant)) + " of " + str(len(correlations)) + ")", alpha=0.8, figure=fig,
+                    color="C1").plot()
     plt.legend(prop={'size': 6})
 
     return fig, ax
@@ -177,7 +179,9 @@ class StatisticalAnalysisCalculator:
             correlations.append(self.data[key].volume_return_correlations)
 
         correlations = list(map(lambda x: x["0"], correlations))
-        return get_correlation_series_descriptions(correlations)
+        all_correlations, significant = get_correlation_series_descriptions(correlations)
+        return {"coefficient-all": all_correlations[0], "p-value-all": all_correlations[1],
+                "coefficient-only-significant": significant[0], "p-value-only-significant": significant[1]}
 
     def get_volume_market_capitalization_correlation_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
         if fig is None and ax is None:
@@ -198,7 +202,9 @@ class StatisticalAnalysisCalculator:
         for key in self.data:
             correlations.append(self.data[key].volume_market_capitalization_correlation)
 
-        return get_correlation_series_descriptions(correlations)
+        all_correlations, significant = get_correlation_series_descriptions(correlations)
+        return {"coefficient-all": all_correlations[0], "p-value-all": all_correlations[1],
+                "coefficient-only-significant": significant[0], "p-value-only-significant": significant[1]}
 
     def get_absolute_volume_price_correlation_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
         if fig is None and ax is None:
@@ -225,7 +231,9 @@ class StatisticalAnalysisCalculator:
             correlations.append(self.data[key].volume_price_correlations)
 
         correlations = list(map(lambda x: x["0"], correlations))
-        return get_correlation_series_descriptions(correlations)
+        all_correlations, significant = get_correlation_series_descriptions(correlations)
+        return {"coefficient-all": all_correlations[0], "p-value-all": all_correlations[1],
+                "coefficient-only-significant": significant[0], "p-value-only-significant": significant[1]}
 
     def get_volume_price_correlation_cause_search_plot(self):
         correlations: List[Dict[str, [Tuple[float, float]]]] = list()
@@ -366,7 +374,8 @@ class StatisticalAnalysisCalculator:
             if not multiple:
                 series.hist(ax=ax, bins=numpy.logspace(-8, 5, num=30, base=10), label=legend_name).plot(spacing=0.5)
             else:
-                series.hist(ax=ax, bins=numpy.logspace(-8, 5, num=30, base=10), alpha=.8, label=legend_name).plot(spacing=0.5)
+                series.hist(ax=ax, bins=numpy.logspace(-8, 5, num=30, base=10), alpha=.8, label=legend_name).plot(
+                    spacing=0.5)
                 plt.legend(prop={'size': 6})
         except ValueError:
             print(series)
@@ -388,7 +397,8 @@ class StatisticalAnalysisCalculator:
         if not multiple:
             series.hist(ax=ax, bins=numpy.logspace(-10, 5, num=100, base=10), label=legend_name).plot(spacing=0.5)
         else:
-            series.hist(ax=ax, bins=numpy.logspace(-10, 5, num=100, base=10), alpha=.8, label=legend_name).plot(spacing=0.5)
+            series.hist(ax=ax, bins=numpy.logspace(-10, 5, num=100, base=10), alpha=.8, label=legend_name).plot(
+                spacing=0.5)
             plt.legend(prop={'size': 6})
         ax.set_xscale('log')
 
@@ -417,7 +427,8 @@ class StatisticalAnalysisCalculator:
         series = self._get_series_of_attribute("first_price")
         return series.describe().to_dict()
 
-    def get_google_trends_correlation_plot(self, switch=0, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[Any, Any, str]:
+    def get_google_trends_correlation_plot(self, switch=0, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[
+        Any, Any, str]:
         if switch != 1 and switch != 0:
             raise Exception()
         trends = list()
@@ -439,13 +450,15 @@ class StatisticalAnalysisCalculator:
             series[series != 0].hist(ax=ax, bins=20, label=legend_name + " (only if significant at 10%: " + str(
                 len(trends_significant)) + " of " + str(len(trends)) + ")", color="C0").plot()
         else:
-            series[series != 0].hist(ax=ax, bins=20, alpha=.8, label=legend_name + " (only if significant at 10%: " + str(
-                len(trends_significant)) + " of " + str(len(trends)) + ")", color="C1").plot()
+            series[series != 0].hist(ax=ax, bins=20, alpha=.8,
+                                     label=legend_name + " (only if significant at 10%: " + str(
+                                         len(trends_significant)) + " of " + str(len(trends)) + ")", color="C1").plot()
             plt.legend(prop={'size': 6})
 
         return fig, ax, "google-trends-price-usd-correlation-significant-ones-marked"
 
-    def get_google_trends_correlation_plot2(self, switch=1, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[Any, Any, str]:
+    def get_google_trends_correlation_plot2(self, switch=1, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[
+        Any, Any, str]:
         if switch != 1 and switch != 2:
             raise Exception()
         trends = list()

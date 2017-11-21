@@ -44,29 +44,6 @@ class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAnd
         self.save_figure(fig1, fig_name1)
         self.save_figure(fig2, fig_name2)
 
-    def add_mean_and_count_data_multiple(self, name1, name2, func) -> None:
-        des1, des2 = func()
-        self.data.append((self.frame_name, name1, "mean: " + str(des1["mean"]), "count: " + str(des1["count"])))
-        self.data.append((self.frame_name, name2, "mean: " + str(des2["mean"]), "count: " + str(des2["count"])))
-
-        result = CalculationResult(name1, "mean", des1["mean"], "count", des1["count"])
-        result2 = CalculationResult(name2, "mean", des2["mean"], "count", des2["count"])
-        self.data_to_export.add_result(result, name1)
-        self.data_to_export.add_result(result2, name2)
-
-        self.sac.data = self.sac_2.data
-
-        des1, des2 = func()
-        self.data.append((self.frame_name, name1, "mean: " + str(des1["mean"]), "count: " + str(des1["count"])))
-        self.data.append((self.frame_name, name2, "mean: " + str(des2["mean"]), "count: " + str(des2["count"])))
-
-        result = CalculationResult(name1, "mean", des1["mean"], "count", des1["count"])
-        result2 = CalculationResult(name2, "mean", des2["mean"], "count", des2["count"])
-        self.data_to_export.add_result(result, name1)
-        self.data_to_export.add_result(result2, name2)
-
-        self.sac.data = self.sac_1.data
-
     def add_descriptive_data(self, result_name, func: Callable) -> None:
         result = CalculationResult(result_name, name_value_dict=func())
         self.data_to_export.add_result(result, result_name)
