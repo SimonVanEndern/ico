@@ -44,42 +44,6 @@ class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAnd
         self.save_figure(fig1, fig_name1)
         self.save_figure(fig2, fig_name2)
 
-    def add_correlation_data(self, name, func) -> None:
-        correlation = func()
-        self.data.append(
-            (self.frame_name, name, "coefficient: " + str(correlation[0]), "p-value: " + str(correlation[1])))
-
-        result = CalculationResult(name, "coefficient", correlation[0], "p-value", correlation[1])
-        self.data_to_export.add_result(result, name)
-
-        self.sac.data = self.sac_2.data
-        result = CalculationResult(name, "coefficient", correlation[0], "p-value", correlation[1])
-        self.data_to_export.add_result(result, name)
-
-        self.sac.data = self.sac_1.data
-
-    def add_correlations_data(self, name1, name2, func) -> None:
-        corr1, corr2 = func()
-        self.data.append((self.frame_name, name1, "coefficient: " + str(corr1[0]), "p-value: " + str(corr1[1])))
-        self.data.append((self.frame_name, name2, "coefficient: " + str(corr2[0]), "p-value: " + str(corr2[1])))
-
-        result = CalculationResult(name1, "coefficient", corr1[0], "p-value", corr1[1])
-        result2 = CalculationResult(name2, "coefficient", corr2[0], "p-value", corr2[1])
-        self.data_to_export.add_result(result, name1)
-        self.data_to_export.add_result(result2, name2)
-
-        self.sac.data = self.sac_2.data
-        corr1, corr2 = func()
-        self.data.append((self.frame_name, name1, "coefficient: " + str(corr1[0]), "p-value: " + str(corr1[1])))
-        self.data.append((self.frame_name, name2, "coefficient: " + str(corr2[0]), "p-value: " + str(corr2[1])))
-
-        result = CalculationResult(name1, "coefficient", corr1[0], "p-value", corr1[1])
-        result2 = CalculationResult(name2, "coefficient", corr2[0], "p-value", corr2[1])
-        self.data_to_export.add_result(result, name1)
-        self.data_to_export.add_result(result2, name2)
-
-        self.sac.data = self.sac_1.data
-
     def add_mean_and_count_data_multiple(self, name1, name2, func) -> None:
         des1, des2 = func()
         self.data.append((self.frame_name, name1, "mean: " + str(des1["mean"]), "count: " + str(des1["count"])))
@@ -100,5 +64,16 @@ class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAnd
         result2 = CalculationResult(name2, "mean", des2["mean"], "count", des2["count"])
         self.data_to_export.add_result(result, name1)
         self.data_to_export.add_result(result2, name2)
+
+        self.sac.data = self.sac_1.data
+
+    def add_descriptive_data(self, result_name, func: Callable) -> None:
+        result = CalculationResult(result_name, name_value_dict=func())
+        self.data_to_export.add_result(result, result_name)
+
+        self.sac.data = self.sac_2.data
+
+        result = CalculationResult(result_name, name_value_dict=func())
+        self.data_to_export.add_result(result, result_name)
 
         self.sac.data = self.sac_1.data

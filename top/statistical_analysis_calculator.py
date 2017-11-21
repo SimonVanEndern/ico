@@ -113,8 +113,9 @@ class StatisticalAnalysisCalculator:
         # ax.set_xscale('log', basex=10)
         return fig, ax, "average-market-capitalization-plot"
 
-    def get_correlation_between_average_volume_and_average_market_capitalization(self) -> Tuple[float, float]:
-        return self._get_pearsonr("average_volume", "average_market_capitalization")
+    def get_correlation_between_average_volume_and_average_market_capitalization(self) -> dict:
+        pearson_r = self._get_pearsonr("average_volume", "average_market_capitalization")
+        return {"coefficient": pearson_r[0], "p-value": pearson_r[1]}
 
     def get_average_market_capitalization_divided_by_average_volume_plot(self, fig=None, ax=None, multiple=False,
                                                                          legend_name=""):
@@ -142,7 +143,7 @@ class StatisticalAnalysisCalculator:
         ax.set_xscale('log', basex=10)
         return fig, ax, "average-market-capitalization-divided-by-average-volume"
 
-    def get_average_market_capitalization_divided_by_average_volume_data(self):
+    def get_average_market_capitalization_divided_by_average_volume_data(self) -> dict:
         volume = list()
         market_cap = list()
 
@@ -153,7 +154,7 @@ class StatisticalAnalysisCalculator:
         combined = numpy.array(market_cap) / numpy.array(volume)
 
         average = combined.mean()
-        return 1 / average, 1 / numpy.median(combined)
+        return {"mean": 1 / average, "median": 1 / numpy.median(combined)}
 
     def get_volume_return_correlation_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
         if fig is None and ax is None:
@@ -280,19 +281,27 @@ class StatisticalAnalysisCalculator:
         Series(currency_characteristics_2).hist(bins=20).plot()
         plt.show()
 
-    def get_age_market_capitalization_correlations(self) -> Tuple[Any, Any]:
+    def get_age_average_market_capitalization_correlations(self) -> dict:
         age = list(map(lambda x: x.age_in_days, self.data.values()))
         average_market_capitalization = list(map(lambda x: x.average_market_capitalization, self.data.values()))
+
+        pearson_r = stats.pearsonr(age, average_market_capitalization)
+        return {"coefficient": pearson_r[0], "p-value": pearson_r[1]}
+
+    def get_age_last_market_capitalization_correlations(self) -> dict:
+        age = list(map(lambda x: x.age_in_days, self.data.values()))
         last_market_capitalization = list(map(lambda x: x.last_market_capitalization, self.data.values()))
         last_market_capitalization = list(map(lambda x: 0 if numpy.isnan(x) else x, last_market_capitalization))
 
-        return stats.pearsonr(age, average_market_capitalization), stats.pearsonr(age, last_market_capitalization)
+        pearson_r = stats.pearsonr(age, last_market_capitalization)
+        return {"coefficient": pearson_r[0], "p-value": pearson_r[1]}
 
-    def get_age_average_volume_correlation(self) -> Tuple[float, float]:
+    def get_age_average_volume_correlation(self) -> dict:
         age = list(map(lambda x: x.age_in_days, self.data.values()))
         average_volume = list(map(lambda x: x.average_volume, self.data.values()))
 
-        return stats.pearsonr(age, average_volume)
+        pearson_r = stats.pearsonr(age, average_volume)
+        return {"coefficient": pearson_r[0], "p-value": pearson_r[1]}
 
     def get_linear_price_regressions_plot(self):
         linear_regressions = list()
