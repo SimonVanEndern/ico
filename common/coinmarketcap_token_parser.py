@@ -93,10 +93,6 @@ class CoinmarketCapTokenParser(Parser):
         fig.subplots_adjust(top=0.9, bottom=0.3)
         # fig.set_size_inches(18.5, 10.5)
 
-
-
-        plt.show()
-
         return len(token_counts)
 
 # run_script = CoinmarketCapTokenParser()

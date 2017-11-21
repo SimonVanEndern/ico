@@ -42,7 +42,7 @@ class Main:
             print("Contains 'bit': " + str(keyword_data["bit"]))
 
             # Figure04:
-            self.descriptives.keyword_comparison_to_market_capitalilzation2()
+            # self.descriptives.keyword_comparison_to_market_capitalilzation2()
 
             # Percentage of keyword "coin" for currencies without market capitalization
             stats = descriptives.contains_keyword_coin(self.coinmarketcap.get_market_cap_named(True))

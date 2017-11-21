@@ -23,10 +23,11 @@ class StatisticalAnalysisRunnerAndExporter:
         self.figure_counter: int = 1
 
         self.data = list()
-        self.data_to_export = ClusterResultContainer(self.frame_name, "no_cluster")
+        self.data_to_export: ClusterResultContainer = ClusterResultContainer(self.frame_name, "no_cluster")
 
     def save_plot(self, func) -> None:
         fig, ax, fig_name = func()
+        fig.set_size_inches(7, 3.5)
 
         # fig.suptitle("Figure " + str(self.figure_counter) + fig_name)
         fig.canvas.set_window_title("Figure " + str(self.figure_counter))
@@ -34,7 +35,7 @@ class StatisticalAnalysisRunnerAndExporter:
         self.save_figure(fig, fig_name)
 
     def save_figure(self, fig, fig_name) -> None:
-        fig.set_size_inches(6, 4)
+        fig.subplots_adjust(bottom=0.2, top=0.9)
         fig.savefig(os.path.join(self.save_path, "Figure" + str(self.figure_counter) + "-" + fig_name + ".png"))
         plt.close(fig)
 
@@ -42,6 +43,8 @@ class StatisticalAnalysisRunnerAndExporter:
 
     def save_plots(self, func) -> None:
         fig1, fig2, fig_name1, fig_name2 = func()
+        fig1.set_size_inches(7, 3.5)
+        fig2.set_size_inches(7, 3.5)
 
         # fig1.suptitle("Figure " + str(self.figure_counter) + fig_name1)
         # fig2.suptitle("Figure " + str(self.figure_counter) + fig_name2)
@@ -78,6 +81,10 @@ class StatisticalAnalysisRunnerAndExporter:
         result2 = CalculationResult(name2, "mean", des2["mean"], "count", des2["count"])
         self.data_to_export.add_result(result, name1)
         self.data_to_export.add_result(result2, name2)
+
+    def add_descriptive_data(self, result_name, func) -> None:
+        result = CalculationResult(result_name, name_value_dict=func())
+        self.data_to_export.add_result(result, result_name)
 
     def run(self) -> None:
         if not os.path.isdir(self.save_path):
@@ -187,9 +194,13 @@ class StatisticalAnalysisRunnerAndExporter:
         # First price since listing on coinmarketcap
         self.save_plot(self.sac.get_first_price_plot)
 
+        self.add_descriptive_data("First price data", self.sac.get_first_price_data)
+
         # Figure:
         # Price change since beginning
         self.save_plot(self.sac.get_price_change_beginning_plot)
+
+        self.add_descriptive_data("Price change beginning data", self.sac.get_price_change_beginning_data)
 
         # Figure:
         # Price correlation with google trends
@@ -203,4 +214,6 @@ class StatisticalAnalysisRunnerAndExporter:
 
         self.data_to_export.save(self.save_path)
 
-        BetweenCurrencies(self.save_path, list(self.original_data.keys()), sleep=True)
+        correlation_calculations = BetweenCurrencies(self.save_path, list(self.original_data.keys()), sleep=False)
+        self.save_plot(correlation_calculations.get_correlation_plot())
+        self.add_descriptive_data("Correlations", correlation_calculations.get_correlation_data())

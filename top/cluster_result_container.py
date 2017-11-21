@@ -30,13 +30,19 @@ class ClusterResultContainer:
 
             for result_name in self.clustered_results:
                 result = self.clustered_results[result_name]
-                writer.writerow([result_name,
-                                 result.result_cluster_1.name_value_1 if result.result_cluster_1 is not None else "",
-                                 result.result_cluster_1.name_value_2 if result.result_cluster_1 is not None else "",
-                                 result.result_cluster_2.name_value_1 if result.result_cluster_2 is not None else "",
-                                 result.result_cluster_2.name_value_2 if result.result_cluster_2 is not None else ""])
+                if result.result_cluster_1.name_value_dict is not None:
+                    writer.writerow([result_name] + list(result.result_cluster_1.name_value_dict.keys()))
+                    writer.writerow(["cluster1"] + list(result.result_cluster_1.name_value_dict.values()))
+                    if result.result_cluster_2.name_value_dict is not None:
+                        writer.writerow(["cluster2"] + list(result.result_cluster_2.name_value_dict.values()))
+                else:
+                    writer.writerow([result_name,
+                                     result.result_cluster_1.name_value_1 if result.result_cluster_1 is not None else "",
+                                     result.result_cluster_1.name_value_2 if result.result_cluster_1 is not None else "",
+                                     result.result_cluster_2.name_value_1 if result.result_cluster_2 is not None else "",
+                                     result.result_cluster_2.name_value_2 if result.result_cluster_2 is not None else ""])
 
-                writer.writerow(["", result.result_cluster_1.value_1 if result.result_cluster_1 is not None else "",
-                                 result.result_cluster_1.value_2 if result.result_cluster_1 is not None else "",
-                                 result.result_cluster_2.value_1 if result.result_cluster_2 is not None else "",
-                                 result.result_cluster_2.value_2 if result.result_cluster_2 is not None else ""])
+                    writer.writerow(["", result.result_cluster_1.value_1 if result.result_cluster_1 is not None else "",
+                                     result.result_cluster_1.value_2 if result.result_cluster_1 is not None else "",
+                                     result.result_cluster_2.value_1 if result.result_cluster_2 is not None else "",
+                                     result.result_cluster_2.value_2 if result.result_cluster_2 is not None else ""])

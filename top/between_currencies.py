@@ -35,21 +35,29 @@ class BetweenCurrencies:
 
                 correlations[currency][currency2] = correlation
 
-        as_list = list()
+        self.as_list = list()
         for key in correlations:
             for key2 in correlations[key]:
-                as_list.append((key, key2, correlations[key][key2][0], correlations[key][key2][1]))
+                self.as_list.append((key, key2, correlations[key][key2][0], correlations[key][key2][1]))
 
         with open(os.path.join(save_path, "all-correlations.csv"), "w") as file:
             writer = csv.writer(file, delimiter=",", lineterminator="\n")
             writer.writerow(["Currency1", "Currency2", "correlation", "p-value"])
-            for row in as_list:
+            for row in self.as_list:
                 writer.writerow(list(row))
 
-        series = pandas.Series(list(map(lambda x: x[2], as_list)))
-        series.hist().plot()
-        as_list = list(filter(lambda x: x[3] < 0.1, as_list))
+    def get_correlation_plot(self):
+        fig, ax = plt.subplots()
+        series = pandas.Series(list(map(lambda x: x[2], self.as_list)))
+        series.hist(ax=ax).plot(figure=fig)
+        as_list = list(filter(lambda x: x[3] < 0.1, self.as_list))
         series2 = pandas.Series(list(map(lambda x: x[2], as_list)))
-        series2.hist().plot()
+        series2.hist(ax=ax).plot(figure=fig)
 
-        plt.show()
+        return fig, ax, "correlations"
+
+    def get_correlation_data(self):
+        series = pandas.Series(list(map(lambda x: x[2], self.as_list)))
+
+        print(series.describe())
+        return series.describe()

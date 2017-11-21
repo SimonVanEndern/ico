@@ -49,18 +49,6 @@ class DescriptiveStatistics:
 
         return
 
-    def start_time_data_analysis_including_keyword(self):
-        df = pandas.read_csv(self.path)
-        df["Includes_Coin"] = df.apply(lambda row: row["Currency"].find("coin") != -1, axis=1)
-        df["Not_Includes_Coin"] = df.apply(lambda row: row["Currency"].find("coin") == -1, axis=1)
-        del df["Currency"]
-        df["Start-Date"] = df["Start-Date"].astype("datetime64[ns]")
-        df.groupby([df["Start-Date"].dt.year, df["Start-Date"].dt.month]).sum().plot(kind="bar")
-        print("Figure 03: ")
-        plt.show()
-
-        return
-
     def get_market_capitalization_histogram(self):
         market_cap = self.coinmarketcap.get_market_cap_named()
         # market_cap.pop("bitcoin")

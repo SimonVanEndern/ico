@@ -28,32 +28,27 @@ class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAnd
         self.data = list()
         self.data_to_export = ClusterResultContainer(self.frame_name, subfolder)
 
+        self.name_cluster_1 = subfolder + " lower half"
+        self.name_cluster_2 = subfolder + " upper half"
+
     def save_plot(self, func) -> None:
         fig, ax = plt.subplots()
+        fig.set_size_inches(7, 3.5)
 
-        fig, ax, fig_name = func(fig=fig, ax=ax, multiple=False)
+        fig, ax, fig_name = func(fig=fig, ax=ax, multiple=False, legend_name=self.name_cluster_1)
         self.sac.data = self.sac_2.data
-        fig, ax, fig_name = func(fig=fig, ax=ax, multiple=True)
+        fig, ax, fig_name = func(fig=fig, ax=ax, multiple=True, legend_name=self.name_cluster_2)
         self.sac.data = self.sac_1.data
-        # plt.show()
 
-        # fig.suptitle("Figure " + str(self.figure_counter) + fig_name)
         fig.canvas.set_window_title("Figure " + str(self.figure_counter))
 
         self.save_figure(fig, fig_name)
 
-    def save_figure(self, fig, fig_name) -> None:
-        fig.set_size_inches(6, 4)
-        fig.savefig(os.path.join(self.save_path, "Figure" + str(self.figure_counter) + "-" + fig_name + ".png"))
-        plt.close(fig)
-
-        self.figure_counter += 1
-
     def save_plots(self, func) -> None:
         fig1, fig2, fig_name1, fig_name2 = func()
+        fig1.set_size_inches(7, 3.5)
+        fig2.set_size_inches(7, 3.5)
 
-        # fig1.suptitle("Figure " + str(self.figure_counter) + fig_name1)
-        # fig2.suptitle("Figure " + str(self.figure_counter) + fig_name2)
         fig1.canvas.set_window_title("Figure " + str(self.figure_counter))
         fig2.canvas.set_window_title("Figure " + str(self.figure_counter))
 

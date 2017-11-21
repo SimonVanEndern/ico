@@ -41,12 +41,18 @@ class TotalCalculator:
 
         fig, ax = plt.subplots()
         df = pandas.DataFrame(list(market_cap), index=dates)
-        df.plot(ax=ax)
+        ax.set(xlabel="Time", ylabel="Market Capitalization")
+        fig.set_size_inches(7, 3)
+        df.plot(ax=ax, legend=False)
+        fig.subplots_adjust(top=0.9, bottom=0.25)
         plt.show()
 
         fig2, ax2 = plt.subplots()
         df2 = pandas.DataFrame(list(volume), index=dates)
-        df2.plot(ax=ax2)
+        ax2.set(xlabel="Time", ylabel="Volume")
+        fig2.set_size_inches(7, 3)
+        df2.plot(ax=ax2, legend=False)
+        fig2.subplots_adjust(top=0.9, bottom=0.25)
         plt.show()
 
         self.calculate_market_capitalization_collapses(market_cap)
