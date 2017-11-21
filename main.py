@@ -31,7 +31,7 @@ class Main:
             print("Platforms: " + str(self.coinmarketcap_tokens.get_platform_statistics()))
 
             # Figure02
-            self.layer_on_top_of_within_currencies.get_start_time_analysis()
+            # self.layer_on_top_of_within_currencies.get_start_time_analysis()
 
             # Includes keyword analysis
             keyword_data = descriptives.contains_keyword_coin(self.coinmarketcap.get_currencies())

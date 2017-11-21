@@ -31,7 +31,7 @@ class DateAndSubClusterRunner:
         self.month_3: datetime = datetime.strptime("01.08.2017", "%d.%m.%Y")
         self.month_1: datetime = datetime.strptime("01.10.2017", "%d.%m.%Y")
 
-        self.start_dates: List(datetime) = [self.month_1, self.start_total, self.start_2017, self.month_6, self.month_3]
+        self.start_dates: List(datetime) = [self.start_total, self.start_2017, self.month_6, self.month_3, self.month_1]
 
         self.data: Dict[str, Dict[str, CurrencyStatisticalData]] = dict()
 
@@ -126,34 +126,6 @@ class DateAndSubClusterRunner:
         plt.show()
 
         return figure_1
-
-    def get_start_time_analysis(self):
-        standard_set = self.data["None"]
-        index = list()
-        output = list()
-
-        for key in standard_set:
-            index.append(standard_set[key].first_date)
-            output.append(True)
-
-        df = pandas.DataFrame(index, index=index, columns=["date"]).sort_index()
-        fig, ax = plt.subplots()
-
-        df["date"] = df["date"].astype("datetime64[ms]")
-        df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).count()
-
-        df2.plot(kind="bar", ax=ax, legend=False)
-        index = list(df2.index)
-        print(index)
-        ax.set_xticklabels(index, rotation=90, fontsize=10)
-        ax.set(xlabel="Time in months", ylabel="Frequency")
-        fig.subplots_adjust(bottom=0.3)
-
-        # fig.bottom = 0.55
-        # fig.tight_layout()
-        plt.show()
-
-        return
 
     def create_semantic_clusters(self) -> Tuple[List[str], List[str]]:
         with_keyword = list()

@@ -49,5 +49,30 @@ class TotalCalculator:
         df2.plot(ax=ax2)
         plt.show()
 
+        self.calculate_market_capitalization_collapses(market_cap)
+
+    def calculate_market_capitalization_collapses(self, market_cap: pandas.DataFrame):
+        indices = market_cap.index.values
+
+        values = list(market_cap)
+
+        output = list()
+
+        for index, value in enumerate(values):
+            if index < 980:
+                continue
+            lowest_value_afterwards = value
+            index_of_lowest_value = index
+
+            for index2, other_value in enumerate(values[index:]):
+                if other_value < lowest_value_afterwards:
+                    lowest_value_afterwards = other_value
+                    index_of_lowest_value = index + index2
+
+            output.append((lowest_value_afterwards / value - 1, index, index_of_lowest_value))
+
+        output = sorted(output, key=lambda x: x[0])
+        print(output)
+
 
 TotalCalculator()

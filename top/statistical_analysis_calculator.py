@@ -1,9 +1,11 @@
+from datetime import datetime
 from pprint import pprint
 from typing import Tuple, Dict, List, Any
 
 import matplotlib.pyplot as plt
 import numpy
-from pandas import Series
+from matplotlib import ticker
+from pandas import Series, DataFrame
 from scipy.stats import stats
 
 from common.currency_handler import CurrencyHandler
@@ -184,7 +186,8 @@ class StatisticalAnalysisCalculator:
 
         correlations = list(map(lambda x: x["0"], correlations))
 
-        fig, ax = get_correlation_figure_from_correlations_list(correlations, xlabel="Correlation between volume and price")
+        fig, ax = get_correlation_figure_from_correlations_list(correlations,
+                                                                xlabel="Correlation between volume and price")
         fig.suptitle("Histogram of correlations between volume and price")
 
         return fig, ax, "raw-volume-price-correlations-significant-marked"
@@ -395,3 +398,40 @@ class StatisticalAnalysisCalculator:
         series[series != 0].hist(ax=ax, bins=20).plot()
 
         return fig, ax, "google-trends-price-usd-correlation-significant-ones-marked"
+
+    def get_first_date_plot(self, fig=None, ax=None, multiple=False):
+        if fig is None and ax is None:
+            fig, ax = plt.subplots()
+
+        dates = self._get_series_of_attribute("first_date")
+
+        df = DataFrame(list(dates), index=dates, columns=["date"]).sort_index()
+
+        df["date"] = df["date"].astype("datetime64[ms]")
+        df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).count()
+        print(df2)
+
+        df2.plot(kind="bar", ax=ax, legend=False)
+
+        # Make most of the ticklabels empty so the labels don't get too crowded
+        ticklabels = [''] * len(df2.index)
+        # Every 4th ticklable shows the month and day
+        ticklabels[::6] = [datetime(item[0], item[1], 1).strftime('%b %d') for item in df2.index[::6]]
+        # Every 12th ticklabel includes the year
+        ticklabels[::12] = [datetime(item[0], item[1], 1).strftime('%b %d\n%Y') for item in df2.index[::12]]
+        ax.xaxis.set_major_formatter(ticker.FixedFormatter(ticklabels))
+        fig.autofmt_xdate()
+
+        # ax.set_xticklabels(index, rotation=90, fontsize=10)
+        ax.set(xlabel="Time in months", ylabel="Frequency")
+        ax.tick_params(labelsize=6)
+        fig.subplots_adjust(bottom=0.3)
+
+        return fig, ax, "start-dates"
+
+
+    #>>> c.a.plot(kind="bar", ax=ax, width=.4, position=1, color="red")
+    # <matplotlib.axes._subplots.AxesSubplot object at 0x0000015F2F480940>
+    # >>> c.b.plot(kind="bar", ax=ax, width=.4, position=0, color="blue")
+    # <matplotlib.axes._subplots.AxesSubplot object at 0x0000015F2F480940>
+    # >>> plt.show()

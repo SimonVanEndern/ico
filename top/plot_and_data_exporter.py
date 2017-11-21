@@ -83,6 +83,8 @@ class StatisticalAnalysisRunnerAndExporter:
         if not os.path.isdir(self.save_path):
             os.mkdir(self.save_path)
 
+        self.save_plot(self.sac.get_first_date_plot)
+
         # Average volume plot
         self.save_plot(self.sac.get_average_volume_plot)
 
@@ -192,6 +194,9 @@ class StatisticalAnalysisRunnerAndExporter:
         # Price correlation with google trends
         self.save_plot(self.sac.get_google_trends_correlation_plot)
         self.save_plot(self.sac.get_google_trends_correlation_plot2)
+
+        # Start date of currencies - especially for clustering
+        self.save_plot(self.sac.get_first_date_plot)
 
         with open(os.path.join(self.save_path, "data.csv"), "w") as file:
             writer = csv.writer(file, delimiter=',', lineterminator='\n')
