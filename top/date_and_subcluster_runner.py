@@ -53,7 +53,7 @@ class DateAndSubClusterRunner:
                         self.create_token_coin_clusters(),
                         self.create_property_cluster("average_volume"),
                         self.create_property_cluster("first_price"),
-                        self.create_property_cluster("start_date"),
+                        self.create_property_cluster("first_date"),
                         self.create_property_cluster("average_market_capitalization"),
                         self.create_cluster_significant_volume_price_correlation()]
 

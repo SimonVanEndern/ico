@@ -56,7 +56,7 @@ class BetweenCurrencies:
             series2.hist(ax=ax, color="C0", label=legend_name + " (only if significant at 10%: " + str(
                 len(series2)) + " of " + str(len(self.as_list)) + ")").plot(figure=fig)
         else:
-            series2.hist(ax=ax, color="C0", alpha=.8, label=legend_name + " (only if significant at 10%: " + str(
+            series2.hist(ax=ax, color="C1", alpha=.8, label=legend_name + " (only if significant at 10%: " + str(
                 len(series2)) + " of " + str(len(self.as_list)) + ")").plot(figure=fig)
             plt.legend()
 
