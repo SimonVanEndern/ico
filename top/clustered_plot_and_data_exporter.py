@@ -1,8 +1,5 @@
-import os
-
 import matplotlib.pyplot as plt
 
-from global_data import GlobalData
 from top.calculation_result import CalculationResult
 from top.cluster_result_container import ClusterResultContainer
 from top.plot_and_data_exporter import StatisticalAnalysisRunnerAndExporter
@@ -14,18 +11,10 @@ class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAnd
         super().__init__(name, data_cluster_1, subfolder=subfolder)
         self.original_data_1: dict = data_cluster_1
         self.original_data_2: dict = data_cluster_2
-        self.frame_name: str = name
-        self.save_path: str = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name)
-        if not os.path.isdir(self.save_path):
-            os.mkdir(self.save_path)
-        if subfolder is not None:
-            self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name, subfolder)
         self.sac: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data_cluster_1)
         self.sac_1: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data_cluster_1)
         self.sac_2: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data_cluster_2)
-        self.figure_counter: int = 1
 
-        self.data = list()
         self.data_to_export = ClusterResultContainer(self.frame_name, subfolder)
 
         self.name_cluster_1 = subfolder + " lower half"
