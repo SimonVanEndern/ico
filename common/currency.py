@@ -46,8 +46,6 @@ class Currency:
         self.statistical_data: CurrencyStatisticalData = None
 
     def get_statistical_data(self) -> CurrencyStatisticalData:
-        if self.currency == "0x":
-            aa = 7
         if self.statistical_data is None:
             try:
                 self.statistical_data = CurrencyStatisticalData(self)

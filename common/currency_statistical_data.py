@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
 
 import numpy
 import pandas
@@ -45,7 +45,7 @@ class CurrencyStatisticalData:
         # TODO: Make it work
         # self.volatility_linear_regression: LinregressResult = self.calculate_volatility_linreg()
 
-        self.google_trends_correlations: dict = self.load_google_trends_data()
+        self.google_trends_correlations: List[Tuple[int, float]] = self.load_google_trends_data()
         self.price_correlation_change_with_google_trends_data: Tuple[
             Tuple[float, float], Tuple[float, float]] = self.calculate_price_correlation_with_google_trends()
 
@@ -281,7 +281,7 @@ class CurrencyStatisticalData:
 
         return export
 
-    def load_google_trends_data(self) -> list:
+    def load_google_trends_data(self) -> List[Tuple[int, float]]:
         gtd = GoogleTrendsDTO(self.currency.currency)
         return gtd.load_aggregated_data()
 

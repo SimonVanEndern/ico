@@ -20,7 +20,12 @@ class StatisticalAnalysisRunnerAndExporter:
             os.mkdir(self.save_path)
         if subfolder is not None:
             self.save_path = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name, subfolder)
+        if not os.path.isdir(self.save_path):
+            os.mkdir(self.save_path)
         self.sac: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data)
+        self.between_curr: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data.keys()),
+                                                                 sleep=False)
+
         self.figure_counter: int = 1
 
         self.data = list()
@@ -55,8 +60,6 @@ class StatisticalAnalysisRunnerAndExporter:
         self.data_to_export.add_result(result, result_name)
 
     def run(self) -> None:
-        if not os.path.isdir(self.save_path):
-            os.mkdir(self.save_path)
 
         plot_functions = [self.sac.get_first_date_plot,
                           self.sac.get_average_volume_plot,
@@ -78,14 +81,8 @@ class StatisticalAnalysisRunnerAndExporter:
                                   self.sac.get_correlation_between_average_volume_and_average_market_capitalization)
         self.add_descriptive_data("Average of average market capitalization divided by average volume",
                                   self.sac.get_average_market_capitalization_divided_by_average_volume_data)
-
-        # Stat 10:
-        # Descriptive statistics of price and volume change
         self.add_descriptive_data("correlation volume and return descriptives",
                                   self.sac.get_volume_return_correlation_data)
-
-        # Stat
-        # Descriptive statistics of volume and market capitalization correlation
         self.add_descriptive_data("correlation volume and market capitalization descriptives",
                                   self.sac.get_volume_market_capitalization_correlation_data)
 
@@ -127,8 +124,6 @@ class StatisticalAnalysisRunnerAndExporter:
         result = CalculationResult(name, "negatives", negatives2, "", "")
         self.data_to_export.add_result(result, name)
 
-        # Stats:
-        # Descriptive statistics of volume and price raw data correlations
         self.add_descriptive_data("correlation volume and price descriptives",
                                   self.sac.get_absolute_volume_price_correlation_data)
 
@@ -141,8 +136,7 @@ class StatisticalAnalysisRunnerAndExporter:
             for row in self.data:
                 writer.writerow(list(row))
 
-        correlation_calculations = BetweenCurrencies(self.save_path, list(self.original_data.keys()), sleep=False)
-        self.save_plot(correlation_calculations.get_correlation_plot)
-        self.add_descriptive_data("Correlations", correlation_calculations.get_correlation_data)
+        self.save_plot(self.between_curr.get_correlation_plot)
+        self.add_descriptive_data("Correlations", self.between_curr.get_correlation_data)
 
         self.data_to_export.save(self.save_path)

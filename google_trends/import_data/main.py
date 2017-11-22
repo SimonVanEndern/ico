@@ -48,6 +48,8 @@ class GoogleTrends:
             GoogleTrendsDTO(currency)
 
     def get_or_download(self, currency, start, end):
+        currency_name = currency.replace("-", " ")
+
         path = os.path.join(self.save_path, currency)
 
         if not os.path.isdir(path):
@@ -59,7 +61,7 @@ class GoogleTrends:
             logging.info("{}:Google Trends data for {} already downloaded".format(self.__class__.__name__, currency))
             return
         else:
-            raw_data = self.get_raw_data(currency, start + " " + end)
+            raw_data = self.get_raw_data(currency_name, start + " " + end)
             compressed_data = self.compress_raw_data(raw_data)
             self.save_compressed_data(compressed_data, path, filename)
 

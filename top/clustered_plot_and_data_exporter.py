@@ -1,5 +1,8 @@
+from typing import Callable
+
 import matplotlib.pyplot as plt
 
+from top.between_currencies import BetweenCurrencies
 from top.calculation_result import CalculationResult
 from top.cluster_result_container import ClusterResultContainer
 from top.plot_and_data_exporter import StatisticalAnalysisRunnerAndExporter
@@ -15,6 +18,10 @@ class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAnd
         self.sac_1: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data_cluster_1)
         self.sac_2: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data_cluster_2)
 
+        self.between_curr_1: BetweenCurrencies = self.between_curr
+        self.between_curr_2: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data_2.keys()),
+                                                                   sleep=False)
+
         self.data_to_export = ClusterResultContainer(self.frame_name, subfolder)
 
         self.name_cluster_1 = subfolder + " lower half"
@@ -26,8 +33,14 @@ class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAnd
 
         fig, ax, fig_name = func(fig=fig, ax=ax, multiple=False, legend_name=self.name_cluster_1)
         self.sac.data = self.sac_2.data
+        correlations_1 = self.between_curr.correlations
+        as_list_1 = self.between_curr.as_list
+        self.between_curr.correlations = self.between_curr_2.correlations
+        self.between_curr.as_list = self.between_curr_2.as_list
         fig, ax, fig_name = func(fig=fig, ax=ax, multiple=True, legend_name=self.name_cluster_2)
         self.sac.data = self.sac_1.data
+        self.between_curr.correlations = correlations_1
+        self.between_curr.as_list = as_list_1
 
         fig.canvas.set_window_title("Figure " + str(self.figure_counter))
 

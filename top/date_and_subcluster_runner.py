@@ -47,8 +47,6 @@ class DateAndSubClusterRunner:
             else:
                 start_date_name = str(start_date.timestamp())
 
-            StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)]).run()
-
             clusters = [self.create_semantic_clusters(),
                         self.create_token_coin_clusters(),
                         self.create_property_cluster("average_volume"),
@@ -56,6 +54,8 @@ class DateAndSubClusterRunner:
                         self.create_property_cluster("first_date"),
                         self.create_property_cluster("average_market_capitalization"),
                         self.create_cluster_significant_volume_price_correlation()]
+            StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)]).run()
+
 
             for cluster in clusters:
                 ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,

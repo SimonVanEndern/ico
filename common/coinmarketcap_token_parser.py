@@ -83,7 +83,6 @@ class CoinmarketCapTokenParser(Parser):
                      fontsize=10)
         df = pandas.DataFrame.from_dict(token_counts, orient='index')
 
-        print(df)
         df.plot(kind='bar', ax=ax[0], legend=False)
         df.plot(kind='bar', ax=ax[1], legend=False)
         ax[1].set_xticklabels(df.index, rotation=90, fontsize=10)

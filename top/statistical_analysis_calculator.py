@@ -1,5 +1,4 @@
 from datetime import datetime
-from pprint import pprint
 from typing import Tuple, Dict, List, Any
 
 import matplotlib.pyplot as plt
@@ -268,9 +267,6 @@ class StatisticalAnalysisCalculator:
                     else:
                         names_total[names[index]] = 1
 
-        pprint(shift_results)
-        pprint(names_total)
-
         currency_characteristics_1 = list()
         currency_characteristics_2 = list()
         for currency in names_total:
@@ -406,7 +402,6 @@ class StatisticalAnalysisCalculator:
 
     def get_volatility_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
         series = self._get_series_of_attribute("average_volatility_90")
-        print(series)
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
@@ -494,7 +489,6 @@ class StatisticalAnalysisCalculator:
         df["date"] = df["date"].astype("datetime64[ms]")
         df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).count()
         df2.columns = [legend_name]
-        print(df2)
 
         if not multiple:
             df2.plot(kind="bar", ax=ax, legend=False, position=0, color="C0", width=.4)
