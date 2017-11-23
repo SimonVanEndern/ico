@@ -115,7 +115,7 @@ class DateAndSubClusterRunner:
         currencies = list(map(lambda x: self.currency_handler.get_currency(x), currencies))
 
         correlations = list(
-            map(lambda x: (x.currency, x.get_statistical_data().volume_price_correlations["0"]), currencies))
+            map(lambda x: (x.currency, x.get_statistical_data().absolute_volume_price_correlations["0"]), currencies))
         correlations = sorted(correlations, key=lambda x: x[1][1])
         correlations_significant = list(filter(lambda x: x[1][1] < 0.1, correlations))
         correlations_significant = list(map(lambda x: x[0], correlations_significant))

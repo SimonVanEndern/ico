@@ -140,12 +140,12 @@ class StatisticalAnalysisCalculator:
         if fig is None and ax is None:
             fig, ax = plt.subplots()
         fig.suptitle("Histogram of average volume / average market cap")
-        ax.set(xlabel="average average volume / market cap", ylabel="Frequency")
+        ax.set(xlabel="average volume / market cap", ylabel="Frequency")
         series = Series(combined)
         if not multiple:
-            series.hist(ax=ax, bins=numpy.logspace(0, 16, num=16, base=2), label=legend_name).plot(spacing=0.5)
+            series.hist(ax=ax, bins=numpy.logspace(-8, 4, num=16, base=10), label=legend_name).plot(spacing=0.5)
         else:
-            series.hist(ax=ax, bins=numpy.logspace(0, 16, num=16, base=2), alpha=.8, label=legend_name).plot(
+            series.hist(ax=ax, bins=numpy.logspace(-8, 4, num=16, base=10), alpha=.8, label=legend_name).plot(
                 spacing=0.5)
             plt.legend(prop={'size': 6})
         ax.set_xscale('log', basex=10)
@@ -175,6 +175,7 @@ class StatisticalAnalysisCalculator:
             correlations.append(self.data[key].volume_return_correlations)
 
         correlations = list(map(lambda x: x["0"], correlations))
+        ax.set(xlabel="Correlation between daily return and daily volume change")
         fig, ax = get_correlation_figure_from_correlations_list(correlations, fig, ax, multiple=multiple,
                                                                 legend_name=legend_name)
 
@@ -199,6 +200,7 @@ class StatisticalAnalysisCalculator:
         for key in self.data:
             correlations.append(self.data[key].volume_market_capitalization_correlation)
 
+        ax.set(xlabel="Correlation of volume and market capitalization")
         fig, ax = get_correlation_figure_from_correlations_list(correlations, fig, ax, multiple=multiple,
                                                                 legend_name=legend_name)
 
@@ -239,7 +241,7 @@ class StatisticalAnalysisCalculator:
         correlations: List[Dict[str, [Tuple[float, float]]]] = list()
 
         for key in self.data:
-            correlations.append(self.data[key].volume_price_correlations)
+            correlations.append(self.data[key].absolute_volume_price_correlations)
 
         correlations = list(map(lambda x: x["0"], correlations))
 
@@ -254,7 +256,7 @@ class StatisticalAnalysisCalculator:
         correlations: List[Dict[str, [Tuple[float, float]]]] = list()
 
         for key in self.data:
-            correlations.append(self.data[key].volume_price_correlations)
+            correlations.append(self.data[key].absolute_volume_price_correlations)
 
         correlations = list(map(lambda x: x["0"], correlations))
         all_correlations, significant = get_correlation_series_descriptions(correlations)
@@ -461,7 +463,8 @@ class StatisticalAnalysisCalculator:
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
-        ax.set(ylabel="Frequency")
+        ax.set(ylabel="Frequency",
+               xlabel="Correlation of change in google search volume (google trends) and daily return")
 
         trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
         trends_significant = list(filter(lambda x: x != 0, trends))
@@ -475,7 +478,7 @@ class StatisticalAnalysisCalculator:
                                          len(trends_significant)) + " of " + str(len(trends)) + ")", color="C1").plot()
         plt.legend(prop={'size': 6})
 
-        return fig, ax, "google-trends-price-usd-correlation-significant-ones-marked"
+        return fig, ax, "significant-google-trends-price-usd-correlation"
 
     def get_google_trends_correlation_positive_section_data(self):
         trends = list()
@@ -540,7 +543,8 @@ class StatisticalAnalysisCalculator:
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
-        ax.set(ylabel="Frequency")
+        ax.set(ylabel="Frequency",
+               xlabel="Correlation of change in google search volume (google trends) and daily return")
 
         trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
         trends_significant = list(filter(lambda x: x != 0, trends))
@@ -553,10 +557,6 @@ class StatisticalAnalysisCalculator:
                                      label=legend_name + " (only if significant at 10%: " + str(
                                          len(trends_significant)) + " of " + str(len(trends)) + ")", color="C1").plot()
         plt.legend(prop={'size': 6})
-
-        trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
-        series = Series(trends)
-        series[series != 0].hist(ax=ax, bins=20).plot()
 
         return fig, ax, "google-trends-price-usd-correlation-significant-ones-marked"
 
