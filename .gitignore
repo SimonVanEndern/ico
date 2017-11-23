@@ -8,3 +8,5 @@ ico_data_crawler/imports/saved
 __pycache__/
 
 google_trends/import_data/test_input
+
+crypto-currency-export-until-31-10-2017.csv

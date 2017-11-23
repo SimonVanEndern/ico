@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f706f99-14d9-4e62-8eec-2dff7ea6a8b0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/total_csv_export.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/coinmarketcap_token_parser.py" afterPath="$PROJECT_DIR$/common/coinmarketcap_token_parser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency.py" afterPath="$PROJECT_DIR$/common/currency.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency_statistical_data.py" afterPath="$PROJECT_DIR$/common/currency_statistical_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/google_trends/import_data/main.py" afterPath="$PROJECT_DIR$/google_trends/import_data/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/between_currencies.py" afterPath="$PROJECT_DIR$/top/between_currencies.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/clustered_plot_and_data_exporter.py" afterPath="$PROJECT_DIR$/top/clustered_plot_and_data_exporter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/date_and_subcluster_runner.py" afterPath="$PROJECT_DIR$/top/date_and_subcluster_runner.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/plot_and_data_exporter.py" afterPath="$PROJECT_DIR$/top/plot_and_data_exporter.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/statistical_analysis_calculator.py" afterPath="$PROJECT_DIR$/top/statistical_analysis_calculator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/total_csv_export.py" afterPath="$PROJECT_DIR$/total_csv_export.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -117,7 +113,7 @@
     <SUITE FILE_PATH="coverage/bachelor-thesis$blockstarter.coverage" NAME="blockstarter Coverage Results" MODIFIED="1506681878964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/sources" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_statistical_data_CurrencyStatisticalDataTest_test_calculate_average_volume.coverage" NAME="Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_average_volume Coverage Results" MODIFIED="1509612457014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_CurrencyTest_test_get_price_correlation.coverage" NAME="Unittests for test_currency.CurrencyTest.test_get_price_correlation Coverage Results" MODIFIED="1510306526169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
-    <SUITE FILE_PATH="coverage/bachelor_thesis$total_csv_export.coverage" NAME="total_csv_export Coverage Results" MODIFIED="1511364894495" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$total_csv_export.coverage" NAME="total_csv_export Coverage Results" MODIFIED="1511368707348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bachelor-thesis$csvcreator.coverage" NAME="csvcreator Coverage Results" MODIFIED="1506616340645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_test_financial_data_calculator_py.coverage" NAME="Unittests in test_financial_data_calculator.py Coverage Results" MODIFIED="1507896043471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/reduced_raw_data" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_statistical_data_CurrencyStatisticalDataTest_test_calculate_volume_linreg.coverage" NAME="Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_volume_linreg Coverage Results" MODIFIED="1509615215115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
@@ -177,8 +173,8 @@
       <file leaf-file-name="plot_and_data_exporter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/top/plot_and_data_exporter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+            <state relative-caret-position="141">
+              <caret line="137" column="30" lean-forward="false" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -186,11 +182,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
+      <file leaf-file-name="statistical_analysis_calculator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/top/statistical_analysis_calculator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="479" column="59" lean-forward="false" selection-start-line="479" selection-start-column="8" selection-end-line="479" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="currency_statistical_data.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/currency_statistical_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="56" column="54" lean-forward="true" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generic.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/core/generic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4740">
+              <caret line="5664" column="8" lean-forward="false" selection-start-line="5664" selection-start-column="8" selection-end-line="5664" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -208,45 +226,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="clustered_plot_and_data_exporter.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/top/clustered_plot_and_data_exporter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="56" lean-forward="false" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
-              <folding>
-                <element signature="e#0#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="currency_handler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/currency_handler.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="78">
               <caret line="33" column="8" lean-forward="false" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="compress_raw_data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finance_data_import/compressed_raw_data/compress_raw_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="51" lean-forward="true" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="coinmarketcap_token_parser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/coinmarketcap_token_parser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -267,21 +251,31 @@
       <file leaf-file-name="total_csv_export.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/total_csv_export.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="311">
+              <caret line="31" column="60" lean-forward="true" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="between_currencies.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="between_currencies.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/top/between_currencies.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="68" column="8" lean-forward="false" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
+            <state relative-caret-position="285">
+              <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -297,21 +291,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>legend_name=legend_name</find>
-      <find>plt.legend()</find>
-      <find>linear-regression</find>
-      <find>only if</find>
-      <find>google</find>
-      <find>::6</find>
-      <find>descrip</find>
-      <find>price change beginning</find>
-      <find>volatili</find>
-      <find>legend</find>
-      <find>label=leg</find>
-      <find>average_volatility_90</find>
-      <find>pearson_r</find>
-      <find>pear</find>
-      <find>pearson_r[0</find>
       <find>start_date</find>
       <find>print\(</find>
       <find>csv.writer</find>
@@ -327,6 +306,21 @@
       <find>corrcoef</find>
       <find>legend\(</find>
       <find>correlation</find>
+      <find>start-dates</find>
+      <find>average-volume-plot</find>
+      <find>average_volume_data</find>
+      <find>average-market</find>
+      <find>market_capi</find>
+      <find>get_average_volume_data</find>
+      <find>first</find>
+      <find>price_change</find>
+      <find>raw-vo</find>
+      <find>raw-volum</find>
+      <find>volume-market-cap</find>
+      <find>google-trends-price-usd</find>
+      <find>positive_section</find>
+      <find>data.csv</find>
+      <find>all-correlations</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;timestamp&quot;</replace>
@@ -352,7 +346,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ico_data_crawler/imports/importer.py" />
         <option value="$PROJECT_DIR$/ico_data_crawler/imports/saved/cyberfund2017115.html" />
         <option value="$PROJECT_DIR$/ico_data_crawler/imports/blockstarter.py" />
         <option value="$PROJECT_DIR$/finance_data_import/compressed_raw_data/currency_compressor.py" />
@@ -393,16 +386,17 @@
         <option value="$PROJECT_DIR$/top/calculate_total_of_currencies.py" />
         <option value="$PROJECT_DIR$/top/calculation_result.py" />
         <option value="$PROJECT_DIR$/top/cluster_result_container.py" />
-        <option value="$PROJECT_DIR$/common/currency_statistical_data.py" />
-        <option value="$PROJECT_DIR$/total_csv_export.py" />
         <option value="$PROJECT_DIR$/google_trends/import_data/main.py" />
-        <option value="$PROJECT_DIR$/top/plot_and_data_exporter.py" />
         <option value="$PROJECT_DIR$/common/currency.py" />
-        <option value="$PROJECT_DIR$/top/statistical_analysis_calculator.py" />
         <option value="$PROJECT_DIR$/top/clustered_plot_and_data_exporter.py" />
         <option value="$PROJECT_DIR$/common/currency_handler.py" />
         <option value="$PROJECT_DIR$/top/date_and_subcluster_runner.py" />
+        <option value="$PROJECT_DIR$/total_csv_export.py" />
+        <option value="$PROJECT_DIR$/common/currency_statistical_data.py" />
+        <option value="$PROJECT_DIR$/top/statistical_analysis_calculator.py" />
+        <option value="$PROJECT_DIR$/top/plot_and_data_exporter.py" />
         <option value="$PROJECT_DIR$/top/between_currencies.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -492,7 +486,7 @@
     <property name="js.eslint.eslintPackage" value="" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
-    <property name="SearchEverywhereHistoryKey" value="betwe&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/top/between_currencies.py&#10;betwee&#9;null&#9;null&#10;curhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;cuhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;currhandl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/test_currency_handler.py&#10;curhandl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curstat&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;currestati&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;currency&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency.py&#10;currency  &#9;null&#9;null&#10;cursta&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;testcur&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/test_currency.py&#10;currhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;currency &#9;null&#9;null&#10;currency_hand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;cointoken&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/coinmarketcap_token_parser.py&#10;coinapi&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/coinmarketCapApi.py&#10;currenhand&#9;null&#9;null&#10;curre&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curr_handl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;calculate_relative&#9;null&#9;null&#10;request_cur&#9;null&#9;null&#10;CurrencyAggregator&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/aggregated_data/currency_aggregator.py&#10;CurrencyCompressor&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/compressed_raw_data/currency_compressor.py&#10;finan&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/aggregated_data/financial_data_calculator.py&#10;to_csv&#9;null&#9;null&#10;logging&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/logging.log&#10;request_add&#9;null&#9;null&#10;request_addi&#9;null&#9;null&#10;exporter&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance/raw_data/exporter.py" />
+    <property name="SearchEverywhereHistoryKey" value="betwee&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/top/between_currencies.py&#10;betwe&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/top/between_currencies.py&#10;curhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;cuhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;currhandl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/test_currency_handler.py&#10;curhandl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curstat&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;currestati&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;currency&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency.py&#10;currency  &#9;null&#9;null&#10;cursta&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;testcur&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/test_currency.py&#10;currhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;currency &#9;null&#9;null&#10;currency_hand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;cointoken&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/coinmarketcap_token_parser.py&#10;coinapi&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/coinmarketCapApi.py&#10;currenhand&#9;null&#9;null&#10;curre&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curr_handl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;calculate_relative&#9;null&#9;null&#10;request_cur&#9;null&#9;null&#10;CurrencyAggregator&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/aggregated_data/currency_aggregator.py&#10;CurrencyCompressor&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/compressed_raw_data/currency_compressor.py&#10;finan&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/aggregated_data/financial_data_calculator.py&#10;to_csv&#9;null&#9;null&#10;logging&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/logging.log&#10;request_add&#9;null&#9;null&#10;request_addi&#9;null&#9;null&#10;exporter&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance/raw_data/exporter.py" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -1272,7 +1266,7 @@
       <workItem from="1509386322911" duration="146265000" />
       <workItem from="1510838250339" duration="24796000" />
       <workItem from="1511167449005" duration="21567000" />
-      <workItem from="1511252956014" duration="48520000" />
+      <workItem from="1511252956014" duration="54032000" />
     </task>
     <servers />
   </component>
@@ -1309,10 +1303,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="589163000" />
+    <option name="totallyTimeSpent" value="594675000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1323,10 +1318,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.4969743" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36882716" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36882716" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2934947" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2934947" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271605" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1433,7 +1428,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/top/plot_and_data_exporter.py</url>
-          <line>138</line>
+          <line>151</line>
           <option name="timeStamp" value="168" />
         </line-breakpoint>
       </breakpoints>
@@ -1453,22 +1448,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/common/main/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finance_data_import/aggregated_data/test_financial_data_calculator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="46" column="47" lean-forward="false" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/finance_data_import/aggregated_data/test_currency_aggregator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -1719,16 +1698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/currency_statistical_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="47" column="88" lean-forward="false" selection-start-line="47" selection-start-column="88" selection-end-line="47" selection-end-column="88" />
-          <folding>
-            <marker date="1511343590665" expanded="false" signature="0:264" ph="import ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/google_trends/import_data/google_trends_DTO.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
@@ -1769,22 +1738,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/top/statistical_analysis_calculator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/top/clustered_plot_and_data_exporter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="56" lean-forward="false" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
           <folding>
-            <element signature="e#0#27#0" expanded="true" />
+            <element signature="e#0#27#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1802,7 +1761,7 @@
         <state relative-caret-position="289">
           <caret line="17" column="51" lean-forward="true" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1820,16 +1779,6 @@
         <state relative-caret-position="78">
           <caret line="33" column="8" lean-forward="false" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/top/plot_and_data_exporter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1855,19 +1804,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/total_csv_export.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="311">
+          <caret line="31" column="60" lean-forward="true" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="60" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/core/generic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4740">
+          <caret line="5664" column="8" lean-forward="false" selection-start-line="5664" selection-start-column="8" selection-end-line="5664" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/currency_statistical_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="56" column="54" lean-forward="true" selection-start-line="56" selection-start-column="54" selection-end-line="56" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/top/statistical_analysis_calculator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="479" column="59" lean-forward="false" selection-start-line="479" selection-start-column="8" selection-end-line="479" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/top/plot_and_data_exporter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="137" column="30" lean-forward="false" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/top/between_currencies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="68" column="8" lean-forward="false" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
+        <state relative-caret-position="285">
+          <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>

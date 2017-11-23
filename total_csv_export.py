@@ -1,5 +1,7 @@
 import csv
 
+import numpy
+
 from common.currency import Currency
 from common.currency_handler import CurrencyHandler
 from google_trends.import_data.google_trends_DTO import GoogleTrendsDTO
@@ -20,14 +22,12 @@ class TotalCSVExport:
                 google_trends_relative_data = GoogleTrendsDTO(currency_name).load_aggregated_data()
                 google_trends_dict = dict()
 
-                if google_trends_relative_data is None:
-                    google_trends_relative_data = ""
-                else:
+                if google_trends_relative_data is not None:
                     for element in google_trends_relative_data:
                         google_trends_dict[(element[0] + 12 * 3600) * 1000] = element[1]
 
                 for index in currency.data.index:
-                    gtd_data = ""
+                    gtd_data = numpy.nan
                     if index in google_trends_dict:
                         gtd_data = google_trends_dict[index]
 

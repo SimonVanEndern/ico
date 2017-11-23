@@ -46,11 +46,11 @@ class BetweenCurrencies:
             for key2 in self.correlations[key]:
                 self.as_list.append((key, key2, self.correlations[key][key2][0], self.correlations[key][key2][1]))
 
-        with open(os.path.join(self.save_path, "all-correlations.csv"), "w") as file:
-            writer = csv.writer(file, delimiter=",", lineterminator="\n")
-            writer.writerow(["Currency1", "Currency2", "correlation", "p-value"])
-            for row in self.as_list:
-                writer.writerow(list(row))
+        # with open(os.path.join(self.save_path, "all-correlations.csv"), "w") as file:
+        #     writer = csv.writer(file, delimiter=",", lineterminator="\n")
+        #     writer.writerow(["Currency1", "Currency2", "correlation", "p-value"])
+        #     for row in self.as_list:
+        #         writer.writerow(list(row))
 
     def get_correlation_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
         if fig is None and ax is None:
@@ -68,7 +68,16 @@ class BetweenCurrencies:
 
         return fig, ax, "correlations"
 
-    def get_correlation_data(self):
-        series = pandas.Series(list(map(lambda x: x[2], self.as_list)))
+    def get_correlation_positive_section_data(self):
+        all_correlations = list(map(lambda x: x[2], self.as_list))
+        positives = list(filter(lambda x: x > 0, all_correlations))
+        series = pandas.Series(positives)
+
+        return series.describe().to_dict()
+
+    def get_correlation_negative_section_data(self):
+        all_correlations = list(map(lambda x: x[2], self.as_list))
+        positives = list(filter(lambda x: x <= 0, all_correlations))
+        series = pandas.Series(positives)
 
         return series.describe().to_dict()

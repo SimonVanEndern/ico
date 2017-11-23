@@ -81,7 +81,6 @@ class StatisticalAnalysisCalculator:
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
-        # fig.suptitle("Historgram of average volume in USD")
         ax.set(xlabel="Log10 of average Volume in USD", ylabel="Frequency")
 
         ax.set(ylabel="Frequency")
@@ -92,9 +91,12 @@ class StatisticalAnalysisCalculator:
         else:
             series.hist(ax=ax, bins=30, figure=fig, alpha=0.8, label=legend_name).plot()
             plt.legend(prop={'size': 6})
-        # series.hist(ax=ax, bins=numpy.logspace(0, 30, num=30, base=2))
-        # ax.set_xscale('log', basex=10)
         return fig, ax, "average-volume-plot"
+
+    def get_average_volume_data(self):
+        series = self._get_series_of_attribute("average_volume")
+
+        return series.describe().to_dict()
 
     def get_average_market_capitalization_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
         series = self._get_series_of_attribute("average_market_capitalization")
@@ -114,11 +116,16 @@ class StatisticalAnalysisCalculator:
         # ax.set_xscale('log', basex=10)
         return fig, ax, "average-market-capitalization-plot"
 
+    def get_average_market_capitalization_data(self):
+        series = self._get_series_of_attribute("average_market_capitalization")
+
+        return series.descriebe().to_dict()
+
     def get_correlation_between_average_volume_and_average_market_capitalization(self) -> dict:
         pearson_r = self._get_pearsonr("average_volume", "average_market_capitalization")
         return {"coefficient": pearson_r[0], "p-value": pearson_r[1]}
 
-    def get_average_market_capitalization_divided_by_average_volume_plot(self, fig=None, ax=None, multiple=False,
+    def get_average_volume_divided_by_average_market_capitalization_plot(self, fig=None, ax=None, multiple=False,
                                                                          legend_name=""):
         volume = list()
         market_cap = list()
@@ -127,13 +134,13 @@ class StatisticalAnalysisCalculator:
             volume.append(self.data[key].average_volume)
             market_cap.append(self.data[key].average_market_capitalization)
 
-        combined = numpy.array(market_cap) / numpy.array(volume)
+        combined = numpy.array(volume) / numpy.array(market_cap)
         combined = combined[numpy.isfinite(combined)]
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
-        fig.suptitle("Histogram of average market cap / average volume")
-        ax.set(xlabel="average market cap / average volume", ylabel="Frequency")
+        fig.suptitle("Histogram of average volume / average market cap")
+        ax.set(xlabel="average average volume / market cap", ylabel="Frequency")
         series = Series(combined)
         if not multiple:
             series.hist(ax=ax, bins=numpy.logspace(0, 16, num=16, base=2), label=legend_name).plot(spacing=0.5)
@@ -142,9 +149,9 @@ class StatisticalAnalysisCalculator:
                 spacing=0.5)
             plt.legend(prop={'size': 6})
         ax.set_xscale('log', basex=10)
-        return fig, ax, "average-market-capitalization-divided-by-average-volume"
+        return fig, ax, "average-volume_divided_by_average_market-capitalization"
 
-    def get_average_market_capitalization_divided_by_average_volume_data(self) -> dict:
+    def get_average_volume_divided_by_average_market_capitalization_data(self):
         volume = list()
         market_cap = list()
 
@@ -152,10 +159,12 @@ class StatisticalAnalysisCalculator:
             volume.append(self.data[key].average_volume)
             market_cap.append(self.data[key].average_market_capitalization)
 
-        combined = numpy.array(market_cap) / numpy.array(volume)
+        combined = numpy.array(volume) / numpy.array(market_cap)
+        combined = combined[numpy.isfinite(combined)]
 
-        average = combined.mean()
-        return {"mean": 1 / average, "median": 1 / numpy.median(combined)}
+        series = Series(combined)
+
+        return series.describe().to_dict()
 
     def get_volume_return_correlation_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
         if fig is None and ax is None:
@@ -193,17 +202,35 @@ class StatisticalAnalysisCalculator:
         fig, ax = get_correlation_figure_from_correlations_list(correlations, fig, ax, multiple=multiple,
                                                                 legend_name=legend_name)
 
-        return fig, ax, "volume-market-cap-correlations-plot-significant-ones-marked"
+        return fig, ax, "significant-volume-market-cap-correlations-plot"
 
-    def get_volume_market_capitalization_correlation_data(self):
+    def get_volume_market_capitalization_correlation_positive_section_data(self):
         correlations: List[Dict[str, [Tuple[float, float]]]] = list()
 
         for key in self.data:
             correlations.append(self.data[key].volume_market_capitalization_correlation)
 
-        all_correlations, significant = get_correlation_series_descriptions(correlations)
-        return {"coefficient-all": all_correlations[0], "p-value-all": all_correlations[1],
-                "coefficient-only-significant": significant[0], "p-value-only-significant": significant[1]}
+        correlations = list(filter(lambda x: x[1] < 0.1, correlations))
+        correlations = list(map(lambda x: x[0], correlations))
+        correlations = list(filter(lambda x: x > 0, correlations))
+
+        return Series(correlations).describe().to_dict()
+
+        # all_correlations, significant = get_correlation_series_descriptions(correlations)
+        # return {"coefficient-all": all_correlations[0], "p-value-all": all_correlations[1],
+        #         "coefficient-only-significant": significant[0], "p-value-only-significant": significant[1]}
+
+    def get_volume_market_capitalization_correlation_negative_section_data(self):
+        correlations: List[Dict[str, [Tuple[float, float]]]] = list()
+
+        for key in self.data:
+            correlations.append(self.data[key].volume_market_capitalization_correlation)
+
+        correlations = list(filter(lambda x: x[1] < 0.1, correlations))
+        correlations = list(map(lambda x: x[0], correlations))
+        correlations = list(filter(lambda x: x <= 0, correlations))
+
+        return Series(correlations).describe().to_dict()
 
     def get_absolute_volume_price_correlation_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
         if fig is None and ax is None:
@@ -221,7 +248,7 @@ class StatisticalAnalysisCalculator:
                                                                 multiple=multiple, legend_name=legend_name)
         fig.suptitle("Histogram of correlations between volume and price")
 
-        return fig, ax, "raw-volume-price-correlations-significant-marked"
+        return fig, ax, "significant-raw-volume-price-correlations"
 
     def get_absolute_volume_price_correlation_data(self):
         correlations: List[Dict[str, [Tuple[float, float]]]] = list()
@@ -231,8 +258,9 @@ class StatisticalAnalysisCalculator:
 
         correlations = list(map(lambda x: x["0"], correlations))
         all_correlations, significant = get_correlation_series_descriptions(correlations)
-        return {"coefficient-all": all_correlations[0], "p-value-all": all_correlations[1],
-                "coefficient-only-significant": significant[0], "p-value-only-significant": significant[1]}
+        return all_correlations.to_dict()
+        # return {"coefficient-all": all_correlations[0], "p-value-all": all_correlations[1],
+        #         "coefficient-only-significant": significant[0], "p-value-only-significant": significant[1]}
 
     def get_volume_price_correlation_cause_search_plot(self):
         correlations: List[Dict[str, [Tuple[float, float]]]] = list()
@@ -422,25 +450,22 @@ class StatisticalAnalysisCalculator:
         series = self._get_series_of_attribute("first_price")
         return series.describe().to_dict()
 
-    def get_google_trends_correlation_plot(self, switch=0, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[
+    def get_google_trends_correlation_plot(self, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[
         Any, Any, str]:
-        if switch != 1 and switch != 0:
-            raise Exception()
+
         trends = list()
 
         for key in self.data:
             if self.data[key].price_correlation_change_with_google_trends_data is not None:
-                trends.append(self.data[key].price_correlation_change_with_google_trends_data[switch])
+                trends.append(self.data[key].price_correlation_change_with_google_trends_data[0])
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
         ax.set(ylabel="Frequency")
-        # series = Series(list(map(lambda x: x[0], trends)))
-        # series.hist(ax=ax, bins=20).plot(alpha=0.5)
 
         trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
         trends_significant = list(filter(lambda x: x != 0, trends))
-        series = Series(trends)
+        series = Series(trends_significant)
         if not multiple:
             series[series != 0].hist(ax=ax, bins=20, label=legend_name + " (only if significant at 10%: " + str(
                 len(trends_significant)) + " of " + str(len(trends)) + ")", color="C0").plot()
@@ -448,29 +473,86 @@ class StatisticalAnalysisCalculator:
             series[series != 0].hist(ax=ax, bins=20, alpha=.8,
                                      label=legend_name + " (only if significant at 10%: " + str(
                                          len(trends_significant)) + " of " + str(len(trends)) + ")", color="C1").plot()
-            plt.legend(prop={'size': 6})
+        plt.legend(prop={'size': 6})
 
         return fig, ax, "google-trends-price-usd-correlation-significant-ones-marked"
 
-    def get_google_trends_correlation_plot2(self, switch=1, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[
-        Any, Any, str]:
-        if switch != 1 and switch != 2:
-            raise Exception()
+    def get_google_trends_correlation_positive_section_data(self):
         trends = list()
 
         for key in self.data:
             if self.data[key].price_correlation_change_with_google_trends_data is not None:
-                trends.append(self.data[key].price_correlation_change_with_google_trends_data[switch])
+                trends.append(self.data[key].price_correlation_change_with_google_trends_data[0])
+
+        trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
+        positives = list(filter(lambda x: x > 0, trends))
+        series = Series(positives)
+
+        return series.describe().to_dict()
+
+    def get_google_trends_correlation_negative_section_data(self):
+        trends = list()
+
+        for key in self.data:
+            if self.data[key].price_correlation_change_with_google_trends_data is not None:
+                trends.append(self.data[key].price_correlation_change_with_google_trends_data[0])
+
+        trends = list(map(lambda x: x[0] if x[1] < 0.1 else 1, trends))
+        positives = list(filter(lambda x: x <= 0, trends))
+        series = Series(positives)
+
+        return series.describe().to_dict()
+
+    def get_google_trends_correlation_positive_section_data2(self):
+        trends = list()
+
+        for key in self.data:
+            if self.data[key].price_correlation_change_with_google_trends_data is not None:
+                trends.append(self.data[key].price_correlation_change_with_google_trends_data[1])
+
+        trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
+        positives = list(filter(lambda x: x > 0, trends))
+        series = Series(positives)
+
+        return series.describe().to_dict()
+
+    def get_google_trends_correlation_negative_section_data2(self):
+        trends = list()
+
+        for key in self.data:
+            if self.data[key].price_correlation_change_with_google_trends_data is not None:
+                trends.append(self.data[key].price_correlation_change_with_google_trends_data[1])
+
+        trends = list(map(lambda x: x[0] if x[1] < 0.1 else 1, trends))
+        positives = list(filter(lambda x: x <= 0, trends))
+        series = Series(positives)
+
+        return series.describe().to_dict()
+
+    def get_google_trends_correlation_plot2(self, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[
+        Any, Any, str]:
+
+        trends = list()
+
+        for key in self.data:
+            if self.data[key].price_correlation_change_with_google_trends_data is not None:
+                trends.append(self.data[key].price_correlation_change_with_google_trends_data[1])
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
         ax.set(ylabel="Frequency")
-        series = Series(list(map(lambda x: x[0], trends)))
+
+        trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
+        trends_significant = list(filter(lambda x: x != 0, trends))
+        series = Series(trends_significant)
         if not multiple:
-            series.hist(ax=ax, bins=20, label=legend_name).plot()
+            series[series != 0].hist(ax=ax, bins=20, label=legend_name + " (only if significant at 10%: " + str(
+                len(trends_significant)) + " of " + str(len(trends)) + ")", color="C0").plot()
         else:
-            series.hist(ax=ax, bins=20, alpha=.8, label=legend_name).plot()
-            plt.legend(prop={'size': 6})
+            series[series != 0].hist(ax=ax, bins=20, alpha=.8,
+                                     label=legend_name + " (only if significant at 10%: " + str(
+                                         len(trends_significant)) + " of " + str(len(trends)) + ")", color="C1").plot()
+        plt.legend(prop={'size': 6})
 
         trends = list(map(lambda x: x[0] if x[1] < 0.1 else 0, trends))
         series = Series(trends)
@@ -512,9 +594,11 @@ class StatisticalAnalysisCalculator:
 
         return fig, ax, "start-dates"
 
+    def get_first_date_data(self, multiple=False, legend_name=""):
+        dates = self._get_series_of_attribute("first_date")
 
-        # >>> c.a.plot(kind="bar", ax=ax, width=.4, position=1, color="red")
-        # <matplotlib.axes._subplots.AxesSubplot object at 0x0000015F2F480940>
-        # >>> c.b.plot(kind="bar", ax=ax, width=.4, position=0, color="blue")
-        # <matplotlib.axes._subplots.AxesSubplot object at 0x0000015F2F480940>
-        # >>> plt.show()
+        df = DataFrame(list(dates), index=dates, columns=["date"]).sort_index()
+
+        df["date"] = df["date"].astype("datetime64[ms]")
+        df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).count()
+        df2.columns = [legend_name]

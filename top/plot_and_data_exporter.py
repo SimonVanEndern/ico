@@ -64,7 +64,7 @@ class StatisticalAnalysisRunnerAndExporter:
         plot_functions = [self.sac.get_first_date_plot,
                           self.sac.get_average_volume_plot,
                           self.sac.get_average_market_capitalization_plot,
-                          self.sac.get_average_market_capitalization_divided_by_average_volume_plot,
+                          self.sac.get_average_volume_divided_by_average_market_capitalization_plot,
                           self.sac.get_volume_return_correlation_plot,
                           self.sac.get_volume_market_capitalization_correlation_plot,
                           self.sac.get_absolute_volume_price_correlation_plot,
@@ -79,12 +79,25 @@ class StatisticalAnalysisRunnerAndExporter:
 
         self.add_descriptive_data("Correlation Average Volume and Average Market Capitalization",
                                   self.sac.get_correlation_between_average_volume_and_average_market_capitalization)
-        self.add_descriptive_data("Average of average market capitalization divided by average volume",
-                                  self.sac.get_average_market_capitalization_divided_by_average_volume_data)
+        self.add_descriptive_data("Histogram average volume / average market cap data",
+                                  self.sac.get_average_volume_divided_by_average_market_capitalization_data)
         self.add_descriptive_data("correlation volume and return descriptives",
                                   self.sac.get_volume_return_correlation_data)
+        self.add_descriptive_data("Average volume data",
+                                  self.sac.get_average_volume_data)
         self.add_descriptive_data("correlation volume and market capitalization descriptives",
-                                  self.sac.get_volume_market_capitalization_correlation_data)
+                                  self.sac.get_volume_market_capitalization_correlation_positive_section_data)
+        self.add_descriptive_data("correlation volume and market capitalization descriptives",
+                                  self.sac.get_volume_market_capitalization_correlation_negative_section_data)
+
+        self.add_descriptive_data("Google Trends correlation shift before, positive section",
+                                  self.sac.get_google_trends_correlation_positive_section_data)
+        self.add_descriptive_data("Google Trends correlation shift before, negative section",
+                                  self.sac.get_google_trends_correlation_negative_section_data)
+        self.add_descriptive_data("Google Trends correlation shift after, positive section",
+                                  self.sac.get_google_trends_correlation_positive_section_data2)
+        self.add_descriptive_data("Google Trends correlation shift after, negative section",
+                                  self.sac.get_google_trends_correlation_negative_section_data2)
 
         # Figure 09:
         # Correlation of price and volume change predictor search
@@ -131,12 +144,15 @@ class StatisticalAnalysisRunnerAndExporter:
         self.add_descriptive_data("Price change beginning data", self.sac.get_price_change_beginning_data)
         self.add_descriptive_data("Volatility 90 window data", self.sac.get_volatility_data)
 
-        with open(os.path.join(self.save_path, "data.csv"), "w") as file:
-            writer = csv.writer(file, delimiter=',', lineterminator='\n')
-            for row in self.data:
-                writer.writerow(list(row))
+        # with open(os.path.join(self.save_path, "data.csv"), "w") as file:
+        #     writer = csv.writer(file, delimiter=',', lineterminator='\n')
+        #     for row in self.data:
+        #         writer.writerow(list(row))
 
         self.save_plot(self.between_curr.get_correlation_plot)
-        self.add_descriptive_data("Correlations", self.between_curr.get_correlation_data)
+        self.add_descriptive_data("Correlations positive section",
+                                  self.between_curr.get_correlation_positive_section_data)
+        self.add_descriptive_data("Correlations negative section",
+                                  self.between_curr.get_correlation_negative_section_data)
 
         self.data_to_export.save(self.save_path)

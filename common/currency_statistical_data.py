@@ -54,7 +54,8 @@ class CurrencyStatisticalData:
         self.volume_return_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_return_correlations()
         self.volume_market_capitalization_correlation: Tuple[
             float, float] = self.calculate_volume_market_capitalization_correlation()
-        self.volume_price_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_price_correlations()
+        self.absolute_volume_price_correlations: Dict[
+            str, Tuple[float, float]] = self.calculate_absolute_volume_price_correlations()
         self.price_market_capitalization_correlation: float = self.calculate_price_market_capitalization_correlation()
 
         self.correlation_other_currencies: Dict[str, Tuple[float, float]] = dict()
@@ -133,7 +134,7 @@ class CurrencyStatisticalData:
 
         return output
 
-    def calculate_volume_price_correlations(self) -> Dict[str, Tuple[float, float]]:
+    def calculate_absolute_volume_price_correlations(self) -> Dict[str, Tuple[float, float]]:
         shifts = [0, 1, 2, 3]
         volume = list(self.currency.data["volume"])
         usd_return = list(self.currency.data["usd"])
