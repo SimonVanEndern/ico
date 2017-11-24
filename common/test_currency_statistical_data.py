@@ -53,7 +53,7 @@ class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
         self.assertEqual(result, 143.00011122999999)
 
     def test_calculate_volume_return_correlations(self):
-        result = self.statistical_data.calculate_volume_return_correlations()
+        result = self.statistical_data.calculate_log_volume_return_correlations()
         print(result)
 
         for key in [-3, -2, -1, 0, 1, 2, 3]:
@@ -123,8 +123,8 @@ class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
 
         self.assertEqual(result, 1646)
 
-    def test_calculate_price_change_from_beginning(self):
-        result = self.statistical_data.calculate_price_change_from_beginning()
+    def test_calculate_average_daily_return(self):
+        result = self.statistical_data.calculate_average_daily_return()
 
         self.assertEqual(result, 43.122143759258392)
 

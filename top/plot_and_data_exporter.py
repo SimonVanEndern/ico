@@ -1,4 +1,3 @@
-import csv
 import os
 from typing import Callable
 
@@ -12,7 +11,7 @@ from top.statistical_analysis_calculator import StatisticalAnalysisCalculator
 
 
 class StatisticalAnalysisRunnerAndExporter:
-    def __init__(self, name, data, subfolder=None):
+    def __init__(self, name, data, start_date: str, subfolder=None):
         self.original_data: dict = data
         self.frame_name: str = name
         self.save_path: str = os.path.join(GlobalData.EXTERNAL_PATH_ANALYSIS_DATA_TODAY, self.frame_name)
@@ -23,9 +22,10 @@ class StatisticalAnalysisRunnerAndExporter:
         if not os.path.isdir(self.save_path):
             os.mkdir(self.save_path)
         self.sac: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data)
-        self.between_curr: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data.keys()),
-                                                                 sleep=False)
-
+        self.between_curr_usd: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data.keys()),
+                                                                     "usd", start_date, sleep=False)
+        self.between_curr_volume: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data.keys()),
+                                                                        "volume", start_date, sleep=False)
         self.figure_counter: int = 1
 
         self.data = list()
@@ -65,7 +65,7 @@ class StatisticalAnalysisRunnerAndExporter:
                           self.sac.get_average_volume_plot,
                           self.sac.get_average_market_capitalization_plot,
                           self.sac.get_average_volume_divided_by_average_market_capitalization_plot,
-                          self.sac.get_volume_return_correlation_plot,
+                          self.sac.get_log_volume_return_correlation_plot,
                           self.sac.get_volume_market_capitalization_correlation_plot,
                           self.sac.get_absolute_volume_price_correlation_plot,
                           self.sac.get_first_price_plot,
@@ -146,15 +146,16 @@ class StatisticalAnalysisRunnerAndExporter:
         self.add_descriptive_data("Price change beginning data", self.sac.get_price_change_beginning_data)
         self.add_descriptive_data("Volatility 90 window data", self.sac.get_volatility_data)
 
-        # with open(os.path.join(self.save_path, "data.csv"), "w") as file:
-        #     writer = csv.writer(file, delimiter=',', lineterminator='\n')
-        #     for row in self.data:
-        #         writer.writerow(list(row))
-
-        self.save_plot(self.between_curr.get_price_correlation_plot)
+        self.save_plot(self.between_curr_usd.get_correlation_plot)
+        self.save_plot(self.between_curr_volume.get_correlation_plot)
+        # self.save_plot(self.between_curr_market_cap.get_correlation_plot)
         self.add_descriptive_data("Price correlations positive section",
-                                  self.between_curr.get_correlation_positive_section_data)
+                                  self.between_curr_usd.get_correlation_positive_section_data)
         self.add_descriptive_data("Price correlations negative section",
-                                  self.between_curr.get_correlation_negative_section_data)
+                                  self.between_curr_usd.get_correlation_negative_section_data)
+        self.add_descriptive_data("Volume correlations positive section",
+                                  self.between_curr_volume.get_correlation_positive_section_data)
+        self.add_descriptive_data("Volume correlations negative section",
+                                  self.between_curr_volume.get_correlation_negative_section_data)
 
         self.data_to_export.save(self.save_path)

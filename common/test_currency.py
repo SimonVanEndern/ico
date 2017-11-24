@@ -52,7 +52,7 @@ class CurrencyTest(unittest.TestCase, TestCommons):
     def test_get_price_correlation(self):
         self.bitcoin.get_statistical_data()
         self.ethereum.get_statistical_data()
-        result = self.bitcoin.get_absolute_price_correlation(self.ethereum)
+        result = self.bitcoin.get_absolute_correlation("usd", self.ethereum)
 
         self.assertEqual(result, (0.93487762641106409, 0.0))
 
@@ -63,6 +63,6 @@ class CurrencyTest(unittest.TestCase, TestCommons):
         authorship.get_statistical_data()
         bitgold.get_statistical_data()
 
-        result = authorship.get_absolute_price_correlation(bitgold)
+        result = authorship.get_absolute_correlation("usd", bitgold)
 
         self.assertEqual(result, (0.11563913578988758, 0.66976489866081823))

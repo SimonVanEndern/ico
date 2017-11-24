@@ -1,3 +1,4 @@
+import csv
 from typing import List
 
 import matplotlib.pyplot as plt
@@ -12,19 +13,41 @@ class PriceIndices:
     currency_handler = CurrencyHandler.Instance()
 
     def __init__(self):
-        pass
+        self.results = dict()
+
+        all_currency_names = self.currency_handler.get_all_currency_names()
+        self.all_currencies: List[Currency] = list(map(lambda x: self.currency_handler.get_currency(x), all_currency_names))
+
+        self.bitcoin: Currency = self.currency_handler.get_currency("bitcoin")
+
+    def run(self):
+        fig, ax = plt.subplots()
+        fig, ax = self.calculates_marekt_capitalization_weighted("market_cap", 1, 0, fig, ax)
+        fig, ax = self.calculates_marekt_capitalization_weighted("volume", 1, 0, fig, ax)
+        fig, ax = self.calculates_marekt_capitalization_weighted("market_cap", .2, 0, fig, ax)
+        fig, ax = self.calculates_marekt_capitalization_weighted("volume", .2, 0, fig, ax)
+        fig, ax = self.calculates_marekt_capitalization_weighted("market_cap", 1, 10000, fig, ax)
+        fig, ax = self.calculates_marekt_capitalization_weighted("volume", 1, 10000, fig, ax)
+        fig, ax = self.calculates_marekt_capitalization_weighted("market_cap", .2, 10000, fig, ax)
+        fig, ax = self.calculates_marekt_capitalization_weighted("volume", .2, 10000, fig, ax)
+
+        self.export()
+
+        ax.set_yscale("log")
+        plt.legend()
+        plt.show()
 
     def calculates_marekt_capitalization_weighted(self, weight_name, max_weight, min_volume, fig, ax):
         weighted_return = dict()
+        calculation_name = weight_name + "-weighted (max_weight=" + str(
+            max_weight) + ", min_volume=" + str(min_volume) + ")"
 
-        all_currency_names = self.currency_handler.get_all_currency_names()
-        all_currencies: List[Currency] = list(map(lambda x: self.currency_handler.get_currency(x), all_currency_names))
-        bitcoin: Currency = self.currency_handler.get_currency("bitcoin")
+        self.results["timestamp"] = self.bitcoin.data.index
         # total = Currency("total")
 
-        for index in bitcoin.relative_data.index:
+        for index in self.bitcoin.relative_data.index:
             for_weight_calculation = dict()
-            for currency in all_currencies + [bitcoin]:
+            for currency in self.all_currencies + [self.bitcoin]:
                 if index in currency.data.index:
                     if currency.data.volume[index] >= min_volume:
                         for_weight_calculation[currency.currency] = currency.data[weight_name][index]
@@ -36,14 +59,14 @@ class PriceIndices:
             weights_to_use = self.calculate_weights(for_weight_calculation, max_weight)
 
             value = 0
-            print(index)
-            for currency in all_currencies + [bitcoin]:
+            # print(index)
+            for currency in self.all_currencies + [self.bitcoin]:
                 if index in currency.relative_data.index and numpy.isfinite(currency.relative_data.usd[index]):
                     value += currency.relative_data.usd[index] * weights_to_use[currency.currency]
 
             weighted_return[index] = value
 
-        print(weighted_return)
+        # print(weighted_return)
 
         current = 100
         chart_index = dict()
@@ -51,17 +74,21 @@ class PriceIndices:
             current = current * (1 + weighted_return[key])
             chart_index[key] = current
 
-        print(chart_index)
-
         pandas.Series(list(chart_index.values())).plot(ax=ax,
-                                                       label=weight_name + "-weighted (max_weight=" + str(
-                                                           max_weight) + ", min_volume=" + str(min_volume) + ")")
+                                                       label=calculation_name)
+
+        self.results[calculation_name] = list(chart_index.values())
 
         return fig, ax
 
     def calculate_weights(self, slots: dict, max_weight):
+        # print(slots)
         weights = dict()
         total = sum(list(slots.values()))
+
+        # In case there are no weights at all
+        if total == 0:
+            return slots
         rest = 0
         exclude = list()
         for slot in slots:
@@ -72,6 +99,10 @@ class PriceIndices:
                 exclude.append(slot)
 
         percentage_left = rest / total
+
+        # In case all weights are nan or 0
+        if rest == total:
+            return weights
         while percentage_left > 0.0001:
             rest = 0
             current_total = 0
@@ -97,22 +128,23 @@ class PriceIndices:
 
             percentage_left = rest / total
 
-        if sum(weights.values()) > 1:
+        if not sum(weights.values()) <= 1.0001:
+            print(weights)
             print(slots)
-        assert (sum(weights.values()) <= 1)
+        assert (sum(weights.values()) <= 1.0001)
         return weights
 
+    def export(self):
+        with open("indices.csv", "w") as file:
+            writer = csv.writer(file, delimiter=",", lineterminator="\n")
+            writer.writerow(sorted(self.results.keys()))
 
-# fig, ax = plt.subplots()
-# price_indices = PriceIndices()
-# fig, ax = price_indices.calculates_marekt_capitalization_weighted("market_cap", 1, 0, fig, ax)
-# fig, ax = price_indices.calculates_marekt_capitalization_weighted("volume", 1, 0, fig, ax)
-# fig, ax = price_indices.calculates_marekt_capitalization_weighted("market_cap", .2, 0, fig, ax)
-# fig, ax = price_indices.calculates_marekt_capitalization_weighted("volume", .2, 0, fig, ax)
-# fig, ax = price_indices.calculates_marekt_capitalization_weighted("market_cap", 1, 10000, fig, ax)
-# fig, ax = price_indices.calculates_marekt_capitalization_weighted("volume", 1, 10000, fig, ax)
-# fig, ax = price_indices.calculates_marekt_capitalization_weighted("market_cap", .2, 10000, fig, ax)
-# fig, ax = price_indices.calculates_marekt_capitalization_weighted("volume", .2, 10000, fig, ax)
-# ax.set_yscale("log")
-# plt.legend()
-# plt.show()
+            for index in list(range(len(self.results["timestamp"]))):
+                print(index)
+                line = list()
+                for key in sorted(self.results.keys()):
+                    line.append(self.results[key][index])
+                writer.writerow(line)
+
+
+PriceIndices().run()

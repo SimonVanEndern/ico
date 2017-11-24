@@ -37,10 +37,10 @@ class CurrencyStatisticalData:
         self.price_linear_regression_standardized_completely_interpolated: LinregressResult = self.calculate_usd_linreq_standardized_completely_interpolated()
 
         self.highest_price_difference: float
-        self.price_change_from_beginning: float = self.calculate_price_change_from_beginning()
+        self.average_daily_return: float = self.calculate_average_daily_return()
 
         self.volatilities: Dict[str, pandas.DataFrame] = self.calculate_rolling_volatility()
-        self.average_volatility_90 = numpy.mean(self.volatilities["90"]["usd"])
+        self.average_volatility_30 = numpy.mean(self.volatilities["30"]["usd"])
 
         # TODO: Make it work
         # self.volatility_linear_regression: LinregressResult = self.calculate_volatility_linreg()
@@ -51,14 +51,15 @@ class CurrencyStatisticalData:
 
         self.percentage_of_total_market_capitalization: pandas.DataFrame
 
-        self.volume_return_correlations: Dict[str, Tuple[float, float]] = self.calculate_volume_return_correlations()
+        self.log_volume_return_correlations: Dict[
+            str, Tuple[float, float]] = self.calculate_log_volume_return_correlations()
         self.volume_market_capitalization_correlation: Tuple[
             float, float] = self.calculate_volume_market_capitalization_correlation()
         self.absolute_volume_price_correlations: Dict[
             str, Tuple[float, float]] = self.calculate_absolute_volume_price_correlations()
         self.price_market_capitalization_correlation: float = self.calculate_price_market_capitalization_correlation()
 
-        self.correlation_other_currencies: Dict[str, Tuple[float, float]] = dict()
+        self.correlation_other_currencies: Dict[Dict[str, Tuple[float, float]]] = dict()
 
         # TODO: Maximum loss in terms of highest price / lowest price after this one
         # TODO: Same for highest gain
@@ -102,10 +103,10 @@ class CurrencyStatisticalData:
 
         return price
 
-    def calculate_volume_return_correlations(self) -> Dict[str, Tuple[float, float]]:
+    def calculate_log_volume_return_correlations(self) -> Dict[str, Tuple[float, float]]:
         shifts = [0, 1, 2, 3]
-        volume = list(self.currency.relative_data["volume"])
-        usd_return = list(self.currency.relative_data["usd"])
+        volume = list(numpy.log(self.currency.relative_data["volume"] + 1))
+        usd_return = list(numpy.log(self.currency.relative_data["usd"] + 1))
 
         try:
             while numpy.isnan(volume[0]) or numpy.isinf(volume[0]):
@@ -180,7 +181,7 @@ class CurrencyStatisticalData:
 
         output: dict = dict()
         for window in windows:
-            output[str(window)] = pandas.rolling_std(self.currency.relative_data, window)
+            output[str(window)] = pandas.rolling_std(numpy.log(self.currency.relative_data + 1), window)
 
         return output
 
@@ -266,9 +267,9 @@ class CurrencyStatisticalData:
     def calculate_total_data_points(self) -> int:
         return len(self.currency.data)
 
-    def calculate_price_change_from_beginning(self) -> float:
+    def calculate_average_daily_return(self) -> float:
         if self.first_price != 0:
-            return self.last_price / self.first_price
+            return ((self.last_price / self.first_price) - 1) / self.age_in_days
         else:
             return math.inf
 

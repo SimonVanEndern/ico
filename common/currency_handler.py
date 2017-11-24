@@ -207,4 +207,4 @@ class CurrencyHandler:
         # self.all_currency_names.remove("power-ledger")
         # self.all_currency_names.remove("playercoin")
 
-        return sorted(self.all_currency_names)[:10]
+        return sorted(self.all_currency_names)

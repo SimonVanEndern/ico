@@ -163,27 +163,35 @@ class Currency:
         else:
             return keyword in self.currency
 
-    def get_absolute_price_correlation(self, other: 'Currency') -> Tuple[float, float]:
+    def get_absolute_correlation(self, attribute: str, other: 'Currency') -> Tuple[float, float]:
         currency_name_other = other.currency
         currency_name_self = self.currency
 
         try:
-            if currency_name_other in self.statistical_data.correlation_other_currencies:
-                return self.statistical_data.correlation_other_currencies[currency_name_other]
+            if attribute in self.statistical_data.correlation_other_currencies:
+                if currency_name_other in self.statistical_data.correlation_other_currencies[attribute]:
+                    return self.statistical_data.correlation_other_currencies[attribute][currency_name_other]
+            else:
+                self.statistical_data.correlation_other_currencies[attribute] = dict()
         except AttributeError:
             print("Error")
             print(currency_name_other)
             print(currency_name_self)
 
-        frame1 = self.data["usd"]
-        frame2 = other.data["usd"]
+        frame1 = self.data[attribute]
+        frame2 = other.data[attribute]
 
         combined: pandas.DataFrame = pandas.concat([frame1, frame2], axis=1)
         combined.columns = ["a", "b"]
         combined = combined.dropna()
 
         correlation = stats.pearsonr(list(combined["a"]), list(combined["b"]))
-        self.statistical_data.correlation_other_currencies[currency_name_other] = correlation
-        other.statistical_data.correlation_other_currencies[currency_name_self] = correlation
+
+        self.statistical_data.correlation_other_currencies[attribute][currency_name_other] = correlation
+
+        if attribute not in other.statistical_data.correlation_other_currencies:
+            other.statistical_data.correlation_other_currencies[attribute] = dict()
+
+        other.statistical_data.correlation_other_currencies[attribute][currency_name_self] = correlation
 
         return correlation
