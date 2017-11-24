@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f706f99-14d9-4e62-8eec-2dff7ea6a8b0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/price_indices.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test_price_indices.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency.py" afterPath="$PROJECT_DIR$/common/currency.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/currency_handler.py" afterPath="$PROJECT_DIR$/common/currency_handler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/finance_data_import/aggregated_data/test_currency_aggregator.py" afterPath="$PROJECT_DIR$/finance_data_import/aggregated_data/test_currency_aggregator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/between_currencies.py" afterPath="$PROJECT_DIR$/top/between_currencies.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/date_and_subcluster_runner.py" afterPath="$PROJECT_DIR$/top/date_and_subcluster_runner.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/plot_and_data_exporter.py" afterPath="$PROJECT_DIR$/top/plot_and_data_exporter.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/top/statistical_analysis_calculator.py" afterPath="$PROJECT_DIR$/top/statistical_analysis_calculator.py" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -24,7 +30,7 @@
     <SUITE FILE_PATH="coverage/bachelor_thesis$cyberfund.coverage" NAME="cyberfund Coverage Results" MODIFIED="1506933261987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/sources" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_time_series_TimeSeriesTest_test_add_data_point.coverage" NAME="Unittests for test_time_series.TimeSeriesTest.test_add_data_point Coverage Results" MODIFIED="1509376743854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$testing.coverage" NAME="testing Coverage Results" MODIFIED="1507729193501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico" />
-    <SUITE FILE_PATH="coverage/bachelor_thesis$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1511427681338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$main__2_.coverage" NAME="main (2) Coverage Results" MODIFIED="1511444296502" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_CurrencyTest_test_calculate_rolling_volatility_30.coverage" NAME="Unittests for test_currency.CurrencyTest.test_calculate_rolling_volatility_30 Coverage Results" MODIFIED="1509370922690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_simplified_data.coverage" NAME="Unittests in simplified_data Coverage Results" MODIFIED="1507903324500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/simplified_data" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_data_point_DataPointTest_test_instantiation_from_tuple.coverage" NAME="Unittests for test_data_point.DataPointTest.test_instantiation_from_tuple Coverage Results" MODIFIED="1509197103533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
@@ -46,6 +52,7 @@
     <SUITE FILE_PATH="coverage/bachelor_thesis$currencies.coverage" NAME="currencies Coverage Results" MODIFIED="1507106414875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_time_series_TimeSeriesTest.coverage" NAME="Unittests for test_time_series.TimeSeriesTest Coverage Results" MODIFIED="1509203704349" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_test_currency_handler_py.coverage" NAME="Unittests in test_currency_handler.py Coverage Results" MODIFIED="1509622798910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights.coverage" NAME="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights Coverage Results" MODIFIED="1511456324754" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_CurrencyTest_test_load_data.coverage" NAME="Unittests for test_currency.CurrencyTest.test_load_data Coverage Results" MODIFIED="1507536567802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_coindesk_TestCoindesk_test_get_ico_data_without_currency_map.coverage" NAME="Unittests for test_coindesk.TestCoindesk.test_get_ico_data_without_currency_map Coverage Results" MODIFIED="1507727020971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/imports" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_time_series_TimeSeriesTest_test_number_of_gaps_with_only_one_data_point.coverage" NAME="Unittests for test_time_series.TimeSeriesTest.test_number_of_gaps_with_only_one_data_point Coverage Results" MODIFIED="1509198862776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
@@ -89,6 +96,7 @@
     <SUITE FILE_PATH="coverage/bachelor_thesis$coinmarketcap_importer.coverage" NAME="coinmarketcap_importer Coverage Results" MODIFIED="1507795549589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/coursedata" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_time_series_TimeSeriesTest_test_initiate_time_series.coverage" NAME="Unittests for test_time_series.TimeSeriesTest.test_initiate_time_series Coverage Results" MODIFIED="1509108418404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$between_currencies.coverage" NAME="between_currencies Coverage Results" MODIFIED="1510313437395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/top" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2.coverage" NAME="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2 Coverage Results" MODIFIED="1511458533103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$calculate_total_of_currencies.coverage" NAME="calculate_total_of_currencies Coverage Results" MODIFIED="1511283469883" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/top" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_imports.coverage" NAME="Unittests in imports Coverage Results" MODIFIED="1507814323572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico/imports" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$coinmarketcap_parser.coverage" NAME="coinmarketcap_parser Coverage Results" MODIFIED="1507455906155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
@@ -119,6 +127,7 @@
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_statistical_data_CurrencyStatisticalDataTest_test_calculate_first_price.coverage" NAME="Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_first_price Coverage Results" MODIFIED="1509612785784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_statistical_data_CurrencyStatisticalDataTest_test_calculate_price_market_capitalization_correlation.coverage" NAME="Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_price_market_capitalization_correlation Coverage Results" MODIFIED="1509614580594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_currency_statistical_data_CurrencyStatisticalDataTest.coverage" NAME="Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest Coverage Results" MODIFIED="1509615944009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/common" />
+    <SUITE FILE_PATH="coverage/bachelor_thesis$price_indices.coverage" NAME="price_indices Coverage Results" MODIFIED="1511457781712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$bitfinex.coverage" NAME="bitfinex Coverage Results" MODIFIED="1507450418901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/exchanges/sources" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_in_test_matcher_py.coverage" NAME="Unittests in test_matcher.py Coverage Results" MODIFIED="1507802319688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ico" />
     <SUITE FILE_PATH="coverage/bachelor_thesis$Unittests_for_test_coinmarketcap_importer_CoinmarketcapImporterTest.coverage" NAME="Unittests for test_coinmarketcap_importer.CoinmarketcapImporterTest Coverage Results" MODIFIED="1507795430198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/finance/coursedata" />
@@ -167,45 +176,87 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plot_and_data_exporter.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/top/plot_and_data_exporter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="137" column="30" lean-forward="false" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state relative-caret-position="170">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="statistical_analysis_calculator.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/top/statistical_analysis_calculator.py">
+      <file leaf-file-name="global_data.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/global_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="546" column="103" lean-forward="false" selection-start-line="546" selection-start-column="103" selection-end-line="546" selection-end-column="103" />
+            <state relative-caret-position="51">
+              <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="price_indices.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/price_indices.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-471">
+              <caret line="61" column="8" lean-forward="false" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
               <folding>
-                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="coinmarketcap_token_parser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/coinmarketcap_token_parser.py">
+      <file leaf-file-name="test_price_indices.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_price_indices.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+              <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="case.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/unittest/case.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="604" column="0" lean-forward="false" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_currency_aggregator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/finance_data_import/aggregated_data/test_currency_aggregator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="series.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/core/series.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="129">
+              <caret line="600" column="0" lean-forward="false" selection-start-line="600" selection-start-column="0" selection-end-line="600" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/core/indexes/base.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="129">
+              <caret line="2476" column="0" lean-forward="false" selection-start-line="2476" selection-start-column="0" selection-end-line="2476" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -214,64 +265,18 @@
       <file leaf-file-name="currency_handler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/currency_handler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="197" column="53" lean-forward="true" selection-start-line="197" selection-start-column="53" selection-end-line="197" selection-end-column="53" />
+            <state relative-caret-position="362">
+              <caret line="202" column="54" lean-forward="true" selection-start-line="202" selection-start-column="54" selection-end-line="202" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="currency_statistical_data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/currency_statistical_data.py">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/main/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="49" column="76" lean-forward="false" selection-start-line="49" selection-start-column="76" selection-end-line="49" selection-end-column="76" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="generic.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/core/generic.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4740">
-              <caret line="5664" column="8" lean-forward="false" selection-start-line="5664" selection-start-column="8" selection-end-line="5664" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="date_and_subcluster_runner.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/top/date_and_subcluster_runner.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="117" column="98" lean-forward="false" selection-start-line="117" selection-start-column="73" selection-end-line="117" selection-end-column="98" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="between_currencies.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/top/between_currencies.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="57" column="60" lean-forward="false" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+            <state relative-caret-position="68">
+              <caret line="4" column="36" lean-forward="false" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -288,9 +293,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>google_trends_data</find>
-      <find>max</find>
-      <find>mkdir</find>
       <find>List</find>
       <find>priln</find>
       <find>print</find>
@@ -318,11 +320,15 @@
       <find>volume-ret</find>
       <find>significant-volume</find>
       <find>google-trends-</find>
+      <find>raw</find>
+      <find>[weight]</find>
+      <find>.volume</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;timestamp&quot;</replace>
       <replace>self.data</replace>
       <replace>plt.legend(prop={'size': 6})</replace>
+      <replace>[weight]</replace>
     </replaceStrings>
     <dirStrings>
       <dir>Z:\Google Drive\05 - Projekte\bachelor-thesis\ico</dir>
@@ -343,9 +349,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ico_data_crawler/imports/saved/cyberfund2017115.html" />
-        <option value="$PROJECT_DIR$/ico_data_crawler/imports/blockstarter.py" />
-        <option value="$PROJECT_DIR$/finance_data_import/compressed_raw_data/currency_compressor.py" />
         <option value="$PROJECT_DIR$/finance_data_import/compressed_raw_data/test_datapoint_dto.py" />
         <option value="$PROJECT_DIR$/finance_data_import/compressed_raw_data/datapoint_dto.py" />
         <option value="$PROJECT_DIR$/finance_data_import/compressed_raw_data/currency_dto.py" />
@@ -363,7 +366,6 @@
         <option value="$PROJECT_DIR$/common/main/main.py" />
         <option value="$PROJECT_DIR$/finance_data_import/aggregated_data/test_financial_data_calculator.py" />
         <option value="$PROJECT_DIR$/common/test_currency_handler.py" />
-        <option value="$PROJECT_DIR$/finance_data_import/aggregated_data/test_currency_aggregator.py" />
         <option value="$PROJECT_DIR$/google_trends/import_data/google_trends_DTO.py" />
         <option value="$PROJECT_DIR$/google_trends/import_data/test_google_trends_DTO.py" />
         <option value="$PROJECT_DIR$/common/test_currency_statistical_data.py" />
@@ -376,7 +378,6 @@
         <option value="$PROJECT_DIR$/top/within_currencies.py" />
         <option value="$PROJECT_DIR$/top/cluster_result.py" />
         <option value="$PROJECT_DIR$/finance_data_import/aggregated_data/currency_aggregator.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/finance/analysis/correlation.py" />
         <option value="$PROJECT_DIR$/finance/analysis/descriptive_statistics.py" />
         <option value="$PROJECT_DIR$/common/coinmarketcap_token_parser.py" />
@@ -384,16 +385,21 @@
         <option value="$PROJECT_DIR$/top/calculation_result.py" />
         <option value="$PROJECT_DIR$/top/cluster_result_container.py" />
         <option value="$PROJECT_DIR$/google_trends/import_data/main.py" />
-        <option value="$PROJECT_DIR$/common/currency.py" />
         <option value="$PROJECT_DIR$/top/clustered_plot_and_data_exporter.py" />
         <option value="$PROJECT_DIR$/total_csv_export.py" />
         <option value="$PROJECT_DIR$/common/currency_statistical_data.py" />
-        <option value="$PROJECT_DIR$/top/plot_and_data_exporter.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/top/date_and_subcluster_runner.py" />
-        <option value="$PROJECT_DIR$/common/currency_handler.py" />
-        <option value="$PROJECT_DIR$/top/statistical_analysis_calculator.py" />
         <option value="$PROJECT_DIR$/top/between_currencies.py" />
+        <option value="$PROJECT_DIR$/top/plot_and_data_exporter.py" />
+        <option value="$PROJECT_DIR$/common/currency.py" />
+        <option value="$PROJECT_DIR$/top/statistical_analysis_calculator.py" />
+        <option value="$PROJECT_DIR$/price-indices.py" />
+        <option value="$PROJECT_DIR$/finance_data_import/aggregated_data/test_currency_aggregator.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/common/currency_handler.py" />
+        <option value="$PROJECT_DIR$/price_indices.py" />
+        <option value="$PROJECT_DIR$/test_price_indices.py" />
       </list>
     </option>
   </component>
@@ -483,22 +489,22 @@
     <property name="js.eslint.eslintPackage" value="" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
-    <property name="SearchEverywhereHistoryKey" value="between&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/top/between_currencies.py&#10;currhandl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;betwee&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/top/between_currencies.py&#10;betwe&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/top/between_currencies.py&#10;curhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;cuhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curhandl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curstat&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;currestati&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;currency&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency.py&#10;currency  &#9;null&#9;null&#10;cursta&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;testcur&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/test_currency.py&#10;currhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;currency &#9;null&#9;null&#10;currency_hand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;cointoken&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/coinmarketcap_token_parser.py&#10;coinapi&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/coinmarketCapApi.py&#10;currenhand&#9;null&#9;null&#10;curre&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curr_handl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;calculate_relative&#9;null&#9;null&#10;request_cur&#9;null&#9;null&#10;CurrencyAggregator&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/aggregated_data/currency_aggregator.py&#10;CurrencyCompressor&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/compressed_raw_data/currency_compressor.py&#10;finan&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/aggregated_data/financial_data_calculator.py&#10;to_csv&#9;null&#9;null&#10;logging&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/logging.log&#10;request_add&#9;null&#9;null&#10;request_addi&#9;null&#9;null&#10;exporter&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance/raw_data/exporter.py" />
+    <property name="SearchEverywhereHistoryKey" value="currhandl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;currency&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;currhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curhandl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;Currency&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency.py&#10;between&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/top/between_currencies.py&#10;get_average_market&#9;null&#9;null&#10;betwee&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/top/between_currencies.py&#10;betwe&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/top/between_currencies.py&#10;cuhand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curstat&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;currestati&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;currency  &#9;null&#9;null&#10;cursta&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_statistical_data.py&#10;testcur&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/test_currency.py&#10;currency &#9;null&#9;null&#10;currency_hand&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;cointoken&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/coinmarketcap_token_parser.py&#10;coinapi&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/coinmarketCapApi.py&#10;currenhand&#9;null&#9;null&#10;curre&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;curr_handl&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/common/currency_handler.py&#10;calculate_relative&#9;null&#9;null&#10;request_cur&#9;null&#9;null&#10;CurrencyAggregator&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/aggregated_data/currency_aggregator.py&#10;CurrencyCompressor&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/compressed_raw_data/currency_compressor.py&#10;finan&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/aggregated_data/financial_data_calculator.py&#10;to_csv&#9;null&#9;null&#10;logging&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance_data_import/logging.log&#10;request_add&#9;null&#9;null&#10;request_addi&#9;null&#9;null&#10;exporter&#9;FILE&#9;file://Z:/Google Drive/05 - Projekte/bachelor-thesis/finance/raw_data/exporter.py" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\google_trends\import_data\test_input\6monthly" />
-      <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\google_trends\import_data" />
-      <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\finance" />
-      <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\finance\reduced_raw_data" />
-      <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\top" />
       <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis" />
       <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\google_trends\import_data\test_input" />
       <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\finance\aggregated_data\test_input\compressed-data\with-additional-data" />
       <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\common" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\google_trends\import_data\test_input\6monthly" />
+      <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\google_trends\import_data" />
+      <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\finance" />
+      <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis\finance\reduced_raw_data" />
+      <recent name="Z:\Google Drive\05 - Projekte\bachelor-thesis" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -513,20 +519,35 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main (2)">
-    <configuration name="Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_price_correlation_with_google_trends" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2">
+    <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/common" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bachelor-thesis" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_price_correlation_with_google_trends&quot;" />
+      <option name="_new_target" value="&quot;test_price_indices.TestPriceIndices.test_calculate_weights&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+    </configuration>
+    <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="bachelor-thesis" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_price_indices.TestPriceIndices.test_calculate_weights_2&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
     <configuration name="Unittests" type="tests" factoryName="Unittests">
@@ -1149,42 +1170,6 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration name="calculate_total_of_currencies" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/top" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="bachelor-thesis" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/top/calculate_total_of_currencies.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/google_trends/import_data" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="bachelor-thesis" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/google_trends/import_data/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="main (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -1203,7 +1188,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="total_csv_export" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="price-indices" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -1216,7 +1201,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bachelor-thesis" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/total_csv_export.py" />
+      <option name="SCRIPT_NAME" value="Z:\Google Drive\05 - Projekte\bachelor-thesis\price_indices.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="price_indices" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="bachelor-thesis" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/price_indices.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -1224,18 +1227,18 @@
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests" />
       <item index="1" class="java.lang.String" itemvalue="Python.main (2)" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_price_correlation_with_google_trends" />
-      <item index="3" class="java.lang.String" itemvalue="Python.main (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Python.calculate_total_of_currencies" />
-      <item index="5" class="java.lang.String" itemvalue="Python.total_csv_export" />
+      <item index="2" class="java.lang.String" itemvalue="Python.price-indices" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_price_indices.TestPriceIndices.test_calculate_weights" />
+      <item index="4" class="java.lang.String" itemvalue="Python.price_indices" />
+      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.main (2)" />
-        <item index="1" class="java.lang.String" itemvalue="Python.total_csv_export" />
-        <item index="2" class="java.lang.String" itemvalue="Python.main (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python.calculate_total_of_currencies" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for test_currency_statistical_data.CurrencyStatisticalDataTest.test_calculate_price_correlation_with_google_trends" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" />
+        <item index="1" class="java.lang.String" itemvalue="Python.price_indices" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_price_indices.TestPriceIndices.test_calculate_weights" />
+        <item index="3" class="java.lang.String" itemvalue="Python.price-indices" />
+        <item index="4" class="java.lang.String" itemvalue="Python.main (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -1263,44 +1266,44 @@
       <workItem from="1509386322911" duration="146265000" />
       <workItem from="1510838250339" duration="24796000" />
       <workItem from="1511167449005" duration="21567000" />
-      <workItem from="1511252956014" duration="57873000" />
+      <workItem from="1511252956014" duration="73846000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests - 2017.11.10 at 15h 32m 52s.xml">
-      <configuration name="Unittests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2 - 2017.11.23 at 18h 24m 09s.xml">
+      <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests - 2017.11.10 at 15h 47m 27s.xml">
-      <configuration name="Unittests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2 - 2017.11.23 at 18h 24m 54s.xml">
+      <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests - 2017.11.10 at 16h 00m 08s.xml">
-      <configuration name="Unittests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2 - 2017.11.23 at 18h 28m 08s.xml">
+      <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests - 2017.11.16 at 15h 31m 41s.xml">
-      <configuration name="Unittests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2 - 2017.11.23 at 18h 29m 09s.xml">
+      <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests - 2017.11.17 at 09h 46m 02s.xml">
-      <configuration name="Unittests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2 - 2017.11.23 at 18h 32m 46s.xml">
+      <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests - 2017.11.20 at 11h 07m 24s.xml">
-      <configuration name="Unittests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2 - 2017.11.23 at 18h 33m 27s.xml">
+      <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests - 2017.11.21 at 09h 31m 25s.xml">
-      <configuration name="Unittests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2 - 2017.11.23 at 18h 33m 55s.xml">
+      <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests - 2017.11.21 at 10h 28m 37s.xml">
-      <configuration name="Unittests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2 - 2017.11.23 at 18h 34m 33s.xml">
+      <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests - 2017.11.21 at 10h 30m 27s.xml">
-      <configuration name="Unittests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2 - 2017.11.23 at 18h 35m 06s.xml">
+      <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests - 2017.11.21 at 17h 57m 34s.xml">
-      <configuration name="Unittests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_price_indices_TestPriceIndices_test_calculate_weights_2 - 2017.11.23 at 18h 35m 34s.xml">
+      <configuration name="Unittests for test_price_indices.TestPriceIndices.test_calculate_weights_2" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="598516000" />
+    <option name="totallyTimeSpent" value="614489000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1425,8 +1428,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/top/plot_and_data_exporter.py</url>
-          <line>151</line>
+          <line>153</line>
           <option name="timeStamp" value="168" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test_price_indices.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test_price_indices.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="173" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -1436,7 +1449,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="171" />
+      <option name="time" value="174" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -1445,60 +1458,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/finance_data_import/aggregated_data/test_currency_aggregator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/pyplot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1055" column="4" lean-forward="false" selection-start-line="1055" selection-start-column="4" selection-end-line="1055" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pytrends/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="89" column="8" lean-forward="false" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="669" column="0" lean-forward="false" selection-start-line="669" selection-start-column="0" selection-end-line="669" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/test_currency_statistical_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="139" column="40" lean-forward="true" selection-start-line="139" selection-start-column="40" selection-end-line="139" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/google_trends/import_data/test_google_trends_DTO.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/google_trends/import_data/google_trends_data.py" />
-    <entry file="file://$PROJECT_DIR$/global_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/singleton.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
@@ -1695,26 +1654,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/google_trends/import_data/google_trends_DTO.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="77" column="8" lean-forward="false" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/google_trends/import_data/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
           <caret line="64" column="62" lean-forward="false" selection-start-line="64" selection-start-column="62" selection-end-line="64" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/top/total.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="1593" column="68" lean-forward="false" selection-start-line="1593" selection-start-column="68" selection-end-line="1593" selection-end-column="68" />
           <folding />
         </state>
       </provider>
@@ -1735,32 +1678,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/top/clustered_plot_and_data_exporter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="56" lean-forward="false" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#27#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/finance_data_import/compressed_raw_data/compress_raw_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="51" lean-forward="true" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
           <folding>
             <element signature="e#0#14#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/currency.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="152" column="20" lean-forward="false" selection-start-line="152" selection-start-column="20" selection-end-line="152" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1781,28 +1704,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/top/plot_and_data_exporter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="137" column="30" lean-forward="false" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1812,7 +1717,7 @@
         <state relative-caret-position="149">
           <caret line="117" column="98" lean-forward="false" selection-start-line="117" selection-start-column="73" selection-end-line="117" selection-end-column="98" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1821,14 +1726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/currency_handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="197" column="53" lean-forward="true" selection-start-line="197" selection-start-column="53" selection-end-line="197" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -1843,22 +1740,152 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/top/between_currencies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="70" column="40" lean-forward="true" selection-start-line="70" selection-start-column="40" selection-end-line="70" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#10#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/google_trends/import_data/google_trends_DTO.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/currency.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="46" column="12" lean-forward="false" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/top/clustered_plot_and_data_exporter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204">
+          <caret line="11" column="56" lean-forward="false" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/top/plot_and_data_exporter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="64" column="45" lean-forward="false" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/top/total.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27081">
+          <caret line="1593" column="68" lean-forward="false" selection-start-line="1593" selection-start-column="68" selection-end-line="1593" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/top/statistical_analysis_calculator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="546" column="103" lean-forward="false" selection-start-line="546" selection-start-column="103" selection-end-line="546" selection-end-column="103" />
+        <state relative-caret-position="129">
+          <caret line="121" column="28" lean-forward="true" selection-start-line="121" selection-start-column="28" selection-end-line="121" selection-end-column="28" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/top/between_currencies.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/core/indexes/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="57" column="60" lean-forward="false" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
+        <state relative-caret-position="129">
+          <caret line="2476" column="0" lean-forward="false" selection-start-line="2476" selection-start-column="0" selection-end-line="2476" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/pandas/core/series.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="600" column="0" lean-forward="false" selection-start-line="600" selection-start-column="0" selection-end-line="600" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finance_data_import/aggregated_data/test_currency_aggregator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/main/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="36" lean-forward="false" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/global_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="6" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/currency_handler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="202" column="54" lean-forward="true" selection-start-line="202" selection-start-column="54" selection-end-line="202" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="604" column="0" lean-forward="false" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_price_indices.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="39" lean-forward="true" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/price_indices.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-471">
+          <caret line="61" column="8" lean-forward="false" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>

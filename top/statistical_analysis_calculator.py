@@ -119,7 +119,7 @@ class StatisticalAnalysisCalculator:
     def get_average_market_capitalization_data(self):
         series = self._get_series_of_attribute("average_market_capitalization")
 
-        return series.descriebe().to_dict()
+        return series.describe().to_dict()
 
     def get_correlation_between_average_volume_and_average_market_capitalization(self) -> dict:
         pearson_r = self._get_pearsonr("average_volume", "average_market_capitalization")

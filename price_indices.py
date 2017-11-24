@@ -1,5 +1,6 @@
 from typing import List
 
+import matplotlib.pyplot as plt
 import numpy
 import pandas
 
@@ -19,31 +20,26 @@ class PriceIndices:
         all_currency_names = self.currency_handler.get_all_currency_names()
         all_currencies: List[Currency] = list(map(lambda x: self.currency_handler.get_currency(x), all_currency_names))
         bitcoin: Currency = self.currency_handler.get_currency("bitcoin")
-        total = Currency("total")
+        # total = Currency("total")
 
         for index in bitcoin.relative_data.index:
-            total_weight = total.data[weight_name][index]
-            # if index in currency.data.index and currency.data.volume[index] < min_volume:
-            #     total_weight -= currency.data[weight_name][index]
+            for_weight_calculation = dict()
+            for currency in all_currencies + [bitcoin]:
+                if index in currency.data.index:
+                    if currency.data.volume[index] >= min_volume:
+                        for_weight_calculation[currency.currency] = currency.data[weight_name][index]
+                    else:
+                        for_weight_calculation[currency.currency] = 0
+                else:
+                    for_weight_calculation[currency.currency] = 0
 
+            weights_to_use = self.calculate_weights(for_weight_calculation, max_weight)
 
-
-            # for currency in all_currencies + [bitcoin]:
-            #     calculated_weight = (currency.data[weight_name][index] / total.data[weight_name][index])
-            #     if calculated_weight > max_weight:
-            #         total_weight -= (calculated_weight - max_weight) * total.data[weight_name][index]
             value = 0
             print(index)
             for currency in all_currencies + [bitcoin]:
-                if index in currency.relative_data.index \
-                        and numpy.isfinite(currency.relative_data.usd[index]) \
-                        and numpy.isfinite(currency.data[weight_name][index]) \
-                        and numpy.isfinite(total.data[weight_name][index]) and total.data[weight_name][index] != 0:
-                    calculated_weight = (currency.data[weight_name][index] / total.data[weight_name][index])
-                    if calculated_weight > max_weight:
-                        calculated_weight = max_weight
-                    if currency.data.volume[index] > min_volume:
-                        value += currency.relative_data.usd[index] * calculated_weight
+                if index in currency.relative_data.index and numpy.isfinite(currency.relative_data.usd[index]):
+                    value += currency.relative_data.usd[index] * weights_to_use[currency.currency]
 
             weighted_return[index] = value
 
@@ -77,12 +73,18 @@ class PriceIndices:
 
         percentage_left = rest / total
         while percentage_left > 0.0001:
-            percentage_left = rest / total
             rest = 0
             current_total = 0
             for slot in slots:
                 if slot not in exclude:
                     current_total += slots[slot]
+
+            if current_total == 0:
+                multiplier = 1 / (len(exclude) * max_weight)
+                for weight in weights:
+                    weights[weight] *= multiplier
+
+                return weights
 
             for slot in slots:
                 if slot not in exclude:
@@ -90,10 +92,16 @@ class PriceIndices:
                         weights[slot] += percentage_left * slots[slot] / current_total
                     else:
                         exclude.append(slot)
-                        rest += total * (weights[slot] + percentage_left * slots[slot] / current_total) - max_weight
+                        rest += total * ((weights[slot] + percentage_left * slots[slot] / current_total) - max_weight)
                         weights[slot] = max_weight
 
+            percentage_left = rest / total
+
+        if sum(weights.values()) > 1:
+            print(slots)
+        assert (sum(weights.values()) <= 1)
         return weights
+
 
 # fig, ax = plt.subplots()
 # price_indices = PriceIndices()

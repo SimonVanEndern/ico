@@ -1,5 +1,4 @@
 import unittest
-from typing import List
 from unittest.mock import MagicMock
 
 from finance_data_import.aggregated_data.currency_aggregator import CurrencyAggregator

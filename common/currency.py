@@ -41,7 +41,10 @@ class Currency:
 
         self.maximum_loss: int = 0
 
-        self.google_trends_data: GoogleTrendsDTO = GoogleTrendsDTO(self.currency)
+        if self.currency == "total":
+            self.google_trends_data = None
+        else:
+            self.google_trends_data: GoogleTrendsDTO = GoogleTrendsDTO(self.currency)
 
         self.statistical_data: CurrencyStatisticalData = None
 
@@ -58,9 +61,12 @@ class Currency:
         print("Currency: {} - Gaps: {}".format(self.currency, self.usd.number_of_gaps()))
 
     def load_financial_data(self) -> None:
-        filename: str = self.currency + str(GlobalData.LAST_DATA_FOR_DOWNLOAD) + ".csv"
-        filepath: str = path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA,
-                                  GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA, self.currency, filename)
+        if self.currency == "total":
+            filepath = "Z:\Google Drive\\05 - Projekte\\bachelor-thesis\\top\\total.csv"
+        else:
+            filename: str = self.currency + str(GlobalData.LAST_DATA_FOR_DOWNLOAD) + ".csv"
+            filepath: str = path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA,
+                                      GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA, self.currency, filename)
         try:
             with open(filepath, "r") as file:
                 reader = csv.reader(file)
@@ -100,7 +106,8 @@ class Currency:
         pandas_dict: dict = {"timestamp": timestamp, "usd": usd, "btc": btc, "volume": volume, "market_cap": market_cap}
 
         self.data: pandas.DataFrame = pandas.DataFrame.from_records(pandas_dict, index=timestamp)
-        self.relative_data: pandas.DataFrame = numpy.log(self.data.interpolate(limit=1).pct_change().apply(lambda x: x + 1))
+        self.relative_data: pandas.DataFrame = numpy.log(
+            self.data.interpolate(limit=1).pct_change().apply(lambda x: x + 1))
         # print(self.relative_data)
 
     def print_with_regression(self, data, regression):
@@ -180,5 +187,3 @@ class Currency:
         other.statistical_data.correlation_other_currencies[currency_name_self] = correlation
 
         return correlation
-
-

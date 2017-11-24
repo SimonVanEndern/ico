@@ -77,14 +77,16 @@ class StatisticalAnalysisRunnerAndExporter:
         for plot_function in plot_functions:
             self.save_plot(plot_function)
 
+        self.add_descriptive_data("Average volume data",
+                                  self.sac.get_average_volume_data)
+        self.add_descriptive_data("Average market capitalization data",
+                                  self.sac.get_average_market_capitalization_data)
         self.add_descriptive_data("Correlation Average Volume and Average Market Capitalization",
                                   self.sac.get_correlation_between_average_volume_and_average_market_capitalization)
         self.add_descriptive_data("Histogram average volume / average market cap data",
                                   self.sac.get_average_volume_divided_by_average_market_capitalization_data)
         self.add_descriptive_data("correlation volume and return descriptives",
                                   self.sac.get_volume_return_correlation_data)
-        self.add_descriptive_data("Average volume data",
-                                  self.sac.get_average_volume_data)
         self.add_descriptive_data("correlation volume and market capitalization descriptives",
                                   self.sac.get_volume_market_capitalization_correlation_positive_section_data)
         self.add_descriptive_data("correlation volume and market capitalization descriptives",
@@ -137,7 +139,7 @@ class StatisticalAnalysisRunnerAndExporter:
         result = CalculationResult(name, "negatives", negatives2, "", "")
         self.data_to_export.add_result(result, name)
 
-        self.add_descriptive_data("correlation volume and price descriptives",
+        self.add_descriptive_data("correlation volume and price data",
                                   self.sac.get_absolute_volume_price_correlation_data)
 
         self.add_descriptive_data("First price data", self.sac.get_first_price_data)
@@ -149,10 +151,10 @@ class StatisticalAnalysisRunnerAndExporter:
         #     for row in self.data:
         #         writer.writerow(list(row))
 
-        self.save_plot(self.between_curr.get_correlation_plot)
-        self.add_descriptive_data("Correlations positive section",
+        self.save_plot(self.between_curr.get_price_correlation_plot)
+        self.add_descriptive_data("Price correlations positive section",
                                   self.between_curr.get_correlation_positive_section_data)
-        self.add_descriptive_data("Correlations negative section",
+        self.add_descriptive_data("Price correlations negative section",
                                   self.between_curr.get_correlation_negative_section_data)
 
         self.data_to_export.save(self.save_path)
