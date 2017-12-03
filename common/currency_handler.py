@@ -37,8 +37,8 @@ class CurrencyHandler:
         else:
             if str(date_limit) not in self.currencies[currency]:
                 self.load_currency(currency, date_limit)
-            else:
-                self.logger.info("Currency {} already loaded".format(currency))
+            # else:
+                # self.logger.info("Currency {} already loaded".format(currency))
 
         return self.currencies[currency][str(date_limit)]
 

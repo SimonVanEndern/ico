@@ -36,6 +36,7 @@ class Currency:
 
         self.data: pandas.DataFrame = None
         self.relative_data: pandas.DataFrame = None
+        self.log_relative_data: pandas.DataFrame = None
 
         self.load_financial_data()
 
@@ -106,7 +107,8 @@ class Currency:
         pandas_dict: dict = {"timestamp": timestamp, "usd": usd, "btc": btc, "volume": volume, "market_cap": market_cap}
 
         self.data: pandas.DataFrame = pandas.DataFrame.from_records(pandas_dict, index=timestamp)
-        self.relative_data: pandas.DataFrame = numpy.log(
+        self.relative_data: pandas.DataFrame = self.data.pct_change()
+        self.log_relative_data: pandas.DataFrame = numpy.log(
             self.data.interpolate(limit=1).pct_change().apply(lambda x: x + 1))
         # print(self.relative_data)
 
@@ -184,6 +186,43 @@ class Currency:
         combined: pandas.DataFrame = pandas.concat([frame1, frame2], axis=1)
         combined.columns = ["a", "b"]
         combined = combined.dropna()
+        if len(combined) < 30:
+            return numpy.nan, 0
+
+        correlation = stats.pearsonr(list(combined["a"]), list(combined["b"]))
+
+        self.statistical_data.correlation_other_currencies[attribute][currency_name_other] = correlation
+
+        if attribute not in other.statistical_data.correlation_other_currencies:
+            other.statistical_data.correlation_other_currencies[attribute] = dict()
+
+        other.statistical_data.correlation_other_currencies[attribute][currency_name_self] = correlation
+
+        return correlation
+
+    def get_relative_correlation(self, attribute: str, other: 'Currency') -> Tuple[float, float]:
+        currency_name_other = other.currency
+        currency_name_self = self.currency
+
+        try:
+            if attribute in self.statistical_data.correlation_other_currencies:
+                if currency_name_other in self.statistical_data.correlation_other_currencies[attribute]:
+                    return self.statistical_data.correlation_other_currencies[attribute][currency_name_other]
+            else:
+                self.statistical_data.correlation_other_currencies[attribute] = dict()
+        except AttributeError:
+            print("Error")
+            print(currency_name_other)
+            print(currency_name_self)
+
+        frame1 = self.log_relative_data[attribute]
+        frame2 = other.log_relative_data[attribute]
+
+        combined: pandas.DataFrame = pandas.concat([frame1, frame2], axis=1)
+        combined.columns = ["a", "b"]
+        combined = combined.dropna()
+        if len(combined) < 30:
+            return numpy.nan, 0
 
         correlation = stats.pearsonr(list(combined["a"]), list(combined["b"]))
 

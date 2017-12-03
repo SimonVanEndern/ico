@@ -27,7 +27,8 @@ class DateAndSubClusterRunner:
         self.month_3: datetime = datetime.strptime("01.08.2017", "%d.%m.%Y")
         self.month_1: datetime = datetime.strptime("01.10.2017", "%d.%m.%Y")
 
-        self.start_dates: List(datetime) = [self.start_total, self.start_2017, self.month_6, self.month_3, self.month_1]
+        # self.start_dates: List(datetime) = [self.start_total, self.start_2017, self.month_6, self.month_3, self.month_1]
+        self.start_dates: List(datetime) = [self.start_total]
 
         self.data: Dict[str, Dict[str, CurrencyStatisticalData]] = dict()
 
@@ -49,12 +50,13 @@ class DateAndSubClusterRunner:
 
             clusters = [self.create_semantic_clusters(),
                         self.create_token_coin_clusters(),
+                        self.create_positive_negative_price_change_clusters(),
                         self.create_property_cluster("average_volume"),
                         self.create_property_cluster("first_price"),
                         self.create_property_cluster("first_date"),
-                        self.create_property_cluster("average_market_capitalization"),
-                        self.create_cluster_significant_volume_price_correlation()]
-            StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)], str(start_date)).run()
+                        self.create_property_cluster("average_market_capitalization")]
+                        # self.create_cluster_significant_volume_price_correlation()]
+            # StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)], str(start_date)).run()
 
             for cluster in clusters:
                 ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,
@@ -93,9 +95,25 @@ class DateAndSubClusterRunner:
         tokens = self.coinmarketcap_tokens.get_all_tokens()
         tokens = list(map(lambda x: x["currency"], tokens))
 
-        coins = self.coinmarketcap_coins.get_all_coins()
+        all_currencies = self.currency_handler.get_all_currency_names()
+        coins = list()
+        for currency in all_currencies:
+            if currency not in tokens:
+                coins.append(currency)
 
         return "coin_token_clustering", coins, tokens
+
+    def create_positive_negative_price_change_clusters(self) -> Tuple[str, List[str], List[str]]:
+        currencies = self.currency_handler.get_all_currency_names()
+        currencies = list(map(lambda x: self.currency_handler.get_currency(x), currencies))
+
+        property_list = list(map(lambda x: (x.currency, x.get_statistical_data().price_change), currencies))
+        positives = list(filter(lambda x: x[1] > 1, property_list))
+        positives = list(map(lambda x: x[0], positives))
+        negatives = list(filter(lambda x: x[1] <= 1, property_list))
+        negatives = list(map(lambda x: x[0], negatives))
+
+        return "positive_negative_price_change_clustering", negatives, positives
 
     def create_property_cluster(self, property_name: str) -> Tuple[str, List[str], List[str]]:
         currencies = self.currency_handler.get_all_currency_names()
@@ -114,11 +132,11 @@ class DateAndSubClusterRunner:
         currencies = list(map(lambda x: self.currency_handler.get_currency(x), currencies))
 
         correlations = list(
-            map(lambda x: (x.currency, x.get_statistical_data().absolute_volume_price_correlations["0"]), currencies))
+            map(lambda x: (x.currency, x.get_statistical_data().log_volume_return_correlations["0"]), currencies))
         correlations = sorted(correlations, key=lambda x: x[1][1])
         correlations_significant = list(filter(lambda x: x[1][1] < 0.1, correlations))
         correlations_significant = list(map(lambda x: x[0], correlations_significant))
         correlations_not_significant = list(filter(lambda x: x[1][1] >= 0.1, correlations))
         correlations_not_significant = list(map(lambda x: x[0], correlations_not_significant))
 
-        return "significant_volume_price_correlation_clustering", correlations_significant, correlations_not_significant
+        return "significant_volume_price_correlation_clustering", correlations_not_significant, correlations_significant

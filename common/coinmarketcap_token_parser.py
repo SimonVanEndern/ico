@@ -3,6 +3,7 @@ from datetime import datetime
 from os import path
 
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import pandas
 from bs4 import BeautifulSoup
 
@@ -17,7 +18,7 @@ class CoinmarketCapTokenParser(Parser):
     path_to_save = path.join(path.dirname(__file__) + "\saved",
                              "coinmarketcap-tokens" + str(now.year) + str(now.month) + str(now.day) + ".html")
 
-    def __init__(self, static=False):
+    def __init__(self, static=True):
         super().__init__()
 
         if static:
@@ -79,18 +80,22 @@ class CoinmarketCapTokenParser(Parser):
         ax[1].plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
         ax[1].plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagonal
 
-        fig.suptitle("Distribution of crypto-currencies according to used blockchain",
-                     fontsize=10)
+        # fig.suptitle("Distribution of crypto-currencies according to used blockchain",
+        #              fontsize=10)
         df = pandas.DataFrame.from_dict(token_counts, orient='index')
 
         df.plot(kind='bar', ax=ax[0], legend=False)
         df.plot(kind='bar', ax=ax[1], legend=False)
+        blue_patch = mpatches.Patch(color="C0", label="Tokens")
+        plt.legend(handles=[blue_patch], prop={"size": 6}, loc="upper right")
+        fig.set_size_inches(7, 4.5)
         ax[1].set_xticklabels(df.index, rotation=90, fontsize=10)
         ax[1].set(xlabel="Used crypto-currency", ylabel="Frequency")
         # fig.bottom = 0.55
         # fig.tight_layout()
         fig.subplots_adjust(top=0.9, bottom=0.3)
         # fig.set_size_inches(18.5, 10.5)
+        plt.show()
 
         return len(token_counts)
 

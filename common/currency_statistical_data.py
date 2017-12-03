@@ -37,7 +37,7 @@ class CurrencyStatisticalData:
         self.price_linear_regression_standardized_completely_interpolated: LinregressResult = self.calculate_usd_linreq_standardized_completely_interpolated()
 
         self.highest_price_difference: float
-        self.average_daily_return: float = self.calculate_average_daily_return()
+        self.price_change: float = self.calculate_price_change()
 
         self.volatilities: Dict[str, pandas.DataFrame] = self.calculate_rolling_volatility()
         self.average_volatility_30 = numpy.mean(self.volatilities["30"]["usd"])
@@ -45,7 +45,7 @@ class CurrencyStatisticalData:
         # TODO: Make it work
         # self.volatility_linear_regression: LinregressResult = self.calculate_volatility_linreg()
 
-        self.google_trends_correlations: List[Tuple[int, float]] = self.load_google_trends_data()
+        self.google_trends_relative_change: List[Tuple[int, float]] = self.load_google_trends_data()
         self.price_correlation_change_with_google_trends_data: Tuple[
             Tuple[float, float], Tuple[float, float]] = self.calculate_price_correlation_with_google_trends()
 
@@ -55,11 +55,11 @@ class CurrencyStatisticalData:
             str, Tuple[float, float]] = self.calculate_log_volume_return_correlations()
         self.volume_market_capitalization_correlation: Tuple[
             float, float] = self.calculate_volume_market_capitalization_correlation()
-        self.absolute_volume_price_correlations: Dict[
-            str, Tuple[float, float]] = self.calculate_absolute_volume_price_correlations()
         self.price_market_capitalization_correlation: float = self.calculate_price_market_capitalization_correlation()
 
         self.correlation_other_currencies: Dict[Dict[str, Tuple[float, float]]] = dict()
+
+        self.first_month_return: float = self.calculate_first_month_return()
 
         # TODO: Maximum loss in terms of highest price / lowest price after this one
         # TODO: Same for highest gain
@@ -68,13 +68,13 @@ class CurrencyStatisticalData:
         return self.currency.data["volume"].sum()
 
     def calculate_average_volume(self) -> float:
-        return float(numpy.mean(self.currency.data["volume"]))
+        return float(numpy.nanmean(self.currency.data["volume"]))
 
     def calculate_average_market_capitalization(self) -> float:
-        return float(numpy.mean(self.currency.data["market_cap"]))
+        return float(numpy.nanmean(self.currency.data["market_cap"]))
 
     def calculate_average_price(self) -> float:
-        return float(numpy.mean(self.currency.data["usd"]))
+        return float(numpy.nanmean(self.currency.data["usd"]))
 
     def calculate_highest_market_capitalization(self) -> float:
         return max(self.currency.data["market_cap"])
@@ -86,63 +86,35 @@ class CurrencyStatisticalData:
         return min(self.currency.data["usd"])
 
     def calculate_first_price(self) -> float:
-        prices = list(self.currency.data["usd"])
-        if numpy.isnan(list(self.currency.data["usd"])[0]):
-            print("NAN Price: " + self.currency.currency)
-            print(list(self.currency.data["usd"]))
-            i = 0
-            while numpy.isnan(prices[i]):
-                i += 1
-                if i > len(prices) - 1:
-                    raise RuntimeError("No data for this currency")
-            price = prices[i]
+        available_prices = self.currency.data.usd.dropna()
+        if len(available_prices) > 0:
+            return available_prices[available_prices.index[0]]
         else:
-            price = list(self.currency.data["usd"])[0]
-        if list(self.currency.data["usd"])[0] > 100:
-            print("Zu viel: " + self.currency.currency)
-
-        return price
+            raise RuntimeError("No data for this currency")
 
     def calculate_log_volume_return_correlations(self) -> Dict[str, Tuple[float, float]]:
         shifts = [0, 1, 2, 3]
-        volume = list(numpy.log(self.currency.relative_data["volume"] + 1))
-        usd_return = list(numpy.log(self.currency.relative_data["usd"] + 1))
+        volume = list(self.currency.log_relative_data["volume"])
+        usd_return = list(self.currency.log_relative_data["usd"])
+        df = pandas.DataFrame({"volume": volume, "usd": usd_return})
 
-        try:
-            while numpy.isnan(volume[0]) or numpy.isinf(volume[0]):
-                volume.pop(0)
-                usd_return.pop(0)
-        except IndexError:
-            print(self.first_date)
-            print(volume)
-            print(self.currency.currency)
-            return {"-3": (numpy.nan, numpy.nan),
-                    "-2": (numpy.nan, numpy.nan),
-                    "-1": (numpy.nan, numpy.nan),
-                    "0": (numpy.nan, numpy.nan),
-                    "1": (numpy.nan, numpy.nan),
-                    "2": (numpy.nan, numpy.nan),
-                    "3": (numpy.nan, numpy.nan)}
+        df = df[numpy.isfinite(df)]
+        df = df.dropna()
 
-        output = dict()
+        volume = list(df.volume)
+        usd_return = list(df.usd)
 
-        for shift in shifts:
-            correlation_1 = stats.pearsonr(volume[shift:], usd_return[: len(usd_return) - shift])
-            correlation_2 = stats.pearsonr(usd_return[shift:], volume[: len(volume) - shift])
-
-            output[str(shift)] = correlation_1
-            output[str(-shift)] = correlation_2
-
-        return output
-
-    def calculate_absolute_volume_price_correlations(self) -> Dict[str, Tuple[float, float]]:
-        shifts = [0, 1, 2, 3]
-        volume = list(self.currency.data["volume"])
-        usd_return = list(self.currency.data["usd"])
-
-        while numpy.isnan(volume[0]) or numpy.isinf(volume[0]):
-            volume.pop(0)
-            usd_return.pop(0)
+        # except IndexError:
+        #     print(self.first_date)
+        #     print(volume)
+        #     print(self.currency.currency)
+        #     return {"-3": (numpy.nan, numpy.nan),
+        #             "-2": (numpy.nan, numpy.nan),
+        #             "-1": (numpy.nan, numpy.nan),
+        #             "0": (numpy.nan, numpy.nan),
+        #             "1": (numpy.nan, numpy.nan),
+        #             "2": (numpy.nan, numpy.nan),
+        #             "3": (numpy.nan, numpy.nan)}
 
         output = dict()
 
@@ -181,7 +153,7 @@ class CurrencyStatisticalData:
 
         output: dict = dict()
         for window in windows:
-            output[str(window)] = pandas.rolling_std(numpy.log(self.currency.relative_data + 1), window)
+            output[str(window)] = pandas.rolling_std(self.currency.relative_data, window)
 
         return output
 
@@ -267,9 +239,12 @@ class CurrencyStatisticalData:
     def calculate_total_data_points(self) -> int:
         return len(self.currency.data)
 
-    def calculate_average_daily_return(self) -> float:
+    def calculate_price_change(self) -> float:
+        # assert(self.last_price > self.first_price)
         if self.first_price != 0:
-            return ((self.last_price / self.first_price) - 1) / self.age_in_days
+            # assert(self.last_price < self.first_price)
+            # assert(((self.last_price / self.first_price) - 1) / self.age_in_days < 0)
+            return self.last_price / self.first_price
         else:
             return math.inf
 
@@ -288,15 +263,15 @@ class CurrencyStatisticalData:
         return gtd.load_aggregated_data()
 
     def calculate_price_correlation_with_google_trends(self) -> Tuple[Tuple[float, float], Tuple[float, float]]:
-        if self.google_trends_correlations is None or len(self.google_trends_correlations) == 0:
+        if self.google_trends_relative_change is None or len(self.google_trends_relative_change) == 0:
             return None
-        trends_adjusted = list(map(lambda x: ((x[0] + 12 * 3600) * 1000, x[1]), self.google_trends_correlations))
-        trends_adjusted2 = list(map(lambda x: ((x[0] - 12 * 3600) * 1000, x[1]), self.google_trends_correlations))
+        trends_adjusted = list(map(lambda x: ((x[0] + 12 * 3600) * 1000, x[1]), self.google_trends_relative_change))
+        trends_adjusted2 = list(map(lambda x: ((x[0] - 12 * 3600) * 1000, x[1]), self.google_trends_relative_change))
         index, trends = zip(*trends_adjusted)
         index2, trends2 = zip(*trends_adjusted2)
         trends_df = pandas.DataFrame(list(trends), index=list(index))
         trends_df2 = pandas.DataFrame(list(trends2), index=list(index2))
-        usd = self.currency.relative_data["usd"]
+        usd = self.currency.log_relative_data["usd"]
 
         combined: pandas.DataFrame = pandas.concat([usd, trends_df], axis=1)
         combined2: pandas.DataFrame = pandas.concat([usd, trends_df2], axis=1)
@@ -307,3 +282,19 @@ class CurrencyStatisticalData:
 
         return stats.pearsonr(list(combined["a"]), list(combined["b"])), stats.pearsonr(list(combined2["a"]),
                                                                                         list(combined2["b"]))
+
+    def calculate_first_month_return(self) -> float:
+        if len(self.currency.data.index) <= 1:
+            return numpy.nan
+        one_day = self.currency.data.index[1] - self.currency.data.index[0]
+
+        observations = self.currency.data.usd.dropna()
+
+        if len(observations) <= 30:
+            change = observations[observations.index[len(observations) - 1]] / observations[observations.index[0]]
+            change = change / ((observations.index[len(observations) - 1] - observations.index[0]) / one_day)
+        else:
+            change = observations[observations.index[30]] / observations[observations.index[0]]
+            change = change / ((observations.index[30] - observations.index[0]) / one_day)
+
+        return change

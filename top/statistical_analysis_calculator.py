@@ -4,7 +4,7 @@ from typing import Tuple, Dict, List, Any
 import matplotlib.pyplot as plt
 import numpy
 from matplotlib import ticker
-from pandas import Series, DataFrame
+from pandas import Series, DataFrame, MultiIndex
 from scipy.stats import stats
 
 from common.currency_handler import CurrencyHandler
@@ -12,8 +12,8 @@ from common.currency_handler import CurrencyHandler
 
 def get_correlation_series_descriptions(correlations):
     correlations_all = list(map(lambda x: x[0], correlations))
-    correlations_significant = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
-    correlations_significant = list(filter(lambda x: x != 0, correlations_significant))
+    correlations_significant = list(filter(lambda x: x[1] < 0.1, correlations))
+    correlations_significant = list(map(lambda x: x[0], correlations_significant))
 
     series = Series(correlations_all)
     series2 = Series(correlations_significant)
@@ -22,10 +22,10 @@ def get_correlation_series_descriptions(correlations):
 
 
 def get_correlation_figure_from_correlations_list(correlations: List[Tuple[float, float]], fig, ax, xlabel=None,
-                                                  multiple=False, legend_name=""):
+                                                  multiple=False, legend_name="", color="C0"):
     correlations_all: List[float] = list(map(lambda x: x[0], correlations))
-    correlations_significant: List[float] = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations))
-    correlations_significant = list(filter(lambda x: x != 0, correlations_significant))
+    correlations_significant: List[float] = list(filter(lambda x: x[1] < 0.1, correlations))
+    correlations_significant = list(map(lambda x: x[0], correlations_significant))
 
     ax.set(ylabel="Frequency")
     if xlabel is not None:
@@ -40,14 +40,16 @@ def get_correlation_figure_from_correlations_list(correlations: List[Tuple[float
 
     series = Series(correlations_significant, name="Correlations significant at 0.1, else replaces with 0")
     if not multiple:
-        series.hist(ax=ax, bins=numpy.linspace(-1, 1, num=25), label=legend_name + " (only if significant at 10%: " + str(
-            len(correlations_significant)) + " of " + str(len(correlations)) + ")", alpha=1.0, figure=fig,
-                    color="C0").plot()
+        series.hist(ax=ax, bins=numpy.linspace(-1, 1, num=25),
+                    label=legend_name + " (only if significant at 10%: " + str(
+                        len(correlations_significant)) + " of " + str(len(correlations)) + ")", alpha=1.0, figure=fig,
+                    color=color).plot()
     else:
-        series.hist(ax=ax, bins=numpy.linspace(-1, 1, num=25), label=legend_name + " (only if significant at 10%: " + str(
-            len(correlations_significant)) + " of " + str(len(correlations)) + ")", alpha=0.8, figure=fig,
+        series.hist(ax=ax, bins=numpy.linspace(-1, 1, num=25),
+                    label=legend_name + " (only if significant at 10%: " + str(
+                        len(correlations_significant)) + " of " + str(len(correlations)) + ")", alpha=0.8, figure=fig,
                     color="C1").plot()
-    plt.legend(prop={'size': 6})
+    plt.legend(prop={'size': 8})
 
     return fig, ax
 
@@ -76,29 +78,47 @@ class StatisticalAnalysisCalculator:
 
         return stats.pearsonr(list_1, list_2)
 
+    def _get_spearmanr(self, attribute_1: str, attribute_2: str):
+        list_1 = list()
+        list_2 = list()
+
+        for key in self.data:
+            list_1.append(getattr(self.data[key], attribute_1))
+            list_2.append(getattr(self.data[key], attribute_2))
+
+        return stats.spearmanr(list_1, list_2)
+
     def get_average_volume_plot(self, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[Any, Any, str]:
+        if legend_name == "":
+            legend_name = "Volumes"
         series = self._get_series_of_attribute("average_volume")
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
-        ax.set(xlabel="Log10 of average Volume in USD", ylabel="Frequency")
+        ax.set(xlabel="Log10 of average volume in USD", ylabel="Frequency")
 
         ax.set(ylabel="Frequency")
         series = numpy.log10(series)
         series = series[numpy.isfinite(series)]
         if not multiple:
-            series.hist(ax=ax, bins=numpy.linspace(0, 10, num=30), figure=fig, label=legend_name).plot()
+            series.hist(ax=ax, bins=numpy.linspace(0, 10, num=30), figure=fig,
+                        label=legend_name + ": " + str(len(series)) + " observations").plot()
         else:
-            series.hist(ax=ax, bins=numpy.linspace(0, 10, num=30), figure=fig, alpha=0.8, label=legend_name).plot()
-            plt.legend(prop={'size': 6})
+            series.hist(ax=ax, bins=numpy.linspace(0, 10, num=30), figure=fig, alpha=0.8,
+                        label=legend_name + ": " + str(len(series)) + " observations").plot()
+        plt.legend(prop={'size': 8})
         return fig, ax, "average-volume-plot"
 
     def get_average_volume_data(self):
         series = self._get_series_of_attribute("average_volume")
+        series = numpy.log10(series)
+        series = series[numpy.isfinite(series)]
 
         return series.describe().to_dict()
 
     def get_average_market_capitalization_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
+        if legend_name == "":
+            legend_name = "Average market capitalizations"
         series = self._get_series_of_attribute("average_market_capitalization")
 
         if fig is None and ax is None:
@@ -108,23 +128,29 @@ class StatisticalAnalysisCalculator:
         series = numpy.log10(series)
         series = series[numpy.isfinite(series)]
         if not multiple:
-            series.hist(ax=ax, bins=numpy.linspace(0, 12, num=30), label=legend_name).plot()
+            series.hist(ax=ax, bins=numpy.linspace(0, 12, num=30),
+                        label=legend_name + ": " + str(len(series)) + " observations").plot()
         else:
-            series.hist(ax=ax, bins=numpy.linspace(0, 12, num=30), alpha=.8, label=legend_name)
-            plt.legend(prop={'size': 6})
+            series.hist(ax=ax, bins=numpy.linspace(0, 12, num=30), alpha=.8,
+                        label=legend_name + ": " + str(len(series)) + " observations")
+        plt.legend(prop={'size': 8})
         return fig, ax, "average-market-capitalization-plot"
 
     def get_average_market_capitalization_data(self):
         series = self._get_series_of_attribute("average_market_capitalization")
+        series = numpy.log10(series)
+        series = series[numpy.isfinite(series)]
 
-        return numpy.log10(series).describe().to_dict()
+        return series.describe().to_dict()
 
     def get_correlation_between_average_volume_and_average_market_capitalization(self) -> dict:
-        pearson_r = self._get_pearsonr("average_volume", "average_market_capitalization")
-        return {"coefficient": pearson_r[0], "p-value": pearson_r[1]}
+        spearman_r = self._get_spearmanr("average_volume", "average_market_capitalization")
+        return {"coefficient": spearman_r[0], "p-value": spearman_r[1]}
 
     def get_average_volume_divided_by_average_market_capitalization_plot(self, fig=None, ax=None, multiple=False,
                                                                          legend_name=""):
+        if legend_name == "":
+            legend_name = "Liquidities"
         volume = list()
         market_cap = list()
 
@@ -137,15 +163,16 @@ class StatisticalAnalysisCalculator:
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
-        fig.suptitle("Histogram of average reported volume / average market cap")
-        ax.set(xlabel="average volume / market cap", ylabel="Frequency")
+        ax.set(xlabel="Average volume divided by average market capitalization", ylabel="Frequency")
         series = Series(combined)
         if not multiple:
-            series.hist(ax=ax, bins=numpy.logspace(-5, 4, num=30, base=10), label=legend_name).plot(spacing=0.5)
+            series.hist(ax=ax, bins=numpy.logspace(-5, 4, num=30, base=10),
+                        label=legend_name + ": " + str(len(series)) + " observations").plot(spacing=0.5)
         else:
-            series.hist(ax=ax, bins=numpy.logspace(-5, 4, num=30, base=10), alpha=.8, label=legend_name).plot(
+            series.hist(ax=ax, bins=numpy.logspace(-5, 4, num=30, base=10), alpha=.8,
+                        label=legend_name + ": " + str(len(series)) + " observations").plot(
                 spacing=0.5)
-            plt.legend(prop={'size': 6})
+        plt.legend(prop={'size': 8})
         ax.set_xscale('log', basex=10)
         return fig, ax, "average-volume_divided_by_average_market-capitalization"
 
@@ -165,6 +192,8 @@ class StatisticalAnalysisCalculator:
         return series.describe().to_dict()
 
     def get_log_volume_return_correlation_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
+        if legend_name == "":
+            legend_name = "Correlations"
         if fig is None and ax is None:
             fig, ax = plt.subplots()
         correlations: List[Dict[str, [Tuple[float, float]]]] = list()
@@ -172,9 +201,9 @@ class StatisticalAnalysisCalculator:
         for key in self.data:
             correlations.append(self.data[key].log_volume_return_correlations)
 
-        correlations = list(map(lambda x: x["0"], correlations))
-        ax.set(xlabel="Correlation between daily return and daily volume change")
-        fig, ax = get_correlation_figure_from_correlations_list(correlations, fig, ax, multiple=multiple,
+        correlations_0 = list(map(lambda x: x["0"], correlations))
+        ax.set(xlabel="Correlation between log returns on price and log returns on volume")
+        fig, ax = get_correlation_figure_from_correlations_list(correlations_0, fig, ax, multiple=multiple,
                                                                 legend_name=legend_name)
 
         return fig, ax, "log-volume-return-correlations-plot-significant-marked"
@@ -186,9 +215,11 @@ class StatisticalAnalysisCalculator:
             correlations.append(self.data[key].log_volume_return_correlations)
 
         correlations = list(map(lambda x: x["0"], correlations))
+        print(correlations)
+
         all_correlations, significant = get_correlation_series_descriptions(correlations)
-        return {"coefficient-all": all_correlations[0], "p-value-all": all_correlations[1],
-                "coefficient-only-significant": significant[0], "p-value-only-significant": significant[1]}
+        print(significant.to_dict())
+        return significant.to_dict()
 
     def get_volume_market_capitalization_correlation_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
         if fig is None and ax is None:
@@ -258,60 +289,9 @@ class StatisticalAnalysisCalculator:
 
         correlations = list(map(lambda x: x["0"], correlations))
         all_correlations, significant = get_correlation_series_descriptions(correlations)
-        return all_correlations.to_dict()
+        return significant.to_dict()
         # return {"coefficient-all": all_correlations[0], "p-value-all": all_correlations[1],
         #         "coefficient-only-significant": significant[0], "p-value-only-significant": significant[1]}
-
-    def get_volume_price_correlation_cause_search_plot(self):
-        correlations: List[Dict[str, [Tuple[float, float]]]] = list()
-        names = list()
-
-        for key in self.data:
-            correlations.append(self.data[key].volume_return_correlations)
-            names.append(self.data[key].currency.currency)
-
-        correlations_0 = list(map(lambda x: x["0"], correlations))
-        correlations_adjusted = list(map(lambda x: x[0] if x[1] < 0.1 else 0, correlations_0))
-        names_adjusted = list()
-        for index, element in enumerate(correlations_adjusted):
-            if element != 0:
-                names_adjusted.append(names[index])
-
-        shift_results = list()
-        shift_results.append(("Shift", "mean", "median", "observations"))
-
-        names_total = dict()
-
-        for i in [-3, -2, -1, 0, 1, 2, 3]:
-            results = list(map(lambda x: x[str(i)], correlations))
-            results = list(map(lambda x: x[0] if x[1] < 0.1 else 0, results))
-            results = list(filter(lambda x: x != 0, results))
-            shift_results.append((i, numpy.mean(results), numpy.median(results), len(results)))
-
-            for index, element in enumerate(results):
-                if element != 0:
-                    if names[index] in names_total:
-                        names_total[names[index]] += 1
-                    else:
-                        names_total[names[index]] = 1
-
-        currency_characteristics_1 = list()
-        currency_characteristics_2 = list()
-        for currency in names_total:
-            data = self.currency_handler.get_currency(currency)
-            data.get_statistical_data()
-            if names_total[currency] > 1:
-                currency_characteristics_2.append(data.statistical_data.age_in_days)
-            else:
-                currency_characteristics_1.append(data.statistical_data.age_in_days)
-
-        # Figure 11
-        Series(currency_characteristics_1).hist(bins=20).plot()
-        plt.show()
-
-        # Figure 12
-        Series(currency_characteristics_2).hist(bins=20).plot()
-        plt.show()
 
     def get_age_average_market_capitalization_correlations(self) -> dict:
         age = list(map(lambda x: x.age_in_days, self.data.values()))
@@ -389,56 +369,128 @@ class StatisticalAnalysisCalculator:
 
         return positives, negatives, positives_interpolated, negatives_interpolated
 
-    def get_price_change_beginning_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
-        series = self._get_series_of_attribute("average_daily_return")
+    def get_positive_average_yearly_relative_price_change_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
+        if legend_name == "":
+            legend_name = "Positive average yearly returns"
+        series: Series = self._get_series_of_attribute("price_change")
+        series_days = self._get_series_of_attribute("age_in_days")
+        series_days = series_days[series > 1]
+        series = series[series > 1]
+        series = series - 1
+        series = series / (series_days / 365)
+        print(series.describe())
         if fig is None and ax is None:
             fig, ax = plt.subplots()
         ax.set(ylabel="Frequency")
         try:
             if not multiple:
-                series.hist(ax=ax, bins=numpy.logspace(-8, 5, num=30, base=10), label=legend_name).plot(spacing=0.5)
+                series.hist(ax=ax, bins=numpy.logspace(-3, 5, num=50, base=10),
+                            label=legend_name + ": " + str(len(series)) + " observations").plot(spacing=0.5)
             else:
-                series.hist(ax=ax, bins=numpy.logspace(-8, 5, num=30, base=10), alpha=.8, label=legend_name).plot(
+                series.hist(ax=ax, bins=numpy.logspace(-3, 5, num=50, base=10),
+                            label=legend_name + ": " + str(len(series)) + " observations", alpha=.8).plot(
                     spacing=0.5)
-                plt.legend(prop={'size': 6})
+            # plt.axvline(x=0, color="red")
+            plt.legend(prop={'size': 8})
         except ValueError:
             print(series)
+
         ax.set_xscale('log')
-        ax.set(xlabel="last price divided by first available price")
+        ax.set(xlabel="Positive average yearly return in 100 percentage points")
 
-        return fig, ax, "price-change-beginning-plot"
+        return fig, ax, "positive-price-change-beginning-plot"
 
-    def get_price_change_beginning_data(self) -> dict:
-        series = self._get_series_of_attribute("average_daily_return")
+    def get_negative_average_yearly_relative_price_change_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
+        if legend_name == "":
+            legend_name = "Annualized losses"
+        series: Series = self._get_series_of_attribute("price_change")
+        series_days = self._get_series_of_attribute("age_in_days")
+        series_days = series_days[series <= 1]
+        series = series[series <= 1]
+        series = series ** (series_days / 365)
+        series = 1 - series
+        # series2_days = series_days[series > 1]
+        # series2 = series[series > 1]
+        # series2 = series2 - 1
+        # series2 = series2 / (series2_days / 365)
+        # series = Series(list(series) + list(series2))
+        print(series.describe())
+        if fig is None and ax is None:
+            fig, ax = plt.subplots()
+        ax.set(ylabel="Frequency")
+        try:
+            if not multiple:
+                series.hist(ax=ax,
+                            bins=50,
+                            label=legend_name + ": " + str(len(series)) + " observations").plot(spacing=0.5)
+            else:
+                series.hist(ax=ax,
+                            bins=50, alpha=.8,
+                            label=legend_name + ": " + str(len(series)) + " observations").plot(spacing=0.5)
+            plt.legend(prop={'size': 8})
+        except ValueError:
+            print(series)
+
+        # ax.set_xticks(list(sorted(-numpy.logspace(-3, 5, num=50, base=10))))
+        # ax.set_xscale("symlog")
+        ax.set(xlabel="Annualized loss")
+
+        return fig, ax, "negative-price-change-beginning-plot"
+
+    def get_positive_price_change_beginning_data(self) -> dict:
+        series: Series = self._get_series_of_attribute("price_change")
+        series_days = self._get_series_of_attribute("age_in_days")
+        series_days = series_days[series > 1]
+        series = series[series > 1]
+        series = series - 1
+        series = series / (series_days / 365)
+        return series.describe().to_dict()
+
+    def get_negative_price_change_beginning_data(self) -> dict:
+        series: Series = self._get_series_of_attribute("price_change")
+        series_days = self._get_series_of_attribute("age_in_days")
+        series_days = series_days[series <= 1]
+        series = series[series <= 1]
+        series = series ** (series_days / 365)
+        series = 1 - series
         return series.describe().to_dict()
 
     def get_first_price_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
+        if legend_name == "":
+            legend_name = "First prices"
+
         series = self._get_series_of_attribute("first_price")
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
-        ax.set(ylabel="Frequency", xlabel="Price on first day listed on Coinmarketcap in USD")
+        ax.set(ylabel="Frequency", xlabel="Price in USD on first day of listing on Coinmarketcap")
         if not multiple:
-            series.hist(ax=ax, bins=numpy.logspace(-10, 5, num=100, base=10), label=legend_name).plot(spacing=0.5)
+            series.hist(ax=ax, bins=numpy.logspace(-10, 5, num=100, base=10),
+                        label=legend_name + ": " + str(len(series)) + " observations").plot(spacing=0.5)
         else:
-            series.hist(ax=ax, bins=numpy.logspace(-10, 5, num=100, base=10), alpha=.8, label=legend_name).plot(
+            series.hist(ax=ax, bins=numpy.logspace(-10, 5, num=100, base=10), alpha=.8,
+                        label=legend_name + ": " + str(len(series)) + " observations").plot(
                 spacing=0.5)
-            plt.legend(prop={'size': 6})
+        plt.legend(prop={'size': 8})
         ax.set_xscale('log')
 
         return fig, ax, "first-price-in-usd"
 
     def get_volatility_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
+        if legend_name == "":
+            legend_name = "Daily volatilities"
         series = self._get_series_of_attribute("average_volatility_30")
 
         if fig is None and ax is None:
             fig, ax = plt.subplots()
-        ax.set(ylabel="Frequency", xlabel="Average volatility calculated for 30-day windows")
+        ax.set(ylabel="Frequency", xlabel="Average daily volatility calculated for 30-day windows")
         if not multiple:
-            series.hist(ax=ax, bins=numpy.linspace(0, 1.5, num=50), label=legend_name).plot(spacing=0.5)
+            series.hist(ax=ax, bins=numpy.linspace(0, 1.5, num=50),
+                        label=legend_name + ": " + str(len(series)) + " observations").plot(spacing=0.5)
         else:
-            series.hist(ax=ax, bins=numpy.linspace(0, 1.5, num=50), alpha=.8, label=legend_name).plot(spacing=0.5)
-            plt.legend(prop={'size': 6})
+            series.hist(ax=ax, bins=numpy.linspace(0, 1.5, num=50), alpha=.8,
+                        label=legend_name + ": " + str(len(series)) + " observations").plot(spacing=0.5)
+        plt.legend(prop={'size': 8})
 
         return fig, ax, "average-volatility-30-day-window"
 
@@ -452,7 +504,6 @@ class StatisticalAnalysisCalculator:
 
     def get_google_trends_correlation_plot(self, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[
         Any, Any, str]:
-
         trends = list()
 
         for key in self.data:
@@ -468,13 +519,14 @@ class StatisticalAnalysisCalculator:
         trends_significant = list(filter(lambda x: x != 0, trends))
         series = Series(trends_significant)
         if not multiple:
-            series[series != 0].hist(ax=ax, bins=numpy.linspace(-1, 1, num=25), label=legend_name + " (only if significant at 10%: " + str(
-                len(trends_significant)) + " of " + str(len(trends)) + ")", color="C0").plot()
+            series[series != 0].hist(ax=ax, bins=numpy.linspace(-1, 1, num=25),
+                                     label=legend_name + " (only if significant at 10%: " + str(
+                                         len(trends_significant)) + " of " + str(len(trends)) + ")", color="C0").plot()
         else:
             series[series != 0].hist(ax=ax, bins=numpy.linspace(-1, 1, num=25), alpha=.8,
                                      label=legend_name + " (only if significant at 10%: " + str(
                                          len(trends_significant)) + " of " + str(len(trends)) + ")", color="C1").plot()
-        plt.legend(prop={'size': 6})
+        plt.legend(prop={'size': 8})
 
         return fig, ax, "significant-google-trends-price-usd-correlation"
 
@@ -532,7 +584,6 @@ class StatisticalAnalysisCalculator:
 
     def get_google_trends_correlation_plot2(self, fig=None, ax=None, multiple=False, legend_name="") -> Tuple[
         Any, Any, str]:
-
         trends = list()
 
         for key in self.data:
@@ -554,11 +605,13 @@ class StatisticalAnalysisCalculator:
             series[series != 0].hist(ax=ax, bins=20, alpha=.8,
                                      label=legend_name + " (only if significant at 10%: " + str(
                                          len(trends_significant)) + " of " + str(len(trends)) + ")", color="C1").plot()
-        plt.legend(prop={'size': 6})
+        plt.legend(prop={'size': 8})
 
         return fig, ax, "google-trends-price-usd-correlation-significant-ones-marked"
 
     def get_first_date_plot(self, fig=None, ax=None, multiple=False, legend_name=""):
+        if legend_name == "":
+            legend_name = "Start dates of crypto-currencies"
         if fig is None and ax is None:
             fig, ax = plt.subplots()
 
@@ -567,21 +620,33 @@ class StatisticalAnalysisCalculator:
         df = DataFrame(list(dates), index=dates, columns=["date"]).sort_index()
 
         df["date"] = df["date"].astype("datetime64[ms]")
+        print(df["date"])
         df2 = df.groupby([df["date"].dt.year, df["date"].dt.month]).count()
-        df2.columns = [legend_name]
+        print(df2.index)
+        print(df2.index.levels)
+        print(list(df2.index))
+        new_index = MultiIndex.from_product([[2013, 2014, 2015, 2016, 2017], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]])
+        df2 = df2.reindex(new_index, fill_value=0)
+        df2 = df2.drop((2013, 1))
+        df2 = df2.drop((2013, 2))
+        df2 = df2.drop((2013, 3))
+        df2 = df2.drop((2017, 11))
+        df2 = df2.drop((2017, 12))
+        df2.columns = [legend_name + ": " + str(len(df)) + " observations"]
 
         if not multiple:
             df2.plot(kind="bar", ax=ax, legend=False, position=0, color="C0", width=.4)
         else:
             df2.plot(kind="bar", ax=ax, legend=False, position=1, color="C1", width=.4)
-            plt.legend(prop={'size': 6})
+        plt.legend(prop={'size': 8})
 
         # Make most of the ticklabels empty so the labels don't get too crowded
         ticklabels = [''] * len(df2.index)
         # Every 4th ticklable shows the month and day
-        ticklabels[::6] = [datetime(item[0], item[1], 1).strftime('%b %d') for item in df2.index[::6]]
+        # ticklabels[::6] = [datetime(item[0], item[1], 1).strftime('%b %d') for item in df2.index[::6]]
         # Every 12th ticklabel includes the year
-        ticklabels[::6] = [datetime(item[0], item[1], 1).strftime('%b %d\n%Y') for item in df2.index[::6]]
+        print(list(df2.index))
+        ticklabels[::6] = [datetime(item[0], item[1], 1).strftime('%b %d\n%Y') for item in list(df2.index)[::6]]
         ax.xaxis.set_major_formatter(ticker.FixedFormatter(ticklabels))
         fig.autofmt_xdate()
 

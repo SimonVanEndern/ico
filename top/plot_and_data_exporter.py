@@ -23,9 +23,9 @@ class StatisticalAnalysisRunnerAndExporter:
             os.mkdir(self.save_path)
         self.sac: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data)
         self.between_curr_usd: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data.keys()),
-                                                                     "usd", start_date, sleep=False)
-        self.between_curr_volume: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data.keys()),
-                                                                        "volume", start_date, sleep=False)
+                                                                     "usd", start_date, sleep=True)
+        # self.between_curr_volume: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data.keys()),
+        #                                                                 "volume", start_date, sleep=False)
         self.figure_counter: int = 1
 
         self.data = list()
@@ -33,7 +33,7 @@ class StatisticalAnalysisRunnerAndExporter:
 
     def save_plot(self, func: Callable) -> None:
         fig, ax, fig_name = func()
-        fig.set_size_inches(7, 3.5)
+        fig.set_size_inches(7, 3)
 
         self.save_figure(fig, fig_name)
 
@@ -46,8 +46,8 @@ class StatisticalAnalysisRunnerAndExporter:
 
     def save_plots(self, func: Callable) -> None:
         fig1, fig2, fig_name1, fig_name2 = func()
-        fig1.set_size_inches(7, 3.5)
-        fig2.set_size_inches(7, 3.5)
+        fig1.set_size_inches(7, 3)
+        fig2.set_size_inches(7, 3)
 
         fig1.canvas.set_window_title("Figure " + str(self.figure_counter))
         fig2.canvas.set_window_title("Figure " + str(self.figure_counter))
@@ -66,10 +66,11 @@ class StatisticalAnalysisRunnerAndExporter:
                           self.sac.get_average_market_capitalization_plot,
                           self.sac.get_average_volume_divided_by_average_market_capitalization_plot,
                           self.sac.get_log_volume_return_correlation_plot,
-                          self.sac.get_volume_market_capitalization_correlation_plot,
-                          self.sac.get_absolute_volume_price_correlation_plot,
+                          # self.sac.get_volume_market_capitalization_correlation_plot,
+                          # self.sac.get_absolute_volume_price_correlation_plot,
                           self.sac.get_first_price_plot,
-                          self.sac.get_price_change_beginning_plot,
+                          self.sac.get_positive_average_yearly_relative_price_change_plot,
+                          self.sac.get_negative_average_yearly_relative_price_change_plot,
                           self.sac.get_google_trends_correlation_plot,
                           self.sac.get_google_trends_correlation_plot2,
                           self.sac.get_volatility_plot]
@@ -81,11 +82,11 @@ class StatisticalAnalysisRunnerAndExporter:
                                   self.sac.get_average_volume_data)
         self.add_descriptive_data("Average market capitalization data",
                                   self.sac.get_average_market_capitalization_data)
-        self.add_descriptive_data("Correlation Average Volume and Average Market Capitalization",
+        self.add_descriptive_data("Spearman Correlation Average Volume and Average Market Capitalization",
                                   self.sac.get_correlation_between_average_volume_and_average_market_capitalization)
         self.add_descriptive_data("Histogram average volume / average market cap data",
                                   self.sac.get_average_volume_divided_by_average_market_capitalization_data)
-        self.add_descriptive_data("correlation volume and return descriptives",
+        self.add_descriptive_data("correlation log volume returns and log price returns",
                                   self.sac.get_volume_return_correlation_data)
         self.add_descriptive_data("correlation volume and market capitalization descriptives",
                                   self.sac.get_volume_market_capitalization_correlation_positive_section_data)
@@ -114,48 +115,51 @@ class StatisticalAnalysisRunnerAndExporter:
                                   self.sac.get_age_average_volume_correlation)
 
         # Slope of linear regression on price
-        self.save_plots(self.sac.get_linear_price_regressions_plot)
+        # self.save_plots(self.sac.get_linear_price_regressions_plot)
 
         # Stats
-        positives, negatives, positives2, negatives2 = self.sac.get_linear_regression_data()
+        # positives, negatives, positives2, negatives2 = self.sac.get_linear_regression_data()
 
-        name = "Currencies with positive linear regression slope and interploation limit=1"
-        self.data.append((self.frame_name, name, "positives: " + str(positives)))
-        result = CalculationResult(name, "positives", positives, "", "")
-        self.data_to_export.add_result(result, name)
+        # name = "Currencies with positive linear regression slope and interploation limit=1"
+        # self.data.append((self.frame_name, name, "positives: " + str(positives)))
+        # result = CalculationResult(name, "positives", positives, "", "")
+        # self.data_to_export.add_result(result, name)
 
-        name = "Currencies with negative linear regression slope and interploation limit=1"
-        self.data.append((self.frame_name, name, "negatives: " + str(negatives)))
-        result = CalculationResult(name, "negatives", negatives, "", "")
-        self.data_to_export.add_result(result, name)
+        # name = "Currencies with negative linear regression slope and interploation limit=1"
+        # self.data.append((self.frame_name, name, "negatives: " + str(negatives)))
+        # result = CalculationResult(name, "negatives", negatives, "", "")
+        # self.data_to_export.add_result(result, name)
+        #
+        # name = "Currencies with positive linear regression slope and unlimited interpolation"
+        # self.data.append((self.frame_name, name, "positives: " + str(positives2)))
+        # result = CalculationResult(name, "positives", positives2, "", "")
+        # self.data_to_export.add_result(result, name)
 
-        name = "Currencies with positive linear regression slope and unlimited interpolation"
-        self.data.append((self.frame_name, name, "positives: " + str(positives2)))
-        result = CalculationResult(name, "positives", positives2, "", "")
-        self.data_to_export.add_result(result, name)
+        # name = "Currencies with negative linear regression slope and unlimited interpolation"
+        # self.data.append((self.frame_name, name, "negatives: " + str(negatives2)))
+        # result = CalculationResult(name, "negatives", negatives2, "", "")
+        # self.data_to_export.add_result(result, name)
 
-        name = "Currencies with negative linear regression slope and unlimited interpolation"
-        self.data.append((self.frame_name, name, "negatives: " + str(negatives2)))
-        result = CalculationResult(name, "negatives", negatives2, "", "")
-        self.data_to_export.add_result(result, name)
-
-        self.add_descriptive_data("correlation volume and price data",
-                                  self.sac.get_absolute_volume_price_correlation_data)
+        # self.add_descriptive_data("correlation volume and price data",
+        #                           self.sac.get_absolute_volume_price_correlation_data)
 
         self.add_descriptive_data("First price data", self.sac.get_first_price_data)
-        self.add_descriptive_data("Price change beginning data", self.sac.get_price_change_beginning_data)
+        self.add_descriptive_data("Negative price change beginning data",
+                                  self.sac.get_negative_price_change_beginning_data)
+        self.add_descriptive_data("Positive price change beginning data",
+                                  self.sac.get_positive_price_change_beginning_data)
         self.add_descriptive_data("Volatility 90 window data", self.sac.get_volatility_data)
 
         self.save_plot(self.between_curr_usd.get_correlation_plot)
-        self.save_plot(self.between_curr_volume.get_correlation_plot)
+        # self.save_plot(self.between_curr_volume.get_correlation_plot)
         # self.save_plot(self.between_curr_market_cap.get_correlation_plot)
         self.add_descriptive_data("Price correlations positive section",
-                                  self.between_curr_usd.get_correlation_positive_section_data)
+                                  self.be1tween_curr_usd.get_correlation_positive_section_data)
         self.add_descriptive_data("Price correlations negative section",
                                   self.between_curr_usd.get_correlation_negative_section_data)
-        self.add_descriptive_data("Volume correlations positive section",
-                                  self.between_curr_volume.get_correlation_positive_section_data)
-        self.add_descriptive_data("Volume correlations negative section",
-                                  self.between_curr_volume.get_correlation_negative_section_data)
+        # self.add_descriptive_data("Volume correlations positive section",
+        #                           self.between_curr_volume.get_correlation_positive_section_data)
+        # self.add_descriptive_data("Volume correlations negative section",
+        #                           self.between_curr_volume.get_correlation_negative_section_data)
 
         self.data_to_export.save(self.save_path)

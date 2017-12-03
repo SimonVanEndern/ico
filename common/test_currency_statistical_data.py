@@ -124,7 +124,7 @@ class CurrencyStatisticalDataTest(unittest.TestCase, TestCommons):
         self.assertEqual(result, 1646)
 
     def test_calculate_average_daily_return(self):
-        result = self.statistical_data.calculate_average_daily_return()
+        result = self.statistical_data.calculate_price_change()
 
         self.assertEqual(result, 43.122143759258392)
 
