@@ -40,10 +40,13 @@ def get_correlation_figure_from_correlations_list(correlations: List[Tuple[float
 
     series = Series(correlations_significant, name="Correlations significant at 0.1, else replaces with 0")
     if not multiple:
+        series2 = Series(correlations_all)
+        series2.hist(ax=ax, bins=numpy.linspace(-1, 1, num=25),
+                    label="All correlations: " + str(len(correlations)) + " observations", alpha=1.0, figure=fig,
+                    color="C0").plot()
         series.hist(ax=ax, bins=numpy.linspace(-1, 1, num=25),
-                    label=legend_name + " (only if significant at 10%: " + str(
-                        len(correlations_significant)) + " of " + str(len(correlations)) + ")", alpha=1.0, figure=fig,
-                    color=color).plot()
+                    label="Correlations significant at 10%: " + str(len(correlations_significant)) + " observations", alpha=1.0, figure=fig,
+                    color="C1").plot()
     else:
         series.hist(ax=ax, bins=numpy.linspace(-1, 1, num=25),
                     label=legend_name + " (only if significant at 10%: " + str(

@@ -24,13 +24,25 @@ class PriceIndices:
 
     def run(self):
         fig, ax = plt.subplots()
-        fig, ax = self.calculates_weighted_index("market_cap", .2, 1000000, fig, ax)
-        fig, ax = self.calculates_weighted_index("market_cap", .2, 10000000, fig, ax)
-        fig, ax = self.calculates_weighted_index("volume", .2, 1000000, fig, ax)
-        fig, ax = self.calculates_weighted_index("volume", .2, 10000000, fig, ax)
+        # fig, ax = self.calculates_weighted_index("market_cap", 1, 0, fig, ax)
+        # fig, ax = self.calculates_weighted_index("volume", 1, 0, fig, ax)
+        # fig, ax = self.calculates_weighted_index("market_cap", .2, 10000, fig, ax)
+        # fig, ax = self.calculates_weighted_index("market_cap", .2, 100000, fig, ax)
+        # fig, ax = self.calculates_weighted_index("market_cap", .2, 1000000, fig, ax)
+        # fig, ax = self.calculates_weighted_index("market_cap", .2, 10000000, fig, ax)
+        # fig, ax = self.calculates_weighted_index("volume", .2, 10000, fig, ax)
+        # fig, ax = self.calculates_weighted_index("volume", .2, 100000, fig, ax)
+        # fig, ax = self.calculates_weighted_index("volume", .2, 1000000, fig, ax)
+        # fig, ax = self.calculates_weighted_index("volume", .2, 10000000, fig, ax)
 
+        fig, ax = self.calculates_weighted_index_30_day_adjusted("market_cap", 1, 0, fig, ax)
+        fig, ax = self.calculates_weighted_index_30_day_adjusted("volume", 1, 0, fig, ax)
+        fig, ax = self.calculates_weighted_index_30_day_adjusted("market_cap", .2, 10000, fig, ax)
+        fig, ax = self.calculates_weighted_index_30_day_adjusted("market_cap", .2, 100000, fig, ax)
         fig, ax = self.calculates_weighted_index_30_day_adjusted("market_cap", .2, 1000000, fig, ax)
         fig, ax = self.calculates_weighted_index_30_day_adjusted("market_cap", .2, 10000000, fig, ax)
+        fig, ax = self.calculates_weighted_index_30_day_adjusted("volume", .2, 10000, fig, ax)
+        fig, ax = self.calculates_weighted_index_30_day_adjusted("volume", .2, 100000, fig, ax)
         fig, ax = self.calculates_weighted_index_30_day_adjusted("volume", .2, 1000000, fig, ax)
         fig, ax = self.calculates_weighted_index_30_day_adjusted("volume", .2, 10000000, fig, ax)
 
@@ -123,15 +135,15 @@ class PriceIndices:
                         currencies_to_use.append(currency)
                 print(len(currencies_to_use))
 
-            for_weight_calculation = dict()
-            for currency in currencies_to_use:
-                for_weight_calculation[currency.currency] = 0
-                if index in currency.data.index:
-                    for_weight_calculation[currency.currency] = currency.data[weight_name][index]
-                    if numpy.isnan(for_weight_calculation[currency.currency]):
-                        for_weight_calculation[currency.currency] = 0
+                for_weight_calculation = dict()
+                for currency in currencies_to_use:
+                    for_weight_calculation[currency.currency] = 0
+                    if index in currency.data.index:
+                        for_weight_calculation[currency.currency] = currency.data[weight_name][index]
+                        if numpy.isnan(for_weight_calculation[currency.currency]):
+                            for_weight_calculation[currency.currency] = 0
 
-            weights_to_use = self.calculate_weights(for_weight_calculation, max_weight)
+                weights_to_use = self.calculate_weights(for_weight_calculation, max_weight)
 
             value = 0
             for currency in currencies_to_use:
@@ -207,7 +219,7 @@ class PriceIndices:
         return weights
 
     def export(self):
-        with open("final-indices.csv", "w") as file:
+        with open("final-indices-2017-12-03-30-day-weighting-without-top-ten.csv", "w") as file:
             writer = csv.writer(file, delimiter=",", lineterminator="\n")
             columns = sorted(self.results.keys())
             columns.remove("timestamp")

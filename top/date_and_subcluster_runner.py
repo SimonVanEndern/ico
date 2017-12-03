@@ -27,8 +27,8 @@ class DateAndSubClusterRunner:
         self.month_3: datetime = datetime.strptime("01.08.2017", "%d.%m.%Y")
         self.month_1: datetime = datetime.strptime("01.10.2017", "%d.%m.%Y")
 
-        # self.start_dates: List(datetime) = [self.start_total, self.start_2017, self.month_6, self.month_3, self.month_1]
-        self.start_dates: List(datetime) = [self.start_total]
+        self.start_dates: List(datetime) = [self.start_total, self.start_2017, self.month_6, self.month_3, self.month_1]
+        # self.start_dates: List(datetime) = [self.start_total]
 
         self.data: Dict[str, Dict[str, CurrencyStatisticalData]] = dict()
 
@@ -56,7 +56,7 @@ class DateAndSubClusterRunner:
                         self.create_property_cluster("first_date"),
                         self.create_property_cluster("average_market_capitalization")]
                         # self.create_cluster_significant_volume_price_correlation()]
-            # StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)], str(start_date)).run()
+            StatisticalAnalysisRunnerAndExporter(start_date_name, self.data[str(start_date)], str(start_date)).run()
 
             for cluster in clusters:
                 ClusteredStatisticalAnalysisRunnerAndExporter(start_date_name,

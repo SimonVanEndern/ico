@@ -24,8 +24,8 @@ class StatisticalAnalysisRunnerAndExporter:
         self.sac: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data)
         self.between_curr_usd: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data.keys()),
                                                                      "usd", start_date, sleep=True)
-        # self.between_curr_volume: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data.keys()),
-        #                                                                 "volume", start_date, sleep=False)
+        self.between_curr_volume: BetweenCurrencies = BetweenCurrencies(self.save_path, list(self.original_data.keys()),
+                                                                        "volume", start_date, sleep=True)
         self.figure_counter: int = 1
 
         self.data = list()
@@ -150,13 +150,13 @@ class StatisticalAnalysisRunnerAndExporter:
                                   self.sac.get_positive_price_change_beginning_data)
         self.add_descriptive_data("Volatility 90 window data", self.sac.get_volatility_data)
 
-        self.save_plot(self.between_curr_usd.get_correlation_plot)
+        # self.save_plot(self.between_curr_usd.get_correlation_plot)
         # self.save_plot(self.between_curr_volume.get_correlation_plot)
         # self.save_plot(self.between_curr_market_cap.get_correlation_plot)
-        self.add_descriptive_data("Price correlations positive section",
-                                  self.be1tween_curr_usd.get_correlation_positive_section_data)
-        self.add_descriptive_data("Price correlations negative section",
-                                  self.between_curr_usd.get_correlation_negative_section_data)
+        # self.add_descriptive_data("Price correlations positive section",
+        #                           self.be1tween_curr_usd.get_correlation_positive_section_data)
+        # self.add_descriptive_data("Price correlations negative section",
+        #                           self.between_curr_usd.get_correlation_negative_section_data)
         # self.add_descriptive_data("Volume correlations positive section",
         #                           self.between_curr_volume.get_correlation_positive_section_data)
         # self.add_descriptive_data("Volume correlations negative section",

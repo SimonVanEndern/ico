@@ -18,16 +18,14 @@ class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAnd
         self.sac_1: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data_cluster_1)
         self.sac_2: StatisticalAnalysisCalculator = StatisticalAnalysisCalculator(data_cluster_2)
 
-        self.between_curr_usd_1: BetweenCurrencies = BetweenCurrencies(self.save_path,
-                                                                       list(self.original_data_1.keys()), "usd",
-                                                                       start_date, sleep=False)
+        self.between_curr_usd_1: BetweenCurrencies = self.between_curr_usd
         self.between_curr_usd_2: BetweenCurrencies = BetweenCurrencies(self.save_path,
                                                                        list(self.original_data_2.keys()), "usd",
-                                                                       start_date, sleep=False)
-        # self.between_curr_volume_1: BetweenCurrencies = self.between_curr_volume
-        # self.between_curr_volume_2: BetweenCurrencies = BetweenCurrencies(self.save_path,
-        #                                                                   list(self.original_data_2.keys()), "volume",
-        #                                                                   start_date, sleep=True)
+                                                                       start_date, sleep=True)
+        self.between_curr_volume_1: BetweenCurrencies = self.between_curr_volume
+        self.between_curr_volume_2: BetweenCurrencies = BetweenCurrencies(self.save_path,
+                                                                          list(self.original_data_2.keys()), "volume",
+                                                                          start_date, sleep=True)
         # self.between_curr_market_cap_1: BetweenCurrencies = self.between_curr_market_cap
         # self.between_curr_market_cap_1: BetweenCurrencies = BetweenCurrencies(self.save_path,
         #                                                                       list(self.original_data_2.keys()),
@@ -65,10 +63,10 @@ class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAnd
         self.between_curr_usd.correlations = self.between_curr_usd_2.correlations
         self.between_curr_usd.as_list = self.between_curr_usd_2.as_list
 
-        # correlations_volume_1 = self.between_curr_volume.correlations
-        # as_list_volume_1 = self.between_curr_volume.as_list
-        # self.between_curr_volume.correlations = self.between_curr_volume_2.correlations
-        # self.between_curr_volume.as_list = self.between_curr_volume_2.as_list
+        correlations_volume_1 = self.between_curr_volume.correlations
+        as_list_volume_1 = self.between_curr_volume.as_list
+        self.between_curr_volume.correlations = self.between_curr_volume_2.correlations
+        self.between_curr_volume.as_list = self.between_curr_volume_2.as_list
 
         fig, ax, fig_name = func(fig=fig, ax=ax, multiple=True, legend_name=self.name_cluster_2)
         self.sac.data = self.sac_1.data
@@ -76,8 +74,8 @@ class ClusteredStatisticalAnalysisRunnerAndExporter(StatisticalAnalysisRunnerAnd
         self.between_curr_usd.correlations = correlations_usd_1
         self.between_curr_usd.as_list = as_list_usd_1
 
-        # self.between_curr_volume.correlations = correlations_volume_1
-        # self.between_curr_volume.as_list = as_list_volume_1
+        self.between_curr_volume.correlations = correlations_volume_1
+        self.between_curr_volume.as_list = as_list_volume_1
 
         # self.between_curr_market_cap.correlations = correlations_market_cap_1
         # self.between_curr_market_cap.as_list = as_list_market_cap_1
