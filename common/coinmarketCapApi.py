@@ -12,7 +12,7 @@ class CoinmarketCapApi:
     currencies: list = list()
 
     api_path: str = "api.coinmarketcap.com"
-    api_section1: str = "/v1/ticker/"
+    api_section1: str = "/v1/ticker/?limit=0"
 
     now: datetime = datetime.datetime.now()
     save_path: str = os.path.join(os.path.dirname(__file__) + "\saved",
@@ -30,6 +30,7 @@ class CoinmarketCapApi:
             conn.request("GET", self.api_section1)
             response = conn.getresponse()
             self.currencies: list = json.loads(response.read().decode("UTF-8"))
+            print(len(self.currencies))
 
             with open(self.save_path, "w") as file:
                 json.dump(self.currencies, file)

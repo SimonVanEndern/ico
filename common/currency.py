@@ -65,7 +65,7 @@ class Currency:
         if self.currency == "total":
             filepath = "Z:\Google Drive\\05 - Projekte\\bachelor-thesis\\top\\total.csv"
         else:
-            filename: str = self.currency + str(GlobalData.LAST_DATA_FOR_DOWNLOAD) + ".csv"
+            filename: str = self.currency + "-24hourly-" + str(GlobalData.LAST_DATA_FOR_DOWNLOAD) + ".csv"
             filepath: str = path.join(GlobalData.EXTERNAL_PATH_AGGREGATED_DATA,
                                       GlobalData.FOLDER_COMPRESSED_DATA_WITH_ADDITIONAL_DATA, self.currency, filename)
         try:
@@ -76,7 +76,7 @@ class Currency:
             logging.warning("Currency {} could not be loaded from {}".format(self.currency, filepath))
 
     def load_financial_data_from_csv_input(self, csv_input: list) -> None:
-        if csv_input is None or len(csv_input) < 3:
+        if csv_input is None or len(csv_input) < 1:
             print(GlobalData.LAST_DATA_FOR_DOWNLOAD)
             raise Exception("Empty csv input for {}".format(self.currency))
 

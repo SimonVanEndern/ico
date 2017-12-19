@@ -111,8 +111,8 @@ class Main:
             #     print(type(self.data[currency]))
 
             # def save_data(self):
-            #     filename = "ico-data" + str(datetime.now().strftime("%Y-%m-%d")) + ".json"
-            #     filepath = os.path.join(GlobalData.ICO_FUNDING_AND_START_DATA_PATH, filename)
+            #     input_filename = "ico-data" + str(datetime.now().strftime("%Y-%m-%d")) + ".json"
+            #     filepath = os.path.join(GlobalData.ICO_FUNDING_AND_START_DATA_PATH, input_filename)
             #     data = self.get_data()
             #     print(data)
             #

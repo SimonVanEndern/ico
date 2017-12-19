@@ -42,7 +42,7 @@ class FinancialDataCalculator:
                     return output
 
             time_span: int = (data[current_data_index + 1]["time"] - data[current_data_index]["time"]) / 1000 / 3600
-            if time_span > maximum_time_span:
+            if time_span > 24:
                 self.logger.warning("For {} timestamp {} data could not be calculated".format(currency, timestamp))
                 self.missing_data[currency].append(
                     (data[current_data_index]["time"], data[current_data_index + 1]["time"]))

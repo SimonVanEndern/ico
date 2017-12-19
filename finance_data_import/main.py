@@ -7,7 +7,7 @@ from global_data import GlobalData
 
 
 class MainDataImporter:
-    # logging.basicConfig(level=logging.INFO, filename="logging.log")
+    # logging.basicConfig(level=logging.INFO, input_filename="logging.log")
     logging.basicConfig(level=logging.INFO)
 
     def __init__(self):
@@ -16,8 +16,12 @@ class MainDataImporter:
         self.raw_data_converter = ReduceSimplifiedData()
 
         self.last_time = GlobalData.LAST_DATA_FOR_DOWNLOAD
+        self.interval = 24  # hours
 
     def run(self):
         self.raw_data_downloader.download_all_data()
         self.raw_data_simplifier.compress_data(self.last_time)
-        self.raw_data_converter.aggregate_compressed_data(self.last_time)
+        self.raw_data_converter.aggregate_compressed_data(self.last_time, self.interval)
+
+
+MainDataImporter().run()

@@ -2,8 +2,8 @@ from collections import Counter
 from datetime import datetime
 from os import path
 
-import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
 import pandas
 from bs4 import BeautifulSoup
 
@@ -23,6 +23,8 @@ class CoinmarketCapTokenParser(Parser):
 
         if static:
             self.path_to_save = path.join(path.dirname(__file__) + "\saved", "coinmarketcap-tokens2017112.html")
+
+        self.all_tokens = self.get_all_tokens()
 
     def get_all_tokens(self):
         tokens: list = list()
@@ -51,6 +53,15 @@ class CoinmarketCapTokenParser(Parser):
 
         return tokens
 
+    def is_token(self, currency: str):
+        return currency in list(map(lambda x: x["currency"], self.all_tokens))
+
+    def is_coin(self, currency: str):
+        return not self.is_token(currency)
+
+    def is_platform(self, currency: str):
+        return currency in list(map(lambda x: x["platform"].lower(), self.all_tokens))
+
     def get_platform_statistics(self):
         tokens = self.get_all_tokens()
         tokens = list(map(lambda x: x["platform"], tokens))
@@ -73,7 +84,7 @@ class CoinmarketCapTokenParser(Parser):
         d = .015  # how big to make the diagonal lines in axes coordinates
         # arguments to pass to plot, just so we don't keep repeating them
         kwargs = dict(transform=ax[0].transAxes, color='k', clip_on=False)
-        ax[0].plot((-d, +d), (-d, +d), **kwargs)        # top-left diagonal
+        ax[0].plot((-d, +d), (-d, +d), **kwargs)  # top-left diagonal
         ax[0].plot((1 - d, 1 + d), (-d, +d), **kwargs)  # top-right diagonal
 
         kwargs.update(transform=ax[1].transAxes)  # switch to the bottom axes

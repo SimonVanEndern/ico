@@ -25,6 +25,8 @@ class CoinMarketCapGraphAPIImporter:
         self.currency_handler = CurrencyHandler.Instance()
 
     def request_currency(self, currency, last_date):
+        if currency == "bonpay":
+            x=7
         if os.path.isfile(os.path.join(self.raw_data_path, currency, "ready" + str(last_date))):
             self.logger.info("All currencies until {} already downloaded".format(last_date))
             return

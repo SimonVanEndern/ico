@@ -37,6 +37,8 @@ class GoogleTrendsDTO:
 
     def load_6monthly_raw_data(self):
         self.logger.info("Loading Google Trends Data for {}".format(self.currency))
+        if not os.path.isdir(self.path_6monthly):
+            return
         for filename in os.listdir(self.path_6monthly):
             if filename.endswith(".csv"):
                 with open(os.path.join(self.path_6monthly, filename)) as file:

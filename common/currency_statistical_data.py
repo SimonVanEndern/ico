@@ -216,6 +216,7 @@ class CurrencyStatisticalData:
         return output
 
     def calculate_fist_date(self) -> int:
+        print(self.currency.currency)
         return self.currency.data["timestamp"].iloc[0]
 
     def calculate_last_price(self) -> float:

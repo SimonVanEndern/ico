@@ -17,7 +17,7 @@ from singleton import Singleton
 
 @Singleton
 class CurrencyHandler:
-    def __init__(self, static=True):
+    def __init__(self, static=False):
         self.currencies: Dict(str, Dict[str, 'Currency']) = dict()
         self.all_currencies_with_data = None
 
@@ -166,6 +166,16 @@ class CurrencyHandler:
                 currencies.append(currency["id"])
 
         currencies.reverse()
+        to_remove = list()
+        for currency in currencies:
+            if GlobalData.LAST_DATA_FOR_DOWNLOAD - 1000 * 3600 * 24 * 3 < self.get_basic_currency_data(currency)["start_date"]:
+                to_remove.append(currency)
+
+        for currency in to_remove:
+            currencies.remove(currency)
+
+        # currencies.remove("bitcoinx")
+        # currencies.remove("blockcdn")
         self.all_currency_names = currencies
         self.save_all_currency_names_data()
 

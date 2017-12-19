@@ -11,13 +11,20 @@ class TotalCSVExport:
     currency_handler = CurrencyHandler.Instance()
 
     def __init__(self):
-        with open("crypto-currency-export-until-31-10-2017.csv", "w") as file:
+        with open("crypto-currency-export-until-31-11-2017-daily-with-google-trends-data.csv", "w") as file:
             writer = csv.writer(file, delimiter=",", lineterminator="\n")
             writer.writerow(["Crypto-currency name", "Timestamp", "Volume", "Market Capitalization", "Price in USD",
-                             "Google Trends reltative change 12 hours ago"])
+                             "Google Trends relatative change 12 hours ago"])
 
+            # counter = 0
             for currency_name in self.currency_handler.get_all_currency_names():
+                # counter += 1
+                # if counter > 10:
+                #     break
                 currency: Currency = self.currency_handler.get_currency(currency_name)
+                if currency is None or currency.data is None:
+                    print("Currency somehow not there")
+                    continue
 
                 google_trends_relative_data = GoogleTrendsDTO(currency_name).load_aggregated_data()
                 google_trends_dict = dict()
