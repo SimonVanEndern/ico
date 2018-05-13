@@ -81,7 +81,7 @@ class Main:
     def log_important_statistics(self):
         print("Coinmarketcap currencies / projects:")
         count = 0
-        for currency in self.coinmarketcap_source.get_currencies(multiple=True):
+        for currency in self.coinmarketcap_source.get_currency_ticker_symbols_fullname_tuple():
             if currency[0] in self.data:
                 if self.data[currency[0]].funds:
                     count += 1

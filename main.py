@@ -34,7 +34,7 @@ class Main:
             print("Platforms: " + str(self.coinmarketcap_tokens.get_platform_statistics()))
 
             # Includes keyword analysis
-            keyword_data = descriptives.contains_keyword_coin(self.coinmarketcap.get_currencies())
+            keyword_data = descriptives.contains_keyword_coin(self.coinmarketcap.get_currency_ticker_symbols())
             # Stat4: Total Cryptocurrencies investigated for keywords
             print("Total cryptocurrencies: " + str(keyword_data["total"]))
             # Stat5: Number of Cryptocurrencies containing the word token

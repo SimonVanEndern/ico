@@ -2,7 +2,7 @@ import datetime
 import http.client
 import json
 import os.path
-from typing import Dict
+from typing import Dict, List, Tuple
 
 from common.main.json_converter import JsonConverter
 
@@ -14,6 +14,7 @@ class CoinmarketCapApi:
     api_section1: str = "/v1/ticker/?limit=0"
 
     now: datetime = datetime.datetime.now()
+
     if not os.path.isdir(os.path.join(os.path.dirname(__file__), "saved")):
         os.mkdir(os.path.join(os.path.dirname(__file__), "saved"))
 
@@ -21,8 +22,6 @@ class CoinmarketCapApi:
                                   "coinmarketcap-tickers" + str(now.year) + str(now.month) + str(now.day) + ".json")
 
     def __init__(self, static=False):
-        self.currencies: list = list()
-
         if static:
             self.save_path = os.path.join(os.path.dirname(__file__), "saved", "coinmarketcap-tickers2017115.json")
 
@@ -33,7 +32,7 @@ class CoinmarketCapApi:
             conn = http.client.HTTPSConnection(self.api_path)
             conn.request("GET", self.api_section1)
             response = conn.getresponse()
-            self.currencies: list = json.loads(response.read().decode("UTF-8"))
+            self.currencies: List[dict] = json.loads(response.read().decode("UTF-8"))
             # print(len(self.currencies))
 
             with open(self.save_path, "w") as file:
@@ -54,21 +53,33 @@ class CoinmarketCapApi:
         for currency in dict_currencies:
             self.currencies.append(dict_currencies[currency])
 
-    def get_all_currencies(self) -> list:
+    def get_all_currencies(self) -> List[dict]:
+        """
+        dict attributes:
+        - id
+        - name
+        - symbol
+        - price_usd
+        ...
+
+        :return: A list of all known currencies
+        """
         return self.currencies
 
-    # returns fullname
-    # for multiple = True returns tuple of shortcut and fullname
-    def get_currencies(self, multiple=False):
-        tickerSymbols: list = list()
+    def get_currency_ticker_symbols(self) -> List[str]:
+        """
 
-        # Get ticker symbol of currencies for requests.
-        for currency in self.currencies:
-            if multiple:
-                tickerSymbols.append([currency["id"], currency["symbol"]])
-            else:
-                tickerSymbols.append(currency["id"])
-        return tickerSymbols
+        :return: 'id' of currency e.g. 'bitcoin' or 'ethereum'
+        """
+        return list(map(lambda x: x["id"], self.currencies))
+
+    def get_currency_ticker_symbols_fullname_tuple(self) -> List[Tuple[str, str]]:
+        """
+        id: see get_currency_ticker_symbols
+        symbol: 3 capital letters e.g. BTC
+        :return: Tuple of id and symbol
+        """
+        return list(map(lambda x: (x["id"], x["symbol"]), self.currencies))
 
     def getShortnameMap(self, reverse=False):
         shortnames: list = list()

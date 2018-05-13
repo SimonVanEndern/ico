@@ -67,7 +67,7 @@ class DescriptiveStatistics:
         plt.show()
 
     def get_highest_lowest_market_cap(self):
-        currencies = self.coinmarketcap.get_currencies()
+        currencies = self.coinmarketcap.get_currency_ticker_symbols()
         ouput = []
         for index, currency in enumerate(currencies):
             if index == 3:
