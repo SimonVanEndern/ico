@@ -1,9 +1,11 @@
+# from top.date_and_subcluster_runner import DateAndSubClusterRunner
+
+from top.date_and_subcluster_runner import DateAndSubClusterRunner
+
 import finance.analysis.descriptive_statistics as descriptives
 from common.coinmarketCapApi import CoinmarketCapApi
 from common.coinmarketcap_coin_parser import CoinmarketCapCoinParser
 from common.coinmarketcap_token_parser import CoinmarketCapTokenParser
-from global_data import GlobalData
-from top.date_and_subcluster_runner import DateAndSubClusterRunner
 
 
 class Main:

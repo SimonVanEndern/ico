@@ -78,6 +78,7 @@ class CurrencyHandler:
         else:
             time.sleep(1)
             path = ("https://" + GlobalData.COIN_MARKET_CAP_GRAPH_API_URL + "/currencies/{}/").format(currency)
+            self.logger.info(path)
             response = requests.request("GET", path)
 
             if response.status_code == 404:
@@ -85,9 +86,12 @@ class CurrencyHandler:
                 self.basic_currency_data[currency] = None
             else:
                 data = json.loads(response.text)
-                datapoints = data[CSVStrings.PRICE_USD_STRING]
+                datapoints: list = data[CSVStrings.PRICE_USD_STRING]
 
-                self.basic_currency_data[currency] = {"start_date": datapoints[0][0]}
+                if not datapoints.__len__() == 0:
+                    self.basic_currency_data[currency] = {"start_date": datapoints[0][0]}
+                else:
+                    self.basic_currency_data[currency] = None
             self.save_basic_currency_data()
             return self.basic_currency_data[currency]
 
@@ -114,6 +118,8 @@ class CurrencyHandler:
     def save_basic_currency_data(self) -> None:
         filename: str = "basic-currency-data.json"
         file_path: str = os.path.join(GlobalData.CURRENCY_HANDLER_PATH, filename)
+        if not os.path.isdir(GlobalData.CURRENCY_HANDLER_PATH):
+            os.mkdir(GlobalData.CURRENCY_HANDLER_PATH)
 
         if os.path.isfile(file_path):
             os.remove(file_path)
@@ -168,7 +174,8 @@ class CurrencyHandler:
         currencies.reverse()
         to_remove = list()
         for currency in currencies:
-            if GlobalData.LAST_DATA_FOR_DOWNLOAD - 1000 * 3600 * 24 * 3 < self.get_basic_currency_data(currency)["start_date"]:
+            if not self.get_basic_currency_data(currency) or\
+                    GlobalData.LAST_DATA_FOR_DOWNLOAD - 1000 * 3600 * 24 * 3 < self.get_basic_currency_data(currency)["start_date"]:
                 to_remove.append(currency)
 
         for currency in to_remove:

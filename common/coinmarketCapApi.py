@@ -15,12 +15,15 @@ class CoinmarketCapApi:
     api_section1: str = "/v1/ticker/?limit=0"
 
     now: datetime = datetime.datetime.now()
-    save_path: str = os.path.join(os.path.dirname(__file__) + "\saved",
+    if not os.path.isdir(os.path.dirname(__file__) + "/saved"):
+        os.mkdir(os.path.dirname(__file__) + "/saved")
+
+    save_path: str = os.path.join(os.path.dirname(__file__) + "/saved",
                                   "coinmarketcap-tickers" + str(now.year) + str(now.month) + str(now.day) + ".json")
 
     def __init__(self, static=False):
         if static:
-            self.save_path = os.path.join(os.path.dirname(__file__) + "\saved", "coinmarketcap-tickers2017115.json")
+            self.save_path = os.path.join(os.path.dirname(__file__) + "/saved", "coinmarketcap-tickers2017115.json")
 
         if os.path.isfile(self.save_path):
             with open(self.save_path, "r") as file:
