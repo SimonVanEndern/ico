@@ -20,6 +20,9 @@ class CoinMarketCapGraphAPIImporter:
         self.logger = logging.getLogger(self.__class__.__name__)
 
         self.raw_data_path = GlobalData.EXTERNAL_PATH_RAW_DATA
+        if not os.path.isdir(self.raw_data_path):
+            os.mkdir(self.raw_data_path)
+
         self.save_path_additional_data = GlobalData.EXTERNAL_PATH_ADDITIONAL_DATA
 
         self.currency_handler = CurrencyHandler.Instance()

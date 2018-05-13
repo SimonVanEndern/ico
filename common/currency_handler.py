@@ -67,6 +67,7 @@ class CurrencyHandler:
                 if not os.path.isdir(os.path.join(self.data_path, filename)):
                     self.all_currencies_with_data.append(filename.split(".")[0])
 
+            self.all_currencies_with_data.sort()
             if len(self.all_currencies_with_data) <= size_limit:
                 return self.all_currencies_with_data
             else:
@@ -165,7 +166,7 @@ class CurrencyHandler:
 
         additional: list = self.coinmarketcapAPI.get_all_currencies()
 
-        for currency in additional:
+        for currency in sorted(additional, key=lambda k: k["id"]):
             if currency["id"] in currencies:
                 pass
             else:
