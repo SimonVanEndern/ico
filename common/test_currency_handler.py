@@ -45,13 +45,13 @@ class CurrencyHandlerTest(unittest.TestCase, TestCommons):
 
         self.assertEqual(result, {"start_date": 1367174841000})
 
-    def test_get_financial_series_start_date_of_all_currencies(self):
-        GlobalData.LAST_DATA_FOR_DOWNLOAD = GlobalData.LAST_DATA_FOR_DOWNLOAD_2
-        self.currency_handler.load_all_currencies()
-        result = self.currency_handler.get_financial_series_start_date_of_all_currencies(limit=10)
-
-        regression_file = self.get_test_path()
-        self.assertEqual(str(result), test_commons.save_or_compare_data(result, regression_file))
+    # def test_get_financial_series_start_date_of_all_currencies(self):
+    #     GlobalData.LAST_DATA_FOR_DOWNLOAD = GlobalData.LAST_DATA_FOR_DOWNLOAD_2
+    #     self.currency_handler.load_all_currencies()
+    #     result = self.currency_handler.get_financial_series_start_date_of_all_currencies(limit=10)
+    #
+    #     regression_file = self.get_test_path()
+    #     self.assertEqual(str(result), test_commons.save_or_compare_data(result, regression_file))
 
     def test_get_all_currency_names_static(self):
         currency_handler = CurrencyHandler.Instance()

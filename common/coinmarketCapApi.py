@@ -84,7 +84,7 @@ class CoinmarketCapApi:
         else:
             return dict(zip(id, symbols))
 
-    def get_market_cap_named(self, only_without_market_cap=False):
+    def get_market_cap_named(self, only_without_market_cap=False) -> dict:
         data: Dict[str, int] = dict()
         for currency in self.currencies:
             if not only_without_market_cap:

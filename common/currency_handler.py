@@ -73,7 +73,7 @@ class CurrencyHandler:
             else:
                 return self.all_currencies_with_data[:size_limit]
 
-    def get_basic_currency_data(self, currency):
+    def get_basic_currency_data(self, currency) -> dict:
         if currency in self.basic_currency_data:
             return self.basic_currency_data[currency]
         else:
@@ -96,16 +96,16 @@ class CurrencyHandler:
             self.save_basic_currency_data()
             return self.basic_currency_data[currency]
 
-    def get_financial_series_start_date_of_all_currencies(self, limit=math.inf):
-        output = list()
-        for key, value in sorted(self.currencies.items()):
-            value[str(None)].get_statistical_data()
-            output.append(value[str(None)].statistical_data.first_date)
-
-            if len(output) > limit:
-                break
-
-        return output
+    # def get_financial_series_start_date_of_all_currencies(self, limit=math.inf) -> list:
+    #     output = list()
+    #     for key, value in sorted(self.currencies.items()):
+    #         value[str(None)].get_statistical_data()
+    #         output.append(value[str(None)].statistical_data.first_date)
+    #
+    #         if len(output) > limit:
+    #             break
+    #
+    #     return output
 
     def load_basic_currency_data(self) -> dict:
         filename: str = "basic-currency-data.json"
@@ -138,18 +138,18 @@ class CurrencyHandler:
         with open(file_path, "w") as file:
             json.dump(self.all_currency_names, file)
 
-    def load_ico_data(self):
-        pass
-        # TODO: implement
+    # def load_ico_data(self) -> None:
+    #     pass
+    #     TODO: implement
 
-    def add_ico_data(self, icos):
+    def add_ico_data(self, icos) -> None:
         for currency in self.currencies:
             if currency["id"] in icos:
                 currency["ico"] = icos[currency["id"]]
 
-    def load_all_currencies(self) -> None:
-        for currency in self.get_all_currency_names_where_data_is_available():
-            self.load_currency(currency)
+    # def load_all_currencies(self) -> None:
+    #     for currency in self.get_all_currency_names_where_data_is_available():
+    #         self.load_currency(currency)
 
     def load_all_currency_names(self) -> dict:
         filename: str = "basic-currency-data.json"
@@ -182,47 +182,7 @@ class CurrencyHandler:
         for currency in to_remove:
             currencies.remove(currency)
 
-        # currencies.remove("bitcoinx")
-        # currencies.remove("blockcdn")
         self.all_currency_names = currencies
         self.save_all_currency_names_data()
-
-        # Manually removing currencies for bachelor thesis because data became available only after 31.10.2017
-        # self.all_currency_names.remove("revain")
-        # self.all_currency_names.remove("gimli")
-        # self.all_currency_names.remove("altcommunity-coin")
-        # self.all_currency_names.remove("ellaism")
-        # self.all_currency_names.remove("rupaya-old")
-        # self.all_currency_names.remove("fapcoin")
-        # self.all_currency_names.remove("ethgas")
-        # self.all_currency_names.remove("vulcano")
-        # self.all_currency_names.remove("ebit")
-        # self.all_currency_names.remove("ibtc")
-        # self.all_currency_names.remove("flypme")
-        # self.all_currency_names.remove("russian-mining-coin")
-        # self.all_currency_names.remove("qvolta")
-        # self.all_currency_names.remove("shield-coin")
-        # self.all_currency_names.remove("roofs")
-        # self.all_currency_names.remove("egold")
-        # self.all_currency_names.remove("ebtcnew")
-        # self.all_currency_names.remove("eltcoin")
-        # self.all_currency_names.remove("btcmoon")
-        # self.all_currency_names.remove("desire")
-        # self.all_currency_names.remove("atlant")
-        # self.all_currency_names.remove("unikoin-gold")
-        # self.all_currency_names.remove("etherparty")
-        # self.all_currency_names.remove("grid")
-        # self.all_currency_names.remove("natcoin")
-        # self.all_currency_names.remove("minexcoin")
-        # self.all_currency_names.remove("credence-coin")
-        # self.all_currency_names.remove("force")
-        # self.all_currency_names.remove("pure")
-        # self.all_currency_names.remove("high-gain")
-        # self.all_currency_names.remove("enjin-coin")
-        # self.all_currency_names.remove("bitbase")
-        # self.all_currency_names.remove("electroneum")
-        # self.all_currency_names.remove("streamr-datacoin")
-        # self.all_currency_names.remove("power-ledger")
-        # self.all_currency_names.remove("playercoin")
 
         return sorted(self.all_currency_names)
