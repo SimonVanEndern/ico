@@ -28,7 +28,7 @@ class Main:
         self.cyberfund_source = CyberfundSource()
         self.blockstarter_source = BlockstarterSource()
 
-        self.currency_map = self.coinmarketcap_source.getShortnameMap()
+        self.currency_map = self.coinmarketcap_source.getIdToSymbolMapping()
 
         self.currency_matcher = CurrencyNameMatcher()
 

@@ -22,6 +22,8 @@ class CoinmarketCapApi:
                                   "coinmarketcap-tickers" + str(now.year) + str(now.month) + str(now.day) + ".json")
 
     def __init__(self, static=False):
+        dict_currencies: dict = dict()
+
         if static:
             self.save_path = os.path.join(os.path.dirname(__file__), "saved", "coinmarketcap-tickers2017115.json")
 
@@ -33,22 +35,11 @@ class CoinmarketCapApi:
             conn.request("GET", self.api_section1)
             response = conn.getresponse()
             self.currencies: List[dict] = json.loads(response.read().decode("UTF-8"))
-            # print(len(self.currencies))
 
-            with open(self.save_path, "w") as file:
-                json.dump(self.currencies, file)
+            self.save()
 
-        dict_currencies: dict = dict()
         for currency in self.currencies:
             dict_currencies[currency["id"]] = currency
-
-        # for to_remove in ["revain", "gimli", "altcommunity-coin", "ellaism", "rupaya-old", "fapcoin", "ethgas",
-        #                   "vulcano", "ebit", "ibtc", "flypme", "russian-mining-coin", "qvolta", "shield-coin", "roofs",
-        #                   "egold", "ebtcnew", "eltcoin", "btcmoon", "desire", "atlant", "unikoin-gold", "etherparty",
-        #                   "grid", "natcoin", "minexcoin", "credence-coin", "force", "pure", "high-gain", "enjin-coin",
-        #                   "bitbase", "electroneum", "streamr-datacoin", "power-ledger", "playercoin"]:
-        #     if to_remove in dict_currencies:
-        #         dict_currencies.pop(to_remove)
 
         for currency in dict_currencies:
             self.currencies.append(dict_currencies[currency])
@@ -81,24 +72,17 @@ class CoinmarketCapApi:
         """
         return list(map(lambda x: (x["id"], x["symbol"]), self.currencies))
 
-    def getShortnameMap(self, reverse=False):
-        shortnames: list = list()
-        names: list = list()
+    def getIdToSymbolMapping(self, reverse=False) -> dict:
+        symbols: list = list()
+        id: list = list()
         for currency in self.currencies:
-            shortnames.append(currency["symbol"])
-            names.append(currency["id"])
+            symbols.append(currency["symbol"])
+            id.append(currency["id"])
 
         if reverse:
-            return dict(zip(shortnames, names))
+            return dict(zip(symbols, id))
         else:
-            return dict(zip(names, shortnames))
-
-    # def getIcoData(self):
-    #     data: Dict[str, ICO] = dict()
-    #     for currency in self.currencies:
-    #         data[currency["id"]] = ICO(currency["id"], None, False, None)
-    #
-    #     return data
+            return dict(zip(id, symbols))
 
     def get_market_cap_named(self, only_without_market_cap=False):
         data: Dict[str, int] = dict()
@@ -111,23 +95,13 @@ class CoinmarketCapApi:
                     data[currency["id"]] = 0
         return data
 
-    def add_start_date(self, start_dates):
-        for currency in self.currencies:
-            if currency["id"] in start_dates:
-                currency["start_date"] = str(start_dates[currency["id"]])
-
-        return
-
     def save(self):
+        """
+        Saving the data. Usually not necessary, as data after init is not changed any more
+        :return:
+        """
         if os.path.isfile(self.save_path):
             os.remove(self.save_path)
 
         with open(self.save_path, "w") as file:
             json.dump(self.currencies, file, cls=JsonConverter)
-
-    # def add_ico_data(self, icos):
-    #     for currency in self.currencies:
-    #         if currency["id"] in icos:
-    #             currency["ico"] = icos[currency["id"]]
-    #
-    #     print(self.currencies)

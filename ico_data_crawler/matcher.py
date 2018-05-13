@@ -5,8 +5,8 @@ class CurrencyNameMatcher:
 
     def __init__(self):
         self.coinmarketcap_source = CoinmarketCapApi()
-        self.currency_map = self.coinmarketcap_source.getShortnameMap()
-        self.currency_map_reverse = self.coinmarketcap_source.getShortnameMap(reverse=True)
+        self.currency_map = self.coinmarketcap_source.getIdToSymbolMapping()
+        self.currency_map_reverse = self.coinmarketcap_source.getIdToSymbolMapping(reverse=True)
 
     def match(self, input_dict):
         output = {}
